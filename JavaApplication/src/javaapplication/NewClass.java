@@ -28,7 +28,14 @@ public class NewClass {
             case 4:
                 ejercicio4(sc);
                 break;
-    
+            case 5:
+                ejercicio5(sc);
+                break;
+            case 6:
+                ejercicio6(sc);
+                break;
+            
+            
             default:
         }
     }
@@ -71,17 +78,60 @@ public class NewClass {
             num=sc.nextInt();
             acum=acum+num;
         }
-        System.out.print("La media de los "+nvalores+ " números es "+acum/nvalores);
+        System.out.println("La media de los "+nvalores+ " números es "+acum/nvalores);
     } 
    
     public static void ejercicio5(Scanner sc){
-        System.out.print("Dime las horas");
-        System.out.print("Dime los minutos");
-        System.out.print("Dime las segundos");
-
+        System.out.print("Dime las horas ");
+        //Multiplica las horas por 60 para convertirlas a minutos
+        int minutos=sc.nextInt()*60;
+        System.out.print("Dime los minutos ");
+        minutos+=sc.nextInt();
+        System.out.print("Dime las segundos ");
+        //Divide los segundos netre 60 para convertirlos a minutos
+        minutos+=sc.nextInt()/60;
+        System.out.println("Eso son "+minutos+" minutos");
+    }
+     
+    public static void ejercicio6(Scanner sc){
+        System.out.print("Cuántos segundos quieres que convierta a horas, minutos y segundos? ");
+        int segundos= sc.nextInt();
+        int horas=segundos/3600;
+        int minutos=(segundos%3600/60);
+        segundos=segundos-((horas*3600)+(minutos*60));
+        System.out.println("Eso son "+horas+" horas, "+minutos+" minutos y "+segundos+" segundos");
         
     }
-        
+    public static void ejercicio7(Scanner sc){
+        int menor;
+        int mayor;
+        for(int x=1;x<10;x++){
+            int num=sc.nextInt();
+            if(x==1){
+               menor=num; 
+               mayor=num;
+            }
+            
+            if (num<menor){
+                menor=num;
+                else if(num>mayor){
+                        mayor=num;
+                        }
+            }
+            
+            
+            
+            
+        }
+       
+       
+       
+       
+   } 
+    
+    
+    
+    
     }
     
     
