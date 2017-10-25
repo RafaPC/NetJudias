@@ -16,10 +16,14 @@ public class NewClass {
         switch (programa){
     
             case 1:
-             ejercicio1(sc);
+                 ejercicio1(sc);
                 break;
             case 2:
-             ejercicio2(sc);
+                 ejercicio2(sc);
+                break;
+                
+            case 3:
+                ejercicio3(sc);
                 break;
     
     
@@ -43,8 +47,9 @@ public class NewClass {
     for(int x=1;x<21;x++)
         System.out.print(5*x+", ");
     }
-    
-  /*int num;
+   
+    public static void ejercicio3(Scanner sc){
+    int num;
     int acum=0;
     for(int x=1;x<16;x++){
         System.out.print("Dime el "+x+" º número: ");
@@ -52,10 +57,16 @@ public class NewClass {
         acum+=num;
     }
     System.out.println(acum/15.0);
-*/  
+    }
     
     
 
+    
+    
+    
+    
+    
+    
     
     
 }
