@@ -194,8 +194,8 @@ public class NewClass {
         String mensaje=null;
         int nota=sc.nextInt();
         do{
-        if(nota<5){
-            mensaje="Has suspendido";
+        if(nota>0&&nota<10){
+            if(nota<5){
         }else if(nota<6){
             mensaje="Has sacado un sufi";
         }else if(nota<7){
@@ -205,7 +205,7 @@ public class NewClass {
         }else if(nota<10){
             mensaje="Has sacado un sobre";
         }
-        }while(mensaje!=null);
+        }while(mensaje==null);
         System.out.println(mensaje);
         
         
