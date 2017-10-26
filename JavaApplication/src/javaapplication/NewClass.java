@@ -46,6 +46,9 @@ public class NewClass {
             case 10:
                 ejercicio10(sc);
                 break;
+            case 11:
+                ejercicio11(sc);
+                break;
             
             
             default:
@@ -104,7 +107,7 @@ public class NewClass {
         System.out.print("Dime los minutos ");
         minutos += sc.nextInt();
         System.out.print("Dime las segundos ");
-        //Divide los segundos netre 60 para convertirlos a minutos
+        //Divide los segundos entre 60 para convertirlos a minutos
         minutos += sc.nextInt() / 60;
         System.out.println("Eso son " + minutos + " minutos");
     }
@@ -148,7 +151,7 @@ public class NewClass {
         for (int x=num-1;x>0;x--){
             acum*=x;
         }   
-            System.out.print(acum);
+            System.out.println(acum);
        
      }
        
@@ -189,35 +192,78 @@ public class NewClass {
         
     }
     
-    public static void ejercicio10(Scanner sc){
-        System.out.print("Qué nota has sacado?");
+    public static void ejercicio11(Scanner sc){
         String mensaje=null;
-        int nota=sc.nextInt();
+        int nota;
         do{
-        if(nota>0&&nota<10){
-            if(nota<5){
-        }else if(nota<6){
-            mensaje="Has sacado un sufi";
-        }else if(nota<7){
-            mensaje="Has sacado un bien";
-        }else if(nota<9){
-            mensaje="Has sacado un notable";
-        }else if(nota<10){
-            mensaje="Has sacado un sobre";
-        }
-        }while(mensaje==null);
+            System.out.print("Qué nota has sacado?");
+            nota=sc.nextInt();
+            if(nota>0&&nota<10){
+                if(nota<5){
+                    mensaje="Has suspendido";   
+                    }else if(nota<6){
+                    mensaje="Has sacado un sufi";
+                    }else if(nota<7){
+                    mensaje="Has sacado un bien";
+                    }else if(nota<9){
+                    mensaje="Has sacado un notable";
+                    }else if(nota<10){
+                    mensaje="Has sacado un sobre";
+                    }
+            }
+        } while(mensaje==null);
         System.out.println(mensaje);
-        
-        
-        
-        
-        
-        
-    }
     }
     
+    public static void ejercicio10(Scanner sc){
+        int nota=0;
+        do {System.out.println("Dime qué nota has sacado");
+        nota=sc.nextInt();
+        switch(nota){
+            case 0:
+                System.out.println("Cerapio");
+                break;
+            case 1:
+                System.out.println("Uno");
+                break;
+            case 2:
+                System.out.println("Dos");
+                break;
+            case 3:
+                System.out.println("Tres");
+                break;
+            case 4:
+                System.out.println("Cuatro");
+                break;
+            case 5:
+                System.out.println("Cinco");
+                break;
+            case 6:
+                System.out.println("Seis");
+                break;
+            case 7:
+                System.out.println("Siete");
+                break;
+            case 8:
+                System.out.println("Ocho");
+                break;
+            case 9:
+                System.out.println("Nueve");
+                break;
+            case 10:
+                System.out.println("Diez");
+                break;
+        }
+        
+        
+        }while(nota>0&&nota<10);
+        
+        
+     
+    }
+
+
+
+
+}
     
-    
-
-
-
