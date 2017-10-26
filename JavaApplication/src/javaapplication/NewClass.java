@@ -37,8 +37,20 @@ public class NewClass {
             case 7:
                 ejercicio7(sc);
                 break;
-
+            case 8:
+                ejercicio8(sc);
+                break;
+            case 9:
+                ejercicio9(sc);
+                break;
+            case 10:
+                ejercicio10(sc);
+                break;
+            
+            
             default:
+            
+        
         }
     }
 
@@ -125,9 +137,87 @@ public class NewClass {
                 mayor = num;
             }          
         }System.out.println("El número menor es "+menor+" y el mayor "+mayor);
+    }
+    public static void ejercicio8(Scanner sc){
+        System.out.print("Dime un número y calcularé su factorial ");
+        int num=sc.nextInt();
+        if (num<0){
+            num=num*(-1);
+        }
+        int acum=num;
+        for (int x=num-1;x>0;x--){
+            acum*=x;
+        }   
+            System.out.print(acum);
+       
+     }
+       
+    public static void ejercicio9(Scanner sc){
+    int num1; int num2; int num3; int menor=0; int medio=0; int mayor=0;
+    num1=sc.nextInt();
+    num2=sc.nextInt();
+    num3=sc.nextInt();
+    if (num1<num2&&num1<num3){
+        menor=num1;
+        if(num2<num3){
+            medio=num2;        
+            mayor=num3;
+        }
+        if(num2>num3){
+            medio=num3;
+            mayor=num2;
+        }
+    if (num1>num2&&num1<num3){
+        medio=num1;
+        menor=num2;
+        mayor=num3;
+    }
+    if (num1>num2&&num1>num3){
+        mayor=num1;
+        if(num2>num3){
+            medio=num2;
+            menor=num3;
+        }
+        else{
+            menor=num2;
+            medio=num3;
+        }
+    
+    }
+    }
+    System.out.print("Estos son tus números ordenados: "+menor+", "+medio+", "+mayor);
+        
+    }
+    
+    public static void ejercicio10(Scanner sc){
+        System.out.print("Qué nota has sacado?");
+        String mensaje=null;
+        int nota=sc.nextInt();
+        do{
+        if(nota<5){
+            mensaje="Has suspendido";
+        }else if(nota<6){
+            mensaje="Has sacado un sufi";
+        }else if(nota<7){
+            mensaje="Has sacado un bien";
+        }else if(nota<9){
+            mensaje="Has sacado un notable";
+        }else if(nota<10){
+            mensaje="Has sacado un sobre";
+        }
+        }while(mensaje!=null);
+        System.out.println(mensaje);
+        
+        
+        
+        
         
         
     }
+    }
+    
+    
+    
 
-}
+
 
