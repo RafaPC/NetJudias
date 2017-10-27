@@ -49,7 +49,9 @@ public class NewClass {
             case 11:
                 ejercicio11(sc);
                 break;
-            
+            case 12:
+                ejercicio12(sc);
+                break;
             
             default:
             
@@ -141,6 +143,7 @@ public class NewClass {
             }          
         }System.out.println("El número menor es "+menor+" y el mayor "+mayor);
     }
+    
     public static void ejercicio8(Scanner sc){
         System.out.print("Dime un número y calcularé su factorial ");
         int num=sc.nextInt();
@@ -162,14 +165,13 @@ public class NewClass {
     num3=sc.nextInt();
     if (num1<num2&&num1<num3){
         menor=num1;
-        if(num2<num3){
+    }else if(num2<num3){
             medio=num2;        
             mayor=num3;
-        }
-        if(num2>num3){
-            medio=num3;
-            mayor=num2;
-        }
+        }else{
+        medio=num3;
+        mayor=num2;
+    }
     if (num1>num2&&num1<num3){
         medio=num1;
         menor=num2;
@@ -187,16 +189,17 @@ public class NewClass {
         }
     
     }
-    }
-    System.out.print("Estos son tus números ordenados: "+menor+", "+medio+", "+mayor);
+
+    System.out.print("Estos son tus números ordenados de menor a mayor: "+menor+", "+medio+", "+mayor);
         
     }
     
     public static void ejercicio11(Scanner sc){
-        String mensaje=null;
+        //Está hecho con "if's" y no con un "switch" para aceptar notas que no sean nº enteros.
+        String mensaje="Pon una nota entre 0 y 10";
         int nota;
         do{
-            System.out.print("Qué nota has sacado?");
+            System.out.print("Qué nota has sacado? ");
             nota=sc.nextInt();
             if(nota>0&&nota<10){
                 if(nota<5){
@@ -211,59 +214,79 @@ public class NewClass {
                     mensaje="Has sacado un sobre";
                     }
             }
-        } while(mensaje==null);
-        System.out.println(mensaje);
+        System.out.println(mensaje);    
+        } while(mensaje=="Pon una nota entre 0 y 10");
     }
     
     public static void ejercicio10(Scanner sc){
-        int nota=0;
+        int nota=-1;
+        String mensaje=null;
         do {System.out.println("Dime qué nota has sacado");
-        nota=sc.nextInt();
-        switch(nota){
-            case 0:
-                System.out.println("Cerapio");
-                break;
-            case 1:
-                System.out.println("Uno");
-                break;
-            case 2:
-                System.out.println("Dos");
-                break;
-            case 3:
-                System.out.println("Tres");
-                break;
-            case 4:
-                System.out.println("Cuatro");
-                break;
-            case 5:
-                System.out.println("Cinco");
-                break;
-            case 6:
-                System.out.println("Seis");
-                break;
-            case 7:
-                System.out.println("Siete");
-                break;
-            case 8:
-                System.out.println("Ocho");
-                break;
-            case 9:
-                System.out.println("Nueve");
-                break;
-            case 10:
-                System.out.println("Diez");
-                break;
-        }
+            nota=sc.nextInt();
+            switch(nota){
+                case 0:
+                    mensaje="Cerapio";
+                    break;
+                case 1:
+                    mensaje="Uno";
+                    break;
+                case 2:
+                    mensaje="Dos";
+                    break;
+                case 3:
+                    mensaje="Tres";
+                    break;
+                case 4:
+                    mensaje="Cuatro";
+                    break;
+                case 5:
+                    mensaje="Cinco";
+                    break;
+                case 6:
+                    mensaje="Seis";
+                    break;
+                case 7:
+                    mensaje="Siete";
+                    break;
+                case 8:
+                    mensaje="8cho";
+                    break;
+                case 9:
+                    mensaje="Nueve";
+                    break;
+                case 10:
+                    mensaje="Diez";
+                    break;
+                default:
+                    System.out.println("Esa nota no vale");
+            }
+        }while(mensaje==null);
         
-        
-        }while(nota>0&&nota<10);
-        
-        
-     
+        System.out.println(mensaje);
     }
 
+    public static void ejercicio12(Scanner sc){
+        System.out.println("¿Cuántos alumnos vas a introducir?");
+        int nalumnos= sc.nextInt();
+        int acum=0;
+        int nota;
+        int aprobados=0;
+        for(int x=1;x<=nalumnos;x++){
+            System.out.println("¿Qué nota ha sacado el "+x+" º alumno?");    
+            nota=sc.nextInt();
+            acum+=nota;
+            if(nota>=5){
+                aprobados+=1;
+            }
+        }
+        System.out.println("La media es "+acum/nalumnos);
+        System.out.println("Han aprobado "+aprobados+" alumnos y han suspendido "+(nalumnos-aprobados));
+   
+    }
 
-
+    public static void ejercicio13(Scanner sc){
+        
+    }
 
 }
     
