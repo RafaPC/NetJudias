@@ -21,7 +21,6 @@ public class NewClass {
             case 2:
                 ejercicio2(sc);
                 break;
-
             case 3:
                 ejercicio3(sc);
                 break;
@@ -52,10 +51,10 @@ public class NewClass {
             case 12:
                 ejercicio12(sc);
                 break;
-            
-            default:
-            
-        
+            case 13:
+                ejercicio13(sc);
+                break;
+            default: System.out.println("Has elegido un programa que no existe");
         }
     }
 
@@ -159,43 +158,37 @@ public class NewClass {
      }
        
     public static void ejercicio9(Scanner sc){
-    int num1; int num2; int num3; int menor=0; int medio=0; int mayor=0;
+    int num1; int num2; int num3; int menor; int medio; int mayor;
+    System.out.println("Escribe 3 números");
     num1=sc.nextInt();
     num2=sc.nextInt();
     num3=sc.nextInt();
-    if (num1<num2&&num1<num3){
-        menor=num1;
-    }else if(num2<num3){
-            medio=num2;        
-            mayor=num3;
-        }else{
-        medio=num3;
-        mayor=num2;
-    }
-    if (num1>num2&&num1<num3){
-        medio=num1;
-        menor=num2;
-        mayor=num3;
-    }
     if (num1>num2&&num1>num3){
         mayor=num1;
-        if(num2>num3){
-            medio=num2;
-            menor=num3;
-        }
-        else{
-            menor=num2;
-            medio=num3;
-        }
-    
+    } else if(num2>num1&&num2>num3){        
+        mayor=num2;
+    } else{
+        mayor=num3;
     }
-
+    if (num1<num2&&num1<num3){
+        menor=num1;
+    } else if(num2<num1&&num2<num3){
+        menor=num2;
+    } else{
+        menor=num3;
+    }
+    if (num1>num2&&num1<num3||num1>num3&&num1<num2){
+        medio=num1;
+    }else if(num2>num3&&num2<num1||num2>num1&&num2<num3){
+        medio=num2;
+    }else{
+        medio=num3;
+    }
     System.out.print("Estos son tus números ordenados de menor a mayor: "+menor+", "+medio+", "+mayor);
-        
     }
-    
+  
     public static void ejercicio11(Scanner sc){
-        //Está hecho con "if's" y no con un "switch" para aceptar notas que no sean nº enteros.
+        //Está hecho con "if's" y no con un "switch" para aceptar notas con decimales.
         String mensaje="Pon una nota entre 0 y 10";
         int nota;
         do{
@@ -215,11 +208,11 @@ public class NewClass {
                     }
             }
         System.out.println(mensaje);    
-        } while(mensaje=="Pon una nota entre 0 y 10");
+        }while(mensaje=="Pon una nota entre 0 y 10");
     }
     
     public static void ejercicio10(Scanner sc){
-        int nota=-1;
+        int nota;
         String mensaje=null;
         do {System.out.println("Dime qué nota has sacado");
             nota=sc.nextInt();
@@ -285,8 +278,23 @@ public class NewClass {
     }
 
     public static void ejercicio13(Scanner sc){
-        
+        System.out.println("Introduce un número y te diré los números primos entre 1 y dicho número");
+        int num=sc.nextInt();
+        boolean primo;
+        for( int i=2;i<num;i++){
+            primo=true;
+            for(int j=i-1;j>1;j--){
+                if(i%j==0)
+                    primo=false;
+            }
+            if(primo==true)
+                System.out.print(i+", ");
+        }
     }
 
 }
+
+
+
+
     
