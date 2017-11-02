@@ -1,12 +1,23 @@
 
 
-table {
-   border-style: dotted; border-color: red;
-   
-   
-}
+.rojo {
+   border-style: dotted; 
+   border-color: red;
+   text-align:center;
+   }
 
 .tdsincelda {
     border-style:hidden;
     text-align: center;
+}
+.centrado{
+    text-align: center;
+}
+.conborder{
+    text-align:center;
+    border-style:solid;
+    border-bottom:50px;
+    border-top:0px;
+    border-left:0px;
+    border-right:0px;
 }
