@@ -28,12 +28,13 @@ public class CombatCards {
         
         //ir sacando una a una las cartas y comparandolas a ver quien gana
         for(int i=0;i<10;i++){
+            System.out.println("Jugador 1: "+mazo[i]);
+            System.out.println("Jugador 2: "+mazo2[i]);
             if(mazo[i]>mazo2[i]){
-            
-            System.out.println("Jugador1 ha ganado con un " +mazo[i]+ " carta más alta");
+            System.out.println("Jugador1 gana");
             puntos1++;
             }else if(mazo2[i]>mazo[i]){
-                System.out.println("Jugador2 ha sacado la carta más alta");
+                System.out.println("Jugador2 gana");
             puntos2++;
                     }else{
                 System.out.println("Ambas cartas son iguales");
