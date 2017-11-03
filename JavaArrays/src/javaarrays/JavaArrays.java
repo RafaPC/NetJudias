@@ -20,15 +20,17 @@ public class JavaArrays {
         // TODO code application logic here
     System.out.println("Cuántos números quieres introducir");
     Scanner sc = new Scanner(System.in);
+    int i;
     int numerodenumeros=sc.nextInt();
     int [] numeros= new int [numerodenumeros];
     int numerodepares=0; int numerodeimpares=0;
     int contadorpares=0; int contadorimpares=0;
-    for(int i=0;i<numerodenumeros;i++){
+    for( i=0;i<numerodenumeros;i++){
+        System.out.println("Escribe un número: ");
         numeros[i] =sc.nextInt();   
     }
     
-    for(int i=0;i<numerodenumeros;i++){
+    for(i=0;i<numerodenumeros;i++){
         if ((numeros[i]%2)==0){
             numerodepares++;
         }
@@ -39,7 +41,7 @@ public class JavaArrays {
     int [] pares= new int [numerodepares];
     int [] impares= new int [numerodeimpares];
     
-    for(int i=0;i<numerodenumeros;i++){
+    for(i=0;i<numerodenumeros;i++){
         if ((numeros[i]%2)==0){
            pares[contadorpares]=numeros[i];
            contadorpares++;
@@ -49,13 +51,13 @@ public class JavaArrays {
         contadorimpares++;
         } 
     }
-    int acum=0;
-    for(int i=0;i<pares.length;i++){
+    float acum=0;
+    for(i=0;i<pares.length;i++){
         acum+=pares[i];
     }
     System.out.println("La media de los pares es "+(acum/pares.length));
     acum=0;
-    for (int i=0;i<impares.length;i++){
+    for (i=0;i<impares.length;i++){
     acum+=impares[i];
     }
     System.out.print("La media de los impares es "+(acum/impares.length));
