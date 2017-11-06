@@ -29,10 +29,10 @@ public class JavaArrays {
             case 2:
                 ejercicio2(sc);
                 break;
-            /*case 3:
+            case 3:
                 ejercicio3(sc);
                 break;
-            case 4:
+            /*case 4:
                 ejercicio4(sc);
                 break;
             case 5:
@@ -76,6 +76,7 @@ public class JavaArrays {
             System.out.println(numeros[i]);
         }
     }
+    
     public static void ejercicio2(Scanner sc){
         int numeros[]=new int [5];
         for(int i=0;i<=4;i++){
@@ -88,7 +89,21 @@ public class JavaArrays {
         }
     }
     
-    
+    public static void ejercicio3(Scanner sc){
+        int numeros[]=new int [5];
+        int acumpositivos=0; int acumnegativos=0;
+        for(int i=0;i<=4;i++){
+            System.out.println("Dame un número: "); 
+            numeros[i]=sc.nextInt();
+        }
+        for(int i=0;i<=4;i++){
+            if (numeros[i]>0){
+               acumpositivos+=numeros[i]; 
+            }else if(numeros[i]<0){
+                acumnegativos+=numeros[i];
+            }
+        }
+    }
     
     /*public static void ejercicioX(Scanner sc){
     System.out.println("Cuántos números quieres introducir");
