@@ -32,10 +32,10 @@ public class JavaArrays {
             case 3:
                 ejercicio3(sc);
                 break;
-            /*case 4:
+            case 4:
                 ejercicio4(sc);
                 break;
-            case 5:
+            /*case 5:
                 ejercicio5(sc);
                 break;
             case 6:
@@ -102,6 +102,19 @@ public class JavaArrays {
             }else if(numeros[i]<0){
                 acumnegativos+=numeros[i];
             }
+        }
+    }
+    
+    public static void ejercicio4(Scanner sc){
+        int array[]=new int [10];
+        for(int i=0;i<10;i++){
+            array[i]=sc.nextInt();
+        }
+        int j=9;
+        for(int i=0;i<5;i++){
+            System.out.println(array[i]);
+            System.out.println(array[j]);
+            j--;
         }
     }
     
