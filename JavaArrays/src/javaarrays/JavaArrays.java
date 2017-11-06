@@ -78,12 +78,12 @@ public class JavaArrays {
     }
     public static void ejercicio2(Scanner sc){
         int numeros[]=new int [5];
-        for(int i=0;i<5;i++){
+        for(int i=0;i<=4;i++){
             System.out.println("Dame un número: "); 
             numeros[i]=sc.nextInt();
         }
         System.out.println("Ahí van tus números al revés");
-        for(int i=4;i>-1;i--){
+        for(int i=4;i>=0;i--){
             System.out.println(numeros[i]);
         }
     }
