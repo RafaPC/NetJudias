@@ -20,7 +20,7 @@ public class JavaArrays {
         Scanner sc = new Scanner(System.in);
         System.out.println("Elige programa: ");
         int programa;
-        programa = sc.nextInt();
+         programa = sc.nextInt();
         switch (programa) {
 
             case 1:
@@ -91,7 +91,8 @@ public class JavaArrays {
     
     public static void ejercicio3(Scanner sc){
         int numeros[]=new int [5];
-        int acumpositivos=0; int acumnegativos=0;
+        int acumpositivos=0; int acumnegativos=0; int ceros=0;
+        int npositivos=0; int nnegativos=0;
         for(int i=0;i<=4;i++){
             System.out.println("Dame un número: "); 
             numeros[i]=sc.nextInt();
@@ -99,13 +100,27 @@ public class JavaArrays {
         for(int i=0;i<=4;i++){
             if (numeros[i]>0){
                acumpositivos+=numeros[i]; 
+               npositivos++;
             }else if(numeros[i]<0){
                 acumnegativos+=numeros[i];
+                nnegativos++;
+            }else{
+                ceros++;
             }
+        }
+        
+        if(npositivos>0){
+            System.out.println("La media de los positivos es "+acumpositivos/npositivos);
+        }
+        if(nnegativos>0){
+            System.out.println("La media de los negativos es "+acumnegativos/nnegativos);
+        }
+        if (ceros>0){
+            System.out.println("Has introducido "+ceros+" ceros");
         }
     }
     
-    public static void ejercicio4(Scanner sc){
+    public static void ejercicio4 (Scanner sc){
         int array[]=new int [10];
         for(int i=0;i<10;i++){
             array[i]=sc.nextInt();
