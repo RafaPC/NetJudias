@@ -7,7 +7,10 @@ and open the template in the editor.
     Created on : 01-nov-2017, 17:41:15
     Author     : Los Prieto
 */
-
+.centro{
+    position: absolute;
+    top: 100px;
+}
 .table1{
     
 }
