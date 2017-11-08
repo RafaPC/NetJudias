@@ -93,7 +93,7 @@ public class JavaArrays {
         int numeros[]=new int [5];
         int acumpositivos=0; int acumnegativos=0; int ceros=0;
         int npositivos=0; int nnegativos=0;
-        for(int i=0;i<=4;i++){
+        for(int i=0;i<5;i++){
             System.out.println("Dame un número: "); 
             numeros[i]=sc.nextInt();
         }
@@ -133,6 +133,58 @@ public class JavaArrays {
         }
     }
     
+    public static void ejercicio5 (Scanner sc){
+        int array1[]=new int[10];
+        int array2[]=new int[10];
+        int array3[]=new int[20];
+        System.out.println("Introduce los números del primer array");
+        for (int i=0;i<10;i++){
+            array1[i]=sc.nextInt();
+        }
+        System.out.println("Ahora los del segundo");
+        for (int i=0;i<10;i++){
+            array2[i]=sc.nextInt();
+        }
+        for(int i=0;i<10;i++){
+            array3[i]=array1[i];
+            array3[i+1]=array2[i];
+        }
+    }
+    
+    public static void ejercicio6 (Scanner sc){
+        int array1[]=new int[12];
+        int array2[]=new int[12];
+        int array3[]=new int[24];
+        System.out.println("Introduce los números del primer array");
+        for (int i=0;i<12;i++){
+            array1[i]=sc.nextInt();
+        }
+        System.out.println("Ahora los del segundo");
+        for (int i=0;i<12;i++){
+            array2[i]=sc.nextInt();
+        }
+        for(int i=3;i<24;i+=3){
+            for(int j=i;j<=3;j++){
+                array3[i]=array1[j];
+            }
+            i+=3;
+            for(int j=i;j<=3;j++){
+                array3[i]=array2[j];
+            }
+        }
+    System.out.println("Primer array:");
+        for(int i=0;i<12;i++){
+        System.out.print(array1[i]+" ,");
+    }
+    System.out.println("Segundo array:");
+        for(int i=0;i<12;i++){
+        System.out.print(array2[i]+" ,");
+    }
+    System.out.println("Tercer array:");
+        for(int i=0;i<24;i++){
+        System.out.print(array3[i]+" ,");
+    }
+    }
     /*public static void ejercicioX(Scanner sc){
     System.out.println("Cuántos números quieres introducir");
     int numerodenumeros=sc.nextInt();
