@@ -172,22 +172,22 @@ public class JavaArrays {
             for(int j=i;j<x;j++,i++){
                 array3[i]=array1[j];
             }
-            for(int j=i-3;j<x;j++,i++){
+            for(int j=i;j<x;j++,i++){
                 array3[i]=array2[j];
             }
         x+=3;
         }
     System.out.println("Primer array:");
         for(int i=0;i<12;i++){
-        System.out.print(array1[i]+" ,");
+        System.out.print(array1[i]+", ");
     }
     System.out.println("\nSegundo array:");
         for(int i=0;i<12;i++){
-        System.out.print(array2[i]+" ,");
+        System.out.print(array2[i]+", ");
     }
     System.out.println("\nTercer array:");
         for(int i=0;i<24;i++){
-        System.out.print(array3[i]+" ,");
+        System.out.print(array3[i]+", ");
     }
     }
     /*public static void ejercicioX(Scanner sc){
