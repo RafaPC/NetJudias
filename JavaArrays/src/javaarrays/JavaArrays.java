@@ -172,10 +172,10 @@ public class JavaArrays {
             for(int j=i;j<x;j++,i++){
                 array3[i]=array1[j];
             }
-            x+=3;
             for(int j=i-3;j<x;j++,i++){
                 array3[i]=array2[j];
             }
+        x+=3;
         }
     System.out.println("Primer array:");
         for(int i=0;i<12;i++){
