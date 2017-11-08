@@ -35,13 +35,13 @@ public class JavaArrays {
             case 4:
                 ejercicio4(sc);
                 break;
-            /*case 5:
+            case 5:
                 ejercicio5(sc);
                 break;
             case 6:
                 ejercicio6(sc);
                 break;
-            case 7:
+            /*case 7:
                 ejercicio7(sc);
                 break;
             case 8:
@@ -145,9 +145,16 @@ public class JavaArrays {
         for (int i=0;i<10;i++){
             array2[i]=sc.nextInt();
         }
+        int j=0;
         for(int i=0;i<10;i++){
-            array3[i]=array1[i];
-            array3[i+1]=array2[i];
+            array3[j]=array1[i];
+            j++;
+            array3[j]=array2[i];
+            j++;
+        }
+        System.out.println("Este es el tercer array");
+        for(int i=0;i<20;i++){
+            System.out.println(array3[i]);
         }
     }
     
@@ -155,7 +162,7 @@ public class JavaArrays {
         int array1[]=new int[12];
         int array2[]=new int[12];
         int array3[]=new int[24];
-        System.out.println("Introduce los números del primer array");
+        System.out.println("Introduce los 12 números del primer array");
         for (int i=0;i<12;i++){
             array1[i]=sc.nextInt();
         }
@@ -163,24 +170,27 @@ public class JavaArrays {
         for (int i=0;i<12;i++){
             array2[i]=sc.nextInt();
         }
-        for(int i=3;i<24;i+=3){
-            for(int j=i;j<=3;j++){
+        int x=3;
+        for(int i=0;i<24;i+=3){
+            for(int j=i;j<x;j++){
                 array3[i]=array1[j];
+            i++;
             }
-            i+=3;
-            for(int j=i;j<=3;j++){
+            x+=3;
+            for(int j=i-3;j<x;j++){
                 array3[i]=array2[j];
+            i++;
             }
         }
     System.out.println("Primer array:");
         for(int i=0;i<12;i++){
         System.out.print(array1[i]+" ,");
     }
-    System.out.println("Segundo array:");
+    System.out.println("\nSegundo array:");
         for(int i=0;i<12;i++){
         System.out.print(array2[i]+" ,");
     }
-    System.out.println("Tercer array:");
+    System.out.println("\nTercer array:");
         for(int i=0;i<24;i++){
         System.out.print(array3[i]+" ,");
     }
