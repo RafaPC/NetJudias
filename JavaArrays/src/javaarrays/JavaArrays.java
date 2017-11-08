@@ -125,11 +125,10 @@ public class JavaArrays {
         for(int i=0;i<10;i++){
             array[i]=sc.nextInt();
         }
-        int j=9;
-        for(int i=0;i<5;i++){
+       
+        for(int i=0,j =9;i<5;i++,j--){
             System.out.println(array[i]);
             System.out.println(array[j]);
-            j--;
         }
     }
     
@@ -145,12 +144,10 @@ public class JavaArrays {
         for (int i=0;i<10;i++){
             array2[i]=sc.nextInt();
         }
-        int j=0;
-        for(int i=0;i<10;i++){
+        for(int i=0,j=0;i<10;i++,j++){
             array3[j]=array1[i];
             j++;
             array3[j]=array2[i];
-            j++;
         }
         System.out.println("Este es el tercer array");
         for(int i=0;i<20;i++){
@@ -172,14 +169,12 @@ public class JavaArrays {
         }
         int x=3;
         for(int i=0;i<24;i+=3){
-            for(int j=i;j<x;j++){
+            for(int j=i;j<x;j++,i++){
                 array3[i]=array1[j];
-            i++;
             }
             x+=3;
-            for(int j=i-3;j<x;j++){
+            for(int j=i-3;j<x;j++,i++){
                 array3[i]=array2[j];
-            i++;
             }
         }
     System.out.println("Primer array:");
