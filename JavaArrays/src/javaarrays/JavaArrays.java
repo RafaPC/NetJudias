@@ -167,15 +167,16 @@ public class JavaArrays {
         for (int i=0;i<12;i++){
             array2[i]=sc.nextInt();
         }
-        int x=3;
-        for(int i=0;i<24;i+=3){
-            for(int j=i;j<x;j++,i++){
-                array3[i]=array1[j];
+        int indice=0;
+        for(int i=0;i<8;i+=3){
+            for(int j=0;j<3;j++){
+                array3[i]=array1[i+j];
+                indice++;
             }
-            for(int j=i;j<x;j++,i++){
-                array3[i]=array2[j];
+            for(int j=0;j<3;j++){
+                array3[indice]=array2[i+j];
+                indice++;
             }
-        x+=3;
         }
     System.out.println("Primer array:");
         for(int i=0;i<12;i++){

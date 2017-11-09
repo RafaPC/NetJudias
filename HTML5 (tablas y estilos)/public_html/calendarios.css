@@ -7,15 +7,26 @@ and open the template in the editor.
     Created on : 09-nov-2017, 16:39:27
     Author     : Los Prieto
 */
+body{
+    background-color: #7ed7f7;
+}
+
 table{
     background-color: #f7f3cd;
     width: 500px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
-
-.td
-.cosa{
+.tabla1{
     border-collapse:collapse;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
-.tabla1, th, td{
+.tabla1, td{
     border-bottom: 1px solid;
+    text-align: center;
 }
