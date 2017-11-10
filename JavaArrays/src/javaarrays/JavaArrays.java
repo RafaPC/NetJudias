@@ -241,8 +241,13 @@ public class JavaArrays {
         num = sc.nextInt();
         System.out.println("Y la posición donde quieres introducirlo (recuerda que tiene que ser entre 0 y 9, ambos inclusive)");
         posicion = sc.nextInt();
+        
+        ayuda=array[posicion];
+        array[posicion]=num;
         for(int i=posicion;i>0;i--){
             ayuda=array[i];
+            
+        
         }
 
     }
