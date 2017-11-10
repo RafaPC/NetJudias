@@ -244,8 +244,10 @@ public class JavaArrays {
         
         ayuda=array[posicion];
         array[posicion]=num;
-        for(int i=posicion;i>0;i--){
+        
+        for(int i=posicion-1;i>0;i--){
             ayuda=array[i];
+            
             
         
         }
