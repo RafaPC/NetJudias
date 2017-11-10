@@ -209,11 +209,9 @@ public class JavaArrays {
         for (int i = 1; i < 10; i++) {
             if (array[i] > array[i - 1]) {
                 decreciente = false;
-            }
-            if (array[i] < array[i - 1]) {
+            } else if (array[i] < array[i - 1]) {
                 creciente = false;
-            }
-            if (array[i] == array[i - 1]) {
+            } else {
                 creciente = false;
                 decreciente = false;
             }
@@ -236,12 +234,17 @@ public class JavaArrays {
             array[i] = sc.nextInt();
 
         }
-        int num; int posicion;
+        int num;
+        int posicion;
+        int ayuda;
         System.out.println("Dime otro número que quieras introducir");
-        num=sc.nextInt();
+        num = sc.nextInt();
         System.out.println("Y la posición donde quieres introducirlo (recuerda que tiene que ser entre 0 y 9, ambos inclusive)");
-        posicion=sc.nextInt();
-        
+        posicion = sc.nextInt();
+        for(int i=posicion;i>0;i--){
+            ayuda=array[i];
+        }
+
     }
     /*public static void ejercicioX(Scanner sc){
     System.out.println("Cuántos números quieres introducir");
