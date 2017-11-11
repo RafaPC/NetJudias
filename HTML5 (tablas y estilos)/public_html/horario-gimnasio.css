@@ -1,0 +1,25 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11-nov-2017, 17:20:01
+    Author     : Los Prieto
+*/
+
+table.tabla td{
+    border: none;
+    padding: 5px;
+    
+}
+.tdnegro{
+    background-color: #454a51;
+    color:white;
+}
+.tdgris{
+    background-color: #edf1f7;
+}
+.tdnaranja{
+    background-color: #f7c251;
+}

@@ -18,19 +18,35 @@ table{
     padding-right: 100px;
     padding-top: 10px;
     padding-bottom: 10px;
+    border:2px solid;
 }
+
 .tabla1{
- 
-    padding-left: 100px;
-    padding-right: 100px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-.tabla3{}
-.tabla1, td{
     border-bottom: 1px solid;
     text-align: center;
+}
+.tabla2 td{
+    border-left:1px solid;
+}
+.tabla2 td{
+    text-align:right;
+    font-weight: bold;
+}
+.tabla3 td{
+    border:1px solid;
+}
+.tabla3 td{
+    margin: 0px;
 }
 .trnegro{
     font-weight: bold;
 }
+div{
+    width:100%;
+    background-position:center;
+    margin-bottom:20px;
+}
+table.textoderecha td{
+    text-align:right;
+}
+
