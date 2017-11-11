@@ -26,5 +26,12 @@ tr.tdborderbottom td{
     border-top: none;
     border-left: 0px;
     border-right: none;
-
+}
+tr.bordepuntos td{
+    border-style:dotted;
+    border-color: red;
+    text-align: center;
+}
+tr.sinbordes td{
+    border: none;
 }
