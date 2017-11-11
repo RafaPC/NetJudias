@@ -20,13 +20,17 @@ table{
     padding-bottom: 10px;
 }
 .tabla1{
-    border-collapse:collapse;
+ 
     padding-left: 100px;
     padding-right: 100px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
+.tabla3{}
 .tabla1, td{
     border-bottom: 1px solid;
     text-align: center;
+}
+.trnegro{
+    font-weight: bold;
 }
