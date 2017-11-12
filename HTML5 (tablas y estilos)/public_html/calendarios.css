@@ -123,6 +123,8 @@ table.textoderecha td{
     background-color: white;
     border-color:red;
     border: 5px dashed;
+    width:800px;
+    margin-bottom:20px;
 }
 .tablanav td{
     border:3px ridge black;

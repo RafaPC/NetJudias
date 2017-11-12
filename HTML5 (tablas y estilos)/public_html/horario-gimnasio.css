@@ -10,7 +10,6 @@ and open the template in the editor.
 
 table.tabla td{
     border: none;
-    padding: 5px;
 }
 .tdnegro{
     background-color: #6e6f72;
@@ -24,9 +23,10 @@ table.tabla td{
 }
 .tdnaranja{
     background-color: #f7c251;
+    width:60px;
 }
 img{
-    height: 30px;
+    height: 25px;
     vertical-align: middle;
 }
 
@@ -36,6 +36,8 @@ img{
     background-color: white;
     border-color:red;
     border: 5px dashed;
+    width:800px;
+    margin-bottom:20px;
 }
 .tablanav td{
     border:3px ridge black;
