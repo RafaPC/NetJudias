@@ -10,43 +10,107 @@ and open the template in the editor.
 body{
     background-color: #7ed7f7;
 }
-
-table{
+div{
+    width:700px;
+    background-position:center;
+    margin-bottom:20px;
     background-color: #f7f3cd;
-    width: 500px;
+    margin-left: 10px;
+    border: 1px solid;
+}
+table{
+
     padding-left: 100px;
     padding-right: 100px;
     padding-top: 10px;
     padding-bottom: 10px;
-    border:2px solid;
+    border:1px solid;
+    margin-top:7px;
+    margin-bottom:7px; 
+    margin-left:80px; 
+    margin-right:50px;
 }
-
+table, td{
+    border-collapse: collapse;
+}
 .tabla1{
     border-bottom: 1px solid;
     text-align: center;
+    margin-left:200px;
+    border: none;
+}
+.tabla1 td{
+    height:20px;
+    width:40px;
+    border-top:1px solid;
+    border-bottom:1px solid;
+    border-color: grey;
+}
+.trnegro1 td{
+    border-top:none;
+    font-weight: bold;
+}
+
+
+.tabla2{
+    margin-left: 200px;
+    border-top: none;
+    border-bottom: none;
+    border-color: grey;
 }
 .tabla2 td{
+    height: 30px;
+    width:40px;
     border-left:1px solid;
-}
-.tabla2 td{
+    border-collapse:collapse;
     text-align:right;
     font-weight: bold;
+    border-color: grey;
+    font-size: 22px;
+}
+.trnegro2 td{
+    text-align: right; 
+}
+
+
+
+
+
+.tabla3{
+    height: 300px;
+    margin-left: 200px;
 }
 .tabla3 td{
     border:1px solid;
-}
-.tabla3 td{
-    margin: 0px;
+    border-collapse:collapse;
+    text-align: left;
+    vertical-align: text-top;
+    width:40px;
 }
 .trnegro{
+    border-collapse:collapse;
+    height: 20px;
     font-weight: bold;
 }
-div{
-    width:100%;
-    background-position:center;
-    margin-bottom:20px;
+.trnegro td{
+    text-align:center;
 }
+
 table.textoderecha td{
     text-align:right;
 }
 
+
+.cap1{
+    font-style: italic;   
+    font-weight: bold;
+    letter-spacing: 8px;
+}
+.cap2{
+    font-weight: bold;
+    text-align: right;
+}
+.cap3{
+    letter-spacing: 10px;
+    text-align: left;
+}
