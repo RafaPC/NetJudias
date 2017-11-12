@@ -10,3 +10,14 @@ and open the template in the editor.
 table{
     margin-top: 20px;
 }
+
+.tablanav{
+    width:80%;
+    text-align: center;
+    background-color: white;
+    border-color:red;
+    border: 5px dashed;
+}
+.tablanav td{
+    border:3px ridge black;
+}

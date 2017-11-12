@@ -4,10 +4,10 @@ table{
     margin-bottom: 20px
 }
 .rojo {
-   border-style: dotted; 
-   border-color: red;
-   text-align:center;
-   }
+    border-style: dotted; 
+    border-color: red;
+    text-align:center;
+}
 
 .tdsincelda {
     border-style:hidden;
@@ -32,4 +32,15 @@ tr.tdborderbottom td{
 }
 tr.imagensincelda td{
     border:none;
+}
+
+.tablanav{
+    width:80%;
+    text-align: center;
+    background-color: white;
+    border-color:red;
+    border: 5px dashed;
+}
+.tablanav td{
+    border:3px ridge black;
 }

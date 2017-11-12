@@ -18,3 +18,14 @@ body{
 p {
    font-size:150%;
 }
+
+.tablanav{
+    width:80%;
+    text-align: center;
+    background-color: white;
+    border-color:red;
+    border: 5px dashed;
+}
+.tablanav td{
+    border:3px ridge black;
+}
