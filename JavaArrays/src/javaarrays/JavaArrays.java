@@ -44,7 +44,7 @@ public class JavaArrays {
             case 7:
                 ejercicio7(sc);
                 break;
-            /*case 8:
+            case 8:
                 ejercicio8(sc);
                 break;
             case 9:
@@ -53,7 +53,7 @@ public class JavaArrays {
             case 10:
                 ejercicio10(sc);
                 break;
-            case 11:
+            /*case 11:
                 ejercicio11(sc);
                 break;
             case 12:
@@ -62,6 +62,12 @@ public class JavaArrays {
             case 13:
                 ejercicio13(sc);
                 break;*/
+            case 15:
+                ejercicio15(sc);
+                break;
+            case 16:
+                ejercicio16(sc);
+                break;
             default:
                 System.out.println("Has elegido un programa que no existe");
         }
@@ -241,18 +247,154 @@ public class JavaArrays {
         num = sc.nextInt();
         System.out.println("Y la posición donde quieres introducirlo (recuerda que tiene que ser entre 0 y 9, ambos inclusive)");
         posicion = sc.nextInt();
-        
-        ayuda=array[posicion];
-        array[posicion]=num;
-        
-        for(int i=posicion-1;i>0;i--){
-            ayuda=array[i];
-            
-            
-        
+
+        ayuda = array[posicion];
+        array[posicion] = num;
+
+        for (int i = posicion - 1; i > 0; i--) {
+            ayuda = array[i];
+
         }
 
     }
+
+    public static void ejercicio9(Scanner sc) {
+        int array[] = new int[10];
+        for (int i = 0; i < 10; i++) {
+            System.out.println("Introduce un número");
+            array[i] = sc.nextInt();
+        }
+        int ayuda1 = array[9];
+        int ayuda2;
+
+        for (int i = 9; i > 0; i--) {
+
+            ayuda2 = array[i - 1];
+            array[i - 1] = ayuda1;
+            ayuda1 = ayuda2;
+
+            if (i == 1) {
+                array[9] = ayuda2;
+
+            }
+        }
+
+        System.out.println("Este es tu array ahora");
+        for (int i = 0; i < 10; i++) {
+            System.out.print(array[i] + ", ");
+        }
+    }
+
+    public static void ejercicio10(Scanner sc) {
+        int array[] = new int[10];
+        for (int i = 0; i < 10; i++) {
+            System.out.println("Introduce un número");
+            array[i] = sc.nextInt();
+        }
+        int ayuda1 = array[9];
+        int ayuda2;
+        System.out.println("¿Cuántas posiciones quieres mover los valores del array?");
+        int posiciones = sc.nextInt();
+        for (int i = 9; i > 0; i--) {
+
+            if (posiciones != 0 || posiciones != 1) {
+
+                ayuda2 = array[i - posiciones];
+                array[i - posiciones] = ayuda1;
+                ayuda1 = ayuda2;
+
+                if (i == 1) {
+                    array[9] = ayuda2;
+                }
+            }
+        }
+
+        System.out.println("Este es tu array ahora");
+        for (int i = 0; i < 10; i++) {
+            System.out.print(array[i] + ", ");
+        }
+    }
+
+    public static void ejercicio15(Scanner sc) {
+
+        int array[] = new int[10];
+        for (int i = 0; i < 10; i++) {
+            array[i] = sc.nextInt();
+        }
+        System.out.println("¿Qué número quieres que encuentre");
+        int numero = sc.nextInt();
+        int posicion = 0;
+        boolean num = false;
+        for (int i = 0; i < 10; i++) {
+            if (array[i] == numero) {
+                num = true;
+                posicion = i + 1;
+            }
+        }
+        if (num == true) {
+            System.out.println("El número " + numero + " estaba en la posición " + posicion);
+        } else {
+            System.out.println("No se ha encontrado ese número");
+        }
+    }
+
+    public static void ejercicio16(Scanner sc) {
+        int trimestre1[] = new int[5];
+        int trimestre2[] = new int[5];
+        int trimestre3[] = new int[5];
+
+        for (int i = 1; i <= 3; i++) {
+            System.out.println("Introduce las notas del trimestre " + i);
+            switch (i) {
+
+                case 1:
+                    for (int j = 0; i < 5; i++) {
+                        System.out.println("Del alumno " + (j + 1));
+                        trimestre1[j] = sc.nextInt();
+                    }
+                    break;
+                case 2:
+                    for (int j = 0; i < 5; i++) {
+                        System.out.println("Del alumno " + (j + 1));
+                        trimestre2[j] = sc.nextInt();
+                    }
+                    break;
+                case 3:
+                    for (int j = 0; i < 5; i++) {
+                        System.out.println("Del alumno " + (j + 1));
+                        trimestre3[j] = sc.nextInt();
+                    }
+                    break;
+            }
+
+        }
+        int acum = 0;
+        System.out.println("La media de los trimestres es");
+        for (int i = 1; i <= 3; i++) {
+            switch (i) {
+
+                case 1:
+                    for (int j = 0; j < 5; j++) {
+                        acum += trimestre1[j];
+                    }
+                    System.out.println("Primer trimestre: " + acum / 5);
+                    break;
+                case 2:
+                    for (int j = 0; j < 5; j++) {
+                        acum += trimestre2[j];
+                    }
+                    System.out.println("Segundo trimestre: " + acum / 5);
+                    break;
+                case 3:
+                    for (int j = 0; j < 5; j++) {
+                        acum += trimestre3[j];
+                    }
+                    System.out.println("Tercer trimestre: " + acum / 5);
+                    break;
+            }
+        }
+    }
+
     /*public static void ejercicioX(Scanner sc){
     System.out.println("Cuántos números quieres introducir");
     int numerodenumeros=sc.nextInt();
@@ -295,5 +437,4 @@ public class JavaArrays {
     acum+=impares[i];
     }
     System.out.print("La media de los impares es "+(acum/impares.length));*/
-
 }
