@@ -62,6 +62,9 @@ public class JavaArrays {
             case 13:
                 ejercicio13(sc);
                 break;*/
+            case 14:
+                ejercicio14(sc);
+                break;
             case 15:
                 ejercicio15(sc);
                 break;
@@ -236,6 +239,7 @@ public class JavaArrays {
     public static void ejercicio8(Scanner sc) {
 
         int array[] = new int[10];
+        System.out.println("Dame 8 números ");
         for (int i = 0; i < 8; i++) {
             array[i] = sc.nextInt();
 
@@ -246,16 +250,20 @@ public class JavaArrays {
         System.out.println("Dime otro número que quieras introducir");
         num = sc.nextInt();
         System.out.println("Y la posición donde quieres introducirlo (recuerda que tiene que ser entre 0 y 9, ambos inclusive)");
-        posicion = sc.nextInt();
+        posicion = sc.nextInt() - 1;
 
-        ayuda = array[posicion];
-        array[posicion] = num;
-
-        for (int i = posicion - 1; i > 0; i--) {
-            ayuda = array[i];
-
+        if (posicion >= 0 && posicion <= 7) {
+            for (int i = 7; i >= posicion; i--) {
+                array[i + 1] = array[i];
+            }
+            array[posicion] = num;
+        } else {
+            array[posicion] = num;
         }
-
+        System.out.println("Este es tu array ahora");
+        for (int i = 0; i < array.length; i++) {
+            System.out.println(array[i] + " ");
+        }
     }
 
     public static void ejercicio9(Scanner sc) {
@@ -315,6 +323,37 @@ public class JavaArrays {
         }
     }
 
+    public static void ejercicio14(Scanner sc) {
+        int array1[] = new int[10];
+        int array2[] = new int[10];
+        int array3[] = new int[20];
+
+        System.out.println("Dame los números del primer array, tienen que ser crecientes");
+        for (int i = 0; i < 10; i++) {
+            array1[i] = sc.nextInt();
+            if (i > 0) {
+                if(array1[i]<array1[i-1]||array1[i]==array1[i-1]){
+                    System.out.println("El número tiene que ser mayor que el anterior ("+array1[i-1]+")");
+                    i--;
+            }
+            }
+        }
+        System.out.println("Dame los números del primer array, tienen que ser crecientes");
+        for (int i = 0; i < 10; i++) {
+            array2[i] = sc.nextInt();
+            if (i > 0) {
+                if(array2[i]<array2[i-1]||array2[i]==array2[i-1]){
+                    System.out.println("El número tiene que ser mayor que el anterior ("+array2[i-1]+")");
+                    i--;
+            }
+
+            }
+        }
+        for(int i=0;i<10;i++){
+            System.out.println(array1[i]);
+        }
+    }
+
     public static void ejercicio15(Scanner sc) {
 
         int array[] = new int[10];
@@ -348,19 +387,19 @@ public class JavaArrays {
             switch (i) {
 
                 case 1:
-                    for (int j = 0; i < 5; i++) {
+                    for (int j = 0; j < 5; j++) {
                         System.out.println("Del alumno " + (j + 1));
                         trimestre1[j] = sc.nextInt();
                     }
                     break;
                 case 2:
-                    for (int j = 0; i < 5; i++) {
+                    for (int j = 0; j < 5; j++) {
                         System.out.println("Del alumno " + (j + 1));
                         trimestre2[j] = sc.nextInt();
                     }
                     break;
                 case 3:
-                    for (int j = 0; i < 5; i++) {
+                    for (int j = 0; j < 5; j++) {
                         System.out.println("Del alumno " + (j + 1));
                         trimestre3[j] = sc.nextInt();
                     }
@@ -371,6 +410,7 @@ public class JavaArrays {
         int acum = 0;
         System.out.println("La media de los trimestres es");
         for (int i = 1; i <= 3; i++) {
+            acum = 0;
             switch (i) {
 
                 case 1:
@@ -393,6 +433,12 @@ public class JavaArrays {
                     break;
             }
         }
+
+        System.out.println("Elige el alumno del que quieras saber la nota");
+        int posicion = sc.nextInt() - 1;
+        acum = trimestre1[posicion] + trimestre2[posicion] + trimestre3[posicion];
+        posicion++;
+        System.out.println("La media del alumno " + posicion + " es " + acum / 3);
     }
 
     /*public static void ejercicioX(Scanner sc){
