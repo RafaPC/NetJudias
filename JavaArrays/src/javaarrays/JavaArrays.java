@@ -48,20 +48,20 @@ public class JavaArrays {
                 ejercicio8(sc);
                 break;
             case 9:
-                ejercicio9(sc);
+                //ejercicio9(sc);
                 break;
             case 10:
                 ejercicio10(sc);
                 break;
-            /*case 11:
-                ejercicio11(sc);
+            case 11:
+                //ejercicio11(sc);
                 break;
             case 12:
                 ejercicio12(sc);
                 break;
             case 13:
-                ejercicio13(sc);
-                break;*/
+                //ejercicio13(sc);
+                break;
             case 14:
                 ejercicio14(sc);
                 break;
@@ -266,7 +266,7 @@ public class JavaArrays {
         }
     }
 
-    public static void ejercicio9(Scanner sc) {
+    /*public static void ejercicio9(Scanner sc) {
         int array[] = new int[10];
         for (int i = 0; i < 10; i++) {
             System.out.println("Introduce un número");
@@ -291,8 +291,7 @@ public class JavaArrays {
         for (int i = 0; i < 10; i++) {
             System.out.print(array[i] + ", ");
         }
-    }
-
+    }*/
     public static void ejercicio10(Scanner sc) {
         int array[] = new int[10];
         for (int i = 0; i < 10; i++) {
@@ -323,6 +322,22 @@ public class JavaArrays {
         }
     }
 
+    public static void ejercicio12(Scanner sc) {
+        int array[] = new int[10];
+        for (int i = 0; i < 10; i++) {
+            array[i] = sc.nextInt();
+        }
+        System.out.println("Ahora dime que posicion quieres borrar");
+        int posicion = sc.nextInt();
+        for(int i=posicion;i<9;i++){
+            array[i]=array[i+1];
+        }
+        System.out.println("Este es tu array ahora");
+        for(int i=0;i<10;i++){
+        System.out.println(array[i]);    
+        }
+    }
+
     public static void ejercicio14(Scanner sc) {
         int array1[] = new int[10];
         int array2[] = new int[10];
@@ -332,26 +347,61 @@ public class JavaArrays {
         for (int i = 0; i < 10; i++) {
             array1[i] = sc.nextInt();
             if (i > 0) {
-                if(array1[i]<array1[i-1]||array1[i]==array1[i-1]){
-                    System.out.println("El número tiene que ser mayor que el anterior ("+array1[i-1]+")");
+                if (!(array1[i] > array1[i - 1])) {
+                    System.out.println("El número tiene que ser mayor que el anterior (" + array1[i - 1] + ")");
                     i--;
-            }
+                }
             }
         }
         System.out.println("Dame los números del primer array, tienen que ser crecientes");
         for (int i = 0; i < 10; i++) {
             array2[i] = sc.nextInt();
             if (i > 0) {
-                if(array2[i]<array2[i-1]||array2[i]==array2[i-1]){
-                    System.out.println("El número tiene que ser mayor que el anterior ("+array2[i-1]+")");
+                if (!(array2[i] > array2[i - 1])) {
+                    System.out.println("El número tiene que ser mayor que el anterior (" + array2[i - 1] + ")");
                     i--;
-            }
+                }
 
             }
         }
-        for(int i=0;i<10;i++){
-            System.out.println(array1[i]);
+        int menorfinal = 0;
+        int menor1 = 0;
+        int menor2 = 0;
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (j == 0) {
+                    menor1 = array1[0];
+                } else if (array1[j] < menor1) {
+                    menor1 = array1[j];
+                }
+
+            }
+            for (int j = 0; j < 10; j++) {
+                if (j == 0) {
+                    menor2 = array2[0];
+                } else if (array2[j] < menor2) {
+                    menor2 = array2[j];
+
+                }
+            }
+            if (menor1 < menor2) {
+                menorfinal = menor1;
+                //array3[i] = menor1;
+                //array3[i+1]=menor2;
+            } else if (menor2 < menor1) {
+                menorfinal = menor2;
+                //array3[i]=menor2;
+                //array3[i+1]=menor1;
+            } else {
+                System.out.println("Error: el programa no funciona porque hay dos números iguales");
+            }
+            array3[i] = menorfinal;
         }
+
+        for (int i = 0; i < 20; i++) {
+            System.out.println(array3[i]);
+        }
+
     }
 
     public static void ejercicio15(Scanner sc) {
@@ -407,7 +457,7 @@ public class JavaArrays {
             }
 
         }
-        int acum = 0;
+        int acum;
         System.out.println("La media de los trimestres es");
         for (int i = 1; i <= 3; i++) {
             acum = 0;
