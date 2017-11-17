@@ -351,8 +351,9 @@ public class JavaArrays {
         }
         int arraypares[] = new int[pares];
         int arrayimpares[] = new int[impares];
-        int j = 0;
-        int k = 0;
+        int j = 0; int k = 0;
+        //Versión utilizando los valores
+        System.out.println("Hecho con valores:");
         for (int i = 0; i < 10; i++) {
             if ((array[i] % 2) == 0) {
                 arraypares[j] = array[i];
@@ -364,11 +365,33 @@ public class JavaArrays {
         }
         System.out.println("Ahí va tu array de pares");
         for (int i = 0; i < pares; i++) {
-            System.out.println(arraypares[i]);
+            System.out.print(arraypares[i] + ",");
+        }
+        System.out.println("\nAhí va tu array de impares");
+        for (int i = 0; i < impares; i++) {
+            System.out.print(arrayimpares[i] + ",");
+        }
+        //Versión utilizando los índices
+        j = 0;
+        k = 0;
+        System.out.println("\n---------------\nHecho con índices:");
+        for (int i = 0; i < 10; i++) {
+            if ((array[i] % 2) == 0) {
+                arraypares[j] = i;
+                j++;
+            } else {
+                arrayimpares[k] = i;
+                k++;
+            }
+
         }
         System.out.println("Ahí va tu array de pares");
+        for (int i = 0; i < pares; i++) {
+            System.out.print(array[arraypares[i]] + ",");
+        }
+        System.out.println("\nAhí va tu array de impares");
         for (int i = 0; i < impares; i++) {
-            System.out.println(arrayimpares[i]);
+            System.out.print(array[arrayimpares[i]] + ",");
         }
     }
 
