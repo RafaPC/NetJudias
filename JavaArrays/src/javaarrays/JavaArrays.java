@@ -61,7 +61,7 @@ public class JavaArrays {
                 ejercicio12(sc);
                 break;
             case 13:
-                //ejercicio13(sc);
+                ejercicio13(sc);
                 break;
             case 14:
                 ejercicio14(sc);
@@ -267,7 +267,7 @@ public class JavaArrays {
         }
     }
 
-    /*public static void ejercicio9(Scanner sc) {
+    public static void ejercicio9(Scanner sc) {
         int array[] = new int[10];
         for (int i = 0; i < 10; i++) {
             System.out.println("Introduce un número");
@@ -292,29 +292,24 @@ public class JavaArrays {
         for (int i = 0; i < 10; i++) {
             System.out.print(array[i] + ", ");
         }
-    }*/
+    }
+
+//UNDER-CONSTRUCTION
     public static void ejercicio10(Scanner sc) {
         int array[] = new int[10];
         for (int i = 0; i < 10; i++) {
-            System.out.println("Introduce un número");
+            System.out.println("");
             array[i] = sc.nextInt();
         }
-        int ayuda1 = array[9];
-        int ayuda2;
+        int ayuda = array[9];
         System.out.println("¿Cuántas posiciones quieres mover los valores del array?");
         int posiciones = sc.nextInt();
-        for (int i = 9; i > 0; i--) {
-
-            if (posiciones != 0 || posiciones != 1) {
-
-                ayuda2 = array[i - posiciones];
-                array[i - posiciones] = ayuda1;
-                ayuda1 = ayuda2;
-
-                if (i == 1) {
-                    array[9] = ayuda2;
-                }
+        for (int i = 1; i > posiciones; i--) {
+            ayuda = array[9];
+            for (int j = 8; j >= 0; i--) {
+                array[i + 1] = array[i];
             }
+            array[0] = ayuda;
         }
 
         System.out.println("Este es tu array ahora");
@@ -336,6 +331,44 @@ public class JavaArrays {
         System.out.println("Este es tu array ahora");
         for (int i = 0; i < 10; i++) {
             System.out.println(array[i]);
+        }
+    }
+
+    public static void ejercicio13(Scanner sc) {
+        int array[] = new int[10];
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Dime un num: ");
+            array[i] = sc.nextInt();
+        }
+        int pares = 0;
+        int impares = 0;
+        for (int i = 0; i < 10; i++) {
+            if ((array[i] % 2) == 0) {
+                pares++;
+            } else {
+                impares++;
+            }
+        }
+        int arraypares[] = new int[pares];
+        int arrayimpares[] = new int[impares];
+        int j = 0;
+        int k = 0;
+        for (int i = 0; i < 10; i++) {
+            if ((array[i] % 2) == 0) {
+                arraypares[j] = array[i];
+                j++;
+            } else {
+                arrayimpares[k] = array[i];
+                k++;
+            }
+        }
+        System.out.println("Ahí va tu array de pares");
+        for (int i = 0; i < pares; i++) {
+            System.out.println(arraypares[i]);
+        }
+        System.out.println("Ahí va tu array de pares");
+        for (int i = 0; i < impares; i++) {
+            System.out.println(arrayimpares[i]);
         }
     }
 
@@ -546,13 +579,7 @@ public class JavaArrays {
         }
     }
 
-
-
-
 }
-
-
-
 
 /*public static void ejercicioX(Scanner sc){
     System.out.println("Cuántos números quieres introducir");
