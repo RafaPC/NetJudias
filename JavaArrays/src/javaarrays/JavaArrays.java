@@ -294,20 +294,19 @@ public class JavaArrays {
         }
     }
 
-//UNDER-CONSTRUCTION
     public static void ejercicio10(Scanner sc) {
         int array[] = new int[10];
+        int ayuda;
         for (int i = 0; i < 10; i++) {
-            System.out.println("");
+            System.out.print("Introduce un número: ");
             array[i] = sc.nextInt();
         }
-        int ayuda = array[9];
         System.out.println("¿Cuántas posiciones quieres mover los valores del array?");
         int posiciones = sc.nextInt();
-        for (int i = 1; i > posiciones; i--) {
+        for (int i = 1; i <= posiciones; i++) {
             ayuda = array[9];
-            for (int j = 8; j >= 0; i--) {
-                array[i + 1] = array[i];
+            for (int j = 8; j >= 0; j--) {
+                array[j + 1] = array[j];
             }
             array[0] = ayuda;
         }
@@ -351,7 +350,8 @@ public class JavaArrays {
         }
         int arraypares[] = new int[pares];
         int arrayimpares[] = new int[impares];
-        int j = 0; int k = 0;
+        int j = 0;
+        int k = 0;
         //Versión utilizando los valores
         System.out.println("Hecho con valores:");
         for (int i = 0; i < 10; i++) {
