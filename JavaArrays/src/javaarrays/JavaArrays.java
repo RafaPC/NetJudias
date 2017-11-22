@@ -466,7 +466,7 @@ public class JavaArrays {
         int i = 0;
         int j = 0;
         int k = 0;
-        while (i < 10 && j < 10) {
+        for (;i < 10 && j < 10;k++) {
             if (array1[i] < array2[j]) {
                 array3[k] = array1[i];
                 i++;
@@ -474,7 +474,6 @@ public class JavaArrays {
                 array3[k] = array2[j];
                 j++;
             }
-            k++;
         }
         if (j == 10) {
             while (i < 10) {
