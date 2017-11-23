@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package siete.media;
+package media;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -29,6 +29,7 @@ public class SieteMedia {
         int respuesta;
         int i = 0;
         System.out.println("Has sacado un " + cartas[i]);
+        //Aquí se podría poner if(cartas[i]>7) pero asi queda más claro 
         if (cartas[i] == 8 || cartas[i] == 9 || cartas[i] == 10) {
             jugador += 0.5;
         } else {
@@ -56,8 +57,11 @@ public class SieteMedia {
 
         }
         //si ha acabado de jugar porque se ha pasado le dice por cuanto se ha pasado
-        if(jugador>7.5)System.out.println("Te has pasado por " + (jugador - 7.5));
+        if (jugador > 7.5) {
+            System.out.println("Te has pasado por " + (jugador - 7.5));
+        }
 
+        System.out.println("------------------\nTurno de la máquina\n------------------");
         System.out.println("La máquina ha sacado un " + cartas[i]);
         if (cartas[i] == 8 || cartas[i] == 9 || cartas[i] == 10) {
             maquina += 0.5;
@@ -65,24 +69,23 @@ public class SieteMedia {
             maquina += cartas[i];
         }
         i++;
-        System.out.println("La máquina tiene "+maquina+" puntos");
-        
-        
+        System.out.println("La máquina tiene " + maquina + " puntos");
+
         for (; maquina < 7.5; i++) {
-            if(maquina>jugador||maquina==jugador){
+            if (maquina > jugador || maquina == jugador) {
                 System.out.println("La máquina se planta");
                 break;
             }
-            
-            System.out.println("La máquina ha sacado un " + cartas[i]);
-            
+
             if (cartas[i] == 8 || cartas[i] == 9 || cartas[i] == 10) {
                 maquina += 0.5;
             } else {
                 maquina += cartas[i];
             }
+            System.out.println("La máquina ha sacado un " + cartas[i]);
+            System.out.println("La máquina tiene " + maquina + " puntos");
+            
             i++;
-        System.out.println("La máquina tiene "+maquina+" puntos");
         }
 
         if (jugador > 7.5 && maquina > 7.5) {
@@ -92,9 +95,9 @@ public class SieteMedia {
         } else if (maquina > 7.5) {
             System.out.println("Has ganado tú");
         } else {
-            if((jugador-7.5)>(maquina-7.5)){
+            if ((jugador - 7.5) > (maquina - 7.5)) {
                 System.out.println("Has ganado porque te has quedado más cerca");
-            }else{
+            } else {
                 System.out.println("Ha ganado la máquina porque se ha quedado más cerca");
             }
 
