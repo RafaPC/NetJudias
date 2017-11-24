@@ -25,10 +25,10 @@ public class SieteMedia {
         float jugador = 0;
         float maquina = 0;
         barajarArray(cartas);
-
+        boolean pregunta = true;
         int respuesta;
         int i = 0;
-        System.out.println("Has sacado un " + cartas[i]);
+        /*System.out.println("Has sacado un " + cartas[i]);
         //Aquí se podría poner if(cartas[i]>7) pero asi queda más claro 
         if (cartas[i] == 8 || cartas[i] == 9 || cartas[i] == 10) {
             jugador += 0.5;
@@ -36,61 +36,62 @@ public class SieteMedia {
             jugador += cartas[i];
         }
         i++;
+         */
+        do {
 
-        for (i = 1; jugador < 7.5; i++) {
-
-            System.out.println("Tienes " + jugador + " puntos");
-            System.out.println("¿Quiéres coger carta?");
-            System.out.println("(1) Sí\n(2) Me planto");
-            respuesta = sc.nextInt();
-
-            if (respuesta == 1) {
-                System.out.println("Has sacado un " + cartas[i]);
-                if (cartas[i] == 8 || cartas[i] == 9 || cartas[i] == 10) {
-                    jugador += 0.5;
-                } else {
-                    jugador += cartas[i];
-                }
+            System.out.println("Has sacado un " + cartas[i]);
+            if (cartas[i] == 8 || cartas[i] == 9 || cartas[i] == 10) {
+                jugador += 0.5;
             } else {
-                break;
+                jugador += cartas[i];
+            }
+            if (jugador >= 7.5) {
+                pregunta = false;
+            }
+            if (pregunta == true) {
+                System.out.println("Tienes " + jugador + " puntos");
+
+                System.out.println("¿Quiéres coger carta?");
+                System.out.println("(1) Sí\n(2) Me planto");
+                respuesta = sc.nextInt();
+                if (respuesta == 2) {
+                    pregunta = false;
+                }
             }
 
-        }
+            i++;
+        } while (jugador < 7.5 && pregunta);
         //si ha acabado de jugar porque se ha pasado le dice por cuanto se ha pasado
         if (jugador > 7.5) {
             System.out.println("Te has pasado por " + (jugador - 7.5));
         }
 
         System.out.println("------------------\nTurno de la máquina\n------------------");
-        System.out.println("La máquina ha sacado un " + cartas[i]);
+        /*System.out.println("La máquina ha sacado un " + cartas[i]);
         if (cartas[i] == 8 || cartas[i] == 9 || cartas[i] == 10) {
             maquina += 0.5;
         } else {
             maquina += cartas[i];
         }
         i++;
-        System.out.println("La máquina tiene " + maquina + " puntos");
+        System.out.println("La máquina tiene " + maquina + " puntos");*/
 
-        for (; (maquina < jugador && maquina != jugador&&jugador<7.5); i++) {
-            /*if (jugador > 7.5) {
-                break;
-            }
-            if (maquina > jugador || maquina == jugador) {
-                System.out.println("La máquina se planta");
-                break;
-            }*/
+        do {
+
 
             if (cartas[i] == 8 || cartas[i] == 9 || cartas[i] == 10) {
                 maquina += 0.5;
             } else {
                 maquina += cartas[i];
             }
-            System.out.println("La máquina ha sacado un " + cartas[i]);
+            System.out.println("La máquina ha sacado " + "un " + cartas[i]);
             System.out.println("La máquina tiene " + maquina + " puntos");
 
             i++;
-        }
+        }while (maquina < jugador && jugador < 7.5);
 
+        
+        
         if (jugador > 7.5 && maquina > 7.5) {
             System.out.println("Perdéis ambos");
         } else if (jugador == maquina) {
