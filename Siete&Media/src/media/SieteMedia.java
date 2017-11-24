@@ -71,14 +71,14 @@ public class SieteMedia {
         i++;
         System.out.println("La máquina tiene " + maquina + " puntos");
 
-        for (; maquina < 7.5; i++) {
-            if (jugador > 7.5) {
+        for (; (maquina < jugador && maquina != jugador&&jugador<7.5); i++) {
+            /*if (jugador > 7.5) {
                 break;
             }
             if (maquina > jugador || maquina == jugador) {
                 System.out.println("La máquina se planta");
                 break;
-            }
+            }*/
 
             if (cartas[i] == 8 || cartas[i] == 9 || cartas[i] == 10) {
                 maquina += 0.5;
