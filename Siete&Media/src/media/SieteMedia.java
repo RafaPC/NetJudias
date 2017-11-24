@@ -72,6 +72,9 @@ public class SieteMedia {
         System.out.println("La máquina tiene " + maquina + " puntos");
 
         for (; maquina < 7.5; i++) {
+            if (jugador > 7.5) {
+                break;
+            }
             if (maquina > jugador || maquina == jugador) {
                 System.out.println("La máquina se planta");
                 break;
@@ -84,16 +87,18 @@ public class SieteMedia {
             }
             System.out.println("La máquina ha sacado un " + cartas[i]);
             System.out.println("La máquina tiene " + maquina + " puntos");
-            
+
             i++;
         }
 
         if (jugador > 7.5 && maquina > 7.5) {
             System.out.println("Perdéis ambos");
+        } else if (jugador == maquina) {
+            System.out.println("Empate. La máquina gana");
         } else if (jugador > 7.5) {
-            System.out.println("Ha ganado la máquina");
+            System.out.println("Ha ganado la máquina porque te has pasado");
         } else if (maquina > 7.5) {
-            System.out.println("Has ganado tú");
+            System.out.println("Ganas tú porque la máquina se ha pasado");
         } else {
             if ((jugador - 7.5) > (maquina - 7.5)) {
                 System.out.println("Has ganado porque te has quedado más cerca");
