@@ -28,15 +28,6 @@ public class SieteMedia {
         boolean pregunta = true;
         int respuesta;
         int i = 0;
-        /*System.out.println("Has sacado un " + cartas[i]);
-        //Aquí se podría poner if(cartas[i]>7) pero asi queda más claro 
-        if (cartas[i] == 8 || cartas[i] == 9 || cartas[i] == 10) {
-            jugador += 0.5;
-        } else {
-            jugador += cartas[i];
-        }
-        i++;
-         */
         do {
 
             System.out.println("Has sacado un " + cartas[i]);
@@ -45,10 +36,7 @@ public class SieteMedia {
             } else {
                 jugador += cartas[i];
             }
-            if (jugador >= 7.5) {
-                pregunta = false;
-            }
-            if (pregunta == true) {
+            if (jugador<7.5) {
                 System.out.println("Tienes " + jugador + " puntos");
 
                 System.out.println("¿Quiéres coger carta?");
@@ -57,6 +45,9 @@ public class SieteMedia {
                 if (respuesta == 2) {
                     pregunta = false;
                 }
+                
+            }else{
+                pregunta=false;
             }
 
             i++;
@@ -78,7 +69,6 @@ public class SieteMedia {
 
         do {
 
-
             if (cartas[i] == 8 || cartas[i] == 9 || cartas[i] == 10) {
                 maquina += 0.5;
             } else {
@@ -88,10 +78,8 @@ public class SieteMedia {
             System.out.println("La máquina tiene " + maquina + " puntos");
 
             i++;
-        }while (maquina < jugador && jugador <= 7.5);
+        } while (maquina < jugador && jugador <= 7.5);
 
-        
-        
         if (jugador > 7.5 && maquina > 7.5) {
             System.out.println("Perdéis ambos");
         } else if (jugador == maquina) {
