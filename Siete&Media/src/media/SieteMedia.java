@@ -58,14 +58,6 @@ public class SieteMedia {
         }
 
         System.out.println("------------------\nTurno de la máquina\n------------------");
-        /*System.out.println("La máquina ha sacado un " + cartas[i]);
-        if (cartas[i] == 8 || cartas[i] == 9 || cartas[i] == 10) {
-            maquina += 0.5;
-        } else {
-            maquina += cartas[i];
-        }
-        i++;
-        System.out.println("La máquina tiene " + maquina + " puntos");*/
 
         do {
 
