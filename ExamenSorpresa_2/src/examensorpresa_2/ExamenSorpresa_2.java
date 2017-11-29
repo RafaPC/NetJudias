@@ -46,7 +46,7 @@ public class ExamenSorpresa_2 {
 
         }
         for (int i = 0; i < 12; i++) {
-            System.out.println(arrayfinal[i]);
+            System.out.print(arrayfinal[i]+", ");
         }
     }
 
@@ -79,7 +79,7 @@ public class ExamenSorpresa_2 {
             cartaencontrada = false;
             for (int j = 0; cartaencontrada == false; j++) {
                 if (cartas[j] == i) {
-                    System.out.println("La posición del último " + i + " es la número " + j);
+                    System.out.println("La posición del primer " + i + " es la número " + j);
                     cartaencontrada = true;
                 }
 
