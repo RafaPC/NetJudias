@@ -7,6 +7,9 @@ and open the template in the editor.
     Created on : 23-nov-2017, 9:49:52
     Author     : daw
 */
+body{
+    background-color:#d4c150;
+}
 .title{
     text-align: center;
     letter-spacing: 11px;
@@ -26,6 +29,12 @@ and open the template in the editor.
 }
 .right{
     text-align:right;
-    color:grey;
-    font-family: Comic Sans MS
+    color:white;
+    margin-bottom: 30px;
+    font-size:17px;
+}
+.subcursiva{
+    text-decoration: underline;
+    font-style:italic;
+    display: inline;
 }
