@@ -51,21 +51,15 @@ public class ExamenSorpresa_2 {
     }
 
     public static void ale() {
-        int array[]=new int[]{1,2,3,4,5,6,7,8,9,10};
+        int array[]=new int[]{1,2,3,4,5,6,7,8,9,10,0,0,0,0,0};
         int suma;
-        int swap;
-        int swap2;
-        /*for(int i=0;i<10;i+=3){
-            //suma dos números y los mete en suma
+        for(int i=0;i<15;i+=3){
             suma=array[i]+array[i+1];
-            //guarda el número en cuya posición irá la suma anterior
-            swap=array[i+=2];
-            //metemos suma
-            array[i+=2]=suma;
-            swap2=array[i+=3];
-            array[i+=2]=swap;
-        }*/
-        for(int i=0;i<10;i++){
+            for(int j=13;j>i+1;j--){
+                array[j+1]=array[j];
+            }array[i+2]=suma;
+        }
+        for(int i=0;i<15;i++){
             System.out.println(array[i]);
         }
     }
@@ -73,19 +67,21 @@ public class ExamenSorpresa_2 {
     public static void olo() {
         int cartas[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         barajarArray(cartas);
-
+        int arrayposiciones[] = new int [10];
         boolean cartaencontrada;
         for (int i = 1; i <= 10; i++) {
             cartaencontrada = false;
             for (int j = 0; cartaencontrada == false; j++) {
                 if (cartas[j] == i) {
-                    System.out.println("La posición del primer " + i + " es la número " + j);
+                    arrayposiciones[i-1]=j;
                     cartaencontrada = true;
                 }
 
             }
+            //En vez de hacer un for que vaya de 0 a 9 para printear el array lo pongo aquí con "i-1" y me ahorro hacerlo
+            System.out.println("La posición del primer "+i+" es la "+ arrayposiciones[i-1]);
         }
-
+        
     }
 
     public static void barajarArray(int[] array) {
