@@ -593,8 +593,6 @@ public class JavaArrays {
         barajarArray(mazo);
         barajarArray(mazo2);
 
-        /*for (int i =0;i<mazo.length;i++)
-            System.out.println(mazo[i]);*/
         //ir sacando una a una las cartas y comparandolas a ver quien gana
         for (int i = 0; i < 10; i++) {
             System.out.println("Jugador 1: " + mazo[i]);
