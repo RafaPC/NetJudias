@@ -7,12 +7,15 @@ and open the template in the editor.
     Created on : 29-nov-2017, 11:53:02
     Author     : daw
 */
+body{
+    background-color:#b6b6b6;
+}
 .titulo1{
     font-family: bold;
     font-size: 40px;
     letter-spacing: 9px;
     text-align: center;
-    margin-bottom: 20px;
+    padding-top:2%;
 }
 .titulo2{
     color:white;
@@ -20,23 +23,25 @@ and open the template in the editor.
     font-size: 30px;
     margin-left: 30px;
     margin-right: 100px;
+    margin-top:3%;
 }
 .rojo{
     color:red;
     font-family: cursive;
 }
 .nigger{
-    
+    background-color: white;
 }
 img{
-    height: 200px;
-    width: 150px;
+    height: 185px;
+    width: 140px;
     float:left;
     margin-left:10%;
     margin-top: 20px;
+    margin-right:20px;
 }
 .txt{
     margin-top:30px;
-    margin-left: 10px;
     margin-right: 20%;
+    text-indent:30px;
 }
