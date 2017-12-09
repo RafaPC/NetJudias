@@ -1,0 +1,54 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 08-dic-2017, 12:57:50
+    Author     : Los Prieto
+*/
+.cabecera{
+    border: dotted red 1px;
+    background-color: #e6b69c;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.tabla1{
+    background-color: #4d4f50;
+    height: 500px;
+    width: 100%;
+    padding: 1%;
+}
+
+.tabla2{
+    background-color: #15d4f8;
+    width: 98%;
+    padding: 2%;
+    margin: 1%;
+}
+.tabla2 td{
+    width: 70px;
+    height:100px;
+    background-color: #ff6a36;
+}
+.a{
+    vertical-align: bottom;
+}
+.beis{
+        background-color: #d8aa78;
+        vertical-align: bottom;
+}
+.bordeabajo{
+    border-bottom:dashed 1.5px red;
+    vertical-align: top;
+    width: 200px;
+}
+.beissinabaj{
+    background-color: #d8aa78;
+    height: 50%;
+}
+.overflow{
+    overflow: scroll;
+    width: 25%;
+}

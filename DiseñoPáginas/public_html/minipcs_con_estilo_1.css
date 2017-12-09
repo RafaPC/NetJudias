@@ -1,0 +1,53 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07-dic-2017, 17:04:12
+    Author     : Los Prieto
+*/
+body{
+    margin-right:18%;
+}
+.minipc{
+    margin-top: 10px;
+    display:inline-block;
+    background-color: black;
+    letter-spacing: 5px;
+    color: white;
+    font-size: 25px;
+    width: 16%;
+}
+.txt1{
+   display:inline-block;
+   vertical-align: top;
+   font-size: 18px;
+   width: 80%;
+}
+.lista{
+    display: inline-block;
+    text-decoration: underline;
+    font-size: 12px;
+}
+.centro{
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10%;
+    width: 70%;
+    height: 700px;
+}
+.arduino{
+    background-color: black;
+    color: white;
+    font-size: 24px;
+    vertical-align: top;
+}
+.txt2{
+    display: inline-block;
+    font-size: 18px;
+}
+img{
+    height: 50%;
+    width: 100%;
+}

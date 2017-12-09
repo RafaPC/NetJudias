@@ -40,12 +40,23 @@ body{
     background-color: #c5b9ce;
     border:20px;
 }
-.caja4{
-    margin:15px;
+.caja4-1{
+    margin:1.5%;
     background-color: #204c45;
-    height: 205px;
-    margin-bottom:10px;
-
+    height: 78%;
+}
+.caja4-2{
+    background-color: #204c45;
+    height: 80%;
+    width: 95%;
+    margin-left: 2.5%;
+}
+.caja4-3{
+    background-color: #204c45;
+    height: 80%;
+    width: 95%;
+    margin-left: 2.5%;
+    color: white;
 }
 .caja5{
     padding-top:19px;
@@ -66,55 +77,77 @@ body{
     font-weight:bold;
 }
 .titulo3{
-
-}
-.arrizq{
     text-align:left;
     padding-top:8px;
-    margin-left:10px;
+    margin-left:1.5%;
 }
 
 .titulo4{
     margin-left:20px;
     vertical-align:top;
     padding-top:8px;
-    margin-left:10px;
+    margin-left:1px;
     font-size:20px;
-}
-
-.img1{
-    float: left;
-    height:150px;
-    width:150px;
-    margin:20px;
-    border: 5px solid white;
-    padding: 5px;
-}
-.txtcentrado{
-    padding-top:35px;
-    color:white;
-    margin-left:300px;
-    margin-right:300px;
-}
-.img2{
-    float: right;
-    height:150px;
-    width:150px;
-    margin:20px;
-    border: 5px solid white;
-    padding:5px;
-}
-.img3{
-    float:left;
-    height: 220px;
-    width:250px;
-    overflow: visible;
-    border: 5px solid white;
-    padding: 5px;
 }
 .titulo5{
     text-align:left;
     font-size:17px;
-    padding-top:20px;
-    margin-left:10px;
+    padding-top: 1%;
+    margin-left: 2.4%;
+    font-weight: bold;
+    margin-bottom: 0.3%;
+}
+
+.img1{
+    float: left;
+    height:72%;
+    width:17%;
+    margin:2.2%;
+    border: 5px solid white;
+    padding: 0.6%;
+}
+.txt1{
+    padding-top:5%;
+    color:white;
+    margin-left:30%;
+    margin-right:30%;
+}
+.txt2{
+    vertical-align: middle;
+    color: white;
+    margin-right: 3%;
+    margin-left: 33%;
+    padding-top: 5%;
+}
+.txt3{
+    padding-top: 3%;
+    margin-left: 2%;
+}
+.img2{
+    float: right;
+    height:70%;
+    width:18%;
+    margin:2.2%;
+    border: 5px solid white;
+    padding:0.8%;
+}
+.img3{
+    float:left;
+    height: 100%;
+    width:30%;
+    overflow: visible;
+    border: 5px solid white;
+    padding: 5px;
+    margin-right: 2%;
+    margin-top: 1.5%;
+}
+.img4{
+    float:right;
+    width: 25%;
+    height: 150%;
+    border: 5px solid white;
+    padding: 5px;
+    margin-right: 2%;
+    margin-top: 1.5%;
+    
 }
