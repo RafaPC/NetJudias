@@ -43,17 +43,18 @@ public class JavaNavidad {
                 if (tresenraya[x][y] == turno) {
                     repetido = true;
                     System.out.println("Ya hay una X en esa posición");
+                } else {
+                    tresenraya[x][y] = 'X';
                 }
-                else tresenraya[x][y] = 'X';
             } while (repetido == true);
 
-            // for de 9 veces, se sale si hay 3 en raya
+            //HECHO for de 9 veces, se sale si hay 3 en raya
             //HECHO se pide celda a poner, comprobar que no estaba ocupada
             //HECHO si esta ocupada pedir otra.
-            // comprobar 3 en raya en funcion
-            // dentro de la funcion llamar a funcion comprobarfila, comprobarcolumna
-            // y comprobar diagonales.
-            // misma fila
+            //HECHO comprobar 3 en raya en funcion
+            //HECHO dentro de la funcion llamar a funcion comprobarfila, comprobarcolumna
+            //HECHO y comprobar diagonales.
+            //HECHO misma fila
             boolean ganar;
 
             imprimirTablero(tresenraya);
@@ -61,8 +62,9 @@ public class JavaNavidad {
             ganar = comprobarTresEnRaya(tresenraya, turno);
             if (ganar == true) {
                 System.out.println("TRES EN RAYA");
+                i = 9;
             }
-            
+
         }
 
     }
@@ -95,7 +97,6 @@ public class JavaNavidad {
             if (tablero[1][1] == turno) {
                 if (tablero[2][2] == turno) {
                     tresEnRaya = true;
-                    System.out.println("diagonal true");
                 }
             }
         } else if (tablero[2][0] == turno) {
@@ -111,20 +112,20 @@ public class JavaNavidad {
 
     public static boolean comprobarTresEnRaya(char[][] tablero, char turno) {
 
-        boolean prueba = false;
+        boolean tresEnRaya = false;
 
-        for (int i = 0; i < 3 && prueba == false; i++) {
-            prueba = comprobarRow(tablero, turno, i);
-            if (prueba == false) {
-                prueba = comprobarCol(tablero, turno, i);
+        for (int i = 0; i < 3 && tresEnRaya == false; i++) {
+            tresEnRaya = comprobarRow(tablero, turno, i);
+            if (tresEnRaya == false) {
+                tresEnRaya = comprobarCol(tablero, turno, i);
             }
-            /*if (tresEnRaya == false) {
+            if (tresEnRaya == false) {
                 tresEnRaya = comprobarDiagonal(tablero, turno);
-            }*/
+            }
 
         }
 
-        return prueba;
+        return tresEnRaya;
     }
 
     public static void imprimirTablero(char[][] tablero) {
