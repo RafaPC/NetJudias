@@ -11,16 +11,16 @@ import java.util.Scanner;
  *
  * @author Los Prieto
  */
-public class JavaNavidad {
-
+public class Cuatroenraya {
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // Hacer el tablero
-        char[][] tresenraya = new char[3][3];
-        for (int i = 0; i < tresenraya.length; i++) {
-            for (int j = 0; j < tresenraya[i].length; j++) {
+        char[][] tresenraya = new char[7][6];
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
                 tresenraya[j][i] = '-';
             }
 
@@ -70,7 +70,7 @@ public class JavaNavidad {
 
     public static boolean comprobarCol(char[][] tablero, char turno, int x) {
         boolean tresEnRaya = true;
-        for (int j = 0; j < 3 && tresEnRaya; j++) {
+        for (int j = 0; j < 4 && tresEnRaya; j++) {
             if (tablero[x][j] != turno) {
                 tresEnRaya = false;
             }
@@ -81,7 +81,7 @@ public class JavaNavidad {
 
     public static boolean comprobarRow(char[][] tablero, char turno, int y) {
         boolean tresEnRaya = true;
-        for (int j = 0; j < 3 && tresEnRaya; j++) {
+        for (int j = 0; j < 4 && tresEnRaya; j++) {
             if (tablero[j][y] != turno) {
                 tresEnRaya = false;
             }
@@ -113,14 +113,14 @@ public class JavaNavidad {
 
         boolean tresEnRaya = false;
 
-        for (int i = 0; i < 3 && tresEnRaya == false; i++) {
+        for (int i = 0; i < 4 && tresEnRaya == false; i++) {
             tresEnRaya = comprobarRow(tablero, turno, i);
             if (tresEnRaya == false) {
                 tresEnRaya = comprobarCol(tablero, turno, i);
             }
-            if (tresEnRaya == false) {
+            /*if (tresEnRaya == false) {
                 tresEnRaya = comprobarDiagonal(tablero, turno);
-            }
+            }*/
 
         }
 
@@ -128,13 +128,12 @@ public class JavaNavidad {
     }
 
     public static void imprimirTablero(char[][] tablero) {
-        for (int i = 0; i < tablero.length; i++) {
-            for (int j = 0; j < tablero[i].length; j++) {
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
                 System.out.print(tablero[j][i]);
             }
             System.out.println("");
         }
 
     }
-
 }
