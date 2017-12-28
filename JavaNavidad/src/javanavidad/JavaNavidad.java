@@ -25,25 +25,35 @@ public class JavaNavidad {
             }
 
         }
-        char turno = 'X';
+        char turnoX = 'X';
+        char turnoO = 'O';
+        char turno = turnoX;
         int x;
         int y;
         boolean repetido;
+        boolean ganar = false;
         // Jugar
         Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 9 && ganar == false; i++) {
 
             do {
                 repetido = false;
-                System.out.println("En qué columna quieres poner la X");
+                System.out.println("En qué columna quieres poner el " + turno);
                 x = sc.nextInt();
                 System.out.println("Y en qué fila?");
                 y = sc.nextInt();
-                if (tresenraya[x][y] == turno) {
+
+                if (tresenraya[x][y] == turnoX || tresenraya[x][y] == turnoO) {
                     repetido = true;
-                    System.out.println("Ya hay una X en esa posición");
+                    System.out.println("Ya hay un " + tresenraya[x][y] + " en esa posición");
                 } else {
-                    tresenraya[x][y] = 'X';
+                    tresenraya[x][y] = turno;
+                    ganar = comprobarTresEnRaya(tresenraya, turno);
+                    if (turno == turnoX) {
+                        turno = 'O';
+                    } else {
+                        turno = 'X';
+                    }
                 }
             } while (repetido == true);
 
@@ -54,14 +64,10 @@ public class JavaNavidad {
             //HECHO dentro de la funcion llamar a funcion comprobarfila, comprobarcolumna
             //HECHO y comprobar diagonales.
             //HECHO misma fila
-            boolean ganar;
-
             imprimirTablero(tresenraya);
 
-            ganar = comprobarTresEnRaya(tresenraya, turno);
             if (ganar == true) {
                 System.out.println("TRES EN RAYA");
-                i = 9;
             }
 
         }

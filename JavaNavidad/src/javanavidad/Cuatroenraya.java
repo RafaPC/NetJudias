@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author Los Prieto
  */
 public class Cuatroenraya {
-    
+
     /**
      * @param args the command line arguments
      */
@@ -25,25 +25,40 @@ public class Cuatroenraya {
             }
 
         }
-        char turno = 'X';
+        char turnoX = 'X';
+        char turnoO = 'O';
+        char turno = turnoX;
         int x;
         int y;
         boolean repetido;
+        boolean ganar = false;
         // Jugar
         Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 42 && ganar == false; i++) {
 
             do {
                 repetido = false;
-                System.out.println("En qué columna quieres poner la X");
+                System.out.println("En qué columna quieres poner la " + turno);
                 x = sc.nextInt();
                 System.out.println("Y en qué fila?");
                 y = sc.nextInt();
-                if (tresenraya[x][y] == turno) {
+
+                if (tresenraya[x][y] == turnoX || tresenraya[x][y] == turnoO) {
                     repetido = true;
-                    System.out.println("Ya hay una X en esa posición");
+                    System.out.println("Ya hay un " + tresenraya[x][y] + " en esa posición");
                 } else {
-                    tresenraya[x][y] = 'X';
+                    for (int k = 5; k >= 0; k--) {
+                        if (tresenraya[x][k] == '-') {
+                            tresenraya[x][k] = turno;
+                            k = 0;
+                        }
+                    }
+                    ganar = comprobarTresEnRaya(tresenraya, turno);
+                    if (turno == turnoX) {
+                        turno = 'O';
+                    } else {
+                        turno = 'X';
+                    }
                 }
             } while (repetido == true);
 
@@ -54,14 +69,10 @@ public class Cuatroenraya {
             //HECHO dentro de la funcion llamar a funcion comprobarfila, comprobarcolumna
             //HECHO y comprobar diagonales.
             //HECHO misma fila
-            boolean ganar;
-
             imprimirTablero(tresenraya);
 
-            ganar = comprobarTresEnRaya(tresenraya, turno);
             if (ganar == true) {
-                System.out.println("TRES EN RAYA");
-                i = 9;
+                System.out.println("CUATRO EN RAYA");
             }
 
         }
@@ -69,28 +80,62 @@ public class Cuatroenraya {
     }
 
     public static boolean comprobarCol(char[][] tablero, char turno, int x) {
-        boolean tresEnRaya = true;
-        for (int j = 0; j < 4 && tresEnRaya; j++) {
-            if (tablero[x][j] != turno) {
-                tresEnRaya = false;
+        boolean tresEnRaya = false;
+        int contadorX = 0;
+        int contadorO = 0;
+
+        for (int j = 5; j >= 0 && tresEnRaya == false; j--) {
+            switch (tablero[x][j]) {
+                case 'X':
+                    contadorX++;
+                    contadorO = 0;
+                    break;
+                case 'O':
+                    contadorO++;
+                    contadorX = 0;
+                    break;
+                case '-':
+                    contadorX = 0;
+                    contadorO = 0;
+                    break;
+            }
+            if (contadorO == 4 || contadorX == 4) {
+                j = -1;
+                tresEnRaya = true;
             }
         }
-
         return tresEnRaya;
     }
 
     public static boolean comprobarRow(char[][] tablero, char turno, int y) {
-        boolean tresEnRaya = true;
-        for (int j = 0; j < 4 && tresEnRaya; j++) {
-            if (tablero[j][y] != turno) {
-                tresEnRaya = false;
+        boolean tresEnRaya = false;
+        int contadorX = 0;
+        int contadorO = 0;
+
+        for (int j = 0; j <= 6 && tresEnRaya == false; j++) {
+            switch (tablero[j][y]) {
+                case 'X':
+                    contadorX++;
+                    contadorO = 0;
+                    break;
+                case 'O':
+                    contadorO++;
+                    contadorX = 0;
+                    break;
+                case '-':
+                    contadorX = 0;
+                    contadorO = 0;
+                    break;
+            }
+            if (contadorO == 4 || contadorX == 4) {
+                tresEnRaya = true;
             }
         }
 
         return tresEnRaya;
     }
 
-    public static boolean comprobarDiagonal(char[][] tablero, char turno) {
+   /*public static boolean comprobarDiagonal(char[][] tablero, char turno) {
         boolean tresEnRaya = false;
         if (tablero[0][0] == turno) {
             if (tablero[1][1] == turno) {
@@ -107,20 +152,22 @@ public class Cuatroenraya {
 
         }
         return tresEnRaya;
-    }
+    }*/
 
     public static boolean comprobarTresEnRaya(char[][] tablero, char turno) {
 
         boolean tresEnRaya = false;
 
-        for (int i = 0; i < 4 && tresEnRaya == false; i++) {
-            tresEnRaya = comprobarRow(tablero, turno, i);
-            if (tresEnRaya == false) {
+        for (int i = 0; i <= 6 && tresEnRaya == false; i++) {
+            if (i < 6) {
+                tresEnRaya = comprobarRow(tablero, turno, i);
+            }
+            if (tresEnRaya == false && i < 6) {
                 tresEnRaya = comprobarCol(tablero, turno, i);
             }
-            /*if (tresEnRaya == false) {
-                tresEnRaya = comprobarDiagonal(tablero, turno);
-            }*/
+            if (tresEnRaya == false) {
+                //tresEnRaya = comprobarDiagonal(tablero, turno);
+            }
 
         }
 
@@ -136,4 +183,5 @@ public class Cuatroenraya {
         }
 
     }
+
 }
