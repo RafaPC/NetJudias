@@ -1,0 +1,61 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 06-dic-2017, 20:11:20
+    Author     : Esther
+*/
+
+body{
+    background-color: lightgray;
+    font-family: 'Share Tech', sans-serif;
+}
+.titulo{
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.div1{
+    background-color: dimgray;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding-left: 10px;
+}
+.espacio{
+    margin-bottom: 30px;
+}
+.cajon1{
+    padding-left: 200px;
+    padding-right: 200px;
+}
+img{
+    width: 180px;
+    height: 180px;
+    float: left;
+}
+.texto{
+    text-align: justify;
+    text-indent: 50px;
+}
+.clear{
+    clear: both;
+}
+.espacio2{
+    margin-bottom: 200px;
+}
+.rojo{
+    color: crimson;
+}
+.negrita{
+    font-weight: bold;
+    background-color: white;
+}.fa {
+
+}

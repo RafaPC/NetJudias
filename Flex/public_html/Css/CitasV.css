@@ -1,0 +1,42 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 06-dic-2017, 16:09:28
+    Author     : Esther
+*/
+body{
+    background-color: goldenrod;
+}
+h1{
+    font-family: 'Cabin Sketch', cursive;
+    font-size: 4rem;
+    text-align: center;
+    letter-spacing: 20px;
+}
+.div1{
+
+    text-align: justify;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.spanNegrita{
+    font-weight: bold;
+}
+.spanSubray{
+    text-decoration: underline;
+}
+.cajon1{
+    font-size: 3rem;
+    clear: both;
+    font-family: 'Pacifico', cursive; 
+}
+.div3{
+    font-size: 3rem;
+    color: white;
+    float: right;
+    font-family: 'Indie Flower', cursive;
+}

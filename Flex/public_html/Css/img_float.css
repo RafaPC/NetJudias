@@ -1,0 +1,107 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16-nov-2017, 9:06:05
+    Author     : daw
+*/
+
+.divme{
+    text-align: center;
+    width:max-content;
+    margin: 0 auto;
+    font-family: 'Sacramento', cursive;
+
+}
+.divme ul li{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.divme ul {
+    list-style-type: none;
+    overflow: hidden;
+    padding: 0;
+    background-color: bisque;
+    border-radius: 12px;
+}
+
+.divme li {
+    float: left;
+}
+
+.divme li a {
+    display: block;
+    color: black;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: pink;
+}
+
+li a:active{
+    background-color: hotpink;
+}
+#activo{
+    background-color: hotpink;
+}
+/* The dropdown container */
+.dropdown {
+    float: left;
+    font-size: 2rem;
+    overflow: hidden;
+}
+/* Dropdown button */
+.dropdown .dropbtn {
+    font-family: 'Sacramento', cursive;
+    font-size: 2rem; 
+    border: none;
+    outline: none;
+    color: black;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-weight: bold;
+} 
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: bisque;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 12px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: pink;
+    border-radius: 12px;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.blurry-text {
+    color: transparent;
+    text-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+.blurry-text:hover {
+    color:black;
+    text-shadow: 0 0 0px rgba(0,0,0,0.5);
+    cursor: default;
+}

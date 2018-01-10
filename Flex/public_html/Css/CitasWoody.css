@@ -1,0 +1,64 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 06-dic-2017, 17:10:10
+    Author     : Esther
+*/
+
+body{
+    background-color:mediumspringgreen;
+    text-align: center;
+}
+h1{
+    color: chocolate;
+    font-size: 5rem;
+    font-family: 'Gloria Hallelujah', cursive;
+}
+.div1{
+    text-indent: 50px;
+    float:left;
+    text-align: justify;
+    width: 800px;
+
+    border-right: 5px solid white;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-family: 'Corben', cursive;
+    font-size: 2rem;
+}
+.cajon1{
+    text-indent: 50px;
+    float: right;
+    border-left: 5px solid white;
+    text-align: justify;
+    width: 800px;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 2rem;
+    font-family: 'Gruppo', cursive;
+}
+.rojo{
+    background-color: gainsboro;
+    border-bottom: 1px solid red;
+}
+.negro{
+    border-top: 1px solid black;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.negrita{
+    font-weight: bold;
+}
+.negritaAlta{
+    font-variant: small-caps;
+    font-weight: bold;
+    border-bottom: 1px red dashed;
+}
+.divEspacio{
+    clear: both;
+    padding-bottom: 40px;
+
+}

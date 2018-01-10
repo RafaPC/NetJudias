@@ -1,0 +1,57 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 06-dic-2017, 18:31:14
+    Author     : Esther
+*/
+body{
+    background-color: lightgray;
+    font-family: 'Amiko', sans-serif;
+}
+.div1{
+    background-color: black;
+    color: white;
+    font-size: 3rem;
+    float: left;
+    letter-spacing: 10px;
+    margin-top: 40px;
+    width: 270px;
+    text-align: center;
+}
+.cajon1{
+    padding-top: 20px;
+    width: 1100px;
+}
+.lista{
+    padding-top: 20px;
+    clear: both;
+    list-style-type: square;
+    float: left;
+    width: 400px; 
+    height: 800px;
+    text-decoration: underline;
+}
+.div3{
+    float: left;
+    width: 700px;
+}
+.div4{
+    background-color: black;
+    color: white; 
+    font-size: 1.5rem;
+    padding-left: 10px;
+}
+.div5{
+    padding-top: 20px;
+}
+img{
+    width: 100%;
+}
+.divfin{
+    clear:both;
+    float: right;
+
+}

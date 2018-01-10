@@ -1,0 +1,87 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 06-dic-2017, 21:39:18
+    Author     : Esther
+*/
+body{
+    background-color: thistle;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.titulo{
+    font-weight: bold;
+    font-size: 3rem;
+    border-top: 3px solid purple;
+    border-bottom: 3px solid purple;
+    background-color: white;
+    margin-bottom: 5px;
+}
+.cajas{
+    float:left;
+    border: 3px solid purple;
+    background-color: white;
+    color: purple;
+    width: 200px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+.cajon{
+    float: left;
+    margin-right: 50px;
+}
+.espacio{
+    padding-bottom: 5px;
+    clear: left;
+}
+.cajon1{
+    background-color: purple;
+    color: white;
+    font-size: 2rem;
+    padding-left: 8px;
+}
+.cajon2{
+    float: left;
+    width: 1050px;
+    height: 900px;
+    background-color: white;
+    overflow-y: scroll;
+}
+.div3{
+    text-align: justify;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 8px;
+    font-size: 1.5rem;
+}
+img{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 3px solid purple;
+    border-bottom: 3px solid purple;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.net{
+    font-variant: small-caps;
+    font-weight: bold;
+    letter-spacing: 0px;
+}
+.lista{
+    list-style-type: disc;
+}
+.espacio2{
+    padding-top: 200px;
+}
+.autor{
+    float: right;
+    font-size: 1rem;
+    clear:right;
+}
+.clear{
+    clear: both;
+}
