@@ -17,7 +17,6 @@ h1{
     letter-spacing: 20px;
 }
 .div1{
-
     text-align: justify;
     width: 400px;
     margin-left: auto;
@@ -29,14 +28,21 @@ h1{
 .spanSubray{
     text-decoration: underline;
 }
-.cajon1{
+.izq{
+    display: flex;
     font-size: 3rem;
-    clear: both;
+    justify-content: flex-start;
     font-family: 'Pacifico', cursive; 
 }
-.div3{
+.right{
+    display: flex;
     font-size: 3rem;
     color: white;
-    float: right;
+    justify-content: flex-end;
     font-family: 'Indie Flower', cursive;
+}
+#flex{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
