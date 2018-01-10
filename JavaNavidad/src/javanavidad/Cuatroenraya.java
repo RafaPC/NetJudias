@@ -27,40 +27,35 @@ public class Cuatroenraya {
         }
         char turnoX = 'X';
         char turnoO = 'O';
-        char turno = turnoX;
+        char turno = 'X';
         int x;
-        int y;
-        boolean repetido;
+        int y = 0;
         boolean ganar = false;
         // Jugar
         Scanner sc = new Scanner(System.in);
         for (int i = 0; i < 42 && ganar == false; i++) {
 
-            do {
-                repetido = false;
+
                 System.out.println("En qué columna quieres poner la " + turno);
                 x = sc.nextInt();
-                System.out.println("Y en qué fila?");
-                y = sc.nextInt();
 
-                if (tresenraya[x][y] == turnoX || tresenraya[x][y] == turnoO) {
-                    repetido = true;
-                    System.out.println("Ya hay un " + tresenraya[x][y] + " en esa posición");
-                } else {
-                    for (int k = 5; k >= 0; k--) {
-                        if (tresenraya[x][k] == '-') {
-                            tresenraya[x][k] = turno;
-                            k = 0;
-                        }
+                boolean colocada = false;
+
+                for (int j = 5; j >= 0 && !colocada; j--) {
+                    if (tresenraya[x][j] == '-') {
+                        tresenraya[x][j] = turno;
+                        colocada = true;
+                        y = j;
                     }
-                    ganar = comprobarTresEnRaya(tresenraya, turno);
-                    if (turno == turnoX) {
+                }
+
+                    ganar = comprobarTresEnRaya(tresenraya, turno, x, y);
+                    if (turno == 'X') {
                         turno = 'O';
                     } else {
                         turno = 'X';
                     }
-                }
-            } while (repetido == true);
+                
 
             //HECHO for de 9 veces, se sale si hay 3 en raya
             //HECHO se pide celda a poner, comprobar que no estaba ocupada
@@ -81,61 +76,46 @@ public class Cuatroenraya {
 
     public static boolean comprobarCol(char[][] tablero, char turno, int x) {
         boolean tresEnRaya = false;
-        int contadorX = 0;
-        int contadorO = 0;
+        int contador = 0;
 
-        for (int j = 5; j >= 0 && tresEnRaya == false; j--) {
-            switch (tablero[x][j]) {
-                case 'X':
-                    contadorX++;
-                    contadorO = 0;
-                    break;
-                case 'O':
-                    contadorO++;
-                    contadorX = 0;
-                    break;
-                case '-':
-                    contadorX = 0;
-                    contadorO = 0;
-                    break;
+        for (int j = 5; j >= 0 && !tresEnRaya; j--) {
+            if (tablero[x][j] == turno) {
+                contador++;
+                System.out.println("++");
+            } else if (tablero[x][j] != turno) {
+                contador = 0;
             }
-            if (contadorO == 4 || contadorX == 4) {
-                j = -1;
+
+            if (contador == 4) {
                 tresEnRaya = true;
             }
         }
+        System.out.println(tresEnRaya);
         return tresEnRaya;
     }
 
     public static boolean comprobarRow(char[][] tablero, char turno, int y) {
         boolean tresEnRaya = false;
-        int contadorX = 0;
-        int contadorO = 0;
+        int contador = 0;
 
-        for (int j = 0; j <= 6 && tresEnRaya == false; j++) {
-            switch (tablero[j][y]) {
-                case 'X':
-                    contadorX++;
-                    contadorO = 0;
-                    break;
-                case 'O':
-                    contadorO++;
-                    contadorX = 0;
-                    break;
-                case '-':
-                    contadorX = 0;
-                    contadorO = 0;
-                    break;
+        for (int j = 5; j >= 0 && !tresEnRaya; j--) {
+            if (tablero[j][y] == turno) {
+                contador++;
+                System.out.println("++");
+            } else if (tablero[j][y] != turno) {
+                contador = 0;
             }
-            if (contadorO == 4 || contadorX == 4) {
+
+            if (contador == 4) {
                 tresEnRaya = true;
             }
         }
-
+        System.out.println(tresEnRaya);
         return tresEnRaya;
     }
 
-   /*public static boolean comprobarDiagonal(char[][] tablero, char turno) {
+
+    public static boolean comprobarDiagonal(char[][] tablero, char turno) {
         boolean tresEnRaya = false;
         if (tablero[0][0] == turno) {
             if (tablero[1][1] == turno) {
@@ -152,23 +132,18 @@ public class Cuatroenraya {
 
         }
         return tresEnRaya;
-    }*/
-
-    public static boolean comprobarTresEnRaya(char[][] tablero, char turno) {
+    }
+    public static boolean comprobarTresEnRaya(char[][] tablero, char turno, int x, int y) {
 
         boolean tresEnRaya = false;
 
-        for (int i = 0; i <= 6 && tresEnRaya == false; i++) {
-            if (i < 6) {
-                tresEnRaya = comprobarRow(tablero, turno, i);
-            }
-            if (tresEnRaya == false && i < 6) {
-                tresEnRaya = comprobarCol(tablero, turno, i);
-            }
-            if (tresEnRaya == false) {
-                //tresEnRaya = comprobarDiagonal(tablero, turno);
-            }
+        tresEnRaya = comprobarCol(tablero, turno, x);
 
+        if (tresEnRaya == false) {
+            tresEnRaya = comprobarRow(tablero, turno, y);
+        }
+        if (tresEnRaya == false) {
+            //tresEnRaya = comprobarDiagonal(tablero, turno);
         }
 
         return tresEnRaya;

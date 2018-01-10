@@ -48,7 +48,7 @@ public class JavaNavidad {
                     System.out.println("Ya hay un " + tresenraya[x][y] + " en esa posición");
                 } else {
                     tresenraya[x][y] = turno;
-                    ganar = comprobarTresEnRaya(tresenraya, turno);
+                    ganar = comprobarTresEnRaya(tresenraya, turno, x, y);
                     if (turno == turnoX) {
                         turno = 'O';
                     } else {
@@ -115,20 +115,19 @@ public class JavaNavidad {
         return tresEnRaya;
     }
 
-    public static boolean comprobarTresEnRaya(char[][] tablero, char turno) {
+    public static boolean comprobarTresEnRaya(char[][] tablero, char turno, int x, int y) {
 
         boolean tresEnRaya = false;
 
-        for (int i = 0; i < 3 && tresEnRaya == false; i++) {
-            tresEnRaya = comprobarRow(tablero, turno, i);
+   
+            tresEnRaya = comprobarRow(tablero, turno, x);
             if (tresEnRaya == false) {
-                tresEnRaya = comprobarCol(tablero, turno, i);
+                tresEnRaya = comprobarCol(tablero, turno, y);
             }
             if (tresEnRaya == false) {
                 tresEnRaya = comprobarDiagonal(tablero, turno);
             }
 
-        }
 
         return tresEnRaya;
     }
