@@ -43,12 +43,13 @@ h1{
     background-color: gray;
     padding: 20px;
     font-family: sans-serif;
-    clear: both;
     font-weight: bold;
+    margin-top: 3%;
 }
 .lista{
     background-color: darkslategray;
-    float: left;
+    display: flex;
+    flex-direction: row;
 }
 .divtexto{
     text-align: justify;
@@ -56,10 +57,10 @@ h1{
     margin-left: 20px;
     color: white;
     font-weight: normal;
+    flex-grow: 2;
 }
 .div5{
     background-color: darkslategray;
-    float: right;
 }
 .img1 {
     width: 200px; 
@@ -69,19 +70,9 @@ h1{
     border: solid 4px white;
     overflow: visible;
     margin-right: 25px;
+    flex-grow: 1;
 }
-.img2 {
-    width: 200px; 
-    height: 200px;
-    margin: 8px;
-    padding: 6px;
-    border: solid 4px white;
-    overflow: visible;
-    margin-left: 25px;
-}
-.divclear{
-    clear: both;
-}
+
 .divespacio{
     margin-top: 10px;
 }

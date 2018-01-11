@@ -53,5 +53,13 @@ img{
 .divfin{
     clear:both;
     float: right;
-
+}
+#general{
+    display: flex;
+    flex-direction: row;
+}
+.colum{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
