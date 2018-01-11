@@ -35,27 +35,25 @@ public class Cuatroenraya {
         Scanner sc = new Scanner(System.in);
         for (int i = 0; i < 42 && ganar == false; i++) {
 
+            System.out.println("En qué columna quieres poner la " + turno);
+            x = sc.nextInt();
 
-                System.out.println("En qué columna quieres poner la " + turno);
-                x = sc.nextInt();
+            boolean colocada = false;
 
-                boolean colocada = false;
-
-                for (int j = 5; j >= 0 && !colocada; j--) {
-                    if (tresenraya[x][j] == '-') {
-                        tresenraya[x][j] = turno;
-                        colocada = true;
-                        y = j;
-                    }
+            for (int j = 5; j >= 0 && !colocada; j--) {
+                if (tresenraya[x][j] == '-') {
+                    tresenraya[x][j] = turno;
+                    colocada = true;
+                    y = j;
                 }
+            }
 
-                    ganar = comprobarTresEnRaya(tresenraya, turno, x, y);
-                    if (turno == 'X') {
-                        turno = 'O';
-                    } else {
-                        turno = 'X';
-                    }
-                
+            ganar = comprobarTresEnRaya(tresenraya, turno, x, y);
+            if (turno == 'X') {
+                turno = 'O';
+            } else {
+                turno = 'X';
+            }
 
             //HECHO for de 9 veces, se sale si hay 3 en raya
             //HECHO se pide celda a poner, comprobar que no estaba ocupada
@@ -71,7 +69,7 @@ public class Cuatroenraya {
             }
 
         }
-
+    
     }
 
     public static boolean comprobarCol(char[][] tablero, char turno, int x) {
@@ -114,25 +112,39 @@ public class Cuatroenraya {
         return tresEnRaya;
     }
 
-
-    public static boolean comprobarDiagonal(char[][] tablero, char turno) {
-        boolean tresEnRaya = false;
-        if (tablero[0][0] == turno) {
-            if (tablero[1][1] == turno) {
-                if (tablero[2][2] == turno) {
-                    tresEnRaya = true;
-                }
-            }
-        } else if (tablero[2][0] == turno) {
-            if (tablero[1][1] == turno) {
-                if (tablero[0][2] == turno) {
-                    tresEnRaya = true;
-                }
-            }
-
+    public static boolean comprobarDiagonal(char[][] tablero, char turno, int x, int y) {
+        
+        int cont1 = 0;
+        int cont2 = 0;
+        
+        boolean entablero = entablero(tablero, x, y);
+        
+        while (tablero[x][y] == turno && entablero){
+        for(int i=0, j=0;tablero[x-i][y-i]==turno;i++,j++){
+            cont1++;
+        }
+        for(int i=0, j=0;tablero[x+i][y+i]==turno;i++,j++){
+            cont1++;
+        }
+        for(int i=0, j=0;tablero[x-i][y+i]==turno;i++,j++){
+            cont2++;
+        }
+        for(int i=0, j=0;tablero[x+i][y-i]==turno;i++,j++){
+            cont2++;
+        }
+        
         }
         return tresEnRaya;
     }
+
+    public static boolean entablero(char[] [] tablero, int i, int j){
+        boolean entablero = true;
+        if((i<0 || i>5)||(j<0||j>6)){
+            entablero = false;
+        }
+        return entablero;
+    }
+    
     public static boolean comprobarTresEnRaya(char[][] tablero, char turno, int x, int y) {
 
         boolean tresEnRaya = false;
@@ -143,7 +155,7 @@ public class Cuatroenraya {
             tresEnRaya = comprobarRow(tablero, turno, y);
         }
         if (tresEnRaya == false) {
-            //tresEnRaya = comprobarDiagonal(tablero, turno);
+            tresEnRaya = comprobarDiagonal(tablero, turno, x, y);
         }
 
         return tresEnRaya;
