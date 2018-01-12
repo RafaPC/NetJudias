@@ -69,96 +69,115 @@ public class Cuatroenraya {
             }
 
         }
-    
+
     }
 
     public static boolean comprobarCol(char[][] tablero, char turno, int x) {
-        boolean tresEnRaya = false;
+        boolean cuatroEnRaya = false;
         int contador = 0;
 
-        for (int j = 5; j >= 0 && !tresEnRaya; j--) {
+        for (int j = 5; j >= 0 && !cuatroEnRaya; j--) {
             if (tablero[x][j] == turno) {
                 contador++;
-                System.out.println("++");
             } else if (tablero[x][j] != turno) {
                 contador = 0;
             }
 
             if (contador == 4) {
-                tresEnRaya = true;
+                cuatroEnRaya = true;
             }
         }
-        System.out.println(tresEnRaya);
-        return tresEnRaya;
+        return cuatroEnRaya;
     }
 
     public static boolean comprobarRow(char[][] tablero, char turno, int y) {
-        boolean tresEnRaya = false;
+        boolean cuatroEnRaya = false;
         int contador = 0;
 
-        for (int j = 5; j >= 0 && !tresEnRaya; j--) {
+        for (int j = 5; j >= 0 && !cuatroEnRaya; j--) {
             if (tablero[j][y] == turno) {
                 contador++;
-                System.out.println("++");
             } else if (tablero[j][y] != turno) {
                 contador = 0;
             }
 
             if (contador == 4) {
-                tresEnRaya = true;
+                cuatroEnRaya = true;
             }
         }
-        System.out.println(tresEnRaya);
-        return tresEnRaya;
+        return cuatroEnRaya;
     }
 
     public static boolean comprobarDiagonal(char[][] tablero, char turno, int x, int y) {
-        
+
         int cont1 = 0;
         int cont2 = 0;
-        
-        boolean entablero = entablero(tablero, x, y);
-        
-        while (tablero[x][y] == turno && entablero){
-        for(int i=0, j=0;tablero[x-i][y-i]==turno;i++,j++){
-            cont1++;
+        boolean cuatroEnRaya = false;
+        boolean entablero = true;
+
+        int i = 0;
+        int j = 0;
+        while (tablero[x][y] == turno && entablero) {
+            //arribaizq
+            entablero = entablero(tablero, x, y, -i, -j);
+            if (tablero[x - i][y - j] == turno && entablero) {
+                cont1++;
+            }
+            //abajderecha
+            entablero = entablero(tablero, x, y, i, j);
+            if (tablero[x + i][y + j] == turno && entablero) {
+                cont1++;
+            }
+            //abajizq
+            entablero = entablero(tablero, x, y, -i, j);
+            if (tablero[x - i][y + j] == turno && entablero) {
+                cont2++;
+            }
+            //arribaderech
+            entablero = entablero(tablero, x, y, i, -j);
+            if (tablero[x + i][y - j] == turno && entablero) {
+                cont2++;
+            }
+            i++;
+            j++;
+            System.out.println("Contador 1= " + cont1);
+            System.out.println("Contador 2= " + cont2);
         }
-        for(int i=0, j=0;tablero[x+i][y+i]==turno;i++,j++){
-            cont1++;
+        if (cont1 >= 3 || cont2 >= 3) {
+            cuatroEnRaya = true;
         }
-        for(int i=0, j=0;tablero[x-i][y+i]==turno;i++,j++){
-            cont2++;
-        }
-        for(int i=0, j=0;tablero[x+i][y-i]==turno;i++,j++){
-            cont2++;
-        }
-        
-        }
-        return tresEnRaya;
+        return cuatroEnRaya;
     }
 
-    public static boolean entablero(char[] [] tablero, int i, int j){
+    public static boolean entablero(char[][] tablero, int x, int y, int i, int j) {
         boolean entablero = true;
-        if((i<0 || i>5)||(j<0||j>6)){
+        int posicion1 = x + i;
+        int posicion2 = y + j;
+        if (((x + i < 0 || x + i > 5) || (y + j < 0 || y + j > 5)) || ((x - i < 0 || x - i > 5) || (y - j < 0 || y - j > 5))) {
             entablero = false;
+            System.out.println("entablerofalse");
+        } else {
+            System.out.println("entablerotrue");
+            System.out.println("X es " + posicion1 + "   Y es " + posicion2);
         }
         return entablero;
     }
-    
+
     public static boolean comprobarTresEnRaya(char[][] tablero, char turno, int x, int y) {
 
-        boolean tresEnRaya = false;
+        boolean cuatroEnRaya;
 
-        tresEnRaya = comprobarCol(tablero, turno, x);
+        cuatroEnRaya = comprobarCol(tablero, turno, x);
 
-        if (tresEnRaya == false) {
-            tresEnRaya = comprobarRow(tablero, turno, y);
+        if (cuatroEnRaya == false) {
+            cuatroEnRaya = comprobarRow(tablero, turno, y);
         }
-        if (tresEnRaya == false) {
-            tresEnRaya = comprobarDiagonal(tablero, turno, x, y);
+        if (cuatroEnRaya == false) {
+            System.out.println("x" + x + ", y" + y);
+            cuatroEnRaya = comprobarDiagonal(tablero, turno, x, y);
         }
 
-        return tresEnRaya;
+        return cuatroEnRaya;
     }
 
     public static void imprimirTablero(char[][] tablero) {
