@@ -115,28 +115,36 @@ public class Cuatroenraya {
         boolean cuatroEnRaya = false;
         boolean entablero = true;
 
-        int i = 0;
-        int j = 0;
+        int i = 1;
+        int j = 1;
         while (tablero[x][y] == turno && entablero) {
             //arribaizq
             entablero = entablero(tablero, x, y, -i, -j);
-            if (tablero[x - i][y - j] == turno && entablero) {
+            if(entablero){
+            if (tablero[x - i][y - j] == turno) {
                 cont1++;
+            }
             }
             //abajderecha
             entablero = entablero(tablero, x, y, i, j);
-            if (tablero[x + i][y + j] == turno && entablero) {
+            if(entablero){
+            if (tablero[x + i][y + j] == turno) {
                 cont1++;
+            }
             }
             //abajizq
             entablero = entablero(tablero, x, y, -i, j);
-            if (tablero[x - i][y + j] == turno && entablero) {
+            if(entablero){
+            if (tablero[x - i][y + j] == turno) {
                 cont2++;
+            }
             }
             //arribaderech
             entablero = entablero(tablero, x, y, i, -j);
-            if (tablero[x + i][y - j] == turno && entablero) {
+            if(entablero){
+            if (tablero[x + i][y - j] == turno) {
                 cont2++;
+            }
             }
             i++;
             j++;
@@ -153,12 +161,13 @@ public class Cuatroenraya {
         boolean entablero = true;
         int posicion1 = x + i;
         int posicion2 = y + j;
-        if (((x + i < 0 || x + i > 5) || (y + j < 0 || y + j > 5)) || ((x - i < 0 || x - i > 5) || (y - j < 0 || y - j > 5))) {
+     System.out.println("X es " + posicion1 + "   Y es " + posicion2);
+        if ((x + i < 0 || x + i > 6) || (y + j < 0 || y + j > 5)) {
             entablero = false;
             System.out.println("entablerofalse");
         } else {
             System.out.println("entablerotrue");
-            System.out.println("X es " + posicion1 + "   Y es " + posicion2);
+            
         }
         return entablero;
     }
