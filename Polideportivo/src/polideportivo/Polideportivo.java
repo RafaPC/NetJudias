@@ -17,7 +17,12 @@ public class Polideportivo {
     public static void main(String[] args) {
         // TODO code application logic here
     
-    
+  
+        
+        /*horario
+        plazas
+        precio
+        Alumnos (pago al mes)*/
     
     }
     
