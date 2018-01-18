@@ -1,0 +1,43 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18-ene-2018, 9:30:51
+    Author     : daw
+*/
+
+.col1{
+    display: flex;
+    flex-direction:row;
+    background-color: red;
+    width: 100%;
+}
+.col2-1{
+    display: flex;
+    flex-direction: row;
+    background-color: blue;
+    align-self: flex-start;
+    flex-grow: 1;
+}
+.col2-2{
+    display: flex;
+    flex-direction: row;
+    background-color: green;
+    align-self: flex-end;
+    flex-grow: 1;
+}
+.col2-1-1{
+   display: flex;
+   flex-direction: column;
+   flex-grow: 1;
+}
+.col2-2-1{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1
+}
+.hola{
+    height: 30px;
+}
