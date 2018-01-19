@@ -11,10 +11,45 @@ package polideportivo;
  */
 public class Horario {
     
-    public int dias;
+    public String dias;
+
+    public int starthour;
     
-    public String starthour;
+    public int endhour;
     
-    public String endhour;
+    
+    public Horario ( int starthour, int endhour, String dias){
+        this.dias = dias;
+        
+        this.starthour = starthour;
+        
+        this.endhour = endhour;
+    }
+    
+    
+    
+    public String getDias() {
+        return dias;
+    }
+
+    public void setDias(String dias) {
+        this.dias = dias;
+    }
+
+    public int getStarthour() {
+        return starthour;
+    }
+
+    public void setStarthour(int starthour) {
+        this.starthour = starthour;
+    }
+
+    public int getEndhour() {
+        return endhour;
+    }
+
+    public void setEndhour(int endhour) {
+        this.endhour = endhour;
+    }
     
 }

@@ -15,12 +15,22 @@ public class Actividades {
     
     private int plazas;
     
-    private int precio;
-    
-    private Afiliados[] alumnos;
+    private float precio = 35;
     
     private Horario horario;
     
+    
+    public Actividades (String tipo, int plazas, float precio, Horario horario ){
+        
+        this.plazas = plazas;
+        
+        this.tipo = tipo;      
+        
+        this.precio = precio;
+        
+        this.horario = horario;
+        
+    }
     
     
     public int getPlazas() {
@@ -29,6 +39,30 @@ public class Actividades {
 
     public void setPlazas(int plazas) {
         this.plazas = plazas;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
+    public Horario getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Horario horario) {
+        this.horario = horario;
     }
     
     

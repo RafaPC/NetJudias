@@ -11,11 +11,65 @@ package polideportivo;
  */
 public class Afiliados {
     
-    public int nombre;
+    private String nombre;
     
-    public int apellido;
+    private String apellidos;
     
-    public int pago;
+    private int pago;
     
+    private int plazaslibres;
+    
+    private int plazas = 35;
+
+
+    
+    public Afiliados(String nombre, String apellidos){
+        
+        this.nombre = nombre;
+        
+        this.apellidos = apellidos;
+        
+        this.pago = 0;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public int getPago() {
+        return pago;
+    }
+
+    public void setPago(int pago) {
+        this.pago = pago;
+    }
+        
+    public int getPlazaslibres() {
+        return plazaslibres;
+    }
+
+    public void setPlazaslibres(int plazaslibres) {
+        this.plazaslibres = plazaslibres;
+    }
+
+    public int getPlazas() {
+        return plazas;
+    }
+
+    public void setPlazas(int plazas) {
+        this.plazas = plazas;
+    }
     
 }
