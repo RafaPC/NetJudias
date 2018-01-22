@@ -11,9 +11,9 @@ package polideportivo;
  */
 public class Horario {
     
-    public String dias;
+    private String dias;
 
-    public int starthour;
+    private int starthour;
     
     public int endhour;
     

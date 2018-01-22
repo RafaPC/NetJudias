@@ -15,7 +15,7 @@ public class Afiliados {
     
     private String apellidos;
     
-    private int pago;
+    private float pago;
     
     private int plazaslibres;
     
@@ -48,11 +48,11 @@ public class Afiliados {
         this.apellidos = apellidos;
     }
 
-    public int getPago() {
+    public float getPago() {
         return pago;
     }
-
-    public void setPago(int pago) {
+    
+    public void setPago(float pago) {
         this.pago = pago;
     }
         

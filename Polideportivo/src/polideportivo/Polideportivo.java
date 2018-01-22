@@ -50,32 +50,44 @@ public class Polideportivo {
         actividades[10] = new Actividades("Natación", 35, 35.70f, new Horario(17, 18, "M, J"));
 
         //System.out.println("Precio es " + actividades[0].getPrecio() + "Y hay " + actividades[0].getPlazas() + " plazas");
-        System.out.println("Elige la funcionalidad");
-        System.out.println("Dar de alta a un afiliado");
-        System.out.println("Matricular a un afiliado en un grupo de una determinada actividad (si hay plazas)");
-        System.out.println("Dar de baja afiliado");
-        System.out.println("Generar el recibo de pago de todos los afiliados");
-        System.out.println("Generar el dinero recaudado por cada actividad");
+//        System.out.println("Elige la funcionalidad");
+//        System.out.println("1.- Dar de alta a un afiliado");
+//        System.out.println("2.- Matricular a un afiliado en un grupo de una determinada actividad (si hay plazas)");
+//        System.out.println("3.- Dar de baja afiliado");
+//        System.out.println("4.- Generar el recibo de pago de todos los afiliados");
+//        System.out.println("5.- Generar el dinero recaudado por cada actividad");
         int numAfil = 0;
 
         do {
+
+            System.out.println("Elige la funcionalidad");
+            System.out.println("1.- Dar de alta a un afiliado");
+            System.out.println("2.- Matricular a un afiliado en un grupo de una determinada actividad (si hay plazas)");
+            System.out.println("3.- Dar de baja afiliado");
+            System.out.println("4.- Generar el recibo de pago de todos los afiliados");
+            System.out.println("5.- Generar el dinero recaudado por cada actividad");
             int funcion = sc.nextInt();
             sc.nextLine();
 
             switch (funcion) {
                 case 1:
-                    afiliados[numAfil] = darAltaAfil(sc);
+                    afiliados[numAfil] = darAltaAfiliado(sc);
                     numAfil++;
                     break;
+
                 case 2:
-                    darBajaAfil(afiliados, sc);
+                    matricular(sc, afiliados, actividades);
+                    break;
+
+                case 3:
+                    darBajaAfiliado(afiliados, sc);
                     break;
 
             }
         } while (numAfil != -1);
     }
 
-    public static Afiliados darAltaAfil(Scanner sc) {
+    public static Afiliados darAltaAfiliado(Scanner sc) {
 
         System.out.println("Dame el nombre");
         String nombre = sc.next();
@@ -86,7 +98,7 @@ public class Polideportivo {
         return new Afiliados(nombre, apellido);
     }
 
-    public static void darBajaAfil(Afiliados[] afiliados, Scanner sc) {
+    public static void darBajaAfiliado(Afiliados[] afiliados, Scanner sc) {
 
         System.out.println("¿Qué alumno quieres borrar?");
         System.out.print("Nombre: ");
@@ -118,14 +130,48 @@ public class Polideportivo {
         return posicion;
     }
 
-    public static void matricularAlumno(Scanner sc, Afiliados[] afiliados, Actividades[] actividades) {
+    public static void matricular(Scanner sc, Afiliados[] afiliados, Actividades[] actividades) {
+
+        System.out.println("A continuación tendrás que escribir los datos del alumno al que quieres matricular");
         //pedir alumno
-        System.out.println("Nombre del alumno: ");
+        System.out.print("Nombre: ");
         String nombre = sc.next();
-        //encontrarle en el array
+
+        System.out.print("Apellido: ");
+        String apellido = sc.next();
+
+        int numafiliado = encontrarAfil(afiliados, nombre, apellido);
+        System.out.println("En que actividad quieres matricularlo");
+        for (int i = 0; i < 11; i++) {
+            System.out.print(i+1 + ".-" + actividades[i].getTipo());
+            System.out.println(
+                    "\n Plazas: " + actividades[i].getPlazas() +
+                    "\n Precio: " + actividades[i].getPrecio() +
+                    "\n Horario: " + actividades[i].getHorario().getDias());
+            
+        }
+        
+        int numactividad = sc.nextInt();
+        actividades[numactividad].setPlazas(actividades[numactividad].getPlazas()-1);
+        
+        afiliados[numafiliado].setPago(actividades[numactividad].getPrecio());
+        
         //encontrar actividad
         //quitar plaza
         // aumentar el dinero del alumno
+    }
+
+    public static int recibo(Afiliados[] afiliados, Actividades[] actividades) {
+
+        int recibo = 0;
+
+        for (int i = 0; i < afiliados.length; i++) {
+
+            recibo += afiliados[i].getPago();
+
+        }
+
+        return recibo;
     }
 
 }

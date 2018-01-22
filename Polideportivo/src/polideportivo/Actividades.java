@@ -32,6 +32,10 @@ public class Actividades {
         
     }
     
+//    public String toString() {
+//        return tipo + "Plazas libres: " + plazas + "\nPrecio: " + precio + "\nHorario: "
+//    }
+//   
     
     public int getPlazas() {
         return plazas;
