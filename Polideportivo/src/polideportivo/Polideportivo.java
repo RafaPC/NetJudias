@@ -71,34 +71,48 @@ public class Polideportivo {
 
             switch (funcion) {
                 case 1:
-                    afiliados[numAfil] = darAltaAfiliado(sc);
+                    afiliados[numAfil] = darAltaAfiliado(sc, numAfil);
                     numAfil++;
                     break;
 
                 case 2:
-                    matricular(sc, afiliados, actividades);
+                    matricular(sc, afiliados, actividades, numAfil);
                     break;
 
                 case 3:
-                    darBajaAfiliado(afiliados, sc);
+                    darBajaAfiliado(afiliados, sc, numAfil);
                     break;
 
+                case 4:
+                    recibo(afiliados, actividades, numAfil);
+                    break;
+
+                default:
+                    System.out.println("hola");
             }
         } while (numAfil != -1);
     }
 
-    public static Afiliados darAltaAfiliado(Scanner sc) {
+    public static Afiliados darAltaAfiliado(Scanner sc, int numAfil) {
 
-        System.out.println("Dame el nombre");
-        String nombre = sc.next();
+        if (numAfil == 35) {
+            System.out.println("No puedes dar de alta otro usuario");
+            System.out.println("Siempre puedes dar de baja un usuario");
+            numAfil--;
+            return null;
+        } else {
 
-        System.out.println("Ahora el apellido");
-        String apellido = sc.next();
+            System.out.println("Dame el nombre");
+            String nombre = sc.next();
 
-        return new Afiliados(nombre, apellido);
+            System.out.println("Ahora el apellido");
+            String apellido = sc.next();
+
+            return new Afiliados(nombre, apellido);
+        }
     }
 
-    public static void darBajaAfiliado(Afiliados[] afiliados, Scanner sc) {
+    public static void darBajaAfiliado(Afiliados[] afiliados, Scanner sc, int numAfil) {
 
         System.out.println("¿Qué alumno quieres borrar?");
         System.out.print("Nombre: ");
@@ -107,16 +121,16 @@ public class Polideportivo {
         System.out.print("Apellido: ");
         String apellido = sc.next();
 
-        int posicion = encontrarAfil(afiliados, nombre, apellido);
+        int posicion = encontrarAfil(afiliados, nombre, apellido, numAfil);
 
         //encontrar Alumno
         //Dar de baja de las actividades, aumentar plaza
         //reordenar array para no dejar huecos
     }
 
-    public static int encontrarAfil(Afiliados[] afiliados, String nombre, String apellido) {
-        int posicion = 0;
-        for (int i = 0; i < afiliados.length; i++) {
+    public static int encontrarAfil(Afiliados[] afiliados, String nombre, String apellido, int numAfil) {
+        int posicion = -1;
+        for (int i = 0; i < numAfil; i++) {
             if ((afiliados[i].getNombre().equals(nombre)) && (afiliados[i].getApellidos().equals(apellido))) {
 
                 posicion = i;
@@ -126,11 +140,14 @@ public class Polideportivo {
             }
 
         }
+        if (posicion == -1) {
+            System.out.println("No se ha encontrado ningún afiliado con ese nombre y apellido");
+        }
 
         return posicion;
     }
 
-    public static void matricular(Scanner sc, Afiliados[] afiliados, Actividades[] actividades) {
+    public static void matricular(Scanner sc, Afiliados[] afiliados, Actividades[] actividades, int numAfil) {
 
         System.out.println("A continuación tendrás que escribir los datos del alumno al que quieres matricular");
         //pedir alumno
@@ -140,38 +157,43 @@ public class Polideportivo {
         System.out.print("Apellido: ");
         String apellido = sc.next();
 
-        int numafiliado = encontrarAfil(afiliados, nombre, apellido);
-        System.out.println("En que actividad quieres matricularlo");
+        int numafiliado = encontrarAfil(afiliados, nombre, apellido, numAfil);
+        
+        if(numafiliado!=-1){System.out.println("En que actividad quieres matricularlo");
         for (int i = 0; i < 11; i++) {
-            System.out.print(i+1 + ".-" + actividades[i].getTipo());
+            System.out.print(i + 1 + ".-" + actividades[i].getTipo());
             System.out.println(
-                    "\n Plazas: " + actividades[i].getPlazas() +
-                    "\n Precio: " + actividades[i].getPrecio() +
-                    "\n Horario: " + actividades[i].getHorario().getDias());
-            
+                    "\n   Plazas: " + actividades[i].getPlazas()
+                    + "\n   Precio: " + actividades[i].getPrecio()
+                    + "\n   Días: " + actividades[i].getHorario().getDias()
+                    + "\n   Horas: " + actividades[i].getHorario().getStarthour()
+                    + ":00 - " + actividades[i].getHorario().getEndhour()
+                    + ":00");
+
         }
-        
-        int numactividad = sc.nextInt();
-        actividades[numactividad].setPlazas(actividades[numactividad].getPlazas()-1);
-        
-        afiliados[numafiliado].setPago(actividades[numactividad].getPrecio());
-        
         //encontrar actividad
+        int numactividad = sc.nextInt() - 1;
+
         //quitar plaza
+        actividades[numactividad].setPlazas(actividades[numactividad].getPlazas() - 1);
+
         // aumentar el dinero del alumno
+        afiliados[numafiliado].setPago(afiliados[numafiliado].getPago() + actividades[numactividad].getPrecio());
+        }
     }
 
-    public static int recibo(Afiliados[] afiliados, Actividades[] actividades) {
+    public static void recibo(Afiliados[] afiliados, Actividades[] actividades, int nAfil) {
 
-        int recibo = 0;
+        double recibo = 0;
 
-        for (int i = 0; i < afiliados.length; i++) {
+        for (int i = 0; i < nAfil; i++) {
 
-            recibo += afiliados[i].getPago();
+            recibo += afiliados[i].getPago();// aumentar el dinero del alumno
 
         }
 
-        return recibo;
+        System.out.println("El recibo total es " + recibo);
+
     }
 
 }
