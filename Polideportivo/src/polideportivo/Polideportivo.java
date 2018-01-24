@@ -84,7 +84,7 @@ public class Polideportivo {
                     break;
 
                 case 4:
-                    recibo(afiliados, actividades, numAfil);
+                    recibo(afiliados, numAfil);
                     break;
 
                 default:
@@ -161,7 +161,7 @@ public class Polideportivo {
     public static void matricular(Scanner sc, Afiliados[] afiliados, Actividades[] actividades, int numAfil) {
 
         if (numAfil == 0) {
-            System.out.println("No puedes dar de baja un usuario si no hay ninguno dado de alta");
+            System.out.println("No puedes matricular un usuario si no hay ninguno dado de alta");
         } else {
             System.out.println("A continuación tendrás que escribir los datos del alumno al que quieres matricular");
             //pedir alumno
@@ -189,6 +189,7 @@ public class Polideportivo {
                 }
                 //encontrar actividad
                 int numactividad = sc.nextInt();
+                sc.nextLine();
 
                 //quitar plaza
                 actividades[numactividad].setPlazas(actividades[numactividad].getPlazas() - 1);
@@ -199,7 +200,7 @@ public class Polideportivo {
         }
     }
 
-    public static void recibo(Afiliados[] afiliados, Actividades[] actividades, int nAfil) {
+    public static void recibo(Afiliados[] afiliados, int nAfil) {
 
         double recibo = 0;
 
