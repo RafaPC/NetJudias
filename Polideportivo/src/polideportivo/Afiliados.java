@@ -5,6 +5,8 @@
  */
 package polideportivo;
 
+import java.util.Objects;
+
 /**
  *
  * @author daw
@@ -20,6 +22,38 @@ public class Afiliados {
     private int plazaslibres;
     
     private int plazas = 35;
+
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Afiliados other = (Afiliados) obj;
+        if (Float.floatToIntBits(this.pago) != Float.floatToIntBits(other.pago)) {
+            return false;
+        }
+        if (this.plazaslibres != other.plazaslibres) {
+            return false;
+        }
+        if (this.plazas != other.plazas) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.apellidos, other.apellidos)) {
+            return false;
+        }
+        return true;
+    }
 
 
     

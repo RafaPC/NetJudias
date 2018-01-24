@@ -114,30 +114,41 @@ public class Polideportivo {
 
     public static void darBajaAfiliado(Afiliados[] afiliados, Scanner sc, int numAfil) {
 
-        System.out.println("¿Qué alumno quieres borrar?");
-        System.out.print("Nombre: ");
-        String nombre = sc.next();
+        if (numAfil == 0) {
+            System.out.println("No puedes dar de baja un usuario si no hay ninguno dado de alta");
+        } else {
+            System.out.println("¿Qué alumno quieres borrar?");
 
-        System.out.print("Apellido: ");
-        String apellido = sc.next();
+            System.out.print("Nombre: ");
+            String nombre = sc.next();
 
-        int posicion = encontrarAfil(afiliados, nombre, apellido, numAfil);
+            System.out.print("Apellido: ");
+            String apellido = sc.next();
 
-        //encontrar Alumno
-        //Dar de baja de las actividades, aumentar plaza
-        //reordenar array para no dejar huecos
+            //encontrar Alumno
+            int posicion = encontrarAfil(afiliados, nombre, apellido, numAfil);
+
+            //Dar de baja de las actividades, aumentar plaza
+            //reordenar array para no dejar huecos
+            afiliados[posicion] = afiliados[numAfil - 1];
+            afiliados[numAfil - 1] = null;
+            numAfil--;
+        }
+
     }
 
     public static int encontrarAfil(Afiliados[] afiliados, String nombre, String apellido, int numAfil) {
         int posicion = -1;
-        for (int i = 0; i < numAfil; i++) {
-            if ((afiliados[i].getNombre().equals(nombre)) && (afiliados[i].getApellidos().equals(apellido))) {
 
-                posicion = i;
+        Afiliados temp = new Afiliados(nombre, apellido);
+        for (int i = 0; i < numAfil && posicion == -1; i++) {
 
-                i = afiliados.length;
+            temp.equals(afiliados[i]);
 
-            }
+            //if ((afiliados[i].getNombre().equals(nombre)) && (afiliados[i].getApellidos().equals(apellido))) {
+            posicion = i;
+
+            i = afiliados.length;
 
         }
         if (posicion == -1) {
@@ -149,36 +160,42 @@ public class Polideportivo {
 
     public static void matricular(Scanner sc, Afiliados[] afiliados, Actividades[] actividades, int numAfil) {
 
-        System.out.println("A continuación tendrás que escribir los datos del alumno al que quieres matricular");
-        //pedir alumno
-        System.out.print("Nombre: ");
-        String nombre = sc.next();
+        if (numAfil == 0) {
+            System.out.println("No puedes dar de baja un usuario si no hay ninguno dado de alta");
+        } else {
+            System.out.println("A continuación tendrás que escribir los datos del alumno al que quieres matricular");
+            //pedir alumno
+            System.out.print("Nombre: ");
+            String nombre = sc.next();
 
-        System.out.print("Apellido: ");
-        String apellido = sc.next();
+            System.out.print("Apellido: ");
+            String apellido = sc.next();
 
-        int numafiliado = encontrarAfil(afiliados, nombre, apellido, numAfil);
-        
-        if(numafiliado!=-1){System.out.println("En que actividad quieres matricularlo");
-        for (int i = 0; i < 11; i++) {
-            System.out.print(i + 1 + ".-" + actividades[i].getTipo());
-            System.out.println(
+            int numafiliado = encontrarAfil(afiliados, nombre, apellido, numAfil);
+
+            if (numafiliado != -1) {
+                System.out.println("En que actividad quieres matricularlo");
+                for (int i = 0; i < 11; i++) {
+                    System.out.print(i + ".- ");
+                    System.out.println(actividades[i].toString() + "\n");
+
+                    /*System.out.println(
                     "\n   Plazas: " + actividades[i].getPlazas()
                     + "\n   Precio: " + actividades[i].getPrecio()
                     + "\n   Días: " + actividades[i].getHorario().getDias()
                     + "\n   Horas: " + actividades[i].getHorario().getStarthour()
                     + ":00 - " + actividades[i].getHorario().getEndhour()
-                    + ":00");
+                    + ":00");*/
+                }
+                //encontrar actividad
+                int numactividad = sc.nextInt();
 
-        }
-        //encontrar actividad
-        int numactividad = sc.nextInt() - 1;
+                //quitar plaza
+                actividades[numactividad].setPlazas(actividades[numactividad].getPlazas() - 1);
 
-        //quitar plaza
-        actividades[numactividad].setPlazas(actividades[numactividad].getPlazas() - 1);
-
-        // aumentar el dinero del alumno
-        afiliados[numafiliado].setPago(afiliados[numafiliado].getPago() + actividades[numactividad].getPrecio());
+                // aumentar el dinero del alumno
+                afiliados[numafiliado].setPago(afiliados[numafiliado].getPago() + actividades[numactividad].getPrecio());
+            }
         }
     }
 

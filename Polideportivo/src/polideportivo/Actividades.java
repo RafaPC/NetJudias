@@ -31,6 +31,15 @@ public class Actividades {
         this.horario = horario;
         
     }
+
+    @Override
+    public String toString() {
+        return  tipo + "\nPlazas: " + plazas + "\nPrecio: " + precio + "\n"+ horario;
+    }
+
+
+    
+    
     
 //    public String toString() {
 //        return tipo + "Plazas libres: " + plazas + "\nPrecio: " + precio + "\nHorario: "

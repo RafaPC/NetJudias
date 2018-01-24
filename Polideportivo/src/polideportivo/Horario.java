@@ -25,6 +25,11 @@ public class Horario {
         
         this.endhour = endhour;
     }
+
+    @Override
+    public String toString() {
+        return "Horario: " + dias + "\n" + starthour + ":00" + "/" + endhour +":00";
+    }
     
     
     
