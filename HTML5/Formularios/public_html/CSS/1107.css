@@ -1,0 +1,42 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25-ene-2018, 9:22:59
+    Author     : daw
+*/
+#izq{
+    float: left;
+    display: inline;
+    margin-left: 5%;
+}
+#right{
+    float: right;
+    display: inline;
+    margin-right: 5%;
+}
+#nombre{
+    width: 60%;
+}
+#dni{
+    width: 40%;
+}
+#contraseña{
+    width:50%;
+}
+#telefono{
+    width:40%;
+}
+#direccion{
+  width: 70%;  
+}
+#postal{
+    width: 20%;
+}
+#submit{
+    clear: both;
+    padding-top: 1.5%;
+    margin-left: 5%; 
+}
