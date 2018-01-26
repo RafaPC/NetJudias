@@ -13,12 +13,27 @@ public class Actividades {
     
     private String tipo;
     
+    private int plazaslibres;
+    
     private int plazas;
     
     private float precio = 35;
     
     private Horario horario;
     
+    public Afiliados[] afiliadosdeunaactividad;
+    
+    public int nafil;
+    
+    
+    public void meterAfil(Afiliados afiliados[], int numafil2){
+        afiliadosdeunaactividad[nafil]=afiliados[numafil2];
+                nafil++;
+    }
+    
+    public void sacarAfil(Afiliados afiliados[], int numafil2){
+        afiliadosdeunaactividad[nafil]=null;
+    }
     
     public Actividades (String tipo, int plazas, float precio, Horario horario ){
         
@@ -30,11 +45,38 @@ public class Actividades {
         
         this.horario = horario;
         
+        //
+        this.plazaslibres = plazas;
+        
+    }
+
+    public int getPlazaslibres() {
+        return plazaslibres;
+    }
+
+    public void setPlazaslibres(int plazaslibres) {
+        this.plazaslibres = plazaslibres;
+    }
+
+    /*public Afiliados[] getAfiliadosx() {
+        return afiliadosx;
+    }
+
+    public void setAfiliadosx(Afiliados[] afiliadosx) {
+        this.afiliadosx = afiliadosx;
+    }*/
+
+    public int getNafil() {
+        return nafil;
+    }
+
+    public void setNafil(int nafil) {
+        this.nafil = nafil;
     }
 
     @Override
     public String toString() {
-        return  tipo + "\nPlazas: " + plazas + "\nPrecio: " + precio + "\n"+ horario;
+        return  tipo + "\nPlazas libres: " + plazaslibres + "\nPrecio: " + precio + "\n"+ horario;
     }
 
 

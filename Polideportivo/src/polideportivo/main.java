@@ -5,8 +5,6 @@
  */
 package polideportivo;
 
-
-import static polideportivo.Polideportivo.recibo;
 import java.util.Scanner;
 
 /**
@@ -14,9 +12,12 @@ import java.util.Scanner;
  * @author daw
  */
 public class main {
-    Scanner sc = new Scanner(System.in);
-    int numAfil = 0;
 
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Polideportivo polideportivo = new Polideportivo();
+
+        boolean salir = false;
         do {
 
             System.out.println("Elige la funcionalidad");
@@ -30,25 +31,27 @@ public class main {
 
             switch (funcion) {
                 case 1:
-                    polideportafiliados[numAfil] = darAltaAfiliado(sc, numAfil);
-                    numAfil++;
+                    polideportivo.darAltaAfiliado();
                     break;
 
                 case 2:
-                    matricular(sc, afiliados, actividades, numAfil);
+                    polideportivo.matricular();
                     break;
 
                 case 3:
-                    darBajaAfiliado(afiliados, sc, numAfil);
+                    polideportivo.darBajaAfiliado();
                     break;
 
                 case 4:
-                    recibo(afiliados, numAfil);
+                    polideportivo.recibo();
                     break;
 
+                case 8:
+                    salir = true;
                 default:
                     System.out.println("hola");
             }
-        } while (numAfil != -1);
+        } while (salir == false);
     }
 
+}
