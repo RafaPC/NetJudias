@@ -10,44 +10,60 @@ package polideportivo;
  * @author daw
  */
 public class Actividades {
-    
+
     private String tipo;
-    
+
     private int plazaslibres;
-    
+
     private int plazas;
-    
-    private float precio = 35;
-    
+
+    private float precio;
+
     private Horario horario;
     
-    public Afiliados[] afiliadosdeunaactividad;
-    
-    public int nafil;
+    private Afiliados[] afiliados;
     
     
-    public void meterAfil(Afiliados afiliados[], int numafil2){
-        afiliadosdeunaactividad[nafil]=afiliados[numafil2];
-                nafil++;
+
+    public boolean meterAfil(Afiliados a) {
+        boolean ok = false;
+        if (plazaslibres > 0) {
+            this.afiliados[this.plazas - this.plazaslibres] = a;
+            this.plazaslibres--;
+            ok = true;
+        }
+        return ok;
     }
-    
-    public void sacarAfil(Afiliados afiliados[], int numafil2){
-        afiliadosdeunaactividad[nafil]=null;
-    }
-    
-    public Actividades (String tipo, int plazas, float precio, Horario horario ){
+
+    public void sacarAfil(Afiliados a) {
         
+    }
+    
+    public void reciboActividades(){
+        
+        for(int i = 0; i<11;i++){
+            
+            
+            
+        }
+        
+    }
+    public Actividades(String tipo, int plazas, int plazaslibres, float precio, Horario horario) {
+
+        this.tipo = tipo;
+
         this.plazas = plazas;
-        
-        this.tipo = tipo;      
-        
+
+        this.plazaslibres = plazaslibres;
+
         this.precio = precio;
-        
+
         this.horario = horario;
-        
-        //
+
         this.plazaslibres = plazas;
         
+        this.afiliados = new Afiliados[plazas];
+
     }
 
     public int getPlazaslibres() {
@@ -66,28 +82,11 @@ public class Actividades {
         this.afiliadosx = afiliadosx;
     }*/
 
-    public int getNafil() {
-        return nafil;
-    }
-
-    public void setNafil(int nafil) {
-        this.nafil = nafil;
-    }
-
     @Override
     public String toString() {
-        return  tipo + "\nPlazas libres: " + plazaslibres + "\nPrecio: " + precio + "\n"+ horario;
+        return tipo + "\nPlazas libres: " + plazaslibres + "\nPrecio: " + precio + "\n" + horario;
     }
-
-
-    
-    
-    
-//    public String toString() {
-//        return tipo + "Plazas libres: " + plazas + "\nPrecio: " + precio + "\nHorario: "
-//    }
-//   
-    
+ 
     public int getPlazas() {
         return plazas;
     }
@@ -119,7 +118,5 @@ public class Actividades {
     public void setHorario(Horario horario) {
         this.horario = horario;
     }
-    
-    
-    
+
 }

@@ -24,8 +24,9 @@ public class main {
             System.out.println("1.- Dar de alta a un afiliado");
             System.out.println("2.- Matricular a un afiliado en un grupo de una determinada actividad (si hay plazas)");
             System.out.println("3.- Dar de baja afiliado");
-            System.out.println("4.- Generar el recibo de pago de todos los afiliados");
-            System.out.println("5.- Generar el dinero recaudado por cada actividad");
+            System.out.println("4.- Generar el recibo de pago de un afiliado");
+            System.out.println("5.- Generar el recibo de pago de todos los afiliados");
+            System.out.println("6.- Generar el dinero recaudado por cada actividad");
             int funcion = sc.nextInt();
             sc.nextLine();
 
@@ -43,7 +44,15 @@ public class main {
                     break;
 
                 case 4:
-                    polideportivo.recibo();
+                    polideportivo.reciboAfiliado();
+                    break;
+                    
+                case 5:
+                    polideportivo.reciboTodosAfiliados();
+                    break;    
+                    
+                case 6:
+                    polideportivo.reciboActividades();
                     break;
 
                 case 8:

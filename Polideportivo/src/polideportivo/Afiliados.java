@@ -66,6 +66,10 @@ public class Afiliados {
         this.pago = 0;
     }
 
+    @Override
+    public String toString(){
+        return nombre + apellidos + "\nRecibo: " + pago;
+    }
     public String getNombre() {
         return nombre;
     }

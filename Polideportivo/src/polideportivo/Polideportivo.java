@@ -25,32 +25,33 @@ public class Polideportivo {
     public Polideportivo() {
         //creo array de actividades
         actividades = new Actividades[11];
+        afiliados = new Afiliados[35];
 
         //creo array de afiliados
-        Afiliados[] afiliados = new Afiliados[35];
+
 
         //creo actividad con un horario y la meto en un array 
-        actividades[0] = new Actividades("Aerobic", 35, 47.60f, new Horario(10, 11, "L, X, V"));
+        actividades[0] = new Actividades("Aerobic", 35, 35, 47.60f, new Horario(10, 11, "L, X, V"));
 
-        actividades[1] = new Actividades("Aerobic", 35, 47.60f, new Horario(11, 12, "L, X, V"));
+        actividades[1] = new Actividades("Aerobic", 35, 35, 47.60f, new Horario(11, 12, "L, X, V"));
 
-        actividades[2] = new Actividades("Aerobic", 35, 47.60f, new Horario(19, 20, "L, X, V"));
+        actividades[2] = new Actividades("Aerobic", 35, 35, 47.60f, new Horario(19, 20, "L, X, V"));
 
-        actividades[3] = new Actividades("Aerobic", 35, 35.70f, new Horario(9, 10, "M, J"));
+        actividades[3] = new Actividades("Aerobic", 35, 35, 35.70f, new Horario(9, 10, "M, J"));
 
-        actividades[4] = new Actividades("Aerobic", 35, 35.70f, new Horario(10, 11, "M, J"));
+        actividades[4] = new Actividades("Aerobic", 35, 35, 35.70f, new Horario(10, 11, "M, J"));
 
-        actividades[5] = new Actividades("Aerobic", 35, 35.70f, new Horario(18, 19, "M, J"));
+        actividades[5] = new Actividades("Aerobic", 35, 35, 35.70f, new Horario(18, 19, "M, J"));
 
-        actividades[6] = new Actividades("Artes marciales", 15, 45f, new Horario(19, 20, "L, X, V"));
+        actividades[6] = new Actividades("Artes marciales", 15, 15, 45f, new Horario(19, 20, "L, X, V"));
 
-        actividades[7] = new Actividades("Artes marciales", 15, 34f, new Horario(18, 19, "M, J"));
+        actividades[7] = new Actividades("Artes marciales", 15, 15, 34f, new Horario(18, 19, "M, J"));
 
-        actividades[8] = new Actividades("Artes marciales", 15, 34f, new Horario(19, 20, "M, J"));
+        actividades[8] = new Actividades("Artes marciales", 15, 15, 34f, new Horario(19, 20, "M, J"));
 
-        actividades[9] = new Actividades("Natación", 35, 47.60f, new Horario(18, 19, "L, X, V"));
+        actividades[9] = new Actividades("Natación", 35, 35, 47.60f, new Horario(18, 19, "L, X, V"));
 
-        actividades[10] = new Actividades("Natación", 35, 35.70f, new Horario(17, 18, "M, J"));
+        actividades[10] = new Actividades("Natación", 35, 35, 35.70f, new Horario(17, 18, "M, J"));
 
         //System.out.println("Precio es " + actividades[0].getPrecio() + "Y hay " + actividades[0].getPlazas() + " plazas");
 //        System.out.println("Elige la funcionalidad");
@@ -73,6 +74,7 @@ public class Polideportivo {
 
             System.out.println("Ahora el apellido");
             String apellido = sc.next();
+
             
             afiliados[numAfil]=new Afiliados(nombre,apellido);
             numAfil++;
@@ -112,7 +114,6 @@ public class Polideportivo {
 
             if(temp.equals(afiliados[i])){
 
-            //if ((afiliados[i].getNombre().equals(nombre)) && (afiliados[i].getApellidos().equals(apellido))) {
             posicion = i;
 
             i = afiliados.length;
@@ -145,31 +146,49 @@ public class Polideportivo {
                 int numactividad = sc.nextInt();
                 sc.nextLine();
 
-                //quitar plaza
-                actividades[numactividad].setPlazaslibres(actividades[numactividad].getPlazaslibres() - 1);
+                actividades[numactividad].meterAfil(afiliados[posicion]);
+                            
                 
-                
-
-                // aumentar el dinero del alumno
-                actividades[numactividad].meterAfil(afiliados, numAfil);
-                
-                //afiliados[numafiliado].setPago(afiliados[numafiliado].getPago() + actividades[numactividad].getPrecio());
+                afiliados[posicion].setPago(afiliados[posicion].getPago() + actividades[numactividad].getPrecio());
             }
         }
     }
 
-    public void recibo() {
+    public void reciboAfiliado() {
 
         double recibo = 0;
+        
+        encontrarAfil();
 
-        for (int i = 0; i < numAfil; i++) {
+        recibo += afiliados[posicion].getPago();
 
-            recibo += afiliados[i].getPago();// aumentar el dinero del alumno
-
-        }
 
         System.out.println("El recibo total es " + recibo);
 
+    }
+    
+    //Hay que mirar los recibos porque se sobreescriben o algo asi
+    public void reciboTodosAfiliados() {
+
+
+            for (int i = 0; i < numAfil; i++){
+
+                System.out.println(afiliados[i].toString());
+        }
+
+    }
+    
+    public void reciboActividades(){
+        
+        for (int i = 0; i < 11; i++){
+            
+            int nafil = actividades[i].getPlazas()-actividades[i].getPlazaslibres();
+            
+            float precio = nafil * actividades[i].getPrecio();
+            
+            System.out.println(i+".- "+actividades[i].getTipo() + "\n" + actividades[i].getHorario()+"\nDinero recaudado: " + precio);
+        }
+        
     }
 
 }
