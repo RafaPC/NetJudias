@@ -18,12 +18,6 @@ public class Afiliados {
     private String apellidos;
     
     private float pago;
-    
-    private int plazaslibres;
-    
-    private int plazas = 35;
-
-
 
     @Override
     public boolean equals(Object obj) {
@@ -37,15 +31,7 @@ public class Afiliados {
             return false;
         }
         final Afiliados other = (Afiliados) obj;
-        if (Float.floatToIntBits(this.pago) != Float.floatToIntBits(other.pago)) {
-            return false;
-        }
-        if (this.plazaslibres != other.plazaslibres) {
-            return false;
-        }
-        if (this.plazas != other.plazas) {
-            return false;
-        }
+
         if (!Objects.equals(this.nombre, other.nombre)) {
             return false;
         }
@@ -68,8 +54,10 @@ public class Afiliados {
 
     @Override
     public String toString(){
-        return nombre + apellidos + "\nRecibo: " + pago;
+        return nombre + " " + apellidos + "\nRecibo: " + pago;
     }
+    
+    
     public String getNombre() {
         return nombre;
     }
@@ -92,22 +80,6 @@ public class Afiliados {
     
     public void setPago(float pago) {
         this.pago = pago;
-    }
-        
-    public int getPlazaslibres() {
-        return plazaslibres;
-    }
-
-    public void setPlazaslibres(int plazaslibres) {
-        this.plazaslibres = plazaslibres;
-    }
-
-    public int getPlazas() {
-        return plazas;
-    }
-
-    public void setPlazas(int plazas) {
-        this.plazas = plazas;
     }
     
 }

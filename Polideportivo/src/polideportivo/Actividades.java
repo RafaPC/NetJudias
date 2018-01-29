@@ -5,6 +5,8 @@
  */
 package polideportivo;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
+
 /**
  *
  * @author daw
@@ -20,10 +22,8 @@ public class Actividades {
     private float precio;
 
     private Horario horario;
-    
+
     private Afiliados[] afiliados;
-    
-    
 
     public boolean meterAfil(Afiliados a) {
         boolean ok = false;
@@ -36,18 +36,32 @@ public class Actividades {
     }
 
     public void sacarAfil(Afiliados a) {
-        
-    }
-    
-    public void reciboActividades(){
-        
-        for(int i = 0; i<11;i++){
-            
-            
-            
+        //No hace falta mirar en las actividades a las que no se ha apuntado nadie
+        //Si no se apunta nadie las plazas y las plazaslibres son iguales, pero cuando alguien se apunta cambian las segundas
+        if (plazaslibres != plazas) {
+            for (int i = 0; i < plazas - plazaslibres; i++) {
+                
+                //Cuando encuentra un afiliado igual al introducido por el usuario
+                //procede a eliminarlo del array y cubrir el hueco
+                if (a.equals(afiliados[i])) {
+
+                    afiliados[i] = afiliados[(plazas-plazaslibres)-1];
+                    afiliados[i] = null;
+                    plazaslibres++;
+                        
+                }
+            }
         }
-        
     }
+
+    public void reciboActividades() {
+
+        for (int i = 0; i < 11; i++) {
+
+        }
+
+    }
+
     public Actividades(String tipo, int plazas, int plazaslibres, float precio, Horario horario) {
 
         this.tipo = tipo;
@@ -61,7 +75,7 @@ public class Actividades {
         this.horario = horario;
 
         this.plazaslibres = plazas;
-        
+
         this.afiliados = new Afiliados[plazas];
 
     }
@@ -81,12 +95,11 @@ public class Actividades {
     public void setAfiliadosx(Afiliados[] afiliadosx) {
         this.afiliadosx = afiliadosx;
     }*/
-
     @Override
     public String toString() {
         return tipo + "\nPlazas libres: " + plazaslibres + "\nPrecio: " + precio + "\n" + horario;
     }
- 
+
     public int getPlazas() {
         return plazas;
     }

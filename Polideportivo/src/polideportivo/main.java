@@ -20,13 +20,15 @@ public class main {
         boolean salir = false;
         do {
 
-            System.out.println("Elige la funcionalidad");
+            System.out.println("\nElige la funcionalidad");
             System.out.println("1.- Dar de alta a un afiliado");
             System.out.println("2.- Matricular a un afiliado en un grupo de una determinada actividad (si hay plazas)");
             System.out.println("3.- Dar de baja afiliado");
             System.out.println("4.- Generar el recibo de pago de un afiliado");
             System.out.println("5.- Generar el recibo de pago de todos los afiliados");
-            System.out.println("6.- Generar el dinero recaudado por cada actividad");
+            System.out.println("6.- Generar el dinero recaudad por una actividad");
+            System.out.println("7.- Generar el dinero recaudado por cada actividad");
+            System.out.println("8.- Salir");
             int funcion = sc.nextInt();
             sc.nextLine();
 
@@ -44,21 +46,25 @@ public class main {
                     break;
 
                 case 4:
-                    polideportivo.reciboAfiliado();
+                    polideportivo.recibo1Afiliado();
                     break;
-                    
+
                 case 5:
                     polideportivo.reciboTodosAfiliados();
-                    break;    
-                    
+                    break;
+
                 case 6:
-                    polideportivo.reciboActividades();
+                    polideportivo.recibo1Actividad();
+                    break;
+
+                case 7:
+                    polideportivo.reciboTodasActividades();
                     break;
 
                 case 8:
                     salir = true;
                 default:
-                    System.out.println("hola");
+                    System.out.println("Te has inventado el número, anda, prueba otra vez");
             }
         } while (salir == false);
     }
