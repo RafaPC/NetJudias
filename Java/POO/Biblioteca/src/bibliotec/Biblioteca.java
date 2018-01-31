@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Biblioteca;
+package bibliotec;
 
 import java.util.Scanner;
 
@@ -17,11 +17,18 @@ public class Biblioteca {
 
     private Libro[] libros;
 
-    public int numUsuarios = 0;
+    public int numUsuarios = 4;
+
+    public int numLibros = 13;
+
+    public int posicionUsuario;
 
     Scanner sc = new Scanner(System.in);
 
     public Biblioteca() {
+
+        numUsuarios = 4;
+        numLibros = 13;
 
         libros = new Libro[30];
 
@@ -58,17 +65,18 @@ public class Biblioteca {
         System.out.println("Número de páginas: ");
         int numPaginas = sc.nextInt();
 
-        libros[0] = new Libro(isbn, titulo, autor, numPaginas);
+        libros[numLibros] = new Libro(isbn, titulo, autor, numPaginas);
+        numLibros++;
     }
 
     public void darAltaUsuario() {
 
         System.out.println("Nombre del usuario: ");
         String nombre = sc.next();
-        
+
         Usuario temp = new Usuario(nombre);
         for (int i = 0; i < numUsuarios; i++) {
-            if(temp.equals(usuarios[i])){
+            if (temp.equals(usuarios[i])) {
                 System.out.println("Ya hay un usuario con ese nombre");
                 System.out.println("En esta biblioteca no admitimos personas con el mismo nombre");
             }
@@ -79,40 +87,55 @@ public class Biblioteca {
     }
 
     public void darBajaUsuario() {
-        System.out.println("Nombre del usuario: ");
-        String nombre = sc.next();
+        encontrarUsuario();
 
-        Usuario temp = new Usuario(nombre);
-        for (int i = 0; i < numUsuarios; i++) {
-            temp.equals(usuarios[i]);
-        }
-
+        usuarios[posicionUsuario] = usuarios[numUsuarios - 1];
+        usuarios[numUsuarios - 1] = null;
+        numUsuarios--;
     }
 
     public void prestarLibro() {
+        encontrarUsuario();
+
+        usuarios[posicionUsuario].prestarLibro(libros, numLibros);
 
     }
 
     public void devolverLibro() {
+        encontrarUsuario();
 
-    }
-
-    public int numLibrosPrestados() {
-        int librosprestados = 0;
-
-        return librosprestados;
+        usuarios[posicionUsuario].devolverLibro(numUsuarios, numLibros);
     }
 
     public void listadoLibros() {
-
-    }
-
-    public void listadoRevistas() {
-
+        for (int i = 0; i < numLibros; i++) {
+            System.out.println(libros[i].toString());
+        }
     }
 
     public void listadoUsuarios() {
+        for (int i = 0; i < numUsuarios; i++) {
 
+            System.out.print("Usuario " + i + ".- ");
+            System.out.println(usuarios[i].toString());
+        }
+    }
+
+    public void encontrarUsuario() {
+        System.out.println("Nombre del usuario: ");
+        String nombre = sc.next();
+
+        Usuario temp = new Usuario(nombre);
+        int posicionUsuario = -1;
+        for (int i = 0; i < numUsuarios; i++) {
+            if (temp.equals(usuarios[i])) {
+                posicionUsuario = i;
+                i = numUsuarios;
+            }
+        }
+        if (posicionUsuario == -1) {
+            System.out.println("No se ha encontrado ese usuario");
+        }
     }
 
 }

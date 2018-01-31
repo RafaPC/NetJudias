@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Biblioteca;
+package bibliotec;
 
 import java.util.Objects;
 
@@ -37,6 +37,13 @@ public Libro(String isbn, String titulo, String autor, int numPaginas){
     this.prestado = false;
 }
 
+    @Override
+    public String toString() {
+        return "Título: " + titulo + "\nAutor: " + autor + "\n";
+    }
+
+    
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
