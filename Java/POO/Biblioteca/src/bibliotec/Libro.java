@@ -39,7 +39,7 @@ public Libro(String isbn, String titulo, String autor, int numPaginas){
 
     @Override
     public String toString() {
-        return "Título: " + titulo + "\nAutor: " + autor + "\n";
+        return "Título: " + titulo + "\nAutor: " + autor + "\nPrestado: "+prestado;
     }
 
     
@@ -72,6 +72,14 @@ public Libro(String isbn, String titulo, String autor, int numPaginas){
             return false;
         }
         return true;
+    }
+
+    public boolean isPrestado() {
+        return prestado;
+    }
+
+    public void setPrestado(boolean prestado) {
+        this.prestado = prestado;
     }
 
 

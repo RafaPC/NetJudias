@@ -25,17 +25,16 @@ public class Usuario {
     public Usuario(String nombre) {
 
         this.nombre = nombre;
-        
-        Libro[] librosprestados = new Libro[3];
-        
+
+        this.librosprestados = new Libro[10];
+
         numlibrosprestados = 0;
     }
 
     @Override
     public String toString() {
-        return  nombre ;
+        return nombre;
     }
-    
 
     @Override
     public boolean equals(Object obj) {
@@ -64,25 +63,42 @@ public class Usuario {
         System.out.println("¿Y qué libro quieres coger?");
         posicionLibro = sc.nextInt();
         sc.nextLine();
-        if (posicionLibro > -1 || posicionLibro < numLibros) {
+
+        //Evita introducir un número donde no haya un libro
+        if (posicionLibro < 0 || posicionLibro >= numLibros) {
+            System.out.println("Has introducido un número no válido");
+        //No se podrá prestar un libro ya prestado
+        } else if (libros[posicionLibro].isPrestado()) {
+            System.out.println("Ese libro ya está cogido");
+        //Mete el libro en el array de libros prestados del usuario seleccionado y lo pone como prestado
+        } else {
+            libros[posicionLibro].setPrestado(true);
             librosprestados[numlibrosprestados] = libros[posicionLibro];
             numlibrosprestados++;
-        } else {
-            System.out.println("Has introducido un número no válido");
         }
 
     }
 
-    public void devolverLibro(int numUsuarios, int numLibros) {
+    public void devolverLibro(Libro[] libros, int numUsuarios, int numLibros) {
         int posicionLibro = -1;
-        for (int i = 0; i < numLibros; i++) {
+        for (int i = 0; i < numlibrosprestados; i++) {
             System.out.println(i + ".-");
-            librosprestados[i].toString();
+            System.out.println(librosprestados[i].toString());
         }
         System.out.println("¿Y qué libro quieres devolver?");
         posicionLibro = sc.nextInt();
         sc.nextLine();
         if (posicionLibro > -1 || posicionLibro < numlibrosprestados) {
+            
+            //Buscamos el libro en el array de libros para volver a ponerlo como disponible (boolean prestado = false)
+            Libro temp = librosprestados[posicionLibro];
+            for (int i = 0; i < numLibros; i++){
+                if(temp.equals(libros[i])){
+                    libros[i].setPrestado(false);
+                }
+            }
+            
+            //Quitamos el libro del array de libros prestados y ordenamos el array
             librosprestados[posicionLibro] = librosprestados[numlibrosprestados - 1];
             librosprestados[numlibrosprestados - 1] = null;
             numlibrosprestados--;
@@ -91,10 +107,11 @@ public class Usuario {
         }
     }
 
-    public int numLibrosPrestados() {
-        int librosprestados = 0;
+    public void librosPrestadosUsuario() {
+        for (int i = 0; i < numlibrosprestados; i++) {
+            System.out.println(librosprestados[i].toString());
+        }
 
-        return librosprestados;
     }
 
     public String getNombre() {
@@ -104,4 +121,9 @@ public class Usuario {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public int getNumlibrosprestados() {
+        return numlibrosprestados;
+    }
+
 }

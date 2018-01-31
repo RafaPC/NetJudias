@@ -22,7 +22,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int numUsuarios = 4;
         int numLibros = 13;
-                boolean salir = false;
+        boolean salir = false;
         do {
 
             System.out.println("\nElige la funcionalidad");
@@ -33,7 +33,8 @@ public class Main {
             System.out.println("5.- Devolver libros de usuarios");
             System.out.println("6.- Listado de libros");
             System.out.println("7.- Listado de usuarios");
-            System.out.println("8.- Salir");
+            System.out.println("8.- Listado de libros de un usuario");
+            System.out.println("9.- Salir");
             int funcion = sc.nextInt();
             sc.nextLine();
 
@@ -67,6 +68,9 @@ public class Main {
                     break;
 
                 case 8:
+                    biblioteca.listadoLibrosUsuario();
+                    break;
+                case 9:
                     salir = true;
                 default:
                     System.out.println("Te has inventado el número, anda, prueba otra vez");

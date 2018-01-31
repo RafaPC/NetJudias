@@ -104,12 +104,21 @@ public class Biblioteca {
     public void devolverLibro() {
         encontrarUsuario();
 
-        usuarios[posicionUsuario].devolverLibro(numUsuarios, numLibros);
+        usuarios[posicionUsuario].devolverLibro(libros,numUsuarios, numLibros);
     }
 
     public void listadoLibros() {
         for (int i = 0; i < numLibros; i++) {
             System.out.println(libros[i].toString());
+        }
+    }
+
+    public void listadoLibrosUsuario() {
+        encontrarUsuario();
+        if (usuarios[posicionUsuario].getNumlibrosprestados() == 0) {
+            System.out.println("Ese usuario no tiene ningún libro prestado actualmente");
+        } else {
+            usuarios[posicionUsuario].librosPrestadosUsuario();
         }
     }
 
