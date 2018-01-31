@@ -190,7 +190,6 @@ public class Polideportivo {
 
     }
 
-    //Hay que mirar los recibos porque se sobreescriben o algo asi
     public void reciboTodosAfiliados() {
 
         for (int i = 0; i < numAfil; i++) {

@@ -26,7 +26,7 @@ public class main {
             System.out.println("3.- Dar de baja afiliado");
             System.out.println("4.- Generar el recibo de pago de un afiliado");
             System.out.println("5.- Generar el recibo de pago de todos los afiliados");
-            System.out.println("6.- Generar el dinero recaudad por una actividad");
+            System.out.println("6.- Generar el dinero recaudado por una actividad");
             System.out.println("7.- Generar el dinero recaudado por cada actividad");
             System.out.println("8.- Salir");
             int funcion = sc.nextInt();
