@@ -23,10 +23,13 @@ public class Biblioteca {
 
     public int posicionUsuario;
 
+    public boolean encontrado;
+
     Scanner sc = new Scanner(System.in);
 
     public Biblioteca() {
 
+        encontrado = false;
         posicionUsuario = 0;
         numUsuarios = 4;
         numLibros = 13;
@@ -45,7 +48,7 @@ public class Biblioteca {
         libros[9] = new Libro("87-7767-987-9", "El codigo Da Vinci", "Alexelcapo", 3141523);
         libros[10] = new Libro("91-0101-789-5", "Kamasutra", "Mahatma Gandhi", 10000);
         libros[11] = new Libro("70-7808-002-4", "Nombre Libro Genérico", "Alexelcapo", 100);
-        libros[12] = new Libro("40-3675-007-1", "Libro de Belén Esteban", "Algiuen que sí que sabe escribir", 2);
+        libros[12] = new Libro("40-3675-007-1", "Libro de Belén Esteban", "Alguien que sí que sabe escribir", 2);
 
         usuarios = new Usuario[20];
         usuarios[0] = new Usuario("Kiko");
@@ -55,6 +58,7 @@ public class Biblioteca {
 
     }
 
+    //Pregunta por los campos que necesita el constructor y crea un objeto de la clase Libro
     public void darAltaLibro() {
         System.out.println("Procede a rellenar los datos para dar de alta el libro");
         System.out.println("ISBN: ");
@@ -70,6 +74,7 @@ public class Biblioteca {
         numLibros++;
     }
 
+    //Pregunta por los campos que necesita el constructor y crea un objeto de la clase Usuario
     public void darAltaUsuario() {
 
         System.out.println("Nombre del usuario: ");
@@ -87,54 +92,67 @@ public class Biblioteca {
 
     }
 
+    //Pregunta el usuario y si tiene algún libro prestado llama a la función "devolverTodosLosLibros" de Usuario
     public void darBajaUsuario() {
         encontrarUsuario();
-        
-        //Si el usuario tiene algun libro prestado los devolverá primero
-        if (usuarios[posicionUsuario].getNumlibrosprestados() > 0) {
-            usuarios[posicionUsuario].devolverTodosLosLibros(libros);
+        if (encontrado) {
+            //Si el usuario tiene algun libro prestado los devolverá primero
+            if (usuarios[posicionUsuario].getNumlibrosprestados() > 0) {
+
+                usuarios[posicionUsuario].devolverTodosLosLibros(libros);
+            }
+            usuarios[posicionUsuario] = usuarios[numUsuarios - 1];
+            usuarios[numUsuarios - 1] = null;
+            numUsuarios--;
         }
-        usuarios[posicionUsuario] = usuarios[numUsuarios - 1];
-        usuarios[numUsuarios - 1] = null;
-        numUsuarios--;
     }
 
+    //Pregunta el usuario y si se ha encontrado y tiene menos de 3 libros, llama a la función "prestarLibro" de Usuario
     public void prestarLibro() {
         encontrarUsuario();
-
-        if (usuarios[posicionUsuario].getNumlibrosprestados() == 3) {
-            System.out.println("Este usuario ya tiene 3 libros\n"
-                    + "Deberá devolver antes un libro para poder coger prestado otro");
-        } else {
-            usuarios[posicionUsuario].prestarLibro(libros, numLibros);
+        if (encontrado) {
+            if (usuarios[posicionUsuario].getNumlibrosprestados() == 3) {
+                System.out.println("Este usuario ya tiene 3 libros\n"
+                        + "Deberá devolver antes un libro para poder coger prestado otro");
+            } else {
+                usuarios[posicionUsuario].prestarLibro(libros, numLibros);
+            }
         }
 
     }
 
+    //Pregunta el usuario y llama a la función "devolverLibro" de Usuario
     public void devolverLibro() {
         encontrarUsuario();
-        if (usuarios[posicionUsuario].getNumlibrosprestados() == 0) {
-            System.out.println("Ese usuario no tiene ningún libro prestado");
-        } else {
-            usuarios[posicionUsuario].devolverLibro(libros, numUsuarios, numLibros);
+        if (encontrado) {
+            if (usuarios[posicionUsuario].getNumlibrosprestados() == 0) {
+                System.out.println("Ese usuario no tiene ningún libro prestado");
+            } else {
+                usuarios[posicionUsuario].devolverLibro(libros, numUsuarios, numLibros);
+            }
         }
     }
 
+    //Lista todos los libros, poniendo en cada uno si está disponible o no
     public void listadoLibros() {
         for (int i = 0; i < numLibros; i++) {
             System.out.println(libros[i].toString() + "\n");
         }
     }
 
+    //Lista los libros que tiene un usuario
     public void listadoLibrosUsuario() {
         encontrarUsuario();
-        if (usuarios[posicionUsuario].getNumlibrosprestados() == 0) {
-            System.out.println("Ese usuario no tiene ningún libro prestado actualmente");
-        } else {
-            usuarios[posicionUsuario].librosPrestadosUsuario();
+        if (encontrado) {
+            if (usuarios[posicionUsuario].getNumlibrosprestados() == 0) {
+                System.out.println("Ese usuario no tiene ningún libro prestado actualmente");
+            } else {
+                usuarios[posicionUsuario].librosPrestadosUsuario();
+            }
         }
     }
 
+    //Lista todos los usuarios
     public void listadoUsuarios() {
         for (int i = 0; i < numUsuarios; i++) {
 
@@ -143,8 +161,10 @@ public class Biblioteca {
         }
     }
 
+    //Busca a un usuario con un nombre introducido por teclado y devuelve si lo ha encontrado o no con el booleano (encontrado)
     public void encontrarUsuario() {
-        System.out.println("Nombre del usuario: ");
+        encontrado = true;
+        System.out.print("Nombre del usuario: ");
         String nombre = sc.next();
 
         Usuario temp = new Usuario(nombre);
@@ -157,7 +177,9 @@ public class Biblioteca {
         }
         if (posicionUsuario == -1) {
             System.out.println("No se ha encontrado ese usuario");
+            encontrado = false;
         }
+
     }
 
 }

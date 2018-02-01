@@ -72,6 +72,7 @@ public class Main {
                     break;
                 case 9:
                     salir = true;
+                    break;
                 default:
                     System.out.println("Te has inventado el número, anda, prueba otra vez");
             }

@@ -62,13 +62,13 @@ public class Usuario {
 
     public void prestarLibro(Libro[] libros, int numLibros) {
 
-        System.out.println("Elige"
-                + "\n1.- Mostrar actividades y elegir número"
-                + "\n2.- Buscar por isbn,titulo,autor");
+        System.out.println("Elige:"
+                + "\n1.- Mostrar todos los libros y escoger por número"
+                + "\n2.- Buscar por isbn, título ó autor");
         int opcion = sc.nextInt();
         sc.nextLine();
         //Posicion del libro en el array de libros de biblioteca
-        int posicionLibro = -1;
+        int posicionLibro = 0;
         //Muestra todos los libros y coge la posición introducida por el usuario
         if (opcion == 1) {
 
@@ -78,23 +78,25 @@ public class Usuario {
                 System.out.println(libros[i].toString());
             }
             //Elige libro
-            System.out.println("¿Y qué libro quieres coger?");
+            System.out.println("\n¿Y qué libro quieres coger?");
             posicionLibro = sc.nextInt();
             sc.nextLine();
 
-            //Evita introducir un número donde no haya un libro
         } else if (opcion == 2) {
-            System.out.println("¿Cómo quieres buscar el libro?"
-                    + "\n1.- Por isbn"
+            System.out.println("\n¿Cómo quieres buscar el libro?"
+                    + "\n1.- Por ISBN"
                     + "\n2.- Por título"
                     + "\n3.- Por autor");
             opcion = sc.nextInt();
             sc.nextLine();
             String campo;
             boolean encontrado = false;
+
+            //Dependiendo del número que se introduzca se buscará por isbn, título o autor
             switch (opcion) {
+                //Busca por isbn
                 case 1:
-                    System.out.println("Dame el isbn:");
+                    System.out.println("Dame el ISBN:");
                     campo = sc.next();
                     for (int i = 0; i < numLibros && !encontrado; i++) {
                         if (libros[i].getIsbn().equalsIgnoreCase(campo)) {
@@ -102,31 +104,44 @@ public class Usuario {
                             encontrado = true;
                         }
                     }
+                    if (!encontrado) {
+                        System.out.println("No se ha encontrado ningún libro con ese ISBN");
+                    }
                     break;
+                //Busca por título
                 case 2:
                     System.out.println("Dame el título");
                     campo = sc.next();
                     for (int i = 0; i < numLibros && !encontrado; i++) {
-                        if(libros[i].getTitulo().equalsIgnoreCase(campo)) {
+                        if (libros[i].getTitulo().equalsIgnoreCase(campo)) {
                             posicionLibro = i;
                             encontrado = true;
                         }
                     }
+                    if (!encontrado) {
+                        System.out.println("No se ha encontrado ningún libro con ese título");
+                    }
                     break;
-                /*case 3:
+                //Busca por autor
+                case 3:
                     System.out.println("Dame el autor");
                     campo = sc.next();
+                    //Recorre el array de libros y muestra los que tienen el autor introducido por teclado para luego elegirlo
                     for (int i = 0; i < numLibros; i++) {
                         if (libros[i].getAutor().equalsIgnoreCase(campo)) {
                             System.out.println(i + ".-");
                             System.out.println(libros[i].toString());
+                            encontrado = true;
                         }
                     }
-                    System.out.println("Ahora elige que libro quieres escoger");
-                    
-                    for(int i = 0;encontrado;i++){
-                        
-                    }*/
+                    if (!encontrado) {
+                        System.out.println("No existe ningún libro de ese autor");
+                    } else {
+                        System.out.println("\nAhora elige que libro quieres escoger");
+                        posicionLibro = sc.nextInt();
+                        sc.nextLine();
+                    }
+                    break;
             }
 
         }
@@ -147,6 +162,7 @@ public class Usuario {
 
     public void devolverLibro(Libro[] libros, int numUsuarios, int numLibros) {
         int posicionLibro = -1;
+        //Muestra todos los libros prestados al usuario seleccionado
         for (int i = 0; i < numlibrosprestados; i++) {
             System.out.println(i + ".-");
             System.out.println(librosprestados[i].toString());
@@ -154,7 +170,8 @@ public class Usuario {
         System.out.println("¿Y qué libro quieres devolver?");
         posicionLibro = sc.nextInt();
         sc.nextLine();
-        if (posicionLibro > -1 || posicionLibro < numlibrosprestados) {
+        //Evita indexoutofbounds
+        if (posicionLibro >= 0 || posicionLibro < numlibrosprestados) {
 
             //Buscamos el libro en el array de libros para volver a ponerlo como disponible (boolean prestado = false)
             Libro temp = librosprestados[posicionLibro];
@@ -175,6 +192,8 @@ public class Usuario {
 
     public void devolverTodosLosLibros(Libro[] libros) {
         boolean cambiado;
+        //Coge cada libro y lo compara con los libros prestados
+        //Si encuentra que son iguales cambiará el boolean prestado (a false) del libro en cuestión en el array de libros
         for (int i = 0; i < numlibrosprestados; i++) {
             cambiado = false;
             for (int j = 0; !cambiado; j++) {

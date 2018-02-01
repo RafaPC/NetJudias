@@ -39,7 +39,18 @@ public Libro(String isbn, String titulo, String autor, int numPaginas){
 
     @Override
     public String toString() {
-        return "Título: " + titulo + "\nAutor: " + autor + "\nPrestado: "+prestado;
+        
+        String mensaje;
+        mensaje = "Título: " + titulo + "\nAutor: " + autor; 
+        if(!prestado){
+            mensaje += "\nDisponible";
+        }else{
+            mensaje += "\nPrestado (no disponible)";
+        }
+        
+        return mensaje;
+    
+    
     }
 
     
