@@ -27,6 +27,7 @@ public class Biblioteca {
 
     public Biblioteca() {
 
+        posicionUsuario = 0;
         numUsuarios = 4;
         numLibros = 13;
 
@@ -88,7 +89,11 @@ public class Biblioteca {
 
     public void darBajaUsuario() {
         encontrarUsuario();
-
+        
+        //Si el usuario tiene algun libro prestado los devolverá primero
+        if (usuarios[posicionUsuario].getNumlibrosprestados() > 0) {
+            usuarios[posicionUsuario].devolverTodosLosLibros(libros);
+        }
         usuarios[posicionUsuario] = usuarios[numUsuarios - 1];
         usuarios[numUsuarios - 1] = null;
         numUsuarios--;
@@ -97,19 +102,27 @@ public class Biblioteca {
     public void prestarLibro() {
         encontrarUsuario();
 
-        usuarios[posicionUsuario].prestarLibro(libros, numLibros);
+        if (usuarios[posicionUsuario].getNumlibrosprestados() == 3) {
+            System.out.println("Este usuario ya tiene 3 libros\n"
+                    + "Deberá devolver antes un libro para poder coger prestado otro");
+        } else {
+            usuarios[posicionUsuario].prestarLibro(libros, numLibros);
+        }
 
     }
 
     public void devolverLibro() {
         encontrarUsuario();
-
-        usuarios[posicionUsuario].devolverLibro(libros,numUsuarios, numLibros);
+        if (usuarios[posicionUsuario].getNumlibrosprestados() == 0) {
+            System.out.println("Ese usuario no tiene ningún libro prestado");
+        } else {
+            usuarios[posicionUsuario].devolverLibro(libros, numUsuarios, numLibros);
+        }
     }
 
     public void listadoLibros() {
         for (int i = 0; i < numLibros; i++) {
-            System.out.println(libros[i].toString());
+            System.out.println(libros[i].toString() + "\n");
         }
     }
 
@@ -135,7 +148,7 @@ public class Biblioteca {
         String nombre = sc.next();
 
         Usuario temp = new Usuario(nombre);
-        int posicionUsuario = -1;
+        posicionUsuario = -1;
         for (int i = 0; i < numUsuarios; i++) {
             if (temp.equals(usuarios[i])) {
                 posicionUsuario = i;

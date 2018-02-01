@@ -82,5 +82,17 @@ public Libro(String isbn, String titulo, String autor, int numPaginas){
         this.prestado = prestado;
     }
 
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
 
 }
