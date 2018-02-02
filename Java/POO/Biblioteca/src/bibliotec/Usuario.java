@@ -34,10 +34,12 @@ public class Usuario {
     @Override
     public String toString() {
         String mensaje;
-        mensaje = nombre + "\nLibros prestados: ";
-        for (int i = 0; i < numlibrosprestados; i++) {
+        mensaje = nombre + "\nLibros prestados: " + numlibrosprestados;
+        
+        
+        /*for (int i = 0; i < numlibrosprestados; i++) {
             mensaje += "\n" + librosprestados[i].toString();
-        }
+        }*/
         mensaje += "\n";
         return mensaje;
     }
@@ -75,7 +77,7 @@ public class Usuario {
             //Muestra libros
             for (int i = 0; i < numLibros; i++) {
                 System.out.println(i + ".-");
-                System.out.println(libros[i].toString());
+                System.out.println(libros[i].toString() + "\n");
             }
             //Elige libro
             System.out.println("\n¿Y qué libro quieres coger?");
@@ -84,7 +86,7 @@ public class Usuario {
 
         } else if (opcion == 2) {
             System.out.println("\n¿Cómo quieres buscar el libro?"
-                    + "\n1.- Por ISBN"
+                    + "\n1.- Por ISBN" 
                     + "\n2.- Por título"
                     + "\n3.- Por autor");
             opcion = sc.nextInt();
@@ -165,7 +167,7 @@ public class Usuario {
         //Muestra todos los libros prestados al usuario seleccionado
         for (int i = 0; i < numlibrosprestados; i++) {
             System.out.println(i + ".-");
-            System.out.println(librosprestados[i].toString());
+            System.out.println(librosprestados[i].toString() + "\n");
         }
         System.out.println("¿Y qué libro quieres devolver?");
         posicionLibro = sc.nextInt();
@@ -208,7 +210,7 @@ public class Usuario {
 
     public void librosPrestadosUsuario() {
         for (int i = 0; i < numlibrosprestados; i++) {
-            System.out.println(librosprestados[i].toString());
+            System.out.println(librosprestados[i].toString() + "\n");
         }
 
     }
