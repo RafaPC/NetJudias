@@ -8,11 +8,32 @@ and open the template in the editor.
     Author     : daw
 */
 
-.col{
-    display: flex;
-    flex-direction: column;
+.titulo{
+    color: #4165e5;
+    border-bottom: 2px dotted black;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    padding-bottom: 5px;
+    margin-left: 20px;
 }
-.row{
-    display: flex;
-    flex-direction: row;
+.txtleft{
+    width: 100px;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.clear{
+    clear:left;
+    clear:right;
+    margin-left: 40px;
+    margin-right: 50px;
+}
+
+.txtright{
+    float:right;
+    width:100px;
+}
+.inputright{
+    float:right;
+    
 }
