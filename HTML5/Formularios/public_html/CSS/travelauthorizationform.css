@@ -8,16 +8,24 @@ and open the template in the editor.
     Author     : daw
 */
 
+#titulazo{
+    text-align: center;
+    background-color:#4165e5;
+    border: 2px #4165e5 ridge;
+    padding: 40px;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
 .titulo{
     color: #4165e5;
     border-bottom: 2px dotted black;
-    margin-bottom: 20px;
     margin-top: 30px;
     padding-bottom: 5px;
     margin-left: 20px;
 }
 .txtleft{
-    width: 100px;
+    width: 130px;
     display: inline-block;
     margin-top: 4px;
 }
@@ -35,5 +43,30 @@ and open the template in the editor.
 }
 .inputright{
     float:right;
+    width: 70px;
+}
+.txtright2{
+    float:right;
+    margin-right: 204px;
+}
+#check{
+    margin-top: 30px;
+    margin-left: 40px;
+}
+.radioright{
+    float:right;
+    clear:right;
+    margin-right: 170px;
+    margin-bottom: 10px;
+}
+.txtcheck{
+    float:right;
+    width: 90px;
+}
+#textareaa{
+    clear:both;
+    float: left;
+}
+#textareaspan{
     
 }
