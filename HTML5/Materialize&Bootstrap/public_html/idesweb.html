@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+
+            crossorigin="anonymous">
+
+        </script>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <!--style>
+            /* label color */
+            .input-field label {
+                color: red;
+            }
+            /* label focus color */
+            .input-field input[type=text]:focus + label {
+                color: red !important;
+            }
+            /* label underline focus color */
+            .input-field input[type=text]:focus {
+                border-bottom: 1px solid red !important;
+                box-shadow: 0 1px 0 0 red !important;
+            }
+        </style-->
+
+
+    </head>
+    <body>
+        <form name="ese" method="POST" action="https://www.w3schools.com/action_page.php">
+            <fieldset>
+                <legend>¿QUIÉN ERES?</legend>
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input id="name" type="text" name="name" class="validate">
+                        <label for="app">Nombre</label>
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input id="surname" type="text" name="surname" class="validate">
+                        <label for="app">Apellidos</label>
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input id="email" type="email" name="email" class="validate">
+                        <label for="app">Correo electrónico</label>
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="col s3">
+                        <label for="birthdate" class="">Fecha de nacimiento</label>
+                        <input type="text" name="birthday" class="datepicker">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>¿DE DÓNDE ERES?</legend>
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input id="city" type="text" name="city" class="validate">
+                        <label for="app">Ciudad</label>
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input id="postalcode" type="text" name="postalcode" class="validate">
+                        <label for="app">Código postal</label>
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="input-field col s3">
+                        <select>
+                            <option value="" disabled selected>Elige tu país</option>
+                            <option value="1">País 1</option>
+                            <option value="2">País 2</option>
+                            <option value="3">País 3</option>
+                        </select>
+                        <label>País</label>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>¿CÓMO QUIERES INICIAR SESIÓN?</legend>
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input id="username" type="text" name="username" class="validate">
+                        <label for="app">Nombre de usuario</label>
+                    </div> 
+                </div>
+                <div class="row">    
+                    <div class="input-field col s3">
+                        <input id="passwd" type="password" name="passwd" class="validate">
+                        <label for="app">Contraseña</label>
+                    </div>  
+                </div>
+                <div class="row">    
+                    <div class="input-field col s3">
+                        <input id="passwd2" type="password" name="passwd2" class="validate">
+                        <label for="app">Vuelva a escribir la contraseña</label>
+                    </div>  
+                </div>
+            </fieldset>
+            <fieldset>
+
+                <p>Deseo recibir ofertas de iDESWEB</p>
+                <input name="group1" type="radio" id="test1" />
+                <label for="test1">Una vez al día</label>
+                <input name="group1" type="radio" id="test2" />
+                <label for="test2">Una vez a la semana</label>
+                <input name="group1" type="radio" id="test3"  />
+                <label for="test3">Una vez al mes</label>
+                <p>
+                    <input type="checkbox" class="filled-in" id="cookies" checked="checked" />
+                    <label for="filled-in-box">Acepto el acuerdo de servicios, la declaración de privacidad y la declaración de uso de cookies</label>
+                </p>
+                <button class="btn waves-effect waves-light" type="submit" >Submit
+                    <i class="material-icons right">send</i>
+                </button>
+
+            </fieldset>
+        </form>
+        <script>
+                $('.datepicker').pickadate({
+                    format: 'dd-mm-yyyy',
+                    selectMonths: true, // Creates a dropdown to control month
+                    selectYears: 15, // Creates a dropdown of 15 years to control year,
+                    monthsFull: ['Enero', 'Febrero', 'Marzo', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                    weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mir', 'Jue', 'Vie', 'Sab'],
+                    today: 'Hoy',
+                    clear: 'Limpiar',
+                    close: 'Kiko',
+                    closeOnSelect: false // Close upon selecting a date,
+                });
+        </script>
+        <script>
+
+            $(document).ready(function () {
+                $('select').material_select();
+            });
+            $('.dropdown-button').dropdown({
+                inDuration: 300,
+                outDuration: 225,
+                constrainWidth: false, // Does not change width of dropdown to that of the activator
+                hover: true, // Activate on hover
+                gutter: 0, // Spacing from edge
+                belowOrigin: false, // Displays dropdown below the button
+                alignment: 'left', // Displays dropdown with edge aligned to the left of button
+                stopPropagation: false // Stops event propagation
+            }
+            );
+        </script>
+    </body>
+</html>
