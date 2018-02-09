@@ -9,11 +9,28 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <link href="../CSS/1107.css" rel="stylesheet" type="text/css"/>
+        <link href="../CSS/1107.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div id="izq">
-            <form>
+        <div class="navbar">
+
+            <div class="dropdown">
+                <button class="dropbtn">Examen
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content blurry-text">
+                    <a href="1107.html">Ejercicio 1</a>
+                    <a href="index.html">Ejercicio 2</a>
+                    <a href="registro.html">Ejercicio 3</a>
+                    <a href="travelauthorizationform.html">Ejercicio 4</a>
+                </div>
+            </div> 
+        </div>
+        
+        
+        <form action="https://www.w3schools.com/action_page.php">
+            <div id="izq">
+
                 <fieldset>
                     <legend>Alta en el servicio</legend>
                     <div>Nombre</div>            
@@ -25,10 +42,9 @@ and open the template in the editor.
                     <div>Contraseña</div>            
                     <input type="password" name="passwd" id="contraseña">
                 </fieldset>
-            </form>
-        </div>
-        <div id="right">
-            <form action="/action_page.php">
+
+            </div>
+            <div id="right">
                 <fieldset>
                     <legend>Datos de contacto</legend>
                     <div>Teléfono</div>            
@@ -40,9 +56,8 @@ and open the template in the editor.
                     <div>Código postal</div>            
                     <input type="text" name="postalcode" id="postal">
                 </fieldset>
-            </form>
-        </div>
-        
-        <div id="submit"><input type="submit" value="Darme de alta"> </div>
+            </div>
+            <div id="submit"><input type="submit" value="Submit"></div>
+        </form>
     </body>
 </html>

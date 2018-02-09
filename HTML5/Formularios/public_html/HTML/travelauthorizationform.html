@@ -12,40 +12,110 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
-        <div class="col">
-            <div class="row">
-            <form>
-                <input type="text" name="titulo">
-                <input type="text" name="firstname">
-                <input type="text" name="inicial">
-                <input type="text" name="lastname">
-                <input type="text" name="email">
-                <input type="text" name="telephone">
-            </form>
-            </div>
-            <div class="row">
-            <form>
-                <input type="text" name="destination">
-                <input type="date" name="leavedate">
-                <input type="date" name="returndate">
-                <input type="text" name="carrental">
-                <input type="text" name="hotel">
-                <input type="text" name="meals">
-                <input type="text" name="totalestimate">
-            </form>
-            </div>
-            <div class="row">
-                <form>
-                <input type="checkbox" name="visit">
-                <input type="radio" name="payment" value="cash">
-                <input type="radio" name="payment" value="creditcard">
-                <input type="radio" name="payment" value="check">
-                <textarea rows="4" cols="50"></textarea>
-            </form>
-            </div>
+        <div class="navbar">
+
+            <div class="dropdown">
+                <button class="dropbtn">Examen
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content blurry-text">
+                    <a href="1107.html">Ejercicio 1</a>
+                    <a href="index.html">Ejercicio 2</a>
+                    <a href="registro.html">Ejercicio 3</a>
+                    <a href="travelauthorizationform.html">Ejercicio 4</a>
+                </div>
+            </div> 
         </div>
 
 
+
+
+        <div id="titulazo">Travel Authorization Form</div>
+        <h1 class="titulo">Section A: Client Information</h1>
+        <form action="https://www.w3schools.com/action_page.php">
+            <div class="clear">
+                <span class="txtleft">Title:</span>
+                <input type="text" name="titulo" class="inputleft">
+            </div>
+            <div class="clear">
+                <span class="txtleft">First name:</span>
+                <input type="text" name="firstname" class="inputleft">
+            </div>
+            <div class="clear">
+                <span class="txtleft">Middle initial:</span>
+                <input type="text" name="inicial" class="inputleft">
+            </div>
+            <div class="clear">
+                <span class="txtleft">Last name:</span>
+                <input type="text" name="lastname" class="inputleft">
+            </div>
+            <div class="clear">
+                <span class="txtleft">E-mail address:</span>
+                <input type="text" name="ename" class="inputleft">
+            </div>
+            <div class="clear">
+                <span class="txtleft">Phone number:</span>
+                <input type="text" name="telephone" class="inputleft">
+            </div>
+
+
+
+            <h1 class="titulo">Section B: Travel Information</h1>
+            <div class="clear">
+                <span class="txtleft">Airline name:</span>
+                <select>
+                    <option value="none">Select an airline      </option>
+                    <option value="wizz">Wizz</option>
+                    <option value="iberia">Iberia</option>
+                    <option value="oceanic">Oceanic Airlines</option>
+                </select>
+                <span class="txtright2">Additional estimated expenses:</span>
+            </div>
+            <div class="clear">
+                <span class="txtleft">Destination:</span>
+                <input type="text" name="destination" class="inputleft">
+                <input type="text" name="carrental" class="inputright">
+                <span class="txtright">Car rental</span>
+            </div>
+            <div class="clear">
+                <span class="txtleft">Leave date:</span>
+                <input type="date" name="leavedate">
+                <input type="text" name="hotel" class="inputright">
+                <span class="txtright">Hotel</span>
+
+            </div>
+            <div class="clear">
+                <span class="txtleft">Return date:</span>
+                <input type="date" name="returndate">
+                <input type="text" name="meals" class="inputright">
+                <span class="txtright">Meals</span>
+            </div>
+            <div class="clear">
+                <span class="txtleft">Estimated cost:</span>
+                <input type="text" name="cost">
+                <input type="text" name="total" class="inputright">
+                <span class="txtright">Total estimate:</span>
+            </div>
+
+            <div id="check">
+                <span class="txtleft">Includes customer visit?</span>
+                <input type="checkbox" name="visit" class="txtleft">
+                <span class="txtright2">Payment method used:</span>
+            </div>
+
+            <input type="radio" name="payment" value="cash" class="radioright">
+            <span class="txtcheck">Cash</span>
+            <input type="radio" name="payment" value="creditcard" class="radioright">
+            <span class="txtcheck">Credit card</span>
+            <input type="radio" name="payment" value="check" class="radioright">
+            <span class="txtcheck">Check</span>
+
+            <div id="textareaa">
+
+                <span>Purpose of travel:</span>
+                <textarea rows="5" cols="170"></textarea>
+            </div>
+
+        </form>
     </body>
 </html>

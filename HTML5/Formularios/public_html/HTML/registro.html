@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <link href="../CSS/registro.css" rel="stylesheet" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="navbar">
+
+            <div class="dropdown">
+                <button class="dropbtn">Examen
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content blurry-text">
+                    <a href="1107.html">Ejercicio 1</a>
+                    <a href="index.html">Ejercicio 2</a>
+                    <a href="registro.html">Ejercicio 3</a>
+                    <a href="travelauthorizationform.html">Ejercicio 4</a>
+                </div>
+            </div> 
+        </div>
+
+
+
+
+        <div id="titulo1">(Sólo los campos resaltados en rojo son obligatorios.)</div>
+        <form action="https://www.w3schools.com/action_page.php">
+            <div class="titulo2">Cuenta de Acceso Personal</div>
+            <span class="txtred">e-mail (Login):</span>
+            <input type="email" name="email">
+
+
+            <div class="titulo2">Datos Personales</div>
+            <div class="row">
+                <span class="txtred">Sr./Sra.:</span>
+                <select>
+                    <option value="none">...</option>
+                    <option value="man">Señor</option>
+                    <option value="woman">Señora</option>
+                </select>
+            </div>
+            <div class="row">
+                <span class="txtred">Nombres:</span>
+                <input type="text" name="email">
+                <span class="txtred">Apellidos:</span>
+                <input type="text" name="surname">
+            </div>
+            <div class="row">
+                <span class="txtred">Sexo:</span>
+                <select>
+                    <option value="none">...</option>
+                    <option value="man">Hombre</option>
+                    <option value="woman">Kiko</option>
+                    <option value="other">Otro</option>
+                </select>
+                <span id="otrotextred">Nacimiento:</span>
+                <input type="date" name="birthday">
+            </div>
+            <div class="row">
+                <span class="txt">Identificación:</span>
+                <input type="text" name="id">
+            </div>
+            <div class="row">
+                <span class="txt">Dirección:</span>
+                <input type="text" name="address" class="input-direccion">
+            </div>
+            <div class="row">
+                <span class="txt">Distrito:</span>
+                <input type="text" name="district">
+                <span class="txt">Código Postal:</span>
+                <input type="text" name="postalcode">
+            </div>
+            <div class="row">
+                <span class="txt">Ciudad:</span>
+                <input type="text" name="city">
+                <span class="txtred">País de Residencia:</span>
+                <select>
+                    <option value="none">...</option>
+                    <option value="country1">País1</option>
+                    <option value="country2">País2</option>
+                    <option value="country3">País3</option>
+                </select>
+            </div>
+            <div class="row">
+                <span class="txt">Teléfono fijo</span>
+                <input type="text" name="telephone">
+                <span class="txt">Celular:</span>
+                <input type="text" name="cellphone">
+            </div>
+            <div class="row">
+                <span class="txt">Fax:</span>
+                <input type="text" name="fax">
+            </div>
+            <div class="row">
+                <span class="txt">Centro de trabajo:</span>
+                <input type="text" name="job" class="input-direccion">
+            </div>
+            <div class="row">
+                <span class="txtred">Ocupación:</span>
+                <select>
+                    <option value="none">...</option>
+                    <option value="student">Estudiante</option>
+                    <option value="worker">Trabajador</option>
+                    <option value="nojob">En paro</option>
+                </select>
+            </div>
+        </form>
+    </body>
+</html>
