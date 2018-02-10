@@ -10,8 +10,10 @@ package Vehiculos;
  * @author daw
  */
 public abstract class VehiculoaMotor extends Vehiculo {
+
     protected String matricula;
     protected int km;
+
     /*public VehiculoaMotor(String matricula,int km, String color, String marca,float preciocompra){
         this.marca = marca;
         this.color = color;
@@ -25,7 +27,11 @@ public abstract class VehiculoaMotor extends Vehiculo {
         this.km = km;
     }
 
+    @Override
+    public String toString() {
+        String mensaje = super.toString();
+        mensaje += "\nMatrícula: " + matricula + "\nKilometraje: " + km;
+        return mensaje;
+    }
 
-    
-    
 }
