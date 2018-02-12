@@ -5,10 +5,6 @@
  */
 package zanalcar;
 
-import Vehiculos.Quad;
-import Vehiculos.Coche;
-import Vehiculos.Moto;
-import Vehiculos.Bicicleta;
 import java.util.Scanner;
 
 /**
@@ -29,6 +25,7 @@ public class ZanalCar {
             System.out.println("He aquí las opciones"
                     + "\n1.-Comprar coche"
                     + "\n2.-Ver coches en stock"
+                    + "\n3.-Vender coche"
                     + "\n8.-Salir");
             int opcion = sc.nextInt();
             switch (opcion) {
@@ -37,6 +34,9 @@ public class ZanalCar {
                     break;
                 case 2:
                     concesionario.cochesEnStock();
+                    break;
+                case 3:
+                    concesionario.venderVehiculo();
                     break;
                 case 8:
                     salir = true;

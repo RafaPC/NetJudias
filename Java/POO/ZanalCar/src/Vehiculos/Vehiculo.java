@@ -14,7 +14,7 @@ public abstract class Vehiculo {
     protected float preciocompra;
     public float precioventa;
     protected String color;
-    protected String marca;
+    public String marca;
 
     public Vehiculo(float preciocompra, String color, String marca) {
         this.preciocompra = preciocompra;
