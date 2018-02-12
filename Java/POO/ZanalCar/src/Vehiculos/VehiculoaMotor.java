@@ -11,7 +11,7 @@ package Vehiculos;
  */
 public abstract class VehiculoaMotor extends Vehiculo {
 
-    protected String matricula;
+    public String matricula;
     protected int km;
 
     /*public VehiculoaMotor(String matricula,int km, String color, String marca,float preciocompra){
