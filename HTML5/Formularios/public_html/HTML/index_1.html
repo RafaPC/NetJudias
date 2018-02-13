@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <link href="../CSS/index.css" rel="stylesheet" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>   
+        <div id="titulo1">iDESWEB</div>
+        <div id="titulo2">Formulario de registro</div>
+
+        <div class="campo">
+            <form>
+                <fieldset>
+                    <legend>¿QUIÉN ERES?</legend>
+                    <div class="fila">Nombre</div>            
+                    <input type="text" name="surname">
+                    <div class="fila">Apellido</div>            
+                    <input type="text" name="emailname">
+                    <div class="fila">Correo electrónico</div>            
+                    <input type="email" name="firstname">
+                    <div class="fila">Fecha de nacimiento</div>            
+                    <input type="date" name="bdate">
+                </fieldset>
+            </form>
+        </div>
+        <div class="campo">
+            <form>
+                <fieldset>
+                    <legend>¿DE DÓNDE ERES?</legend>
+                    <div class="fila">Ciudad</div>            
+                    <input type="text" name="city">
+                    <div class="fila">Código postal</div>            
+                    <input type="text" name="postalcode">
+                    <div class="fila">País</div>            
+
+                    <select>
+                        <option value="volvo">País</option>
+                        <option value="saab">Chiquitistán</option>
+                        <option value="mercedes">Andorra</option>
+                        <option value="audi">Tabarnia</option>
+                    </select> 
+                </fieldset>
+            </form>
+        </div>
+        <div class="campo">
+            <form>
+                <fieldset>
+                    <legend>¿CÓMO QUIERES INICIAR SESIÓN?</legend>
+                    <div class="fila">Nombre de usuario</div>            
+                    <input type="text" name="user">
+                    <div class="fila">Contraseña</div>            
+                    <input type="text" name="passwd">
+                    <div class="fila">Vuelve a escribir la contraseña</div>            
+                    <input type="text" name="passwd2">
+                </fieldset>
+            </form>
+        </div>
+        <div class="campo">
+            <form>
+                <fieldset>
+                    <legend>CONDICIONES DE REGISTRO</legend>
+                    <div class="fila">Deseo recibir ofertas de iDESWEB</div>
+                    <div class="inline"><input type="radio" name="offers" value="day" class="inline"> Una vez al día</div>
+                    <div class="inline"><input type="radio" name="offers" value="week" class="inline"> Una vez a la semana</div>
+                    <div class="inline"><input type="radio" name="offers" value="month" class="inline"> Una vez al mes</div>
+                    <div class="fila"><input type="checkbox" name="conditions" value="accept" class="inline"> Acepto el acuerdo de servicios, la declaración de privacidad y la declaración de uso de cookies</div>
+                </fieldset>
+            </form>
+        </div>
+
+    </body>
+</html>
