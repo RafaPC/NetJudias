@@ -13,79 +13,147 @@ and open the template in the editor.
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             crossorigin="anonymous">
         </script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     </head>
     <body>
-        <form name="ese" method="POST" action="https://www.w3schools.com/action_page.php">
-            <div class="row">
-                <div class="input-field col offset-s1 s5">
-                    <fieldset>
-                        <legend>Alta en el servicio</legend>
-                        <div class="row">
-                            <div class="input-field col s5">
-                                <input id="name" type="text" name="name" class="validate">
-                                <label for="app">Nombre</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s8">
-                                <input id="surname" type="text" name="surname" class="validate">
-                                <label for="app">Apellidos</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s3">
-                                <input id="dni" type="text" name="dni" class="validate">
-                                <label for="app">DNI</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s5">
-                                <input id="passwd" type="password" name="passwd" class="validate">
-                                <label for="app">Contraseña</label>
-                            </div>
-                        </div>
-                    </fieldset>
+        <div class="container-fluid">
+            <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+                <div id="navbarNav">
+                    <div class="row">
+                        <div class="nav-item"><a class="nav-link" href="bootstrap4.html">Trabajo 1</a></div>
+                        <div class="nav-item"><a class="nav-link" href="f1107.html">Trabajo 2</a></div>
+                        <div class="nav-item"><a class="nav-link" href="idesweb.html">Trabajo 3</a></div>
+                        <div class="nav-item"><a class="nav-link" href="travelauthorizationform.html">Trabajo 4</a></div>
+                    </div>
                 </div>
-                <div class="input-field col s5">
-                    <fieldset>
-                        <legend>Datos de contacto</legend>
-                        <div class="row">
-                            <div class="input-field col s5">
-                                <input id="telephone" type="text" name="telephone" class="validate">
-                                <label for="app">Teléfono</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s11">
-                                <input id="email" type="email" name="email" class="validate">
-                                <label for="app">Email</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s8">
-                                <input id="direction" type="text" name="direction" class="validate">
-                                <label for="app">Dirección</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s5">
-                                <input id="postalcode" type="text" name="postalcode" class="validate">
-                                <label for="app">Código Postal</label>
-                            </div>
-                        </div>
-                    </fieldset>
+            </nav>
+        </div>
+
+        <form action="https://www.w3schools.com/action_page.php">
+            <div class="text-primary"><h1 class="text-center">Travel Authorization Form</h1></div>
+            <div class="offset-1"><div class="border-bottom"><div class="text-primary"><h2>Section A: Client Information</h2></div></div></div>
+            <div class="row">""</div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Title:</label></div>
+                <div class="form-group col-2">
+                    <input type="text" class="form-control" name="title" id="title" aria-describedby="title" placeholder="">
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col offset-s1 s3">
-                    <button class="btn waves-effect waves-light" type="submit" >Submit
-                        <i class="material-icons right">send</i>
-                    </button>
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">First name:</label></div>
+                <div class="form-group col-2">
+                    <input type="text" class="form-control" name="firstname" id="name" aria-describedby="name" placeholder="">
                 </div>
             </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Middle initial:</label></div>
+                <div class="form-group col-1">
+                    <input type="text" class="form-control" name="middleinitial" id="secondinitial" aria-describedby="secondinitiañ" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Last name:</label></div>
+                <div class="form-group col-2">
+                    <input type="text" class="form-control" name="lastname" id="lastname" aria-describedby="lastname" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">E-mail address:</label></div>
+                <div class="form-group col-2">
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Phone number:</label></div>
+                <div class="form-group col-2">
+                    <input type="text" class="form-control" name="phone" id="phone" aria-describedby="phone" placeholder="">
+                </div>
+            </div>
+
+
+            <div class="offset-1"><div class="border-bottom"><div class="text-primary"><h2>Section B: Travel Information</h2></div></div></div>
+            <div class="row">""</div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Airline name:</label></div>
+                <div class="form-group col-2">
+                    <select name="airline" class="form-control" id="airline">
+                        <option>Select an airline</option>
+                        <option>Hombre</option>
+                        <option>Kiko</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+                <div class="offset-1 col-2"><label>Additional estimated expenses:</label></div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Destination:</label></div>
+                <div class="form-group col-2">
+                    <input type="text" class="form-control" name="destntation" id="destination" aria-describedby="destination" placeholder="">
+                </div>
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Car rental</label></div>
+                <div class="form-group col-1">
+                    <input type="text" class="form-control" name="carrental" id="carrental" aria-describedby="carrental" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Leave date:</label></div>
+                <div class="form-group col-2">
+                    <input type="date" class="form-control" name="leavedate" id="leave" aria-describedby="leave" placeholder="">
+                </div>
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Hotel</label></div>
+                <div class="form-group col-1">
+                    <input type="text" class="form-control" name="hotel" id="hotel" aria-describedby="hotel" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Return date:</label></div>
+                <div class="form-group col-2">
+                    <input type="date" class="form-control" name="returndate" id="returndate" aria-describedby="returndate" placeholder="">
+                </div>
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Meals</label></div>
+                <div class="form-group col-1">
+                    <input type="text" class="form-control" name="meals" id="meals" aria-describedby="meals" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Estimated cost:</label></div>
+                <div class="form-group col-2">
+                    <input type="text" class="form-control" name="estimatedcost" id="estimatedcost" aria-describedby="estimatedcost" placeholder="">
+                </div>
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Total estimate</label></div>
+                <div class="form-group col-1">
+                    <input type="text" class="form-control" name="totalestimate" id="totalestimate" aria-describedby="totalestimate" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Includes </br>customer visit?</label></div> 
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="customervisit">
+                </div>
+                <div class="offset-3 col-2"><label for="exampleInputEmail1">Payment method used:</label></div>   
+            </div>
+            <div class="offset-7">
+                <div class="radio">
+                    <label><input type="radio" name="optradio" id="cash">Cash</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="optradio" id="creditcard">Credit card</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="optradio" id="check">Check</label>
+                </div>
+            </div>
+            <div>
+                <div class="input-group offset-1 col-10">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Purpose of travel</span>
+                    </div>
+                    <textarea class="form-control" name="purposeoftravel" aria-label="With textarea"></textarea>
+                </div>
+            </div>
+            <div class="row">"</div>
+            <div class="row"><div class="offset-1"><button type="submit" class="btn btn-primary">Submit</button></div></div>
         </form>
     </body>
 </html>

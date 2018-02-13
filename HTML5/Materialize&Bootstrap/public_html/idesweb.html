@@ -22,6 +22,16 @@ and open the template in the editor.
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     </head>
     <body>
+        <nav>
+            <div class="nav-wrapper">
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a href="bootstrap4.html">Trabajo 1</a></li>
+                    <li><a href="f1107.html">Trabajo 2</a></li>
+                    <li><a href="idesweb.html">Trabajo 3</a></li>
+                    <li><a href="travelauthorizationform.html">Trabajo 4</a></li>
+                </ul>
+            </div>
+        </nav>
         <form name="ese" method="POST" action="https://www.w3schools.com/action_page.php">
             <fieldset>
                 <legend>¿QUIÉN ERES?</legend>
@@ -66,11 +76,11 @@ and open the template in the editor.
                 </div>
                 <div class="row">
                     <div class="input-field col s3">
-                        <select>
+                        <select id="country"  name="country">
                             <option value="" disabled selected>Elige tu país</option>
-                            <option value="1">País 1</option>
-                            <option value="2">País 2</option>
-                            <option value="3">País 3</option>
+                            <option value="Pais 1">País 1</option>
+                            <option value="Pais 2">País 2</option>
+                            <option value="Pais 3">País 3</option>
                         </select>
                         <label>País</label>
                     </div>
@@ -107,7 +117,7 @@ and open the template in the editor.
                 <input name="group1" type="radio" id="test3"  />
                 <label for="test3">Una vez al mes</label>
                 <p>
-                    <input type="checkbox" class="filled-in" id="cookies" checked="checked" />
+                    <input type="checkbox" class="filled-in" id="filled-in-box" name="cookies" checked="checked" />
                     <label for="filled-in-box">Acepto el acuerdo de servicios, la declaración de privacidad y la declaración de uso de cookies</label>
                 </p>
                 <button class="btn waves-effect waves-light" type="submit" >Submit

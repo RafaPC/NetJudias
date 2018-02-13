@@ -9,24 +9,37 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet"
-              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"  >
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"  >
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
         <div class="container-fluid">
-            <form>
-                <h1 class="offset-3 col6">(Sólo los campos resaltados en rojo son obligatorios.)</h1>
-                <h4 class="offset-5 col6">Cuenta de Acceso Personal</h4>
+            <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+                <div id="navbarNav">
+                    <div class="row">
+                        <div class="nav-item"><a class="nav-link" href="bootstrap4.html">Trabajo 1</a></div>
+                        <div class="nav-item"><a class="nav-link" href="f1107.html">Trabajo 2</a></div>
+                        <div class="nav-item"><a class="nav-link" href="idesweb.html">Trabajo 3</a></div>
+                        <div class="nav-item"><a class="nav-link" href="travelauthorizationform.html">Trabajo 4</a></div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="container-fluid">
+            <form action="https://www.w3schools.com/action_page.php">
+                <div class="text-center"><div class="text-primary"><h1 class="col12">(Sólo los campos resaltados en azul son obligatorios.)</h1></div></div>
+                <div class="border-bottom"><div class="text-center"><h4 class="col12">Cuenta de Acceso Personal</h4></div></div>
                 <div class="form-group offset-2 col-6">
-                    <label for="exampleInputEmail1">e-mail (Login)</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <div class="text-primary"><label for="exampleInputEmail1">e-mail (Login)</label></div>
+                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
-                <h4 class="offset-5 col6">Datos Personales</h4>
+                <div class="border-bottom"><div class="text-center"><h4 class="col12">Datos Personales</h4></div></div>
                 <div class="row ">
                     <div class="form-group offset-2 col-1">
-                        <label for="exampleInputPassword1">Sr./Sra.</label>
-                        <select class="form-control" id="sir">
+                        <div class="text-primary"><label for="exampleInputPassword1">Sr./Sra.</label></div>
+                        <select name="sir" class="form-control" id="sir">
                             <option> ... </option>
                             <option>Señor</option>
                             <option>Señora</option>
@@ -35,18 +48,18 @@ and open the template in the editor.
                 </div>
                 <div class="row">
                     <div class="form-group offset-2 col-2">
-                        <label for="exampleInputEmail1">Nombre</label>
-                        <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="">
+                        <div class="text-primary"><label for="exampleInputEmail1">Nombre</label></div>
+                        <input type="text" class="form-control" name="name" id="name" aria-describedby="name" placeholder="">
                     </div>
                     <div class="form-group offset-2 col-2">
-                        <label for="exampleInputEmail1">Apellidos</label>
-                        <input type="text" class="form-control" id="surname" aria-describedby="surname" placeholder="">
+                        <div class="text-primary"><label for="exampleInputEmail1">Apellidos</label></div>
+                        <input type="text" class="form-control" name="surname" id="surname" aria-describedby="surname" placeholder="">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group offset-2 col-2">
-                        <label for="exampleFormControlSelect1">Sexo</label>
-                        <select class="form-control" id="sex">
+                        <div class="text-primary"><label for="exampleFormControlSelect1">Sexo</label></div>
+                        <select name="sex" class="form-control" id="sex">
                             <option> ... </option>
                             <option>Hombre</option>
                             <option>Kiko</option>
@@ -54,55 +67,44 @@ and open the template in the editor.
                         </select>
                     </div>
 
-                    <div class='col-sm-6'>
+                    <div class='offset-2 col-sm-3'>
                         <div class="form-group">
-                            <div class='input-group date' id='datetimepicker2'>
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
+                            <div class="text-primary"><label for="exampleFormControlSelect1">Nacimiento</label></div>
+                            <input type="date" class="form-control" name="birth" id="returndate" aria-describedby="returndate" placeholder="">
                         </div>
                     </div>
-                    <script type="text/javascript">
-                        $(function () {
-                            $('#datetimepicker2').datetimepicker({
-                                locale: 'ru'
-                            });
-                        });
-                    </script>
                 </div>
                 <div class="row">
                     <div class="form-group offset-2 col-2">
                         <label for="exampleInputEmail1">Identificación</label>
-                        <input type="text" class="form-control" id="id" aria-describedby="id" placeholder="">
+                        <input type="text" class="form-control" name="id" id="id" aria-describedby="id" placeholder="">
                         <small id="idHelp" class="form-text text-muted">(DNI/CE o similar)</small>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group offset-2 col-6">
                         <label for="exampleInputEmail1">Dirección</label>
-                        <input type="text" class="form-control" id="address" aria-describedby="address" placeholder="">
+                        <input type="text" class="form-control" name="address" id="address" aria-describedby="address" placeholder="">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group offset-2 col-2">
                         <label for="exampleInputEmail1">Distrito</label>
-                        <input type="text" class="form-control" id="district" aria-describedby="district" placeholder="">
+                        <input type="text" class="form-control" name="district" id="district" aria-describedby="district" placeholder="">
                     </div>
                     <div class="form-group offset-2 col-2">
                         <label for="exampleInputEmail1">Código Postal</label>
-                        <input type="text" class="form-control" id="postalcode" aria-describedby="postalcode" placeholder="">
+                        <input type="text" class="form-control" name="postalcode" id="postalcode" aria-describedby="postalcode" placeholder="">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group offset-2 col-2">
                         <label for="exampleInputEmail1">Ciudad</label>
-                        <input type="text" class="form-control" id="city" aria-describedby="city" placeholder="">
+                        <input type="text" class="form-control" name="city" id="city" aria-describedby="city" placeholder="">
                     </div>
                     <div class="form-group offset-2 col-4">
-                        <label for="exampleFormControlSelect1">País de residencia</label>
-                        <select class="form-control" id="country">
+                        <div class="text-primary"><label for="exampleFormControlSelect1">País de residencia</label></div>
+                        <select name="country" class="form-control" id="country">
                             <option> -- Elija opción -- </option>
                             <option>Andorra</option>
                             <option>Myanmar</option>
@@ -113,29 +115,29 @@ and open the template in the editor.
                 <div class="row">
                     <div class="form-group offset-2 col-2">
                         <label for="exampleInputEmail1">Teléfono Fijo</label>
-                        <input type="text" class="form-control" id="telephone" aria-describedby="telephone" placeholder="">
+                        <input type="text" class="form-control" name="telehone" id="telephone" aria-describedby="telephone" placeholder="">
                     </div>
                     <div class="form-group offset-2 col-2">
                         <label for="exampleInputEmail1">Celular</label>
-                        <input type="text" class="form-control" id="cellphone" aria-describedby="cellphone" placeholder="">
+                        <input type="text" class="form-control" name="cellphone" id="cellphone" aria-describedby="cellphone" placeholder="">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group offset-2 col-2">
                         <label for="exampleInputEmail1">Fax</label>
-                        <input type="text" class="form-control" id="fax" aria-describedby="fax" placeholder="">
+                        <input type="text" class="form-control" name="fax" id="fax" aria-describedby="fax" placeholder="">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group offset-2 col-6">
                         <label for="exampleInputEmail1">Centro de trabajo</label>
-                        <input type="text" class="form-control" id="workplace" aria-describedby="workplace" placeholder="">
+                        <input type="text" class="form-control" name="workplace" id="workplace" aria-describedby="workplace" placeholder="">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group offset-2 col-4">
-                        <label for="exampleFormControlSelect1">Ocupación</label>
-                        <select class="form-control" id="ocupation">
+                        <div class="text-primary"><label for="exampleFormControlSelect1">Ocupación</label></div>
+                        <select name="ocupation" class="form-control" id="ocupation">
                             <option> -- Elija opción -- </option>
                             <option>Estudiante</option>
                             <option>No estudiante</option>
@@ -143,27 +145,10 @@ and open the template in the editor.
                         </select>
                     </div>
                 </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                <div class="offset-2"><button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1">Example select</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+
         </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-        </script>
     </body>
 </html>
