@@ -26,6 +26,7 @@ public class ZanalCar {
                     + "\n1.-Comprar coche"
                     + "\n2.-Ver coches en stock"
                     + "\n3.-Vender coche"
+                    + "\n4.-Facturación total"
                     + "\n8.-Salir");
             int opcion = sc.nextInt();
             switch (opcion) {
@@ -34,6 +35,9 @@ public class ZanalCar {
                     break;
                 case 2:
                     concesionario.cochesEnStock();
+                    break;
+                case 4:
+                    concesionario.facturacion();
                     break;
                 case 3:
                     concesionario.venderVehiculo();

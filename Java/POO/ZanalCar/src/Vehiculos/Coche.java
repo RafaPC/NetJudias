@@ -15,6 +15,4 @@ public class Coche extends VehiculoaMotor {
         super(matricula, km, preciocompra, color, marca);
     }
 
-
-
 }
