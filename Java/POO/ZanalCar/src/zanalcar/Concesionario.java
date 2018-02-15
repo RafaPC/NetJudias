@@ -59,8 +59,14 @@ public class Concesionario {
             color = sc.next();
             System.out.print("Precio:");
             preciocompra = sc.nextInt();
+            if (preciocompra < 0) {
+                preciocompra *= -1;
+            }
             System.out.print("Kilómetros:");
             kilometros = sc.nextInt();
+            if (kilometros < 0) {
+                kilometros *= -1;
+            }
             sc.nextLine();
             System.out.print("Matrícula:");
             matricula = sc.next();
@@ -93,14 +99,35 @@ public class Concesionario {
             System.out.print("Precio de compra: ");
             preciocompra = sc.nextInt();
             sc.nextLine();
+            if (preciocompra < 0) {
+                preciocompra *= -1;
+            }
             System.out.print("Tamaño de rueda (pulgadas): ");
             tamañoderueda = sc.nextInt();
             sc.nextLine();
+            if (tamañoderueda < 0) {
+                tamañoderueda *= -1;
+            }
             System.out.print("Número de marchas: ");
             numdemarchas = sc.nextInt();
             sc.nextLine();
+            if (numdemarchas < 0) {
+                numdemarchas *= -1;
+            }
             System.out.print("Tipo de cambio: ");
-            tipodecambio = sc.next();
+            System.out.println("1.-Manual"
+                    + "\n2.-Automático");
+            opcion = sc.nextInt();
+            sc.nextLine();
+            if (opcion == 1) {
+                tipodecambio = "Manual";
+            } else if (opcion == 2) {
+                tipodecambio = "Automático";
+            } else {
+                System.out.println("Has introducido un número no válido\nEscríbelo tú");
+                tipodecambio = sc.next();
+            }
+
             stock.add(new Bicicleta(tamañoderueda, numdemarchas, tipodecambio, preciocompra, color, marca));
 
         }
@@ -153,6 +180,9 @@ public class Concesionario {
                 System.out.println("Dime el precio");
                 int precio = sc.nextInt();
                 sc.nextLine();
+                if (precio < 0) {
+                precio *= -1;
+            }
                 for (int i = 0; i < stock.size(); i++) {
                     if (stock.get(i).precioventa < precio) {
                         printearVehiculo(i);
@@ -178,32 +208,83 @@ public class Concesionario {
     public void facturacion() {
         String respuesta;
         int dinerorecaudado = 0;
-        /*for (Vehiculo indice : vendidos) {
-            System.out.println(indice.precioventa);
-            dinerorecaudado += indice.precioventa;
-        }*/
         dinerorecaudado = cochesVendidos(dinerorecaudado);
         if (dinerorecaudado == 0) {
-            respuesta = "No hay una mierda recaudada";
+            respuesta = "No hay una mierda recaudada"
+                    + "\nTe van a despedir";
         } else {
             respuesta = "El total recaudado es " + dinerorecaudado;
         }
         System.out.println(respuesta);
+        vendidos.clear();
+    }
+
+    public void probarVehiculo() {
+        System.out.println("Qué vehículo va a probar");
+        System.out.println("1.-Coche"
+                + "\n2.-Quad");
+        int opcion = sc.nextInt();
+        sc.nextLine();
+        if (opcion == 1) {
+            printearTipo(1);
+        } else if (opcion == 2) {
+            printearTipo(3);
+        } else {
+            System.out.println("No existe esa opción");
+        }
+        System.out.println("Elige el vehículo para probar");
+        int posicion = sc.nextInt();
+        sc.nextLine();
+        boolean correcto = false;
+        //Comprueba que el usuario ha elegido buscar coches y ha introducido un número de un coche o ha hecho lo mismo pero con quads
+        if ((opcion == 1 && stock.get(posicion) instanceof Coche) || (opcion == 3 && stock.get(posicion) instanceof Quad)) {
+            correcto = true;
+        } else {
+            System.out.println("Has introducido un número no válido");
+        }
+        if (correcto) {
+            System.out.println("¿Cuántos km va a hacer?");
+            int kmprueba = sc.nextInt();
+            sc.nextLine();
+            if (kmprueba < 0) {
+                kmprueba *= -1;
+            }
+            if (stock.get(posicion) instanceof Coche) {
+                //Creamos un vehiculo tipo coche para acceder a los km
+                Coche temp = (Coche) stock.get(posicion);
+                //Aumentamos los km al vehiculo
+                temp.prueba(kmprueba);
+                //Cambiamos el coche en la posicion por otro igual con los km aumentados
+                stock.set(posicion, new Coche(temp.matricula, temp.km, temp.preciocompra, temp.color, temp.marca));
+                System.out.println("Ahora han cambiado los km");
+                System.out.println(stock.get(posicion).toString());
+                //Como ha pasado por el if de arriba, si es correcto y no es de tipo Coche es obligatoriamente de tipo Quad
+            } else {
+                //Creamos un vehiculo tipo quad para acceder a los km
+                Quad temp = (Quad) stock.get(posicion);
+                //Aumentamos los km al vehiculo
+                temp.prueba(kmprueba);
+                //Cambiamos el coche de la posicion indicada por otro igual con los km aumentados
+                stock.set(posicion, new Quad(temp.matricula, temp.km, temp.preciocompra, temp.color, temp.marca));
+                System.out.println(stock.get(posicion).toString());
+            }
+        }
+
     }
 
     public void cochesEnStock() {
         for (int i = 0; i < stock.size(); i++) {
             if (stock.get(i) instanceof Coche) {
-                System.out.println(i + 1 + ".-Coche" + "\n" + stock.get(i));
+                System.out.println(i + ".-Coche" + "\n" + stock.get(i));
             }
             if (stock.get(i) instanceof Moto) {
-                System.out.println(i + 1 + ".-Moto" + "\n" + stock.get(i));
+                System.out.println(i + ".-Moto" + "\n" + stock.get(i));
             }
             if (stock.get(i) instanceof Quad) {
-                System.out.println(i + 1 + ".-Quad" + "\n" + stock.get(i));
+                System.out.println(i + ".-Quad" + "\n" + stock.get(i));
             }
             if (stock.get(i) instanceof Bicicleta) {
-                System.out.println(i + 1 + ".-Bicicleta" + "\n" + stock.get(i));
+                System.out.println(i + ".-Bicicleta" + "\n" + stock.get(i));
             }
             System.out.println("\n");
         }
@@ -231,13 +312,13 @@ public class Concesionario {
 
     private void printearVehiculo(int i) {
         if (stock.get(i) instanceof Coche) {
-            System.out.println("\n" + i + 1 + ".-Coche" + "\n" + stock.get(i));
+            System.out.println("\n" + i + ".-Coche" + "\n" + stock.get(i));
         } else if (stock.get(i) instanceof Moto) {
-            System.out.println("\n" + i + 1 + ".-Moto" + "\n" + stock.get(i));
+            System.out.println("\n" + i + ".-Moto" + "\n" + stock.get(i));
         } else if (stock.get(i) instanceof Quad) {
-            System.out.println("\n" + i + 1 + ".-Quad" + "\n" + stock.get(i));
+            System.out.println("\n" + i + ".-Quad" + "\n" + stock.get(i));
         } else if (stock.get(i) instanceof Bicicleta) {
-            System.out.println("\n" + i + 1 + ".-Bicicleta" + "\n" + stock.get(i));
+            System.out.println("\n" + i + ".-Bicicleta" + "\n" + stock.get(i));
         }
         System.out.println("\n");
     }

@@ -11,9 +11,9 @@ package Vehiculos;
  */
 public abstract class Vehiculo {
 
-    protected float preciocompra;
+    public float preciocompra;
     public float precioventa;
-    protected String color;
+    public String color;
     public String marca;
 
     public Vehiculo(float preciocompra, String color, String marca) {
