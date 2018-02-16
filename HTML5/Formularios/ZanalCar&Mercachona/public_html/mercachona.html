@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+
+            crossorigin="anonymous">
+        </script>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    </head>
+    <body>
+        <form>
+            <div>TODO write content</div>
+            <p>Deseo recibir ofertas de iDESWEB</p>
+            <input name="group1" type="radio" id="test1" />
+            <label for="test1">Una vez al día</label>
+            <input name="group1" type="radio" id="test2" />
+            <label for="test2">Una vez a la semana</label>
+            <input name="group1" type="radio" id="test3"  />
+            <label for="test3">Una vez al mes</label>
+            <div class="row">
+                <div class="input-field col s8">
+                    <input id="color" type="text" name="color" class="validate">
+                    <label for="app">Nombre</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s8">
+                    <input id="color" type="text" name="color" class="validate">
+                    <label for="app">Apellidos</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s8">
+                    <input id="color" type="text" name="color" class="validate">
+                    <label for="app">DNI</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s8">
+                    <input id="color" type="text" name="color" class="validate">
+                    <label for="app">Dirección</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s8">
+                    <input id="color" type="text" name="color" class="validate">
+                    <label for="app">Teléfono</label>
+                </div>
+            </div>
+            <p>Sexo</p>
+            <input name="group2" type="radio" id="man"/>
+            <label for="man">Hombre</label>
+            <input name="group2" type="radio" id="woman"/>
+            <label for="woman">Mujer</label>
+            <div class="row">
+                <div class="col s3">
+                    <label for="birthdate" class="">Fecha de nacimiento</label>
+                    <input type="text" name="birthday" class="datepicker">
+                </div>
+            </div>
+            <p>Turno deseado</p>
+            <input name="turn" type="radio" id="morning" />
+            <label for="morning">Mañana</label>
+            <input name="turn" type="radio" id="evening" />
+            <label for="evening">Tarde</label>
+            <input name="turn" type="radio" id="night"  />
+            <label for="night">Noche</label>
+            <div class="row">
+                <div class="input-field col s3">
+                    <select id="country"  name="country">
+                        <option value="" disabled selected>Elige el puesto</option>
+                        <option value="Pais 1">Reponedora</option>
+                        <option value="Pais 2">Cajera</option>
+                        <option value="Pais 3">Jefe</option>
+                        <option value="Pais 3">Pescadería</option>
+                    </select>
+                    <label>País</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s3">
+                    <p>Sueldo esperado</p>
+                    <p class="range-field">
+                        <input type="range" id="test5" min="10000" max="15000"/>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <p>Entiende la política de empresa</p>
+                <p>    
+                    <input type="checkbox" id="policy" />
+                    <label for="policy">Entiende la política de empresa</label>
+                </p>
+            </div>
+        </form>
+        <script>
+                $('.datepicker').pickadate({
+                    format: 'dd-mm-yyyy',
+                    selectMonths: true, // Creates a dropdown to control month
+                    selectYears: 15, // Creates a dropdown of 15 years to control year,
+                    monthsFull: ['Enero', 'Febrero', 'Marzo', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                    weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mir', 'Jue', 'Vie', 'Sab'],
+                    today: 'Hoy',
+                    clear: 'Limpiar',
+                    close: 'Kiko',
+                    closeOnSelect: false // Close upon selecting a date,
+                });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('select').material_select();
+            });
+            $('.dropdown-button').dropdown({
+                inDuration: 300,
+                outDuration: 225,
+                constrainWidth: false, // Does not change width of dropdown to that of the activator
+                hover: true, // Activate on hover
+                gutter: 0, // Spacing from edge
+                belowOrigin: false, // Displays dropdown below the button
+                alignment: 'left', // Displays dropdown with edge aligned to the left of button
+                stopPropagation: false // Stops event propagation
+            }
+            );
+        </script>
+    </body>
+</html>
