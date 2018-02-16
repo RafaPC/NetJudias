@@ -25,16 +25,6 @@ public class Concesionario {
     public Scanner sc = new Scanner(System.in);
 
     public Concesionario() {
-        /*String x = "hola";
-        Quad temp = new Quad(x, 35, 1000, x, x);
-        System.out.println(temp.precioventa);
-        Coche temp1 = new Coche(x, 35, 5350, x, x);
-        System.out.println(temp1.precioventa);
-        Moto temp2 = new Moto(x, 35, 2672.5f, x, x);
-        System.out.println(temp2.precioventa);
-        Bicicleta temp3 = new Bicicleta(80.8f, x, x);
-        System.out.println(temp3.precioventa);*/
-
         stock.add(new Coche("SDRG54", 5000, 10000, "Rojo", "Mustang"));
         stock.add(new Moto("ZDGFRDFHG23", 1003, 2087, "Negro", "Vespa"));
         stock.add(new Quad("BVLJHY87", 767, 300, "Rojo", "Marca de Quad"));
