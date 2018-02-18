@@ -105,7 +105,7 @@ public class Concesionario {
                 numdemarchas *= -1;
             }
             System.out.print("Tipo de cambio: ");
-            System.out.println("1.-Manual"
+            System.out.println("\n1.-Manual"
                     + "\n2.-Automático");
             opcion = sc.nextInt();
             sc.nextLine();
@@ -114,7 +114,7 @@ public class Concesionario {
             } else if (opcion == 2) {
                 tipodecambio = "Automático";
             } else {
-                System.out.println("Has introducido un número no válido\nEscríbelo tú");
+                System.out.println("Has introducido un número no válido\nEscríbelo tú el tipo de cambio");
                 tipodecambio = sc.next();
             }
 
@@ -188,7 +188,7 @@ public class Concesionario {
         if (precio < stock.get(opcion).precioventa) {
             System.out.println("No puedes venerlo a ese precio, tiene que ser igual o mayor a " + stock.get(opcion).precioventa);
         } else {
-            System.out.println("Has vendido el vehículo " + stock.get(opcion).toString() + " por " + stock.get(opcion).precioventa);
+            System.out.println("Has vendido el vehículo " + stock.get(opcion).toString() + " por " + stock.get(opcion).precioventa + "\n");
             stock.get(opcion).precioventa = precio;
             vendidos.add(stock.get(opcion));
             stock.remove(opcion);
