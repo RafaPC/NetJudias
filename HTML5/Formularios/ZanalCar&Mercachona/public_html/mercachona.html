@@ -30,9 +30,7 @@ and open the template in the editor.
                             <input id="name" type="text" name="name" class="validate">
                             <label for="app">Nombre</label>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s3">
+                        <div class="input-field offset-s1 col s3">
                             <input id="surname" type="text" name="surname" class="validate">
                             <label for="app">Apellidos</label>
                         </div>
@@ -42,8 +40,6 @@ and open the template in the editor.
                             <input id="dni" type="text" name="dni" class="validate">
                             <label for="app">DNI</label>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="input-field col s3">
                             <input id="direction" type="text" name="direction" class="validate">
                             <label for="app">Dirección</label>
@@ -54,9 +50,7 @@ and open the template in the editor.
                             <input id="phone" type="text" name="phone" class="validate">
                             <label for="app">Teléfono</label>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s2">
+                        <div class="input-field offset-s1 col s2">
                             <input id="color" type="text" name="color" class="validate">
                             <label for="app">Color del uniforme</label>
                         </div>
@@ -72,16 +66,18 @@ and open the template in the editor.
                             <input type="text" name="birthday" class="datepicker">
                         </div>
                     </div>
-                    <p>Turno deseado</p>
-                    <input name="turn" type="radio" id="morning" />
-                    <label for="morning">Mañana</label>
-                    <input name="turn" type="radio" id="evening" />
-                    <label for="evening">Tarde</label>
-                    <input name="turn" type="radio" id="night"  />
-                    <label for="night">Noche</label>
+                    <div class="row">
+                        <p>Turno deseado</p>
+                        <input name="turn" type="radio" id="morning" />
+                        <label for="morning">Mañana</label>
+                        <input name="turn" type="radio" id="evening" />
+                        <label for="evening">Tarde</label>
+                        <input name="turn" type="radio" id="night"  />
+                        <label for="night">Noche</label>
+                    </div>
                     <div class="row">
                         <div class="input-field col s2">
-                            <select id="country"  name="country">
+                            <select id="puesto"  name="puesto">
                                 <option value="" disabled selected>Elige el puesto</option>
                                 <option value="reponedora">Reponedora</option>
                                 <option value="cajera">Cajera</option>
@@ -100,12 +96,15 @@ and open the template in the editor.
                         </div>
                     </div>
                     <div class="row">
-                        <p>Entiende la <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" >política de empresa</a></p>
+                        <p><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Política de empresa</a></p>
                         <p>    
                             <input type="checkbox" id="policy" />
                             <label for="policy">Entiende la política de empresa</label>
                         </p>
                     </div>
+                    <button class="btn waves-effect waves-light" type="submit" >Submit
+                        <i class="material-icons right">send</i>
+                    </button>
                 </div>
             </div>
         </form>
