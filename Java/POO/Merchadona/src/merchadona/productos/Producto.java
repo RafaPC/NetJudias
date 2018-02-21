@@ -12,9 +12,20 @@ package merchadona.productos;
 public class Producto {
     public float preciobase;
     public int stock;
+    public String nombre;
 
-    public Producto(float preciobase, int stock) {
+    public Producto(float preciobase, int stock, String nombre) {
         this.preciobase = preciobase;
         this.stock = stock;
+        this.nombre = nombre;
+    }   
+
+    @Override
+    public String toString() {
+        return nombre + "\nCantidad en stock: " + stock + "\n";
+    }
+
+    public void sumarStock(int cantidad) {
+        this.stock += cantidad;
     }
 }

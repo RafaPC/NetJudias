@@ -5,17 +5,23 @@
  */
 package merchadona.empleados;
 
+import merchadona.Merchadona;
+
 /**
  *
  * @author daw
  */
-public class Reponedor extends Empleado{
-    public int numProductosRepuestos; 
+public class Reponedor extends Empleado {
+
+    public int numProductosRepuestos;
 
     public Reponedor(String nombre, int id) {
         super(nombre, id);
         this.numProductosRepuestos = 0;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Puesto: Reponedor/a" + "\nNombre: " + nombre + "\nID: " + id;
+    }
 }

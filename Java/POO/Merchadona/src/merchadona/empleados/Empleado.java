@@ -17,4 +17,9 @@ public abstract class Empleado {
     }
     public String nombre;
     public int id;
+
+    @Override
+    public String toString() {
+        return nombre + "ID: " + id;
+    }
 }

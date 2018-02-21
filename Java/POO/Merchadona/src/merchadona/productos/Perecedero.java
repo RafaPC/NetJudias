@@ -11,14 +11,21 @@ import java.time.LocalDate;
  *
  * @author daw
  */
-public class Perecedero extends Producto{
+public class Perecedero extends Producto {
+
     public LocalDate fechaReposicion;
 
-    public Perecedero(LocalDate fechaReposicion, float preciobase, int stock) {
-        super(preciobase, stock);
+    public Perecedero(LocalDate fechaReposicion, float preciobase, int stock, String nombre) {
+        super(preciobase, stock, nombre);
         this.fechaReposicion = fechaReposicion;
     }
 
-   
+    @Override
+    public String toString() {
+        return nombre + "\nCantidad en stock: " + stock + "\nCaduca en: " + fechaReposicion + "\n";
+    }
 
+    public void bajaPrecio() {
+        
+    }
 }

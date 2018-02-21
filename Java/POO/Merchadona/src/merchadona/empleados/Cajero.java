@@ -13,10 +13,14 @@ public class Cajero extends Empleado {
 
     public int preciototal;
 
-    public Cajero(String nombre, int id) {
+    public Cajero(String nombre, int id, int preciototal) {
         super(nombre, id);
-        this.preciototal = 0;
+        this.preciototal = preciototal;
     }
 
-    
+    @Override
+    public String toString() {
+        return  "\nNombre: " + nombre + "\nID: " + id + "\nDinero recaudado: " + preciototal;
+    }
+ 
 }

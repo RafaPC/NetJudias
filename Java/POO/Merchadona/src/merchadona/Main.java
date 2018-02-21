@@ -24,47 +24,70 @@ public class Main {
         int opcion = 0;
         int tipo = 0;
         do {
+            //Menú principal cuando no estás logueado
+            //Solo puedes elegir loguearte
             if (tipo == 0) {
-                System.out.println(estrines.menu);
+                System.out.println(estrines.menu0);
                 opcion = sc.nextInt();
                 sc.nextLine();
                 switch (opcion) {
                     case 1:
-                        tipo = merchadona.log();
-                        break;
-                    case 2:
-                        merchadona.darDeAlta();
-                        break;
-                    case 3:
-                        merchadona.darDeBaja();
+                        tipo = merchadona.login();
                         break;
                 }
             } else if (tipo == 1) {
-                System.out.println("funciones de cajero");
-            System.out.println("f1.- funcion 1"
-                        + "\n2.- funcion2"
-                        + "\n3.- Deslog");
+                //Menú de admin, puede dar de alta y baja y esas cosas
+                System.out.println(estrines.menuadmin);
                 opcion = sc.nextInt();
                 sc.nextLine();
                 switch (opcion) {
+                    case 1:
+                        merchadona.darDeAlta();
+                        break;
+                    case 2:
+                        merchadona.darDeBaja();
+                        break;
                     case 3:
-                        merchadona.deslog();
+                        merchadona.logout();
+                        break;
+                    case 4:
+                        merchadona.listaCajeras();
+                        break;
+                    case 5:
+                        tipo = merchadona.logout();
                         break;
                 }
             } else if (tipo == 2) {
-                System.out.println("f1.- funcion 1"
-                        + "\n2.- funcion2"
-                        + "\n3.- Deslog");
+                //
+                System.out.println(estrines.menucajero);
                 opcion = sc.nextInt();
                 sc.nextLine();
                 switch (opcion) {
+                    case 1:
+                        merchadona.venderProductos();
+                        break;
+                    case 2:
+                        tipo = merchadona.logout();
+                        break;
+                }
+            } else {
+                System.out.println(estrines.menureponedor);
+                opcion = sc.nextInt();
+                sc.nextLine();
+                switch (opcion) {
+                    case 1:
+                        merchadona.reponerProducto();
+                        break;
+                    case 2:
+                        merchadona.listaProductos();
+                        break;
                     case 3:
-                        merchadona.deslog();
+                        tipo = merchadona.logout();
                         break;
                 }
             }
 
-        } while (opcion != 10000);
+        } while (opcion != 8);
 
     }
 
