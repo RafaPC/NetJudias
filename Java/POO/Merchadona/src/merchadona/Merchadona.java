@@ -33,8 +33,8 @@ public class Merchadona {
         empleados.put(2896, new Cajero("Happy", 2896, 0));
         empleados.put(7203, new Cajero("HappySon", 7203, 0));
         empleados.put(1102, new Reponedor("HappyDaughter", 1102));
-        empleados.put(2342, new Reponedor("Happy", 2896));
-        stock.add(new Perecedero(LocalDate.of(2018, 1, 10), 19.99f, 3, "Plátanos"));
+        empleados.put(2342, new Reponedor("HappyReponedor", 2342));
+        stock.add(new Perecedero(19.99f, 3, "Plátanos"));
         stock.add(new Producto(7.99f, 25, "Papel higiénico"));
         stock.add(new Producto(6.99f, 20, "Fairy"));
         int id;
@@ -107,6 +107,27 @@ public class Merchadona {
         }
     }
 
+    public void darAltaProducto(){
+        System.out.print("Nombre del producto: ");
+        String nombre = sc.next();
+        System.out.print("Precio base: ");
+        float preciobase = sc.nextFloat();
+        sc.nextLine();
+        System.out.print("Cantidad:");
+        int cantidad = sc.nextInt();
+        sc.nextLine();
+        System.out.println("¿Va a tener caducidad?"
+                + "\nSí (1)"
+                + "\nNo (2)");
+        int opcion = sc.nextInt();
+        sc.nextLine();
+        if(opcion == 2){
+            stock.add(new Producto(preciobase, cantidad, nombre));
+        }else{
+            stock.add(new Perecedero(preciobase,cantidad,nombre));
+        }
+    }
+    
     public void listaCajeras() {
         for (Empleado empleado : empleados.values()) {
             if (empleado instanceof Cajero) {
@@ -138,6 +159,9 @@ public class Merchadona {
 
     public void listaProductos() {
         stock.forEach((producto) -> {
+            if(producto instanceof Perecedero){
+                ((Perecedero) producto).bajaPrecio(stock);
+            }
             System.out.println(producto.toString());
         });
     }

@@ -48,7 +48,7 @@ public class Main {
                         merchadona.darDeBaja();
                         break;
                     case 3:
-                        merchadona.logout();
+                        merchadona.darAltaProducto();
                         break;
                     case 4:
                         merchadona.listaCajeras();

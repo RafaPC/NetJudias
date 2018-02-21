@@ -5,7 +5,11 @@
  */
 package merchadona.productos;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import merchadona.Constantes;
 
 /**
  *
@@ -13,19 +17,35 @@ import java.time.LocalDate;
  */
 public class Perecedero extends Producto {
 
-    public LocalDate fechaReposicion;
+    public LocalDateTime fechaReposicion;
+    public float preciocaducado;
 
-    public Perecedero(LocalDate fechaReposicion, float preciobase, int stock, String nombre) {
+    public Perecedero(float preciobase, int stock, String nombre) {
         super(preciobase, stock, nombre);
-        this.fechaReposicion = fechaReposicion;
+        this.fechaReposicion = LocalDateTime.now();
+        this.preciocaducado = super.preciobase;
     }
 
     @Override
     public String toString() {
-        return nombre + "\nCantidad en stock: " + stock + "\nCaduca en: " + fechaReposicion + "\n";
+        LocalDateTime time = LocalDateTime.now();
+        Duration d = Duration.between(fechaReposicion, time);
+        return nombre + "\nCantidad en stock: " + stock + "\nCaduca en: " + (60 - d.getSeconds()) + "\nPrecio unitario: " + preciocaducado;
     }
 
-    public void bajaPrecio() {
-        
+    public void bajaPrecio(ArrayList stock) {
+        LocalDateTime time = LocalDateTime.now();
+        Duration d = Duration.between(fechaReposicion, time);
+        long tiemporestante = 60 - d.getSeconds();
+        if (d.getSeconds() >= 60) {
+
+        }
+        long tiempocaducado = d.getSeconds();
+        do {
+            if (d.getSeconds() >= Constantes.NUM_SEGUNDOS_BAJA_PRECIO) {
+                preciocaducado = super.preciobase - (super.preciobase * Constantes.FACTOR_BAJA_PRECIO);
+                tiempocaducado -= 10;
+            }
+        } while (tiempocaducado >= 10);
     }
 }
