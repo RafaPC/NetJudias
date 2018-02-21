@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            crossorigin="anonymous">
+        </script>
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+                <div id="navbarNav">
+                    <div class="row">
+                        <div class="nav-item"><a class="nav-link" href="bootstrap4.html">Trabajo 1</a></div>
+                        <div class="nav-item"><a class="nav-link" href="f1107.html">Trabajo 2</a></div>
+                        <div class="nav-item"><a class="nav-link" href="idesweb.html">Trabajo 3</a></div>
+                        <div class="nav-item"><a class="nav-link" href="travelauthorizationform.html">Trabajo 4</a></div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <form action="https://www.w3schools.com/action_page.php">
+            <div class="text-primary"><h1 class="text-center">Travel Authorization Form</h1></div>
+            <div class="offset-1"><div class="border-bottom"><div class="text-primary"><h2>Section A: Client Information</h2></div></div></div>
+            <div class="row">""</div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Title:</label></div>
+                <div class="form-group col-2">
+                    <input type="text" class="form-control" name="title" id="title" aria-describedby="title" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">First name:</label></div>
+                <div class="form-group col-2">
+                    <input type="text" class="form-control" name="firstname" id="name" aria-describedby="name" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Middle initial:</label></div>
+                <div class="form-group col-1">
+                    <input type="text" class="form-control" name="middleinitial" id="secondinitial" aria-describedby="secondinitiañ" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Last name:</label></div>
+                <div class="form-group col-2">
+                    <input type="text" class="form-control" name="lastname" id="lastname" aria-describedby="lastname" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">E-mail address:</label></div>
+                <div class="form-group col-2">
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Phone number:</label></div>
+                <div class="form-group col-2">
+                    <input type="text" class="form-control" name="phone" id="phone" aria-describedby="phone" placeholder="">
+                </div>
+            </div>
+
+
+            <div class="offset-1"><div class="border-bottom"><div class="text-primary"><h2>Section B: Travel Information</h2></div></div></div>
+            <div class="row">""</div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Airline name:</label></div>
+                <div class="form-group col-2">
+                    <select name="airline" class="form-control" id="airline">
+                        <option>Select an airline</option>
+                        <option>Hombre</option>
+                        <option>Kiko</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+                <div class="offset-1 col-2"><label>Additional estimated expenses:</label></div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Destination:</label></div>
+                <div class="form-group col-2">
+                    <input type="text" class="form-control" name="destntation" id="destination" aria-describedby="destination" placeholder="">
+                </div>
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Car rental</label></div>
+                <div class="form-group col-1">
+                    <input type="text" class="form-control" name="carrental" id="carrental" aria-describedby="carrental" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Leave date:</label></div>
+                <div class="form-group col-2">
+                    <input type="date" class="form-control" name="leavedate" id="leave" aria-describedby="leave" placeholder="">
+                </div>
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Hotel</label></div>
+                <div class="form-group col-1">
+                    <input type="text" class="form-control" name="hotel" id="hotel" aria-describedby="hotel" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Return date:</label></div>
+                <div class="form-group col-2">
+                    <input type="date" class="form-control" name="returndate" id="returndate" aria-describedby="returndate" placeholder="">
+                </div>
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Meals</label></div>
+                <div class="form-group col-1">
+                    <input type="text" class="form-control" name="meals" id="meals" aria-describedby="meals" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Estimated cost:</label></div>
+                <div class="form-group col-2">
+                    <input type="text" class="form-control" name="estimatedcost" id="estimatedcost" aria-describedby="estimatedcost" placeholder="">
+                </div>
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Total estimate</label></div>
+                <div class="form-group col-1">
+                    <input type="text" class="form-control" name="totalestimate" id="totalestimate" aria-describedby="totalestimate" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-2 col-1"><label for="exampleInputEmail1">Includes </br>customer visit?</label></div> 
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="customervisit">
+                </div>
+                <div class="offset-3 col-2"><label for="exampleInputEmail1">Payment method used:</label></div>   
+            </div>
+            <div class="offset-7">
+                <div class="radio">
+                    <label><input type="radio" name="optradio" id="cash">Cash</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="optradio" id="creditcard">Credit card</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="optradio" id="check">Check</label>
+                </div>
+            </div>
+            <div>
+                <div class="input-group offset-1 col-10">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Purpose of travel</span>
+                    </div>
+                    <textarea class="form-control" name="purposeoftravel" aria-label="With textarea"></textarea>
+                </div>
+            </div>
+            <div class="row">"</div>
+            <div class="row"><div class="offset-1"><button type="submit" class="btn btn-primary">Submit</button></div></div>
+        </form>
+    </body>
+</html>

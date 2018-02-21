@@ -23,9 +23,11 @@ public class ZanalCar {
         boolean salir = false;
         do {
             System.out.println("He aquí las opciones"
-                    + "\n1.-Comprar coche"
-                    + "\n2.-Ver coches en stock"
-                    + "\n3.-Vender coche"
+                    + "\n1.-Comprar Vehículo"
+                    + "\n2.-Ver vehículo en stock"
+                    + "\n3.-Vender vehículo"
+                    + "\n4.-Facturación total"
+                    + "\n5.-Probar vehículo"
                     + "\n8.-Salir");
             int opcion = sc.nextInt();
             switch (opcion) {
@@ -38,8 +40,16 @@ public class ZanalCar {
                 case 3:
                     concesionario.venderVehiculo();
                     break;
+                case 4:
+                    concesionario.facturacion();
+                    break;
+                case 5:
+                    concesionario.probarVehiculo();
+                    break;
                 case 8:
                     salir = true;
+                default:
+                    System.out.println("Has introducido un número no válido, venga, inténtalo otra vez");
             }
 
         } while (!salir);

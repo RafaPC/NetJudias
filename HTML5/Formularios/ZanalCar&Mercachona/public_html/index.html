@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            crossorigin="anonymous">
+        </script>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    </head>
+    <body>
+        <form name="ese" method="POST" action="https://www.w3schools.com/action_page.php">
+            <div class="center-align">
+                <h4>Vehículos a motor</h4>
+                <div class="row">
+                    <div class="col s11">
+                        <div class="row">
+                            <div class="offset-s5 col s3">
+                                <p>Tipo de vehículo</p>
+                                <input name="vehicle" type="radio" id="car" />
+                                <label for="car">Coche</label>
+                                <input name="vehicle" type="radio" id="motorbike" />
+                                <label for="motorbike">Moto</label>
+                                <input name="vehicle" type="radio" id="quad"  />
+                                <label for="quad">Quad</label>
+                            </div>
+                        </div>   
+                        <div class="row">
+                            <div class="input-field offset-s5 col s3">
+                                <select id="marca"  name="marca">
+                                    <option value="" disabled selected>Elige marca</option>
+                                    <option value="marca1">Marca 1</option>
+                                    <option value="marca2">Marca 2</option>
+                                    <option value="marca3">Marca 3</option>
+                                </select>
+                                <label>Marca</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field offset-s5 col s3">
+                                <input id="color" type="text" name="color" class="validate">
+                                <label for="app">Color</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field offset-s5 col s2">
+                                <input id="price" type="text" name="price" class="validate">
+                                <label for="app">Precio</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field offset-s5 col s2">
+                                <input id="km" type="text" name="km" class="validate">
+                                <label for="app">Kilómetros</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field offset-s5 col s3">
+                                <input id="matricula" type="text" name="matricula" class="validate">
+                                <label for="app">Matrícula</label>
+                            </div>
+                        </div>
+
+                        <button class="btn waves-effect waves-light" type="submit" >Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                        </form>
+                        <form name="eso" method="POST" action="https://www.w3schools.com/action_page.php">
+                            <h4 class="center-align">BICICLETAS</h4>
+                            <div class="row">
+                                <div class="input-field offset-s5 col s3">
+                                    <select id="marcabici"  name="marcabici">
+                                        <option value="" disabled selected>Elige marca</option>
+                                        <option value="marca1">Marca 1</option>
+                                        <option value="marca2">Marca 2</option>
+                                        <option value="marca3">Marca 3</option>
+                                    </select>
+                                    <label>Marca</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field offset-s5 col s3">
+                                    <input id="color" type="text" name="color" class="validate">
+                                    <label for="app">Color</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field offset-s5 col s2">
+                                    <input id="direction" type="text" name="direction" class="validate">
+                                    <label for="app">Tamaño de rueda (pulgadas)</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field offset-s5 col s2">
+                                    <input id="postalcode" type="text" name="postalcode" class="validate">
+                                    <label for="app">Número de marchas</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="offset-s5 col s3">
+                                    <p>Tipo de cambio</p>
+                                    <input name="cambio" type="radio" id="cambio1" />
+                                    <label for="cambio1">Manual</label>
+
+                                    <input name="cambio" type="radio" id="cambio2" />
+                                    <label for="cambio2">Automático</label>
+                                </div>
+                            </div>
+                            <button class="btn waves-effect waves-light" type="submit" >Submit
+                                <i class="material-icons right">send</i>
+                            </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <script>
+                $(document).ready(function () {
+                    $('select').material_select();
+                });
+        </script>
+    </body>
+</html>

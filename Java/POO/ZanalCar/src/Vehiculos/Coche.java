@@ -15,6 +15,8 @@ public class Coche extends VehiculoaMotor {
         super(matricula, km, preciocompra, color, marca);
     }
 
-
-
+    public int prueba(int kmprueba) {
+        km += kmprueba;
+        return km;
+    }
 }
