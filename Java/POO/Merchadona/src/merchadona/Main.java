@@ -58,7 +58,6 @@ public class Main {
                         break;
                 }
             } else if (tipo == 2) {
-                //
                 System.out.println(estrines.menucajero);
                 opcion = sc.nextInt();
                 sc.nextLine();

@@ -28,4 +28,7 @@ public class Producto {
     public void sumarStock(int cantidad) {
         this.stock += cantidad;
     }
+    public void restarStock(int cantidad){
+        this.stock -= cantidad;
+    }
 }

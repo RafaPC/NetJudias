@@ -43,7 +43,7 @@ public class Merchadona {
     public int login() {
         int tipo = 0;
         System.out.println("Introduce tu ID");
-        int id = sc.nextInt();
+        id = sc.nextInt();
         if (id == Constantes.ADMIN_ID) {
             System.out.println("Te has logeado como admin");
             tipo = 1;
@@ -70,18 +70,28 @@ public class Merchadona {
 
     public void darDeAlta() {
         System.out.println(estrines.msgLogin);
-        System.out.println("Nombre:");
+        System.out.print("Nombre:");
         String nombre = sc.next();
-        System.out.println("ID:");
+        System.out.print("ID:");
         id = sc.nextInt();
         sc.nextLine();
-        System.out.println("Va a ser cajero (1) o reponedor (2)");
-        int opcion = sc.nextInt();
-        sc.nextLine();
-        if (opcion == 1) {
-            empleados.put(id, new Cajero(nombre, id, 0));
-        } else if (opcion == 2) {
-            empleados.put(id, new Reponedor(nombre, id));
+        boolean idrepetida = false;
+        for (Empleado emp : empleados.values()) {
+            if (emp.id == id) {
+                idrepetida = true;
+            }
+        }
+        if (!idrepetida) {
+            System.out.println("Va a ser cajero (1) o reponedor (2)");
+            int opcion = sc.nextInt();
+            sc.nextLine();
+            if (opcion == 1) {
+                empleados.put(id, new Cajero(nombre, id, 0));
+            } else if (opcion == 2) {
+                empleados.put(id, new Reponedor(nombre, id));
+            }
+        }else{
+            System.out.println("Ya existe un empleado con esa ID");
         }
     }
 
@@ -141,18 +151,20 @@ public class Merchadona {
                 System.out.println(i + ".- " + producto.toString());
                 i++;
             }
-            System.out.println("00.-Salir y facturar");
+            System.out.println("Escribe \"-1\" si quieres salir y facturar");
             numproducto = sc.nextInt();
             sc.nextLine();
+            if (numproducto != -1) {
+                System.out.println("¿Y qué cantidad?");
+                int cantidad = sc.nextInt();
+                sc.nextLine();
 
-            System.out.println("¿Y qué cantidad?");
-            int cantidad = sc.nextInt();
-            sc.nextLine();
-
-            Cajero temp = (Cajero) empleados.get(id);
-            temp.preciototal += cantidad * stock.get(numproducto).preciobase;
-            empleados.replace(id, new Cajero(temp.nombre, id, temp.preciototal));
-        } while (numproducto != 00);
+                Cajero temp = (Cajero) empleados.get(id);
+                temp.preciototal += cantidad * stock.get(numproducto).preciobase;
+                empleados.replace(id, new Cajero(temp.nombre, id, temp.preciototal));
+                stock.get(numproducto).restarStock(cantidad);
+            }
+        } while (numproducto != -1);
         Cajero temp = (Cajero) empleados.get(id);
         System.out.println("El precio total ahora es de " + temp.preciototal);
     }
