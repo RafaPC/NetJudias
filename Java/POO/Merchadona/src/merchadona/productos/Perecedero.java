@@ -6,7 +6,6 @@
 package merchadona.productos;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import merchadona.Constantes;
@@ -17,8 +16,8 @@ import merchadona.Constantes;
  */
 public class Perecedero extends Producto {
 
-    public LocalDateTime fechaReposicion;
-    public float preciocaducado;
+    private LocalDateTime fechaReposicion;
+    private float preciocaducado;
 
     public Perecedero(float preciobase, int stock, String nombre) {
         super(preciobase, stock, nombre);
@@ -30,22 +29,30 @@ public class Perecedero extends Producto {
     public String toString() {
         LocalDateTime time = LocalDateTime.now();
         Duration d = Duration.between(fechaReposicion, time);
-        return nombre + "\nCantidad en stock: " + stock + "\nCaduca en: " + (60 - d.getSeconds()) + "\nPrecio unitario: " + preciocaducado;
+        return nombre + "\nCantidad en stock: " + cantidad + "\nCaduca en: " + (60 - d.getSeconds()) + "\nPrecio unitario: " + preciocaducado + "\n";
     }
 
-    public void bajaPrecio(ArrayList stock) {
+    public void bajaPrecio() {
         LocalDateTime time = LocalDateTime.now();
         Duration d = Duration.between(fechaReposicion, time);
-        long tiemporestante = 60 - d.getSeconds();
-        if (d.getSeconds() >= 60) {
-
-        }
         long tiempocaducado = d.getSeconds();
-        do {
-            if (d.getSeconds() >= Constantes.NUM_SEGUNDOS_BAJA_PRECIO) {
-                preciocaducado = super.preciobase - (super.preciobase * Constantes.FACTOR_BAJA_PRECIO);
-                tiempocaducado -= 10;
-            }
-        } while (tiempocaducado >= 10);
+        if (tiempocaducado >= Constantes.NUM_SEGUNDOS_CADUCA) {
+            
+        }
+        long veces = tiempocaducado / Constantes.NUM_SEGUNDOS_BAJA_PRECIO;
+        float descuento = 0;
+        descuento += (super.preciobase * Constantes.FACTOR_BAJA_PRECIO * veces);
+        preciocaducado = super.preciobase - descuento;
+    }
+
+    public boolean comprobarCaducado() {
+        boolean caducado = false;
+        LocalDateTime time = LocalDateTime.now();
+        Duration d = Duration.between(fechaReposicion, time);
+        long tiempocaducado = d.getSeconds();
+        if (tiempocaducado >= Constantes.NUM_SEGUNDOS_CADUCA) {
+            caducado = true;
+        }
+        return caducado;
     }
 }
