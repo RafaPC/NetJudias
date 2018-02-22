@@ -22,7 +22,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return nombre + "\nCantidad en stock: " + cantidad + "\nPrecio unitario: " + preciobase;
+        return nombre + "\nCantidad en stock: " + cantidad + "\nPrecio unitario: " + preciobase + "\n";
     }
 
     public void sumarStock(int cantidad) {

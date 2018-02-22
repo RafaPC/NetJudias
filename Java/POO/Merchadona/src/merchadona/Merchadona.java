@@ -34,9 +34,14 @@ public class Merchadona {
         empleados.put(7203, new Cajero("HappySon", 7203, 0));
         empleados.put(1102, new Reponedor("HappyDaughter", 1102));
         empleados.put(2342, new Reponedor("HappyReponedor", 2342));
-        stock.add(new Perecedero(19.99f, 3, "Plátanos"));
-        stock.add(new Producto(7.99f, 25, "Papel higiénico"));
+        stock.add(new Perecedero(2.99f, 8, "Plátanos"));
+        stock.add(new Perecedero(19.99f, 6, "Aceite de girasol virgen super mega extra"));
+        stock.add(new Perecedero(2.99f, 10, "Manzanas"));
+        stock.add(new Producto(7.99f, 25, "Papel del culo"));
         stock.add(new Producto(6.99f, 20, "Fairy"));
+        stock.add(new Producto(9.99f, 7, "Whisky"));
+        stock.add(new Producto(4.99f, 20, "Nuka-Cola Quantum"));
+
         int id;
     }
 
@@ -194,6 +199,7 @@ public class Merchadona {
                 System.out.println(i + ".- " + producto.toString());
                 i++;
             }
+            System.out.println("¿Qué producto quieres vender?");
             System.out.println("Escribe \"-1\" si quieres salir y facturar");
             numproducto = sc.nextInt();
             sc.nextLine();
@@ -201,29 +207,30 @@ public class Merchadona {
 
             if (stock.get(numproducto).cantidad == 0) {
                 System.out.println("No puedes comprar ese producto porque ya no hay en stock");
-            }
-            if (stock.get(numproducto) instanceof Perecedero) {
-                caducado = ((Perecedero) stock.get(numproducto)).comprobarCaducado();
-            }
-            if (caducado) {
-                System.out.println("No puedes comprar ese producto porque está caducado"
-                        + "\nSi tantas ganas tienes de venderlo primero deberás reponerlo para que se recupere mágicamente");
             } else {
+                if (stock.get(numproducto) instanceof Perecedero) {
+                    caducado = ((Perecedero) stock.get(numproducto)).comprobarCaducado();
+                }
+                if (caducado) {
+                    System.out.println("No puedes comprar " + stock.get(numproducto).nombre + "porque está caducado"
+                            + "\nSi tantas ganas tienes de venderlo primero deberás reponerlo para que se recupere mágicamente");
+                } else {
 
-                if (numproducto != -1) {
-                    System.out.println("¿Y qué cantidad?");
-                    int cantidad = sc.nextInt();
-                    sc.nextLine();
-                    //Por si se quieren vender más unidades de un producto de las que tiene
-                    //Se venden las máximas que tiene
-                    if (cantidad > stock.get(numproducto).cantidad) {
-                        System.out.println("Solo puedes comprar " + stock.get(numproducto).cantidad + " unidades de ese producto, ya que no quedan más");
-                        cantidad = stock.get(numproducto).cantidad;
+                    if (numproducto != -1) {
+                        System.out.println("¿Y qué cantidad?");
+                        int cantidad = sc.nextInt();
+                        sc.nextLine();
+                        //Por si se quieren vender más unidades de un producto de las que tiene
+                        //Se venden las máximas que tiene
+                        if (cantidad > stock.get(numproducto).cantidad) {
+                            System.out.println("Solo puedes comprar " + stock.get(numproducto).cantidad + " unidades de ese producto, ya que no quedan más");
+                            cantidad = stock.get(numproducto).cantidad;
+                        }
+                        Cajero temp = (Cajero) empleados.get(id);
+                        temp.preciototal += cantidad * stock.get(numproducto).preciobase;
+                        empleados.replace(id, new Cajero(temp.nombre, id, temp.preciototal));
+                        stock.get(numproducto).restarStock(cantidad);
                     }
-                    Cajero temp = (Cajero) empleados.get(id);
-                    temp.preciototal += cantidad * stock.get(numproducto).preciobase;
-                    empleados.replace(id, new Cajero(temp.nombre, id, temp.preciototal));
-                    stock.get(numproducto).restarStock(cantidad);
                 }
             }
         } while (numproducto != -1);

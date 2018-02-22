@@ -29,20 +29,29 @@ public class Perecedero extends Producto {
     public String toString() {
         LocalDateTime time = LocalDateTime.now();
         Duration d = Duration.between(fechaReposicion, time);
-        return nombre + "\nCantidad en stock: " + cantidad + "\nCaduca en: " + (60 - d.getSeconds()) + "\nPrecio unitario: " + preciocaducado + "\n";
+        long tiempo = (60 - d.getSeconds());
+        String caducidad = "Estado: ";
+        if (d.getSeconds() >= Constantes.NUM_SEGUNDOS_CADUCA) {
+            caducidad += "Caducado";
+        } else {
+            caducidad += "Caduca en " + Long.toString(tiempo);
+        }
+
+        return nombre + "\nCantidad en stock: " + cantidad + "\n" + caducidad + "\nPrecio unitario: " + preciocaducado + "\n";
     }
 
     public void bajaPrecio() {
         LocalDateTime time = LocalDateTime.now();
         Duration d = Duration.between(fechaReposicion, time);
         long tiempocaducado = d.getSeconds();
-        if (tiempocaducado >= Constantes.NUM_SEGUNDOS_CADUCA) {
-            
-        }
+
         long veces = tiempocaducado / Constantes.NUM_SEGUNDOS_BAJA_PRECIO;
-        float descuento = 0;
-        descuento += (super.preciobase * Constantes.FACTOR_BAJA_PRECIO * veces);
-        preciocaducado = super.preciobase - descuento;
+
+        if (d.getSeconds() >= 10 || d.getSeconds() < 60) {
+            float descuento = 0;
+            descuento += (super.preciobase * Constantes.FACTOR_BAJA_PRECIO * veces);
+            preciocaducado = super.preciobase - descuento;
+        }
     }
 
     public boolean comprobarCaducado() {
