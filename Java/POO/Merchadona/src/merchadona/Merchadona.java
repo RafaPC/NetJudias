@@ -22,7 +22,7 @@ import merchadona.productos.Producto;
  */
 public class Merchadona {
 
-    public Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
     Estrines estrines = new Estrines();
     private Map<Integer, Empleado> empleados = new LinkedHashMap<>();
     private ArrayList<Producto> stock = new ArrayList<>();
@@ -189,6 +189,8 @@ public class Merchadona {
 
     public void venderProductos() {
         int numproducto = 0;
+        int cantidad = 0;
+        float preciocompra = 0;
         do {
             System.out.println("¿Qué producto quieres vender?");
             int i = 0;
@@ -205,20 +207,22 @@ public class Merchadona {
             sc.nextLine();
             boolean caducado = false;
 
-            if (stock.get(numproducto).cantidad == 0) {
-                System.out.println("No puedes comprar ese producto porque ya no hay en stock");
-            } else {
-                if (stock.get(numproducto) instanceof Perecedero) {
-                    caducado = ((Perecedero) stock.get(numproducto)).comprobarCaducado();
-                }
-                if (caducado) {
-                    System.out.println("No puedes comprar " + stock.get(numproducto).nombre + "porque está caducado"
-                            + "\nSi tantas ganas tienes de venderlo primero deberás reponerlo para que se recupere mágicamente");
-                } else {
+            if (numproducto == -1) {
 
-                    if (numproducto != -1) {
+            } else {
+                if (stock.get(numproducto).cantidad == 0) {
+                    System.out.println("No puedes comprar ese producto porque ya no hay en stock");
+                } else {
+                    if (stock.get(numproducto) instanceof Perecedero) {
+                        caducado = ((Perecedero) stock.get(numproducto)).comprobarCaducado();
+                    }
+                    if (caducado) {
+                        System.out.println("No puedes comprar " + stock.get(numproducto).nombre + "porque está caducado"
+                                + "\nSi tantas ganas tienes de venderlo primero deberás reponerlo para que se recupere mágicamente");
+                    } else {
+
                         System.out.println("¿Y qué cantidad?");
-                        int cantidad = sc.nextInt();
+                        cantidad = sc.nextInt();
                         sc.nextLine();
                         //Por si se quieren vender más unidades de un producto de las que tiene
                         //Se venden las máximas que tiene
@@ -226,15 +230,18 @@ public class Merchadona {
                             System.out.println("Solo puedes comprar " + stock.get(numproducto).cantidad + " unidades de ese producto, ya que no quedan más");
                             cantidad = stock.get(numproducto).cantidad;
                         }
-                        Cajero temp = (Cajero) empleados.get(id);
-                        temp.preciototal += cantidad * stock.get(numproducto).preciobase;
-                        empleados.replace(id, new Cajero(temp.nombre, id, temp.preciototal));
+
+                        preciocompra += cantidad * stock.get(numproducto).preciobase;
                         stock.get(numproducto).restarStock(cantidad);
                     }
+
                 }
             }
         } while (numproducto != -1);
+        System.out.println("La compra ha sido de " + preciocompra + " euros");
         Cajero temp = (Cajero) empleados.get(id);
+        temp.preciototal += preciocompra;
+        empleados.replace(id, new Cajero(temp.nombre, id, temp.preciototal));
         System.out.println("El precio total ahora es de " + temp.preciototal);
 
     }

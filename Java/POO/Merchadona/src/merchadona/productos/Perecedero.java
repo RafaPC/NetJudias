@@ -46,7 +46,9 @@ public class Perecedero extends Producto {
         long tiempocaducado = d.getSeconds();
 
         long veces = tiempocaducado / Constantes.NUM_SEGUNDOS_BAJA_PRECIO;
-
+        if (veces >= 6) {
+            veces = 5;
+        }
         if (d.getSeconds() >= 10 || d.getSeconds() < 60) {
             float descuento = 0;
             descuento += (super.preciobase * Constantes.FACTOR_BAJA_PRECIO * veces);
