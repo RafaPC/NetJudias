@@ -5,7 +5,7 @@
  */
 package merchadona;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -117,7 +117,7 @@ public class Merchadona {
         String nombre = sc.next();
         boolean repetido = false;
         for (Producto producto : stock) {
-            if (producto.nombre.equalsIgnoreCase(nombre)) {
+            if (producto.getNombre().equalsIgnoreCase(nombre)) {
                 repetido = true;
             }
         }
@@ -169,12 +169,14 @@ public class Merchadona {
         sc.nextLine();
 
         if (stock.get(producto) instanceof Perecedero) {
-            stock.set(producto, new Perecedero(stock.get(producto).preciobase, stock.get(producto).cantidad + cantidad, stock.get(producto).nombre));
+            stock.get(producto).setCantidad(stock.get(producto).getCantidad()+cantidad);
+            ((Perecedero)stock.get(producto)).setFechaReposicion(LocalDateTime.now());
+            //stock.set(producto, new Perecedero(stsock.get(producto).getPreciobase(), stock.get(producto).getCantidad() + cantidad, stock.get(producto).getNombre()));
         } else {
             stock.get(producto).sumarStock(cantidad);
         }
         if (stock.get(producto) instanceof Perecedero) {
-            System.out.println("Has roto las leyes de la física y has hecho volver esos " + stock.get(producto).nombre + " al pasado y han recuperado su frescura");
+            System.out.println("Has roto las leyes de la física y has hecho volver esos " + stock.get(producto).getNombre() + " al pasado y han recuperado su frescura");
         }
     }
 
@@ -210,14 +212,14 @@ public class Merchadona {
             if (numproducto == -1) {
 
             } else {
-                if (stock.get(numproducto).cantidad == 0) {
+                if (stock.get(numproducto).getCantidad() == 0) {
                     System.out.println("No puedes comprar ese producto porque ya no hay en stock");
                 } else {
                     if (stock.get(numproducto) instanceof Perecedero) {
                         caducado = ((Perecedero) stock.get(numproducto)).comprobarCaducado();
                     }
                     if (caducado) {
-                        System.out.println("No puedes comprar " + stock.get(numproducto).nombre + "porque está caducado"
+                        System.out.println("No puedes comprar " + stock.get(numproducto).getNombre() + "porque está caducado"
                                 + "\nSi tantas ganas tienes de venderlo primero deberás reponerlo para que se recupere mágicamente");
                     } else {
 
@@ -226,12 +228,12 @@ public class Merchadona {
                         sc.nextLine();
                         //Por si se quieren vender más unidades de un producto de las que tiene
                         //Se venden las máximas que tiene
-                        if (cantidad > stock.get(numproducto).cantidad) {
-                            System.out.println("Solo puedes comprar " + stock.get(numproducto).cantidad + " unidades de ese producto, ya que no quedan más");
-                            cantidad = stock.get(numproducto).cantidad;
+                        if (cantidad > stock.get(numproducto).getCantidad()) {
+                            System.out.println("Solo puedes comprar " + stock.get(numproducto).getCantidad() + " unidades de ese producto, ya que no quedan más");
+                            cantidad = stock.get(numproducto).getCantidad();
                         }
 
-                        preciocompra += cantidad * stock.get(numproducto).preciobase;
+                        preciocompra += cantidad * stock.get(numproducto).getPreciobase();
                         stock.get(numproducto).restarStock(cantidad);
                     }
 
@@ -240,9 +242,9 @@ public class Merchadona {
         } while (numproducto != -1);
         System.out.println("La compra ha sido de " + preciocompra + " euros");
         Cajero temp = (Cajero) empleados.get(id);
-        temp.preciototal += preciocompra;
-        empleados.replace(id, new Cajero(temp.nombre, id, temp.preciototal));
-        System.out.println("El precio total ahora es de " + temp.preciototal);
+        temp.setPreciototal(temp.getPreciototal() + preciocompra); 
+        empleados.replace(id, new Cajero(temp.nombre, id, temp.getPreciototal()));
+        System.out.println("El precio total ahora es de " + temp.getPreciototal());
 
     }
 }

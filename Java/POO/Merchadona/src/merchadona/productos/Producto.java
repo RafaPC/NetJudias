@@ -10,9 +10,33 @@ package merchadona.productos;
  * @author daw
  */
 public class Producto {
-    public float preciobase;
-    public int cantidad;
-    public String nombre;
+    private float preciobase;
+    private int cantidad;
+    private String nombre;
+
+    public float getPreciobase() {
+        return preciobase;
+    }
+
+    public void setPreciobase(float preciobase) {
+        this.preciobase = preciobase;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     public Producto(float preciobase, int stock, String nombre) {
         this.preciobase = preciobase;

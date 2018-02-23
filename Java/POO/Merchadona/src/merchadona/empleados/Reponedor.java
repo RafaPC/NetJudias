@@ -5,15 +5,13 @@
  */
 package merchadona.empleados;
 
-import merchadona.Merchadona;
-
 /**
  *
  * @author daw
  */
 public class Reponedor extends Empleado {
 
-    public int numProductosRepuestos;
+    private int numProductosRepuestos;
 
     public Reponedor(String nombre, int id) {
         super(nombre, id);

@@ -11,9 +11,17 @@ package merchadona.empleados;
  */
 public class Cajero extends Empleado {
 
-    public int preciototal;
+    private float preciototal;
 
-    public Cajero(String nombre, int id, int preciototal) {
+    public float getPreciototal() {
+        return preciototal;
+    }
+
+    public void setPreciototal(float preciototal) {
+        this.preciototal = preciototal;
+    }
+
+    public Cajero(String nombre, int id, float preciototal) {
         super(nombre, id);
         this.preciototal = preciototal;
     }
