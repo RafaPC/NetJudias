@@ -28,7 +28,7 @@ public class Cajero extends Empleado {
 
     @Override
     public String toString() {
-        return  "\nNombre: " + nombre + "\nID: " + id + "\nDinero recaudado: " + preciototal;
+        return  "\nNombre: " + super.getNombre() + "\nID: " + super.getId() + "\nDinero recaudado: " + preciototal;
     }
  
 }

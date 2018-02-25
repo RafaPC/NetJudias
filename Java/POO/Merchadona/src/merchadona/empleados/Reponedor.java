@@ -20,6 +20,6 @@ public class Reponedor extends Empleado {
 
     @Override
     public String toString() {
-        return "Puesto: Reponedor/a" + "\nNombre: " + nombre + "\nID: " + id;
+        return "Puesto: Reponedor/a" + "\nNombre: " + super.getNombre() + "\nID: " + super.getId();
     }
 }

@@ -15,8 +15,16 @@ public abstract class Empleado {
         this.nombre = nombre;
         this.id = id;
     }
-    public String nombre;
-    public int id;
+    private String nombre;
+    private int id;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     @Override
     public String toString() {

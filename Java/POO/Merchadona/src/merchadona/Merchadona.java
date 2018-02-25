@@ -56,11 +56,11 @@ public class Merchadona {
             System.out.println("No existe ningún empleado con ese ID");
         } else {
             if (empleados.get(id) instanceof Cajero) {
-                System.out.println("Te has logeado como\n" + empleados.get(id).nombre + "\nPuesto: Cajero");
+                System.out.println("Te has logeado como\n" + empleados.get(id).getNombre() + "\nPuesto: Cajero");
                 tipo = 2;
             }
             if (empleados.get(id) instanceof Reponedor) {
-                System.out.println("Te has logeado como\n" + empleados.get(id).nombre + "\nPuesto: Reponedor");
+                System.out.println("Te has logeado como\n" + empleados.get(id).getNombre() + "\nPuesto: Reponedor");
                 tipo = 3;
             }
         }
@@ -82,7 +82,7 @@ public class Merchadona {
         sc.nextLine();
         boolean idrepetida = false;
         for (Empleado emp : empleados.values()) {
-            if (emp.id == id) {
+            if (emp.getId() == id) {
                 idrepetida = true;
             }
         }
@@ -243,7 +243,7 @@ public class Merchadona {
         System.out.println("La compra ha sido de " + preciocompra + " euros");
         Cajero temp = (Cajero) empleados.get(id);
         temp.setPreciototal(temp.getPreciototal() + preciocompra); 
-        empleados.replace(id, new Cajero(temp.nombre, id, temp.getPreciototal()));
+        empleados.replace(id, new Cajero(temp.getNombre(), id, temp.getPreciototal()));
         System.out.println("El precio total ahora es de " + temp.getPreciototal());
 
     }
