@@ -5,7 +5,7 @@
  */
 package ohmygueim;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import ohmygueim.Clientes.Gamer;
 
@@ -15,15 +15,17 @@ import ohmygueim.Clientes.Gamer;
  */
 public class Campeonato {
 
-    private LocalDateTime dia;
+    private LocalDate dia;
     private String juego;
-    private ArrayList<Gamer> clientes;
+    private ArrayList <Gamer> clientes = new ArrayList <>();
     private String premio;
 
-    public Campeonato(LocalDateTime dia, String juego, ArrayList<Gamer> clientes, String premio) {
+    public Campeonato(LocalDate dia, String juego, String premio) {
         this.dia = dia;
         this.juego = juego;
-        this.clientes = clientes;
         this.premio = premio;
+    }
+    public void addJugador(Gamer jugador){
+        clientes.add(jugador);
     }
 }

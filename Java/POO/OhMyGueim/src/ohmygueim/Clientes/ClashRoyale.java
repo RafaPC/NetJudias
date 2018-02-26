@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class ClashRoyale extends Gamer {
 
-    private ArrayList<Carta> mazo;
+    private ArrayList <Carta> mazo = new ArrayList<>();
 
     public ClashRoyale(int ranking, String nombre, int numtorneos) {
         super(ranking, nombre, numtorneos);

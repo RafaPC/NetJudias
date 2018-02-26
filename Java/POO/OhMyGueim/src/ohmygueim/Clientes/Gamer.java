@@ -16,18 +16,13 @@ public abstract class Gamer {
     private int ranking;
     private String nombre;
     private int numtorneos;
-    private ArrayList<String> trofeos;
+    private ArrayList <String> trofeos = new ArrayList<>();
 
     public Gamer(int ranking, String nombre, int numtorneos) {
         this.ranking = ranking;
         this.nombre = nombre;
         this.numtorneos = numtorneos;
     }
-
-    /*public Gamer(){
-        ArrayList <String> trofeos = new ArrayList<>();
-    }*/
-
     public void addTrofeo(String trofeo) {
         trofeos.add(trofeo);
     }
