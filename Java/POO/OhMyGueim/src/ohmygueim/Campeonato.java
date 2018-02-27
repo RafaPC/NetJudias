@@ -15,17 +15,22 @@ import ohmygueim.Clientes.Gamer;
  */
 public class Campeonato {
 
-    private LocalDate dia;
+    private LocalDate fecha;
     private String juego;
     private ArrayList <Gamer> clientes = new ArrayList <>();
     private String premio;
 
-    public Campeonato(LocalDate dia, String juego, String premio) {
-        this.dia = dia;
+    public Campeonato(LocalDate fecha, String juego, String premio) {
+        this.fecha = fecha;
         this.juego = juego;
         this.premio = premio;
     }
     public void addJugador(Gamer jugador){
         clientes.add(jugador);
     }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
 }
