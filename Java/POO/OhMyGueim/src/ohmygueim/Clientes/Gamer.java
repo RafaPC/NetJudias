@@ -26,4 +26,9 @@ public abstract class Gamer {
     public void addTrofeo(String trofeo) {
         trofeos.add(trofeo);
     }
+
+    @Override
+    public String toString() {
+        return "Gamer{" + "ranking=" + ranking + ", nombre=" + nombre + ", numtorneos=" + numtorneos + ", trofeos=" + trofeos + '}';
+    }
 }

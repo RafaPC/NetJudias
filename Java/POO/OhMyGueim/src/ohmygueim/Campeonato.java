@@ -17,7 +17,7 @@ public class Campeonato {
 
     private LocalDate fecha;
     private String juego;
-    private ArrayList <Gamer> clientes = new ArrayList <>();
+    private ArrayList <Gamer> participantes = new ArrayList <>();
     private String premio;
 
     public Campeonato(LocalDate fecha, String juego, String premio) {
@@ -26,11 +26,15 @@ public class Campeonato {
         this.premio = premio;
     }
     public void addJugador(Gamer jugador){
-        clientes.add(jugador);
+        participantes.add(jugador);
     }
 
     public LocalDate getFecha() {
         return fecha;
+    }
+
+    public ArrayList<Gamer> getParticipantes() {
+        return participantes;
     }
 
 }

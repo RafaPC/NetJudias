@@ -48,17 +48,25 @@ public class OhMyGueim {
     public void crearCampeonato() {
         int dia, mes, año;
         String juego, premio;
-        System.out.println("¿Que día va a ser?");
-        System.out.print("Día: ");
-        dia = sc.nextInt();
-        sc.nextLine();
-        System.out.print("Mes: ");
-        mes = sc.nextInt();
-        sc.nextLine();
-        System.out.print("Año: ");
-        año = sc.nextInt();
-        sc.nextLine();
-        
+        boolean repetido;
+        do {
+            repetido = false;
+            System.out.println("¿Que día va a ser?");
+            System.out.print("Día: ");
+            dia = sc.nextInt();
+            sc.nextLine();
+            System.out.print("Mes: ");
+            mes = sc.nextInt();
+            sc.nextLine();
+            System.out.print("Año: ");
+            año = sc.nextInt();
+            sc.nextLine();
+            if (campeonatos.get(LocalDate.of(año, mes, dia)) != null) {
+                System.out.println("Ya existe un campeonato ese día");
+                repetido = true;
+            }
+        } while (repetido);
+
         System.out.println("¿De qué juego va a ser?");
         System.out.println("1.- CSGO"
                 + "\n2.- LOL"
@@ -83,25 +91,58 @@ public class OhMyGueim {
 
         int numjugador = 0;
         campeonatos.put(LocalDate.of(año, mes, dia), new Campeonato(LocalDate.of(año, mes, dia), juego, premio));
-
+        boolean metido;
         do {
+            metido = false;
             if (opcion == 1) {
                 for (int i = 0; i < gamers.size(); i++) {
                     if (gamers.get(i) instanceof CSGO) {
-                        System.out.println(i + ".- " + gamers.get(i).toString());
+                        if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size() > 0) {
+                            for (int j = 0; j < campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size(); j++) {
+
+                                if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().get(j).equals(gamers.get(i))) {
+                                    metido = true;
+                                }
+                            }
+                        }
+                        if (!metido) {
+                            System.out.println(i + ".- " + gamers.get(i).toString());
+                        }
                     }
                 }
             } else if (opcion == 2) {
                 for (int i = 0; i < gamers.size(); i++) {
                     if (gamers.get(i) instanceof LOL) {
-                        System.out.println(i + ".- " + gamers.get(i).toString());
+                        if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size() > 0) {
+                            for (int j = 0; j < campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size(); j++) {
+
+                                if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().get(j).equals(gamers.get(i))) {
+                                    metido = true;
+                                }
+                            }
+                        }
+                        if (!metido) {
+                            System.out.println(i + ".- " + gamers.get(i).toString());
+                        }
                     }
+
                 }
             } else if (opcion == 3) {
                 for (int i = 0; i < gamers.size(); i++) {
                     if (gamers.get(i) instanceof ClashRoyale) {
-                        System.out.println(i + ".- " + gamers.get(i).toString());
+                        if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size() > 0) {
+                            for (int j = 0; j < campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size(); j++) {
+
+                                if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().get(j).equals(gamers.get(i))) {
+                                    metido = true;
+                                }
+                            }
+                        }
+                        if (!metido) {
+                            System.out.println(i + ".- " + gamers.get(i).toString());
+                        }
                     }
+
                 }
             }
             System.out.println("¿Quién va a participar?");
