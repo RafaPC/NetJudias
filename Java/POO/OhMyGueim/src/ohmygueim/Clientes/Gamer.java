@@ -16,19 +16,24 @@ public abstract class Gamer {
     private int ranking;
     private String nombre;
     private int numtorneos;
-    private ArrayList <String> trofeos = new ArrayList<>();
+    private ArrayList<String> trofeos = new ArrayList<>();
 
     public Gamer(int ranking, String nombre, int numtorneos) {
         this.ranking = ranking;
         this.nombre = nombre;
         this.numtorneos = numtorneos;
     }
+
     public void addTrofeo(String trofeo) {
         trofeos.add(trofeo);
     }
 
     @Override
     public String toString() {
-        return "Gamer{" + "ranking=" + ranking + ", nombre=" + nombre + ", numtorneos=" + numtorneos + ", trofeos=" + trofeos + '}';
+        String tostring = "Jugador: " + nombre + "\nELO: " + ranking + "\nNº torneos jugados: " + numtorneos + "\nTrofeos: ";
+        for(String trophy : trofeos){
+            tostring += "\n" + trophy.toString();
+        }
+        return tostring;
     }
 }

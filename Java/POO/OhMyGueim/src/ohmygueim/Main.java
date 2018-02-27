@@ -5,6 +5,8 @@
  */
 package ohmygueim;
 
+import java.util.Scanner;
+
 /**
  *
  * @author daw
@@ -16,8 +18,25 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-    OhMyGueim cosa = new OhMyGueim();
-    cosa.crearCampeonato();
+        Scanner sc = new Scanner(System.in);
+        OhMyGueim cosa = new OhMyGueim();
+        int opcion;
+        do {
+            System.out.println("1.- Crear campeonato ó 2.- meter posiciones ó 3.-lista de campeonatos");
+            opcion = sc.nextInt();
+            sc.nextLine();
+            switch (opcion) {
+                case 1:
+                    cosa.crearCampeonato();
+                    break;
+                case 2:
+                    cosa.modificarPosiciones();
+                    break;
+                case 3:
+                    cosa.showCampeonatos();
+                    break;
+            }
+        } while (opcion != 8);
     }
-    
+
 }

@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import javax.sound.midi.SysexMessage;
 import ohmygueim.Clientes.CSGO;
 import ohmygueim.Clientes.ClashRoyale;
 import ohmygueim.Clientes.Gamer;
@@ -41,7 +42,18 @@ public class OhMyGueim {
         ((ClashRoyale) gamers.get(2)).addCarta("P.E.K.K.A.", 3);
         ((ClashRoyale) gamers.get(2)).addCarta("Bruja", 4);
         ((ClashRoyale) gamers.get(2)).addCarta("Arqueras", 1);
+        
+        gamers.add(new CSGO("Nube9", 567, "Dust 23", 2000, "Germansooo", 56));
+        gamers.get(0).addTrofeo("Pìston Cup of café con leche");
+        gamers.add(new CSGO("Equipo1", 567, "Mapa1", 2000, "Jugador1", 56));
+        gamers.get(0).addTrofeo("Trofeo1");
+        
+        
+        
         campeonatos.put(LocalDate.of(2018, 3, 27), new Campeonato(LocalDate.of(2018, 3, 27), "LOL", "El Mejor Premio del Mundo"));
+        campeonatos.get(LocalDate.of(2018, 3, 27)).addJugador(gamers.get(3));
+        campeonatos.get(LocalDate.of(2018, 3, 27)).addJugador(gamers.get(4));
+
 
     }
 
@@ -99,7 +111,6 @@ public class OhMyGueim {
                     if (gamers.get(i) instanceof CSGO) {
                         if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size() > 0) {
                             for (int j = 0; j < campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size(); j++) {
-
                                 if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().get(j).equals(gamers.get(i))) {
                                     metido = true;
                                 }
@@ -115,7 +126,6 @@ public class OhMyGueim {
                     if (gamers.get(i) instanceof LOL) {
                         if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size() > 0) {
                             for (int j = 0; j < campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size(); j++) {
-
                                 if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().get(j).equals(gamers.get(i))) {
                                     metido = true;
                                 }
@@ -125,14 +135,12 @@ public class OhMyGueim {
                             System.out.println(i + ".- " + gamers.get(i).toString());
                         }
                     }
-
                 }
             } else if (opcion == 3) {
                 for (int i = 0; i < gamers.size(); i++) {
                     if (gamers.get(i) instanceof ClashRoyale) {
                         if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size() > 0) {
                             for (int j = 0; j < campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size(); j++) {
-
                                 if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().get(j).equals(gamers.get(i))) {
                                     metido = true;
                                 }
@@ -142,13 +150,48 @@ public class OhMyGueim {
                             System.out.println(i + ".- " + gamers.get(i).toString());
                         }
                     }
-
                 }
             }
             System.out.println("¿Quién va a participar?");
+            System.out.println("Pulsa -1 si quieres dejar de meter jugador");
             numjugador = sc.nextInt();
             sc.nextLine();
-            campeonatos.get(LocalDate.of(año, mes, dia)).addJugador(gamers.get(numjugador));
+            if(numjugador != -1){
+                campeonatos.get(LocalDate.of(año, mes, dia)).addJugador(gamers.get(numjugador));
+            }
         } while (numjugador != -1);
+    }
+
+    public void modificarPosiciones() {
+        int dia, mes, año;
+        boolean repetido;
+        System.out.println("¿Qué campeonato quieres modificar?");
+
+        do {
+            repetido = false;
+            System.out.print("Día: ");
+            dia = sc.nextInt();
+            sc.nextLine();
+            System.out.print("Mes: ");
+            mes = sc.nextInt();
+            sc.nextLine();
+            System.out.print("Año: ");
+            año = sc.nextInt();
+            sc.nextLine();
+            if (campeonatos.get(LocalDate.of(año, mes, dia)) == null) {
+                System.out.println("No existe un campeonato ese día");
+                repetido = true;
+            }
+
+        } while (repetido);
+
+        campeonatos.get(LocalDate.of(año, mes, dia)).addPosiciones(sc);
+    }
+    
+    public void showCampeonatos(){
+        System.out.println("PENE");
+        for(Campeonato camp : campeonatos.values()){
+            System.out.println(camp.toString());
+        }
     }
 }
