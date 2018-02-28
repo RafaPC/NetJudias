@@ -18,9 +18,9 @@ public class Campeonato {
 
     private LocalDate fecha;
     private String juego;
-    private ArrayList<Gamer> participantes = new ArrayList<>();
+    //private ArrayList<Gamer> participantes = new ArrayList<>();
     private String premio;
-    private ArrayList<Posicion> posiciones = new ArrayList<>();
+    private ArrayList<Participante> participantes = new ArrayList<>();
 
     public Campeonato(LocalDate fecha, String juego, String premio) {
         this.fecha = fecha;
@@ -29,14 +29,14 @@ public class Campeonato {
     }
 
     public void addJugador(Gamer jugador) {
-        participantes.add(jugador);
+        participantes.add(new Participante(jugador));
     }
 
     public LocalDate getFecha() {
         return fecha;
     }
 
-    public ArrayList<Gamer> getParticipantes() {
+    public ArrayList<Participante> getParticipantes() {
         return participantes;
     }
 
@@ -82,28 +82,52 @@ public class Campeonato {
 
         } while (!completo);
         System.out.println("Ya has introducido todas las posiciones");*/
-        boolean completo, repetido;
-        int posicion, numparticipante;
-        do {
+        boolean completo = true, repetido;
+        int posicion = 0, numparticipante;
+        for (Participante participante : participantes) {
+            if(participante.getPosicion() == -1){
+                completo = false;
+            }
+        }
+        while (!completo) {
             completo = true;
+
             do {
                 repetido = false;
+
+                for (int i = 0; i < participantes.size(); i++) {
+                    if (-1 == participantes.get(i).getPosicion()) {
+                        System.out.println("------------------");
+                        System.out.println(i + ".- " + participantes.get(i).getPersona().toString());
+                        System.out.println("------------------");
+                    }
+                }
                 System.out.print("Participante: ");
                 numparticipante = sc.nextInt();
                 sc.nextLine();
-                System.out.print("Posición: ");
-                posicion = sc.nextInt();
-                sc.nextLine();
-                for (int i = 0; i < posiciones.length; i++) {
-                    if (posiciones[i] == posicion) {
-                        repetido = true;
-                        System.out.println("Ya existe un jugador con esa posición");
+                if (numparticipante < 0 && numparticipante > participantes.size()) {
+                    System.out.println("No existe ese participante");
+                    repetido = true;
+                } else {
+                    System.out.print("Posición: ");
+                    posicion = sc.nextInt();
+                    sc.nextLine();
+                    for (int i = 0; i < participantes.size(); i++) {
+                        if (participantes.get(i).getPosicion() == posicion) {
+                            repetido = true;
+                            System.out.println("Ya existe un jugador con esa posición");
+                        }
                     }
                 }
             } while (repetido);
-            posiciones.add(new Posicion(participantes.get(numparticipante),posicion));
-        } while (!completo);
-
+            participantes.get(numparticipante).setPosicion(posicion);
+            for (Participante person : participantes) {
+                if (-1 == person.getPosicion()) {
+                    completo = false;
+                }
+            }
+        }
+        System.out.println("Ya has asignado una posición a cada participante");
     }
 
     @Override

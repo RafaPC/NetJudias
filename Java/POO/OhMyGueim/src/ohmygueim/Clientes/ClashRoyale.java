@@ -21,4 +21,9 @@ public class ClashRoyale extends Gamer {
     public void addCarta(String nombre, int nivel){
         mazo.add(new Carta(nombre,nivel));
     }
+
+    public ArrayList<Carta> getMazo() {
+        return mazo;
+    }
+
 }

@@ -22,6 +22,15 @@ public class CSGO extends Gamer{
         this.mapafavorito = mapafavorito;
     }
 
-    
+    public String getEquipo() {
+        return equipo;
+    }
 
+    public int getNumkills() {
+        return numkills;
+    }
+
+    public String getMapafavorito() {
+        return mapafavorito;
+    }
 }

@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import javax.sound.midi.SysexMessage;
 import ohmygueim.Clientes.CSGO;
 import ohmygueim.Clientes.ClashRoyale;
 import ohmygueim.Clientes.Gamer;
@@ -28,7 +27,7 @@ public class OhMyGueim {
 
     public OhMyGueim() {
 
-        gamers.add(new CSGO("Cloud9", 567, "Dust 2", 2000, "PashaBiceps", 56));
+        gamers.add(new CSGO("Cloud9", 870, "Dust 2", 2225, "PashaBiceps", 83));
         gamers.get(0).addTrofeo("Pìston Cup");
 
         gamers.add(new LOL("Mid", "Asesino", 2300, "xPeke", 72));
@@ -44,9 +43,9 @@ public class OhMyGueim {
         ((ClashRoyale) gamers.get(2)).addCarta("Arqueras", 1);
         
         gamers.add(new CSGO("Nube9", 567, "Dust 23", 2000, "Germansooo", 56));
-        gamers.get(0).addTrofeo("Pìston Cup of café con leche");
-        gamers.add(new CSGO("Equipo1", 567, "Mapa1", 2000, "Jugador1", 56));
-        gamers.get(0).addTrofeo("Trofeo1");
+        gamers.get(3).addTrofeo("Pìston Cup of café con leche");
+        gamers.add(new CSGO("Equipo1", 100, "Mapa1", 2000, "Jugador1", 100));
+        gamers.get(4).addTrofeo("Trofeo1");
         
         
         
@@ -106,51 +105,57 @@ public class OhMyGueim {
         boolean metido;
         do {
             metido = false;
-            if (opcion == 1) {
-                for (int i = 0; i < gamers.size(); i++) {
-                    if (gamers.get(i) instanceof CSGO) {
-                        if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size() > 0) {
-                            for (int j = 0; j < campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size(); j++) {
-                                if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().get(j).equals(gamers.get(i))) {
-                                    metido = true;
+            switch (opcion) {
+                case 1:
+                    for (int i = 0; i < gamers.size(); i++) {
+                        metido = false;
+                        if (gamers.get(i) instanceof CSGO) {
+                            if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size() > 0) {
+                                for (int j = 0; j < campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size(); j++) {
+                                    if ((campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().get(j).getPersona()).equals(gamers.get(i))) {
+                                        metido = true;
+                                    }
                                 }
                             }
-                        }
-                        if (!metido) {
-                            System.out.println(i + ".- " + gamers.get(i).toString());
-                        }
-                    }
-                }
-            } else if (opcion == 2) {
-                for (int i = 0; i < gamers.size(); i++) {
-                    if (gamers.get(i) instanceof LOL) {
-                        if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size() > 0) {
-                            for (int j = 0; j < campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size(); j++) {
-                                if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().get(j).equals(gamers.get(i))) {
-                                    metido = true;
-                                }
+                            if (!metido) {
+                                System.out.println(i + ".- " + gamers.get(i).toString());
                             }
                         }
-                        if (!metido) {
-                            System.out.println(i + ".- " + gamers.get(i).toString());
-                        }
-                    }
-                }
-            } else if (opcion == 3) {
-                for (int i = 0; i < gamers.size(); i++) {
-                    if (gamers.get(i) instanceof ClashRoyale) {
-                        if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size() > 0) {
-                            for (int j = 0; j < campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size(); j++) {
-                                if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().get(j).equals(gamers.get(i))) {
-                                    metido = true;
+                    }   break;
+                case 2:
+                    for (int i = 0; i < gamers.size(); i++) {
+                        metido = false;
+                        if (gamers.get(i) instanceof LOL) {
+                            if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size() > 0) {
+                                for (int j = 0; j < campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size(); j++) {
+                                    if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().get(j).getPersona().equals(gamers.get(i))) {
+                                        metido = true;
+                                    }
                                 }
                             }
+                            if (!metido) {
+                                System.out.println(i + ".- " + gamers.get(i).toString());
+                            }
                         }
-                        if (!metido) {
-                            System.out.println(i + ".- " + gamers.get(i).toString());
+                    }   break;
+                case 3:
+                    for (int i = 0; i < gamers.size(); i++) {
+                        metido = false;
+                        if (gamers.get(i) instanceof ClashRoyale) {
+                            if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size() > 0) {
+                                for (int j = 0; j < campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size(); j++) {
+                                    if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().get(j).getPersona().equals(gamers.get(i))) {
+                                        metido = true;
+                                    }
+                                }
+                            }
+                            if (!metido) {
+                                System.out.println(i + ".- " + gamers.get(i).toString());
+                            }
                         }
-                    }
-                }
+                    }   break;
+                default:
+                    break;
             }
             System.out.println("¿Quién va a participar?");
             System.out.println("Pulsa -1 si quieres dejar de meter jugador");

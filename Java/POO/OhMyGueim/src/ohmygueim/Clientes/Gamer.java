@@ -30,10 +30,28 @@ public abstract class Gamer {
 
     @Override
     public String toString() {
-        String tostring = "Jugador: " + nombre + "\nELO: " + ranking + "\nNº torneos jugados: " + numtorneos + "\nTrofeos: ";
+        String tostring;
+        tostring = "Jugador: " + nombre + "\nELO: " + ranking + "\nNº torneos jugados: " + numtorneos + "\nTrofeos: ";
         for(String trophy : trofeos){
             tostring += "\n" + trophy.toString();
         }
         return tostring;
     }
+
+    public int getRanking() {
+        return ranking;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getNumtorneos() {
+        return numtorneos;
+    }
+
+    public ArrayList<String> getTrofeos() {
+        return trofeos;
+    }
+    
 }

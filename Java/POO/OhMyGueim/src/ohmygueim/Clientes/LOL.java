@@ -11,14 +11,20 @@ package ohmygueim.Clientes;
  */
 public class LOL extends Gamer{
 
+    private String linea;
+    private String especialidad;
+    
     public LOL(String linea, String especialidad, int ranking, String nombre, int numtorneos) {
         super(ranking, nombre, numtorneos);
         this.linea = linea;
         this.especialidad = especialidad;
     }
-    private String linea;
-    private String especialidad;
 
-    
-    
+    public String getLinea() {
+        return linea;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
 }
