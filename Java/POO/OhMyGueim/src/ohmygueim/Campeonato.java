@@ -20,7 +20,7 @@ public class Campeonato {
     private String juego;
     private ArrayList<Gamer> participantes = new ArrayList<>();
     private String premio;
-    private int posiciones[];
+    private ArrayList<Posicion> posiciones = new ArrayList<>();
 
     public Campeonato(LocalDate fecha, String juego, String premio) {
         this.fecha = fecha;
@@ -41,7 +41,7 @@ public class Campeonato {
     }
 
     public void addPosiciones(Scanner sc) {
-        posiciones = new int[participantes.size()];
+        /*posiciones = new int[participantes.size()];
         boolean completo, repetido;
         int posicion, numparticipante;
 
@@ -81,15 +81,37 @@ public class Campeonato {
             }
 
         } while (!completo);
-        System.out.println("Ya has introducido todas las posiciones");
+        System.out.println("Ya has introducido todas las posiciones");*/
+        boolean completo, repetido;
+        int posicion, numparticipante;
+        do {
+            completo = true;
+            do {
+                repetido = false;
+                System.out.print("Participante: ");
+                numparticipante = sc.nextInt();
+                sc.nextLine();
+                System.out.print("Posición: ");
+                posicion = sc.nextInt();
+                sc.nextLine();
+                for (int i = 0; i < posiciones.length; i++) {
+                    if (posiciones[i] == posicion) {
+                        repetido = true;
+                        System.out.println("Ya existe un jugador con esa posición");
+                    }
+                }
+            } while (repetido);
+            posiciones.add(new Posicion(participantes.get(numparticipante),posicion));
+        } while (!completo);
+
     }
 
     @Override
     public String toString() {
         String tostring = "Campeonato de " + juego + "\nFecha: " + fecha + "\nPremio: " + premio;
-        for (int i = 0; i < posiciones.length; i++) {
+        /*for (int i = 0; i < posiciones.length; i++) {
             tostring += "\n" + participantes.get(i).toString() + "\nPosición: " + posiciones[i];
-        }
+        }*/
         return tostring;
     }
 }
