@@ -14,63 +14,54 @@ and open the template in the editor.
                 <xs:element name="vehiculos">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="vehiculo">
-                                <xs:element name="marca"/>
-                                <xs:element name="color"/>
-                                <xs:element name="preciodeventa"/>
-                                <xs:element name="preciodecompra"/>
+                            <xs:element name="coche" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="coche">
-                                            <xs:complexType>
-                                                <xs:sequence>
-                                                    <xs:element name="matricula" type="xs:String"/>
-                                                    <xs:element name="km" type="xs:Integer"/>
-                                                    <xs:element name="preciocompra" type="xs:double"/>
-                                                    <xs:element name="precioventa" type="xs:double"/>
-                                                    <xs:element name="color" type="xs:String"/>
-                                                    <xs:element name="marca" type="xs:String"/>
-                                                </xs:sequence>
-                                            </xs:complexType>
-                                        </xs:element>
-                                        <xs:element name="moto">
-                                            <xs:complexType>
-                                                <xs:sequence>
-                                                    <xs:element name="matricula" type="xs:String"/>
-                                                    <xs:element name="km" type="xs:Integer"/>
-                                                    <xs:element name="preciocompra" type="xs:double"/>
-                                                    <xs:element name="precioventa" type="xs:double"/>
-                                                    <xs:element name="color" type="xs:String"/>
-                                                    <xs:element name="marca" type="xs:String"/>
-                                                </xs:sequence>
-                                            </xs:complexType>
-                                        </xs:element>
-                                        <xs:element name="quad">
-                                            <xs:complexType>
-                                                <xs:sequence>
-                                                    <xs:element name="matricula" type="xs:String"/>
-                                                    <xs:element name="km" type="xs:Integer"/>
-                                                    <xs:element name="preciocompra" type="xs:double"/>
-                                                    <xs:element name="precioventa" type="xs:double"/>
-                                                    <xs:element name="color" type="xs:String"/>
-                                                    <xs:element name="marca" type="xs:String"/>
-                                                </xs:sequence>
-                                            </xs:complexType>
-                                        </xs:element>
-                                        <xs:element name="bici">
-                                            <xs:complexType>
-                                                <xs:sequence>
-                                                    <xs:element name="preciocompra" type="xs:double"/>
-                                                    <xs:element name="precioventa" type="xs:double"/>
-                                                    <xs:element name="tamañoderueda" type="xs:Integer"/>
-                                                    <xs:element name="numdemarchas" type="xs:Integer"/>
-                                                    <xs:element name="color" type="xs:String"/>
-                                                    <xs:element name="marca" type="xs:String"/>
-                                                </xs:sequence>
-                                            </xs:complexType>
-                                        </xs:element>
+                                        <xs:element name="matricula" type="xs:string"/>
+                                        <xs:element name="km" type="xs:integer"/>
+                                        <xs:element name="preciocompra" type="xs:double"/>
+                                        <xs:element name="precioventa" type="xs:double"/>
+                                        <xs:element name="color" type="xs:string"/>
+                                        <xs:element name="marca" type="xs:string"/>
                                     </xs:sequence>
-                                </xs:complexType> 
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="moto" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="matricula" type="xs:string"/>
+                                        <xs:element name="km" type="xs:integer"/>
+                                        <xs:element name="preciocompra" type="xs:double"/>
+                                        <xs:element name="precioventa" type="xs:double"/>
+                                        <xs:element name="color" type="xs:string"/>
+                                        <xs:element name="marca" type="xs:string"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="quad" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="matricula" type="xs:string"/>
+                                        <xs:element name="km" type="xs:integer"/>
+                                        <xs:element name="preciocompra" type="xs:double"/>
+                                        <xs:element name="precioventa" type="xs:double"/>
+                                        <xs:element name="color" type="xs:string"/>
+                                        <xs:element name="marca" type="xs:string"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bici" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="preciocompra" type="xs:double"/>
+                                        <xs:element name="precioventa" type="xs:double"/>
+                                        <xs:element name="tamañoderueda" type="xs:integer"/>
+                                        <xs:element name="numdemarchas" type="xs:integer"/>
+                                        <xs:element name="tipodecambio" type="xs:string"/>
+                                        <xs:element name="color" type="xs:string"/>
+                                        <xs:element name="marca" type="xs:string"/>
+                                    </xs:sequence>
+                                </xs:complexType>
                             </xs:element>
                         </xs:sequence>
                     </xs:complexType>

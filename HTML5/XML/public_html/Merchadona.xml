@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<merchadona
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='Merchadona.xsd'>
+    <empleados>
+        <reponedor>
+            <nombre>juani</nombre>
+            <id>2784</id>
+            <numproductosrepuestos>18</numproductosrepuestos>
+        </reponedor>
+        <cajero>
+            <nombre>choni</nombre>
+            <id>2773</id>
+            <preciototal>304.6</preciototal>
+        </cajero>
+    </empleados>
+    <productos>
+        <producto>
+            <preciobase>7</preciobase>
+            <cantidad>20</cantidad>
+            <nombre>celofán</nombre>
+        </producto>
+        <perecedero>
+            <preciobase>7</preciobase>
+            <cantidad>20</cantidad>
+            <nombre>pan bimbo</nombre>
+            <preciocaducado>7</preciocaducado>
+            <fechareposicion>2002-09-24</fechareposicion>
+        </perecedero>
+    </productos>
+</merchadona>

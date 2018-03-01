@@ -8,48 +8,35 @@ and open the template in the editor.
 
 <biblioteca
     xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-    xsi:noNamespaceSchemaLocation='file:/home/daw/NetBeansProjects/NetJudias/HTML5/XML/public_html/Biblioteca.xsd'>
+    xsi:noNamespaceSchemaLocation='Biblioteca.xsd'>
     <usuarios>
         <usuario>
             <nombre>Kiko</nombre>
-            <numLibros>2</numLibros>
+            <numLibros>1</numLibros>
             <libro>
-                <isb>35U073IJ</isb>
-                <titulo>Ilíada</titulo>
+                <isb>KJHG9765</isb>
+                <titulo>Iliada</titulo>
                 <autor>Homero Simpson</autor>
                 <numpaginas>567</numpaginas>
-                <prestado>true</prestado>
-            </libro>
-            <libro>
-                <isb>98675HGV</isb>
-                <titulo>La Biblia</titulo>
-                <autor>Jesucristo</autor>
-                <numpaginas>666</numpaginas>
                 <prestado>true</prestado>
             </libro>
         </usuario>
     </usuarios>
     <libros>
         <libro>
-            <isb>35U073IJ</isb>
-            <titulo>Ilíada</titulo>
+            <isb>KJHG9765</isb>
+            <titulo>Iliada</titulo>
             <autor>Homero Simpson</autor>
             <numpaginas>567</numpaginas>
             <prestado>true</prestado>
         </libro>
         <libro>
-            <isb>98675HGV</isb>
-            <titulo>La Biblia</titulo>
-            <autor>Jesucristo</autor>
-            <numpaginas>666</numpaginas>
-            <prestado>true</prestado>
-        </libro>
-        <libro>
-            <isb>1765KJHV2</isb>
-            <titulo>Guía de la tele</titulo>
-            <autor>Kikazo</autor>
-            <numpaginas>23</numpaginas>
+            <isb>OIUY541</isb>
+            <titulo>Titulo1</titulo>
+            <autor>Autor1</autor>
+            <numpaginas>999</numpaginas>
             <prestado>false</prestado>
         </libro>
     </libros>
+
 </biblioteca>

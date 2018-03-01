@@ -15,15 +15,15 @@ and open the template in the editor.
             <xs:sequence>
                 <xs:element name="actividades">
                     <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="actividad">
+                        <xs:sequence>    
+                            <xs:element name="actividad" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element name="tipo" type="xs:string"/>
-                                        <xs:element name="plazaslibres" type="xs:Integer"/>
-                                        <xs:element name="plazas" type="xs:Integer"/>
+                                        <xs:element name="plazaslibres" type="xs:integer"/>
+                                        <xs:element name="plazas" type="xs:integer"/>
                                         <xs:element name="precio" type="xs:float"/>
-                                        <xs:element name="alumno">
+                                        <xs:element name="alumno" maxOccurs="unbounded">
                                             <xs:complexType>
                                                 <xs:sequence>
                                                     <xs:element name="nombre" type="xs:string"/>
@@ -36,8 +36,8 @@ and open the template in the editor.
                                             <xs:complexType>
                                                 <xs:sequence>
                                                     <xs:element name="dias" type="xs:string"/>
-                                                    <xs:element name="horacomienzo" type="xs:Integer"/>
-                                                    <xs:element name="horafinal" type="xs:Integer"/>
+                                                    <xs:element name="horacomienzo" type="xs:integer"/>
+                                                    <xs:element name="horafinal" type="xs:integer"/>
                                                 </xs:sequence>
                                             </xs:complexType>
                                         </xs:element>
@@ -47,7 +47,7 @@ and open the template in the editor.
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="alumno">
+                <xs:element name="alumno" maxOccurs="unbounded">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="nombre" type="xs:string"/>

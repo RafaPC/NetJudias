@@ -3,7 +3,7 @@
 <!--
     TODO define vocabulary identification
     PUBLIC ID: -//vendor//vocabulary//EN
-    SYSTEM ID: http://server/path/Zanalcar.dtd
+    SYSTEM ID: http://server/path/Merchadona.dtd
 
 -->
 
@@ -12,58 +12,58 @@
 
     <?xml version="1.0"?>
 
-    <!DOCTYPE zanalcar SYSTEM "Zanalcar.dtd">
+    <!DOCTYPE merchadona SYSTEM "Merchadona.dtd">
 
-    <zanalcar>
+    <merchadona>
     ...
-    </zanalcar>
+    </merchadona>
 -->
 
 <!--- Put your DTDDoc comment here. -->
-<!ELEMENT zanalcar (vehiculos)*>
-<!ATTLIST zanalcar
+<!ELEMENT merchadona (empleados|productos)*>
+<!ATTLIST merchadona
     xsi:noNamespaceSchemaLocation CDATA #IMPLIED
     xmlns:xsi CDATA #IMPLIED
   >
 
 <!--- Put your DTDDoc comment here. -->
-<!ELEMENT vehiculos (coche|moto|quad|bici)*>
+<!ELEMENT empleados (reponedor|cajero)*>
 
 <!--- Put your DTDDoc comment here. -->
-<!ELEMENT coche (matricula|km|preciocompra|precioventa|color|marca)*>
+<!ELEMENT reponedor (nombre|id|numproductosrepuestos)*>
 
 <!--- Put your DTDDoc comment here. -->
-<!ELEMENT matricula (#PCDATA)>
+<!ELEMENT nombre (#PCDATA)>
 
 <!--- Put your DTDDoc comment here. -->
-<!ELEMENT km (#PCDATA)>
+<!ELEMENT id (#PCDATA)>
 
 <!--- Put your DTDDoc comment here. -->
-<!ELEMENT preciocompra (#PCDATA)>
+<!ELEMENT numproductosrepuestos (#PCDATA)>
 
 <!--- Put your DTDDoc comment here. -->
-<!ELEMENT precioventa (#PCDATA)>
+<!ELEMENT cajero (nombre|id|preciototal)*>
 
 <!--- Put your DTDDoc comment here. -->
-<!ELEMENT color (#PCDATA)>
+<!ELEMENT preciototal (#PCDATA)>
 
 <!--- Put your DTDDoc comment here. -->
-<!ELEMENT marca (#PCDATA)>
+<!ELEMENT productos (producto|perecedero)*>
 
 <!--- Put your DTDDoc comment here. -->
-<!ELEMENT moto (matricula|km|preciocompra|precioventa|color|marca)*>
+<!ELEMENT producto (preciobase|cantidad|nombre)*>
 
 <!--- Put your DTDDoc comment here. -->
-<!ELEMENT quad (matricula|km|preciocompra|precioventa|color|marca)*>
+<!ELEMENT preciobase (#PCDATA)>
 
 <!--- Put your DTDDoc comment here. -->
-<!ELEMENT bici (preciocompra|precioventa|tamañoderueda|numdemarchas|tipodecambio|color|marca)*>
+<!ELEMENT cantidad (#PCDATA)>
 
 <!--- Put your DTDDoc comment here. -->
-<!ELEMENT tamañoderueda (#PCDATA)>
+<!ELEMENT perecedero (preciobase|cantidad|nombre|preciocaducado|fechareposicion)*>
 
 <!--- Put your DTDDoc comment here. -->
-<!ELEMENT numdemarchas (#PCDATA)>
+<!ELEMENT preciocaducado (#PCDATA)>
 
 <!--- Put your DTDDoc comment here. -->
-<!ELEMENT tipodecambio (#PCDATA)>
+<!ELEMENT fechareposicion (#PCDATA)>
