@@ -6,10 +6,10 @@
 package ohmygueim;
 
 import java.util.Objects;
-import ohmygueim.Clientes.CSGO;
-import ohmygueim.Clientes.ClashRoyale;
-import ohmygueim.Clientes.Gamer;
-import ohmygueim.Clientes.LOL;
+import modelo.CSGO;
+import modelo.ClashRoyale;
+import modelo.Gamer;
+import modelo.LOL;
 
 /**
  *

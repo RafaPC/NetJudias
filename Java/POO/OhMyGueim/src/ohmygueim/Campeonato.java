@@ -7,8 +7,13 @@ package ohmygueim;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
-import ohmygueim.Clientes.Gamer;
+import modelo.CSGO;
+import modelo.ClashRoyale;
+import modelo.Gamer;
+import modelo.LOL;
+import ohmygueim.Participante;
 
 /**
  *
@@ -45,7 +50,7 @@ public class Campeonato {
         boolean completo = true, repetido;
         int posicion = 0, numparticipante;
         for (Participante participante : participantes) {
-            if(participante.getPosicion() == -1){
+            if (participante.getPosicion() == -1) {
                 completo = false;
             }
         }
@@ -94,8 +99,61 @@ public class Campeonato {
     public String toString() {
         String tostring = "Campeonato de " + juego + "\nFecha: " + fecha + "\nPremio: " + premio;
         for (int i = 0; i < participantes.size(); i++) {
+            tostring += "\n---";
             tostring += "\n" + participantes.get(i).getPersona().toString() + "\nPosición: " + participantes.get(i).getPosicion();
         }
         return tostring;
+    }
+
+    public void imprimirCSGO(ArrayList <Gamer> gamers, boolean metido, Map campeonatos,LocalDate temp) {
+        int i = 0;
+        metido = false;
+        for (i = 0; i < gamers.size(); i++) {
+            metido = false;
+            if (gamers.get(i) instanceof CSGO) {
+                if (getParticipantes().size() > 0) {
+                    if (getParticipantes().contains(new Participante(gamers.get(i)))) {
+                        metido = true;
+                    }
+                }
+                if (!metido) {
+                    System.out.println(i + ".- " + gamers.get(i).toString());
+                }
+            }
+        }
+    }
+    public void imprimirLOL(ArrayList <Gamer>gamers, boolean metido, Map campeonatos,LocalDate temp) {
+        int i = 0;
+        metido = false;
+        for (i = 0; i < gamers.size(); i++) {
+            metido = false;
+            if (gamers.get(i) instanceof LOL) {
+                if (getParticipantes().size() > 0) {
+                    if (getParticipantes().contains(new Participante(gamers.get(i)))) {
+                        metido = true;
+                    }
+                }
+                if (!metido) {
+                    System.out.println(i + ".- " + gamers.get(i).toString());
+                }
+            }
+        }
+    }
+    public void imprimirClashRoyale(ArrayList <Gamer> gamers, boolean metido, Map campeonatos,LocalDate temp) {
+        int i = 0;
+        metido = false;
+        for (i = 0; i < gamers.size(); i++) {
+            metido = false;
+            if (gamers.get(i) instanceof ClashRoyale) {
+                if (getParticipantes().size() > 0) {
+                    if (getParticipantes().contains(new Participante(gamers.get(i)))) {
+                        metido = true;
+                    }
+                }
+                if (!metido) {
+                    System.out.println(i + ".- " + gamers.get(i).toString());
+                }
+            }
+        }
     }
 }

@@ -10,10 +10,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import ohmygueim.Clientes.CSGO;
-import ohmygueim.Clientes.ClashRoyale;
-import ohmygueim.Clientes.Gamer;
-import ohmygueim.Clientes.LOL;
+import modelo.CSGO;
+import modelo.ClashRoyale;
+import modelo.Gamer;
+import modelo.LOL;
 
 /**
  *
@@ -50,6 +50,8 @@ public class OhMyGueim {
         campeonatos.put(LocalDate.of(2018, 3, 27), new Campeonato(LocalDate.of(2018, 3, 27), "LOL", "El Mejor Premio del Mundo"));
         campeonatos.get(LocalDate.of(2018, 3, 27)).addJugador(gamers.get(3));
         campeonatos.get(LocalDate.of(2018, 3, 27)).addJugador(gamers.get(4));
+        campeonatos.get(LocalDate.of(2018, 3, 27)).getParticipantes().get(0).setPosicion(1);
+        campeonatos.get(LocalDate.of(2018, 3, 27)).getParticipantes().get(1).setPosicion(2);
 
     }
 
@@ -69,12 +71,13 @@ public class OhMyGueim {
             System.out.print("Año: ");
             año = sc.nextInt();
             sc.nextLine();
-            if (campeonatos.get(LocalDate.of(año, mes, dia)) != null) {
+            LocalDate temp = LocalDate.of(año, mes, dia);
+            if (campeonatos.get(temp) != null) {
                 System.out.println("Ya existe un campeonato ese día");
                 repetido = true;
             }
         } while (repetido);
-
+        LocalDate temp = LocalDate.of(año, mes, dia);
         System.out.println("¿De qué juego va a ser?");
         System.out.println("1.- CSGO"
                 + "\n2.- LOL"
@@ -98,60 +101,20 @@ public class OhMyGueim {
         premio = sc.next();
 
         int numjugador = 0;
-        campeonatos.put(LocalDate.of(año, mes, dia), new Campeonato(LocalDate.of(año, mes, dia), juego, premio));
+        campeonatos.put(temp, new Campeonato(temp, juego, premio));
         boolean metido;
         do {
             int i = 0;
             metido = false;
             switch (opcion) {
                 case 1:
-                    for (i = 0; i < gamers.size(); i++) {
-                        metido = false;
-                        if (gamers.get(i) instanceof CSGO) {
-                            if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size() > 0) {
-                                if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().contains(new Participante(gamers.get(i)))) {
-                                    metido = true;
-                                }
-                            }
-                            if (!metido) {
-                                System.out.println(i + ".- " + gamers.get(i).toString());
-                            }
-                        }
-                    }
+                    campeonatos.get(temp).imprimirCSGO(gamers, metido, campeonatos, temp);
                     break;
                 case 2:
-                    for (i = 0; i < gamers.size(); i++) {
-                        metido = false;
-                        if (gamers.get(i) instanceof LOL) {
-                            if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size() > 0) {
-                                for (int j = 0; j < campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size(); j++) {
-                                    if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().contains(new Participante(gamers.get(i)))) {
-                                        metido = true;
-                                    }
-                                }
-                            }
-                            if (!metido) {
-                                System.out.println(i + ".- " + gamers.get(i).toString());
-                            }
-                        }
-                    }
+                        campeonatos.get(temp).imprimirLOL(gamers, metido, campeonatos, temp);
                     break;
                 case 3:
-                    for (i = 0; i < gamers.size(); i++) {
-                        metido = false;
-                        if (gamers.get(i) instanceof ClashRoyale) {
-                            if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size() > 0) {
-                                for (int j = 0; j < campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().size(); j++) {
-                                    if (campeonatos.get(LocalDate.of(año, mes, dia)).getParticipantes().contains(new Participante(gamers.get(i)))) {
-                                        metido = true;
-                                    }
-                                }
-                            }
-                            if (!metido) {
-                                System.out.println(i + ".- " + gamers.get(i).toString());
-                            }
-                        }
-                    }
+                    campeonatos.get(temp).imprimirClashRoyale(gamers, metido, campeonatos, temp);
                     break;
                 default:
                     break;
@@ -162,7 +125,7 @@ public class OhMyGueim {
             numjugador = sc.nextInt();
             sc.nextLine();
             if (numjugador != -1) {
-                campeonatos.get(LocalDate.of(año, mes, dia)).addJugador(gamers.get(numjugador));
+                campeonatos.get(temp).addJugador(gamers.get(numjugador));
             }
         } while (numjugador != -1);
     }
@@ -197,6 +160,7 @@ public class OhMyGueim {
         System.out.println("PENE");
         for (Campeonato camp : campeonatos.values()) {
             System.out.println(camp.toString());
+            System.out.println("------------------");
         }
     }
 }
