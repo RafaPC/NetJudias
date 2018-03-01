@@ -6,6 +6,7 @@
 package ohmygueim.Clientes;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
@@ -52,6 +53,39 @@ public abstract class Gamer {
 
     public ArrayList<String> getTrofeos() {
         return trofeos;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Gamer other = (Gamer) obj;
+        if (this.ranking != other.ranking) {
+            return false;
+        }
+        if (this.numtorneos != other.numtorneos) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.trofeos, other.trofeos)) {
+            return false;
+        }
+        return true;
     }
     
 }

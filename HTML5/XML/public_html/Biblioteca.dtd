@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+    TODO define vocabulary identification
+    PUBLIC ID: -//vendor//vocabulary//EN
+    SYSTEM ID: http://server/path/Biblioteca.dtd
+
+-->
+
+<!--
+    An example how to use this DTD from your XML document:
+
+    <?xml version="1.0"?>
+
+    <!DOCTYPE biblioteca SYSTEM "Biblioteca.dtd">
+
+    <biblioteca>
+    ...
+    </biblioteca>
+-->
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT biblioteca (usuarios|libros)*>
+<!ATTLIST biblioteca
+    xsi:noNamespaceSchemaLocation CDATA #IMPLIED
+    xmlns:xsi CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT usuarios (usuario)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT usuario (nombre|numLibros|libro)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT nombre (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT numLibros (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT libro (isb|titulo|autor|numpaginas|prestado)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT isb (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT titulo (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT autor (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT numpaginas (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT prestado (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT libros (libro)*>

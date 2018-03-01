@@ -11,17 +11,45 @@ and open the template in the editor.
     xsi:noNamespaceSchemaLocation='file:/home/daw/NetBeansProjects/NetJudias/HTML5/XML/public_html/Biblioteca.xsd'>
     <usuarios>
         <usuario>
-            <nombre></nombre>
-            <numLibros></numLibros>
+            <nombre>Kiko</nombre>
+            <numLibros>2</numLibros>
             <libro>
-                <isb></isb>
-                <titulo></titulo>
-                <autor></autor>
-                <numpaginas></numpaginas>
-                <prestado></prestado>
+                <isb>35U073IJ</isb>
+                <titulo>Ilíada</titulo>
+                <autor>Homero Simpson</autor>
+                <numpaginas>567</numpaginas>
+                <prestado>true</prestado>
+            </libro>
+            <libro>
+                <isb>98675HGV</isb>
+                <titulo>La Biblia</titulo>
+                <autor>Jesucristo</autor>
+                <numpaginas>666</numpaginas>
+                <prestado>true</prestado>
             </libro>
         </usuario>
     </usuarios>
-    <libros></libros>
-
+    <libros>
+        <libro>
+            <isb>35U073IJ</isb>
+            <titulo>Ilíada</titulo>
+            <autor>Homero Simpson</autor>
+            <numpaginas>567</numpaginas>
+            <prestado>true</prestado>
+        </libro>
+        <libro>
+            <isb>98675HGV</isb>
+            <titulo>La Biblia</titulo>
+            <autor>Jesucristo</autor>
+            <numpaginas>666</numpaginas>
+            <prestado>true</prestado>
+        </libro>
+        <libro>
+            <isb>1765KJHV2</isb>
+            <titulo>Guía de la tele</titulo>
+            <autor>Kikazo</autor>
+            <numpaginas>23</numpaginas>
+            <prestado>false</prestado>
+        </libro>
+    </libros>
 </biblioteca>

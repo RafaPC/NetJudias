@@ -26,7 +26,7 @@ and open the template in the editor.
                                                     <xs:element name="isb" type="xs:string"/>
                                                     <xs:element name="titulo" type="xs:string"/>
                                                     <xs:element name="autor" type="xs:string"/>
-                                                    <xs:element name="numpaginas" type="xs:int"/>
+                                                    <xs:element name="numpaginas" type="xs:Integer"/>
                                                     <xs:element name="prestado" type="xs:boolean"/>
                                                 </xs:sequence>
                                             </xs:complexType>
@@ -45,7 +45,7 @@ and open the template in the editor.
                                     <xs:element name="isb" type="xs:string"/>
                                     <xs:element name="titulo" type="xs:string"/>
                                     <xs:element name="autor" type="xs:string"/>
-                                    <xs:element name="numpaginas" type="int"/>
+                                    <xs:element name="numpaginas" type="Integer"/>
                                     <xs:element name="prestado" type="boolean"/>
                                 </xs:sequence>
                             </xs:complexType>

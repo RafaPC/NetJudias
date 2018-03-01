@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    <xs:element name="zanalcar">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="vehiculos">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="vehiculo">
+                                <xs:element name="marca"/>
+                                <xs:element name="color"/>
+                                <xs:element name="preciodeventa"/>
+                                <xs:element name="preciodecompra"/>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="coche">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="matricula" type="xs:String"/>
+                                                    <xs:element name="km" type="xs:Integer"/>
+                                                    <xs:element name="preciocompra" type="xs:double"/>
+                                                    <xs:element name="precioventa" type="xs:double"/>
+                                                    <xs:element name="color" type="xs:String"/>
+                                                    <xs:element name="marca" type="xs:String"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="moto">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="matricula" type="xs:String"/>
+                                                    <xs:element name="km" type="xs:Integer"/>
+                                                    <xs:element name="preciocompra" type="xs:double"/>
+                                                    <xs:element name="precioventa" type="xs:double"/>
+                                                    <xs:element name="color" type="xs:String"/>
+                                                    <xs:element name="marca" type="xs:String"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="quad">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="matricula" type="xs:String"/>
+                                                    <xs:element name="km" type="xs:Integer"/>
+                                                    <xs:element name="preciocompra" type="xs:double"/>
+                                                    <xs:element name="precioventa" type="xs:double"/>
+                                                    <xs:element name="color" type="xs:String"/>
+                                                    <xs:element name="marca" type="xs:String"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="bici">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="preciocompra" type="xs:double"/>
+                                                    <xs:element name="precioventa" type="xs:double"/>
+                                                    <xs:element name="tamañoderueda" type="xs:Integer"/>
+                                                    <xs:element name="numdemarchas" type="xs:Integer"/>
+                                                    <xs:element name="color" type="xs:String"/>
+                                                    <xs:element name="marca" type="xs:String"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType> 
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

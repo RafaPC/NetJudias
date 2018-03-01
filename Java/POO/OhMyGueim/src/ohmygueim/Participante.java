@@ -5,6 +5,7 @@
  */
 package ohmygueim;
 
+import java.util.Objects;
 import ohmygueim.Clientes.CSGO;
 import ohmygueim.Clientes.ClashRoyale;
 import ohmygueim.Clientes.Gamer;
@@ -62,6 +63,30 @@ public class Participante {
         }
 
         return tostring;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Participante other = (Participante) obj;
+        if (!Objects.equals(this.persona, other.persona)) {
+            return false;
+        }
+        return true;
     }
 
 }
