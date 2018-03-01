@@ -111,7 +111,7 @@ public class OhMyGueim {
                     campeonatos.get(temp).imprimirCSGO(gamers, metido, campeonatos, temp);
                     break;
                 case 2:
-                        campeonatos.get(temp).imprimirLOL(gamers, metido, campeonatos, temp);
+                    campeonatos.get(temp).imprimirLOL(gamers, metido, campeonatos, temp);
                     break;
                 case 3:
                     campeonatos.get(temp).imprimirClashRoyale(gamers, metido, campeonatos, temp);

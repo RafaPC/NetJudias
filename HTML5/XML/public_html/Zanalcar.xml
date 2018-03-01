@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<zanalcar
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='Zanalcar.xsd'>
+    <vehiculos>
+        <vehiculo>
+            <coche>
+                <matricula>9675976G</matricula>
+                <km>324</km>
+                <preciocompra>2000</preciocompra>
+                <precioventa>3000</precioventa>
+                <color>rojo</color>
+                <marca>seat</marca>
+            </coche>
+            <moto>
+                <matricula>867GV9678</matricula>
+                <km>1230</km>
+                <preciocompra>1000</preciocompra>
+                <precioventa>1300</precioventa>
+                <color>verde</color>
+                <marca>bmw</marca>
+            </moto>
+            <quad>
+                <matricula>976KJHGV62</matricula>
+                <km>700</km>
+                <preciocompra>3000</preciocompra>
+                <precioventa>3500</precioventa>
+                <color>negro</color>
+                <marca>mercedes</marca>
+            </quad>
+            <bici>
+                <preciocompra>500</preciocompra>
+                <precioventa>750</precioventa>
+                <tamañoderueda>11</tamañoderueda>
+                <numdemarchas>21</numdemarchas>
+                <color>verde</color>
+                <marca>elbicho</marca>
+            </bici>
+        </vehiculo>
+    </vehiculos>
+</zanalcar>
