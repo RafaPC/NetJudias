@@ -13,9 +13,15 @@ public class RecursoMaterial extends Recurso{
     private int habilidadMinima;
     private int rangoAccion;
 
-    public RecursoMaterial(int habilidadMinima, int rangoAccion) {
+    public RecursoMaterial(int habilidadMinima, int rangoAccion, int potenciaDeMuerte, String nombre) {
+        super(potenciaDeMuerte, nombre);
         this.habilidadMinima = habilidadMinima;
         this.rangoAccion = rangoAccion;
     }
-    
+
+    @Override
+    public String toString() {
+        return "RecursoMaterial{" + "habilidadMinima=" + habilidadMinima + ", rangoAccion=" + rangoAccion + '}';
+    }
+  
 }

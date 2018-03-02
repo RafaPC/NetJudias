@@ -9,11 +9,17 @@ package modelo;
  *
  * @author daw
  */
-public class RecursoMaterialVehiculo {
+public class RecursoMaterialVehiculo extends RecursoMaterial{
    private int capacidad; 
 
-    public RecursoMaterialVehiculo(int capacidad) {
+    public RecursoMaterialVehiculo(int capacidad, int habilidadMinima, int rangoAccion, int potenciaDeMuerte, String nombre) {
+        super(habilidadMinima, rangoAccion, potenciaDeMuerte, nombre);
         this.capacidad = capacidad;
+    }
+
+    @Override
+    public String toString() {
+        return "RecursoMaterialVehiculo{" + "capacidad=" + capacidad + '}';
     }
    
 }

@@ -16,7 +16,8 @@ public class RecursoHumano extends Recurso {
     private int habilidadMaquinas;
     private int exp;
 
-    public RecursoHumano(int stress, int numBajasCuchillo, int habilidadMaquinas, int exp) {
+    public RecursoHumano(int stress, int numBajasCuchillo, int habilidadMaquinas, int exp, int potenciaDeMuerte, String nombre) {
+        super(potenciaDeMuerte, nombre);
         this.stress = stress;
         this.numBajasCuchillo = numBajasCuchillo;
         this.habilidadMaquinas = habilidadMaquinas;
@@ -25,6 +26,11 @@ public class RecursoHumano extends Recurso {
 
     public int getStress() {
         return stress;
+    }
+
+    @Override
+    public String toString() {
+        return "RecursoHumano{" + "stress=" + stress + ", numBajasCuchillo=" + numBajasCuchillo + ", habilidadMaquinas=" + habilidadMaquinas + ", exp=" + exp + '}';
     }
 
 }

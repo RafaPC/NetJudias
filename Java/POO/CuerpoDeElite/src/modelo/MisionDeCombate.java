@@ -14,9 +14,9 @@ import java.time.LocalDate;
 public class MisionDeCombate extends Mision{
     private int potenciaMinima;
 
-    public MisionDeCombate(int potenciaMinima, LocalDate fecha, String lugar, int expganada, boolean exito) {
-        super(fecha, lugar, expganada, exito);
+    public MisionDeCombate(int potenciaMinima, LocalDate fecha, String lugar, int expGanada, String nombre) {
+        super(fecha, lugar, expGanada, nombre);
         this.potenciaMinima = potenciaMinima;
-    } 
+    }
     
 }
