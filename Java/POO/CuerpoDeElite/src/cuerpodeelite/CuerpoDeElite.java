@@ -24,6 +24,14 @@ public class CuerpoDeElite {
 
     public void crearMision() {
         int opcion = 0;
+        int expGanada;
+        String lugar;
+        System.out.println("Lugar de la misión: ");
+        lugar = sc.next();
+        System.out.println("Experiencia ganada: ");
+        expGanada = sc.nextInt();
+        sc.nextLine();
+        
         System.out.println("Tipo de misión"
                 + "\n1.-De reconocimiento"
                 + "\n2.-De combate");
