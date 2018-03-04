@@ -9,9 +9,10 @@ package modelo;
  *
  * @author daw
  */
-public class RecursoMaterial extends Recurso{
-    private int habilidadMinima;
-    private int rangoAccion;
+public class RecursoMaterial extends Recurso {
+
+    protected int habilidadMinima;
+    protected int rangoAccion;
 
     public RecursoMaterial(int habilidadMinima, int rangoAccion, int potenciaDeMuerte, String nombre) {
         super(potenciaDeMuerte, nombre);
@@ -21,7 +22,34 @@ public class RecursoMaterial extends Recurso{
 
     @Override
     public String toString() {
-        return "RecursoMaterial{" + "habilidadMinima=" + habilidadMinima + ", rangoAccion=" + rangoAccion + '}';
+        return "Vehículo: " + nombre + "\nHabilidad mínima: " + habilidadMinima + "\nRango de acción: " + rangoAccion + "\nPotencia de muerte: " + potenciaDeMuerte ;
     }
-  
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final RecursoMaterial other = (RecursoMaterial) obj;
+        if (this.habilidadMinima != other.habilidadMinima) {
+            return false;
+        }
+        if (this.rangoAccion != other.rangoAccion) {
+            return false;
+        }
+        return true;
+    }
+
 }
