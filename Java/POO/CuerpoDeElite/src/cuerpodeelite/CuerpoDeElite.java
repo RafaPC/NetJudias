@@ -130,7 +130,9 @@ public class CuerpoDeElite {
 
     public void bajarStress() {
         for (Recurso resource : recursos) {
-
+            if(resource instanceof RecursoHumano){
+                ((RecursoHumano) resource).setStress(0);
+            }
         }
     }
 }

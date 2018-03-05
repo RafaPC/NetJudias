@@ -24,6 +24,10 @@ public class RecursoHumano extends Recurso {
         this.exp = exp;
     }
 
+    public void setStress(int stress) {
+        this.stress = stress;
+    }
+
     public int getStress() {
         return stress;
     }
