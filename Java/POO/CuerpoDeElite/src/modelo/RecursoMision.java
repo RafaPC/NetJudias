@@ -52,4 +52,8 @@ public class RecursoMision {
         return true;
     }
 
+    public Recurso getRecurso() {
+        return recurso;
+    }
+
 }

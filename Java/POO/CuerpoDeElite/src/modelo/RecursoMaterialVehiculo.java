@@ -45,5 +45,9 @@ public class RecursoMaterialVehiculo extends RecursoMaterial{
         }
         return true;
     }
+
+    public int getCapacidad() {
+        return capacidad;
+    }
    
 }

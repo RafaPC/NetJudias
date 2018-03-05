@@ -31,7 +31,7 @@ public class Mision {
     }
 
     public void addRecurso(Recurso recurso, String uso) {
-        recursosMision.add(new RecursoMision(recurso,uso));
+        recursosMision.add(new RecursoMision(recurso, uso));
     }
 
     /*public void crearMision(ArrayList<Recurso> recursos, Scanner sc) {
@@ -72,9 +72,42 @@ public class Mision {
             recursos.get(numRecurso).addMision(this);
         } while (numRecurso != -1);
     }*/
-
     public ArrayList<RecursoMision> getRecursosMision() {
         return recursosMision;
     }
 
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public boolean requisitoVehiculos() {
+        boolean requisito = false;
+        for (int i = 0; i < recursosMision.size() && !requisito; i++) {
+            if (recursosMision.get(i).getRecurso() instanceof RecursoMaterialVehiculo) {
+                requisito = true;
+            }
+        }
+        return requisito;
+    }
+
+    public boolean requisitoPersonas() {
+        boolean requisito = false;
+        int numPersonas = 0;
+        int capacidad = 0;
+        for (int i = 0; i < recursosMision.size() && !requisito; i++) {
+            Recurso temp = recursosMision.get(i).getRecurso();
+            if (temp instanceof RecursoMaterialVehiculo) {
+                capacidad += ((RecursoMaterialVehiculo)temp).getCapacidad();
+            }else if(temp instanceof RecursoHumano){
+                numPersonas++;
+            }
+        }
+        if(capacidad >= numPersonas){
+            requisito = true;
+        }else{
+            System.out.println("Tienes " + numPersonas + " y solo " + capacidad + " plazas totales de los vehículos");
+            System.out.println("Tienes que coger vehículos hasta llegar a " + numPersonas + " plazas o más");
+        }
+        return requisito;
+    }
 }

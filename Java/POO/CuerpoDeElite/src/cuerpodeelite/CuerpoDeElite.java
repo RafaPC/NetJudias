@@ -91,36 +91,65 @@ public class CuerpoDeElite {
         boolean estresado;
         int fuerzaLetal = 0;
         int numRecurso = 0;
+        boolean requisitos = false;
         do {
-            for (int i = 0; i < recursos.size(); i++) {
-                estresado = false;
-                if (recursos.get(i) instanceof RecursoHumano) {
-                    if (((RecursoHumano) recursos.get(i)).getStress() > 20) {
-                        estresado = true;
+            boolean cogido;
+            do {
+                cogido = false;
+                for (int i = 0; i < recursos.size(); i++) {
+                    estresado = false;
+                    if (recursos.get(i) instanceof RecursoHumano) {
+                        if (((RecursoHumano) recursos.get(i)).getStress() > 20) {
+                            estresado = true;
+                        }
                     }
-                }
-                if (!estresado) {
-                    if (recursos.get(i).getMisiones().contains(misiones.get(nombre))) {
-                    } else {
-                        if (recursos.get(i) instanceof RecursoMaterialVehiculo) {
-                            System.out.println(i + ".- " + ((RecursoMaterialVehiculo) recursos.get(i)).toString());
-                        } else if (recursos.get(i) instanceof RecursoMaterial) {
-                            System.out.println(i + ".- " + ((RecursoMaterial) recursos.get(i)).toString());
-                        } else if (recursos.get(i) instanceof RecursoHumano) {
-                            System.out.println(i + ".- " + ((RecursoHumano) recursos.get(i)).toString());
+                    if (!estresado) {
+                        if (recursos.get(i).getMisiones().contains(misiones.get(nombre))) {
+                        } else {
+                            if (recursos.get(i) instanceof RecursoMaterialVehiculo) {
+                                System.out.println(i + ".- " + ((RecursoMaterialVehiculo) recursos.get(i)).toString());
+                            } else if (recursos.get(i) instanceof RecursoMaterial) {
+                                System.out.println(i + ".- " + ((RecursoMaterial) recursos.get(i)).toString());
+                            } else if (recursos.get(i) instanceof RecursoHumano) {
+                                System.out.println(i + ".- " + ((RecursoHumano) recursos.get(i)).toString());
+                            }
                         }
                     }
                 }
+                System.out.println("Elige el recurso");
+                System.out.println("Si quieres salir elige '-1'");
+                numRecurso = sc.nextInt();
+                sc.nextLine();
+
+                if (numRecurso != -1) {
+                    for (Recurso resource : recursos) {
+                        for (int i = 0; i < resource.getMisiones().size() && !cogido; i++) {
+                            if (resource.getMisiones().get(i).getFecha().equals(misiones.get(nombre))) {
+                                System.out.println("Ese recurso ya está ocupado en otra misión el mismo día");
+                                cogido = true;
+                            }
+                        }
+                    }
+                } else {
+                    if (misiones.get(nombre).requisitoVehiculos()) {
+                        System.out.println("Tienes que coger al menos un vehículo");
+                        if (misiones.get(nombre).requisitoPersonas()) {
+                            requisitos = true;
+                        }
+                    } else {
+                        System.out.println("Tienes que coger al menos un vehículo");
+                    }
+                }
+            } while (cogido);
+            if (numRecurso != -1) {
+                System.out.println("¿Y cuál va a ser su uso?");
+                uso = sc.next();
+                fuerzaLetal += recursos.get(numRecurso).getPotenciaDeMuerte();
+                misiones.get(nombre).addRecurso(recursos.get(numRecurso), uso);
+                recursos.get(numRecurso).addMision(misiones.get(nombre));
             }
-            System.out.println("Elige el recurso");
-            numRecurso = sc.nextInt();
-            sc.nextLine();
-            System.out.println("¿Y cuál va a ser su uso?");
-            uso = sc.next();
-            fuerzaLetal += recursos.get(numRecurso).getPotenciaDeMuerte();
-            misiones.get(nombre).addRecurso(recursos.get(numRecurso), uso);
-            recursos.get(numRecurso).addMision(misiones.get(nombre));
-        } while (numRecurso != -1);
+
+        } while (numRecurso != -1 || !requisitos);
 
     }
 
@@ -130,7 +159,7 @@ public class CuerpoDeElite {
 
     public void bajarStress() {
         for (Recurso resource : recursos) {
-            if(resource instanceof RecursoHumano){
+            if (resource instanceof RecursoHumano) {
                 ((RecursoHumano) resource).setStress(0);
             }
         }
