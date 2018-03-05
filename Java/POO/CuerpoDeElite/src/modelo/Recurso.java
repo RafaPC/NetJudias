@@ -67,4 +67,8 @@ public abstract class Recurso {
         return true;
     }
 
+    public ArrayList<Mision> getMisiones() {
+        return misiones;
+    }
+
 }

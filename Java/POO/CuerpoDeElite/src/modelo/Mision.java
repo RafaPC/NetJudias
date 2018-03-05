@@ -30,11 +30,11 @@ public class Mision {
         this.nombre = nombre;
     }
 
-    protected void addRecurso(Recurso recurso) {
-        recursosMision.add(new RecursoMision(recurso));
+    public void addRecurso(Recurso recurso, String uso) {
+        recursosMision.add(new RecursoMision(recurso,uso));
     }
 
-    public void crearMision(ArrayList<Recurso> recursos, Scanner sc) {
+    /*public void crearMision(ArrayList<Recurso> recursos, Scanner sc) {
         String uso;
         boolean estresado;
         int fuerzaLetal = 0;
@@ -71,5 +71,10 @@ public class Mision {
             fuerzaLetal += recursos.get(numRecurso).getPotenciaDeMuerte();
             recursos.get(numRecurso).addMision(this);
         } while (numRecurso != -1);
+    }*/
+
+    public ArrayList<RecursoMision> getRecursosMision() {
+        return recursosMision;
     }
+
 }

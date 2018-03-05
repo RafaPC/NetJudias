@@ -76,8 +76,8 @@ public class CuerpoDeElite {
                 break;
             case 2:
                 misiones.put(nombre, new Mision(fecha, lugar, expGanada, nombre));
-                misiones.get(nombre).crearMision(recursos, sc);
-                //crearMisionDeCombate(fecha, nombre, expGanada, lugar);
+                //misiones.get(nombre).crearMision(recursos, sc);
+                crearMisionDeCombate(fecha, nombre, expGanada, lugar);
                 break;
             default:
                 System.out.println("No existe esa opción");
@@ -85,7 +85,7 @@ public class CuerpoDeElite {
         }
     }
 
-    /*private void crearMisionDeCombate(LocalDate fecha, String nombre, int expGanada, String lugar) {
+    private void crearMisionDeCombate(LocalDate fecha, String nombre, int expGanada, String lugar) {
         misiones.put(nombre, new Mision(fecha, lugar, expGanada, nombre));
         String uso;
         boolean estresado;
@@ -100,12 +100,15 @@ public class CuerpoDeElite {
                     }
                 }
                 if (!estresado) {
-                    if (recursos.get(i) instanceof RecursoMaterialVehiculo) {
-                        System.out.println(i + ".- " + ((RecursoMaterialVehiculo) recursos.get(i)).toString());
-                    } else if (recursos.get(i) instanceof RecursoMaterial) {
-                        System.out.println(i + ".- " + ((RecursoMaterial) recursos.get(i)).toString());
-                    } else if (recursos.get(i) instanceof RecursoHumano) {
-                        System.out.println(i + ".- " + ((RecursoHumano) recursos.get(i)).toString());
+                    if (recursos.get(i).getMisiones().contains(misiones.get(nombre))) {
+                    } else {
+                        if (recursos.get(i) instanceof RecursoMaterialVehiculo) {
+                            System.out.println(i + ".- " + ((RecursoMaterialVehiculo) recursos.get(i)).toString());
+                        } else if (recursos.get(i) instanceof RecursoMaterial) {
+                            System.out.println(i + ".- " + ((RecursoMaterial) recursos.get(i)).toString());
+                        } else if (recursos.get(i) instanceof RecursoHumano) {
+                            System.out.println(i + ".- " + ((RecursoHumano) recursos.get(i)).toString());
+                        }
                     }
                 }
             }
@@ -116,11 +119,18 @@ public class CuerpoDeElite {
             uso = sc.next();
             fuerzaLetal += recursos.get(numRecurso).getPotenciaDeMuerte();
             misiones.get(nombre).addRecurso(recursos.get(numRecurso), uso);
-            recursos.get(numRecurso).addMision(mision);
+            recursos.get(numRecurso).addMision(misiones.get(nombre));
         } while (numRecurso != -1);
 
-    }*/
+    }
+
     private void crearMisionDeReconocimiento() {
 
+    }
+
+    public void bajarStress() {
+        for (Recurso resource : recursos) {
+
+        }
     }
 }

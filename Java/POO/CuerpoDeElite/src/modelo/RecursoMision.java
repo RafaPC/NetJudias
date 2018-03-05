@@ -16,12 +16,15 @@ public class RecursoMision {
     private Recurso recurso;
     private String uso;
 
-    public RecursoMision(Recurso recurso) {
+    public RecursoMision(Recurso recurso, String uso) {
         this.recurso = recurso;
-    }
-    private void addUso(String uso){
         this.uso = uso;
     }
+
+    private void addUso(String uso) {
+        this.uso = uso;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
