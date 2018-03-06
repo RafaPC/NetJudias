@@ -28,10 +28,20 @@ public class RecursoHumano extends Recurso {
         this.stress = stress;
     }
 
+    public void sumarStress(int stress) {
+        this.stress += stress;
+    }
+
     public int getStress() {
         return stress;
     }
 
+    public void sumarExp(int exp) {
+        this.exp += exp;
+    }
+   
+    
+    
     @Override
     public String toString() {
         return "Soldado: " + nombre + "\nEstrés: " + stress + "\nNúmero de bajas a cuchillo: " + numBajasCuchillo + "\nHabilidad con máquinas: " + habilidadMaquinas + "\nExperiencia: " + exp + "\nPotencia de muerte: " + potenciaDeMuerte;
@@ -69,5 +79,7 @@ public class RecursoHumano extends Recurso {
         }
         return true;
     }
+
+    
 
 }

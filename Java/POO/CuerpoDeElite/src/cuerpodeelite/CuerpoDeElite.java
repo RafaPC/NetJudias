@@ -7,6 +7,7 @@ package cuerpodeelite;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -47,8 +48,18 @@ public class CuerpoDeElite {
         int opcion = 0;
         int expGanada, dia, mes, año;
         String lugar, nombre;
-        System.out.print("Nombre de la misión: ");
-        nombre = sc.next();
+        boolean repetido;
+        do {
+            repetido = false;
+            System.out.print("Nombre de la misión: ");
+            nombre = sc.next();
+            for (String key : misiones.keySet()) {
+                if (misiones.get(key).getNombre().equalsIgnoreCase(nombre)) {
+                    System.out.println("Ya existe otra misión con el mismo nombre");
+                    repetido = true;
+                }
+            }
+        } while (repetido);
         System.out.print("Lugar de la misión: ");
         lugar = sc.next();
         System.out.print("Experiencia ganada: ");
@@ -75,9 +86,11 @@ public class CuerpoDeElite {
 
                 break;
             case 2:
-                misiones.put(nombre, new Mision(fecha, lugar, expGanada, nombre));
-                //misiones.get(nombre).crearMision(recursos, sc);
-                crearMisionDeCombate(fecha, nombre, expGanada, lugar);
+                System.out.println("Cuál será la potencia mínima de combate");
+                int poten = sc.nextInt();
+                sc.nextLine();
+                misiones.put(nombre, new MisionDeCombate(poten, fecha, lugar, expGanada, nombre));
+                crearMision(fecha, nombre, expGanada);
                 break;
             default:
                 System.out.println("No existe esa opción");
@@ -85,8 +98,7 @@ public class CuerpoDeElite {
         }
     }
 
-    private void crearMisionDeCombate(LocalDate fecha, String nombre, int expGanada, String lugar) {
-        misiones.put(nombre, new Mision(fecha, lugar, expGanada, nombre));
+    private void crearMision(LocalDate fecha, String nombre, int expGanada) {
         String uso;
         boolean estresado;
         boolean imprimir = true;
@@ -104,15 +116,22 @@ public class CuerpoDeElite {
                             estresado = true;
                         }
                     }
-                    if (!estresado) {
+                    if (!estresado && imprimir) {
                         if (recursos.get(i).getMisiones().contains(misiones.get(nombre))) {
                         } else {
                             if (recursos.get(i) instanceof RecursoMaterialVehiculo) {
+                                System.out.println("------------------");
+                                System.out.println("Vehículo");
                                 System.out.println(i + ".- " + ((RecursoMaterialVehiculo) recursos.get(i)).toString());
                             } else if (recursos.get(i) instanceof RecursoMaterial) {
+                                System.out.println("------------------");
+                                System.out.println("Material");
                                 System.out.println(i + ".- " + ((RecursoMaterial) recursos.get(i)).toString());
                             } else if (recursos.get(i) instanceof RecursoHumano) {
+                                System.out.println("------------------");
+                                System.out.println("Soldado");
                                 System.out.println(i + ".- " + ((RecursoHumano) recursos.get(i)).toString());
+
                             }
                         }
                     }
@@ -127,16 +146,33 @@ public class CuerpoDeElite {
                         if (recursos.get(numRecurso).getMisiones().get(i).getFecha().equals(misiones.get(nombre).getFecha())) {
                             System.out.println("Ese recurso ya está ocupado en otra misión el mismo día");
                             cogido = true;
+                            imprimir = false;
                         }
                     }
                 } else {
                     if (misiones.get(nombre).requisitoVehiculos()) {
-                        System.out.println("Tienes que coger al menos un vehículo");
                         if (misiones.get(nombre).requisitoPersonas()) {
                             requisitos = true;
+                        } else {
+                            imprimir = false;
                         }
                     } else {
                         System.out.println("Tienes que coger al menos un vehículo");
+                        System.out.println("La misión sería un fracaso");
+                        imprimir = false;
+                    }
+                    if (misiones.get(nombre) instanceof MisionDeCombate) {
+                        int potencia = 0;
+                        for (int i = 0; i < misiones.get(nombre).getRecursosMision().size(); i++) {
+                            potencia += misiones.get(nombre).getRecursosMision().get(i).getRecurso().getPotenciaDeMuerte();
+                        }
+                        /*if  (potencia < ((MisionDeCombate) misiones.get(nombre)).getPotenciaMinima()) {
+                            System.out.println("Los recursos no suman lo suficiente para llegar a la potencia mínima de muerte");
+                            System.out.println("La misión sería un fracaso");
+                            System.out.println("Coge más recursos para no pifiarla");
+                            imprimir = false;
+                            cogido = true;
+                        }*/
                     }
                 }
             } while (cogido);
@@ -146,14 +182,62 @@ public class CuerpoDeElite {
                 fuerzaLetal += recursos.get(numRecurso).getPotenciaDeMuerte();
                 misiones.get(nombre).addRecurso(recursos.get(numRecurso), uso);
                 recursos.get(numRecurso).addMision(misiones.get(nombre));
+                imprimir = true;
             }
 
         } while (numRecurso != -1 || !requisitos);
-
+        System.out.println("Misión creada succesfullymente");
+        boolean fracaso = false;
+        if (misiones.get(nombre) instanceof MisionDeCombate) {
+            int potencia = 0;
+            for (int i = 0; i < misiones.get(nombre).getRecursosMision().size(); i++) {
+                potencia += misiones.get(nombre).getRecursosMision().get(i).getRecurso().getPotenciaDeMuerte();
+            }
+            if (((MisionDeCombate) misiones.get(nombre)).getPotenciaMinima() > potencia) {
+                System.out.println("La misión ha sido un fracaso porque no ha llegado a la potencia de muerte suficiente");
+                misiones.get(nombre).esFracaso();
+                fracaso = true;
+            }
+        }
+        if (!fracaso) {
+            System.out.println("¿Como ha salido la misión?");
+            System.out.println("1.- Éxito rotundo"
+                    + "\n2.- Fracaso estrepitoso");
+            int opcion = sc.nextInt();
+            sc.nextLine();
+            switch (opcion) {
+                case 1:
+                    misiones.get(nombre).esExito();
+                    break;
+                case 2:
+                    misiones.get(nombre).esFracaso();
+                    break;
+            }
+        }
     }
 
-    private void crearMisionDeReconocimiento() {
+    public void listadoMisiones() {
+        for (String key : misiones.keySet()) {
+            if (misiones.get(key) instanceof MisionDeCombate) {
+                ((MisionDeCombate)misiones.get(key)).toString();
+            } else {
+                System.out.println(misiones.get(key).toString());
+            }
+            misiones.get(key).toStringRecursos();
+        }
+    }
 
+    public void listadoRecursos() {
+        for (Recurso resource : recursos) {
+            if (resource instanceof RecursoHumano) {
+                System.out.println(((RecursoHumano) resource).toString());
+            } else if (resource instanceof RecursoMaterialVehiculo) {
+                System.out.println(((RecursoMaterialVehiculo) resource).toString());
+            } else if (resource instanceof RecursoMaterial) {
+                System.out.println(((RecursoMaterial) resource).toString());
+            }
+            resource.toStringMisiones((HashMap<String, Mision>) misiones);
+        }
     }
 
     public void bajarStress() {

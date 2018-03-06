@@ -26,7 +26,6 @@ public class Mision {
         this.fecha = fecha;
         this.lugar = lugar;
         this.expGanada = expGanada;
-        this.exito = false;
         this.nombre = nombre;
     }
 
@@ -97,16 +96,55 @@ public class Mision {
         for (int i = 0; i < recursosMision.size() && !requisito; i++) {
             Recurso temp = recursosMision.get(i).getRecurso();
             if (temp instanceof RecursoMaterialVehiculo) {
-                capacidad += ((RecursoMaterialVehiculo)temp).getCapacidad();
-            }else if(temp instanceof RecursoHumano){
+                capacidad += ((RecursoMaterialVehiculo) temp).getCapacidad();
+            } else if (temp instanceof RecursoHumano) {
                 numPersonas++;
             }
         }
-        if(capacidad >= numPersonas){
+        if (capacidad >= numPersonas) {
             requisito = true;
-        System.out.println("Tienes " + numPersonas + " y solo " + capacidad + " plazas totales de los vehículos");
+
+        } else {
+            System.out.println("Tienes " + numPersonas + " personas y solo " + capacidad + " plazas totales de los vehículos");
             System.out.println("Tienes que coger vehículos hasta llegar a " + numPersonas + " plazas o más");
         }
         return requisito;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public boolean isExito() {
+        return exito;
+    }
+
+    public void esExito() {
+        this.exito = true;
+        for (RecursoMision ressource : recursosMision) {
+            if (ressource.getRecurso() instanceof RecursoHumano) {
+                RecursoHumano temp = ((RecursoHumano) ressource.getRecurso());
+                temp.sumarExp(this.expGanada);
+                temp.sumarStress(this.expGanada / 2);
+            }
+        }
+    }
+
+    public void esFracaso() {
+        this.exito = false;
+        for (RecursoMision ressource : recursosMision) {
+            if (ressource.getRecurso() instanceof RecursoHumano) {
+                RecursoHumano temp = ((RecursoHumano) ressource.getRecurso());
+                temp.sumarStress(this.expGanada);
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Mision{" + "nombre=" + nombre + ", fecha=" + fecha + ", lugar=" + lugar + ", expGanada=" + expGanada + ", exito=" + exito + ", recursosMision=" + recursosMision.toString() + '}';
+    }
+    public void toStringRecursos(){
+        
     }
 }

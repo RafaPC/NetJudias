@@ -6,8 +6,10 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
-
+import java.util.Map;
+import modelo.Mision;
 /**
  *
  * @author daw
@@ -34,7 +36,7 @@ public abstract class Recurso {
     
     @Override
     public String toString() {
-        return "Recurso{" + "potenciaDeMuerte=" + potenciaDeMuerte + ", nombre=" + nombre + ", misiones=" + misiones + '}';
+        return "Recurso{" + "potenciaDeMuerte=" + potenciaDeMuerte + ", nombre=" + nombre;
     }
 
     @Override
@@ -69,6 +71,12 @@ public abstract class Recurso {
 
     public ArrayList<Mision> getMisiones() {
         return misiones;
+    }
+    
+    public void toStringMisiones(HashMap <String,Mision> misiones){
+        for(String key : misiones.keySet()){
+            System.out.println(misiones.get(key).toString());
+        }
     }
 
 }

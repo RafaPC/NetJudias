@@ -59,4 +59,9 @@ public class MisionDeCombate extends Mision {
             exito = false;
         }
     }
+
+    public int getPotenciaMinima() {
+        return potenciaMinima;
+    }
+    
 }

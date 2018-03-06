@@ -21,17 +21,29 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         CuerpoDeElite cosa = new CuerpoDeElite();
         int opcion = 0;
-        do{
-        System.out.println("1.-Crear misión");
-        opcion = sc.nextInt();
-        sc.nextLine();
-        switch(opcion){
-            case 1:
-                cosa.crearMision();
-                break;
-        }
-        }while(opcion!=8);
-        
+        do {
+            System.out.println("1.- Crear misión"
+                    + "\n2.- Relajar soldados"
+                    + "\n3.- Lista de misiones"
+                    + "\n4.- Lista de recursos");
+            opcion = sc.nextInt();
+            sc.nextLine();
+            switch (opcion) {
+                case 1:
+                    cosa.crearMision();
+                    break;
+                case 2:
+                    cosa.bajarStress();
+                    break;
+                case 3:
+                    cosa.listadoMisiones();
+                    break;
+                case 4:
+                    cosa.listadoRecursos();
+                    break;
+            }
+        } while (opcion != 8);
+
     }
 
 }
