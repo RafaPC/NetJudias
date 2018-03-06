@@ -56,4 +56,9 @@ public class RecursoMision {
         return recurso;
     }
 
+    @Override
+    public String toString() {
+        return  "Recurso=" + recurso + ", Uso: " + uso + '}';
+    }
+
 }

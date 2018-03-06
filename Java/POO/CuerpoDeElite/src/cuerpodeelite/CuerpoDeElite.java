@@ -83,7 +83,8 @@ public class CuerpoDeElite {
         sc.nextLine();
         switch (opcion) {
             case 1:
-
+                misiones.put(nombre, new Mision(fecha, lugar, expGanada, nombre));
+                crearMision(fecha, nombre, expGanada);
                 break;
             case 2:
                 System.out.println("Cuál será la potencia mínima de combate");
@@ -218,17 +219,19 @@ public class CuerpoDeElite {
 
     public void listadoMisiones() {
         for (String key : misiones.keySet()) {
+            System.out.println("----------------------");
             if (misiones.get(key) instanceof MisionDeCombate) {
-                ((MisionDeCombate)misiones.get(key)).toString();
+                ((MisionDeCombate) misiones.get(key)).toString();
             } else {
                 System.out.println(misiones.get(key).toString());
             }
-            misiones.get(key).toStringRecursos(recursos);
+            misiones.get(key).toStringRecursos();
         }
     }
 
     public void listadoRecursos() {
         for (Recurso resource : recursos) {
+            System.out.println("----------------------");
             if (resource instanceof RecursoHumano) {
                 System.out.println(((RecursoHumano) resource).toString());
             } else if (resource instanceof RecursoMaterialVehiculo) {
@@ -236,7 +239,7 @@ public class CuerpoDeElite {
             } else if (resource instanceof RecursoMaterial) {
                 System.out.println(((RecursoMaterial) resource).toString());
             }
-            resource.toStringMisiones((HashMap<String, Mision>) misiones);
+            resource.toStringMisiones();
         }
     }
 

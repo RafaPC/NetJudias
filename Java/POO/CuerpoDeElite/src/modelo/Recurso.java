@@ -36,7 +36,7 @@ public abstract class Recurso {
     
     @Override
     public String toString() {
-        return "Recurso{" + "potenciaDeMuerte=" + potenciaDeMuerte + ", nombre=" + nombre;
+        return "PotenciaDeMuerte: " + potenciaDeMuerte + ", Nombre: " + nombre;
     }
 
     @Override
@@ -73,9 +73,10 @@ public abstract class Recurso {
         return misiones;
     }
     
-    public void toStringMisiones(HashMap <String,Mision> misiones){
-        for(String key : misiones.keySet()){
-            System.out.println(misiones.get(key).toString());
+    public void toStringMisiones(){
+        for(Mision mission : misiones){
+            System.out.println("-----");
+            System.out.println(mission.toString());
         }
     }
 

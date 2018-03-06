@@ -142,10 +142,11 @@ public class Mision {
 
     @Override
     public String toString() {
-        return "Mision{" + "nombre=" + nombre + ", fecha=" + fecha + ", lugar=" + lugar + ", expGanada=" + expGanada + ", exito=" + exito + ", recursosMision=" + recursosMision.toString() + '}';
+        return "Mision - " + "Nombre: " + nombre + ", Fecha: " + fecha + ", Lugar: " + lugar + ", ExpGanada: " + expGanada + ", Exito: " + exito;
     }
-    public void toStringRecursos(ArrayList <Recurso> recursos){
-        for(Recurso resource : recursos){
+    public void toStringRecursos(){
+        for(RecursoMision resource : recursosMision){
+            System.out.println("-----");
             System.out.println(resource.toString());
         }
     }
