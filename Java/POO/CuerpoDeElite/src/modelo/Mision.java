@@ -144,7 +144,9 @@ public class Mision {
     public String toString() {
         return "Mision{" + "nombre=" + nombre + ", fecha=" + fecha + ", lugar=" + lugar + ", expGanada=" + expGanada + ", exito=" + exito + ", recursosMision=" + recursosMision.toString() + '}';
     }
-    public void toStringRecursos(){
-        
+    public void toStringRecursos(ArrayList <Recurso> recursos){
+        for(Recurso resource : recursos){
+            System.out.println(resource.toString());
+        }
     }
 }

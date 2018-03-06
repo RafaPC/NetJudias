@@ -223,7 +223,7 @@ public class CuerpoDeElite {
             } else {
                 System.out.println(misiones.get(key).toString());
             }
-            misiones.get(key).toStringRecursos();
+            misiones.get(key).toStringRecursos(recursos);
         }
     }
 
