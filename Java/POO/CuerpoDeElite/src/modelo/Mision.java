@@ -104,8 +104,7 @@ public class Mision {
         }
         if(capacidad >= numPersonas){
             requisito = true;
-        }else{
-            System.out.println("Tienes " + numPersonas + " y solo " + capacidad + " plazas totales de los vehículos");
+        System.out.println("Tienes " + numPersonas + " y solo " + capacidad + " plazas totales de los vehículos");
             System.out.println("Tienes que coger vehículos hasta llegar a " + numPersonas + " plazas o más");
         }
         return requisito;

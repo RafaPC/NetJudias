@@ -89,6 +89,7 @@ public class CuerpoDeElite {
         misiones.put(nombre, new Mision(fecha, lugar, expGanada, nombre));
         String uso;
         boolean estresado;
+        boolean imprimir = true;
         int fuerzaLetal = 0;
         int numRecurso = 0;
         boolean requisitos = false;
@@ -122,12 +123,10 @@ public class CuerpoDeElite {
                 sc.nextLine();
 
                 if (numRecurso != -1) {
-                    for (Recurso resource : recursos) {
-                        for (int i = 0; i < resource.getMisiones().size() && !cogido; i++) {
-                            if (resource.getMisiones().get(i).getFecha().equals(misiones.get(nombre))) {
-                                System.out.println("Ese recurso ya está ocupado en otra misión el mismo día");
-                                cogido = true;
-                            }
+                    for (int i = 0; i < recursos.get(numRecurso).getMisiones().size() && !cogido; i++) {
+                        if (recursos.get(numRecurso).getMisiones().get(i).getFecha().equals(misiones.get(nombre).getFecha())) {
+                            System.out.println("Ese recurso ya está ocupado en otra misión el mismo día");
+                            cogido = true;
                         }
                     }
                 } else {
