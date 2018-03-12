@@ -1,0 +1,13 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    .opcion{
+        color: red;
+        background: blue;
+    }
+    #prueba{
+        -fx-background-color: red;
+    }
+}
