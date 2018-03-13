@@ -25,34 +25,25 @@ public class FXMLController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    List<Cliente> clientes;
     private int indice;
-    
+    private Integer number = 0;
+    private int anterior = 0;
     
     @FXML
     private TextField fxUser;
     @FXML
     private Button fxBotonNormal;
+    @FXML
+    private Button fxBotonHola;
     
     @FXML
     private void sumarFibonacci(ActionEvent event) throws IOException{
-        
-    }
-    @FXML
-    private void derecha(ActionEvent event) throws IOException{
-        indice++;
-    }
-    @FXML
-    private void izquierda(ActionEvent event) throws IOException{
-        indice--;
-    }
-    @FXML
-    private void otraFuncion(ActionEvent event) throws IOException{
-        
         number = number + anterior;
         anterior = number - anterior;
         fxBotonHola.setText(number.toString());
     }
+
+    @FXML
     
     
     @Override
