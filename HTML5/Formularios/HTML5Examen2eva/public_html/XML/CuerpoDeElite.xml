@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<cuerpodeelite
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='file:/home/daw/NetBeansProjects/NetJudias/HTML5/Formularios/HTML5Examen2eva/public_html/CuerpoDeElite/CuerpoDeElite.xsd'>
+    <recursos>
+        <RecursoHumano>
+            <potenciaDeMuerte>99</potenciaDeMuerte>
+            <nombre>Chuck Norris</nombre>
+            <stress>0</stress>
+            <numBajasCuchillo>999</numBajasCuchillo>
+            <habilidadMaquinas>50</habilidadMaquinas>
+            <exp>1000</exp>
+            <misiones>
+                <Mision>
+                    <nombre>Operación Anacardo</nombre>
+                    <fecha>2011-11-11</fecha>
+                    <lugar>Sagitario A*</lugar>
+                    <expGanada>1000</expGanada>
+                    <exito>true</exito>
+                </Mision>
+                <MisionDeCombate>
+                    <nombre>Operación Ninja</nombre>
+                    <fecha>2017-04-23</fecha>
+                    <lugar>Desclasificado</lugar>
+                    <expGanada>50</expGanada>
+                    <exito>true</exito>
+                    <potenciaMinima>90</potenciaMinima>
+                </MisionDeCombate>
+            </misiones>
+        </RecursoHumano>
+        <RecursoMaterial>
+            <potenciaDeMuerte>100000</potenciaDeMuerte>
+            <nombre>Bomba H</nombre>
+            <habilidadMinima>1</habilidadMinima>
+            <rangoAccion>10000</rangoAccion>
+            <misiones>
+            </misiones>
+        </RecursoMaterial>
+        <RecursoMaterialVehiculo>
+            <potenciaDeMuerte>10</potenciaDeMuerte>
+            <nombre>Furgoneta</nombre>
+            <habilidadMinima>40</habilidadMinima>
+            <rangoAccion>5</rangoAccion>
+            <capacidad>7</capacidad>
+            <misiones>
+                <MisionDeCombate>
+                    <nombre>Operación Ninja</nombre>
+                    <fecha>2000-01-01</fecha>
+                    <lugar>Desclasificado</lugar>
+                    <expGanada>50</expGanada>
+                    <exito>true</exito>
+                    <potenciaMinima>90</potenciaMinima>
+                </MisionDeCombate>
+            </misiones>
+        </RecursoMaterialVehiculo>
+    </recursos>
+    <misiones>
+        <Mision>
+            <nombre>Operación Anacardo</nombre>
+            <fecha>2011-11-11</fecha>
+            <lugar>Sagitario A*</lugar>
+            <expGanada>1000</expGanada>
+            <exito>true</exito>
+            <recursosmision>
+                <RecursoMision>
+                    <RecursoHumano>
+                        <potenciaDeMuerte>999</potenciaDeMuerte>
+                        <nombre>Chuck Norris</nombre>
+                        <stress>0</stress>
+                        <numBajasCuchillo>999</numBajasCuchillo>
+                        <habilidadMaquinas>50</habilidadMaquinas>
+                        <exp>1000</exp>
+                    </RecursoHumano>
+                    <uso>Salvar la humanidad</uso>
+                </RecursoMision>
+            </recursosmision>
+        </Mision>
+        <MisionDeCombate>
+            <nombre>Operación Ninja</nombre>
+            <fecha>2017-04-23</fecha>
+            <lugar>Desclasificado</lugar>
+            <expGanada>50</expGanada>
+            <exito>true</exito>
+            <potenciaMinima>90</potenciaMinima>
+            <recursosmision>
+                <RecursoMision>
+                    <RecursoMaterialVehiculo>
+                        <potenciaDeMuerte>10</potenciaDeMuerte>
+                        <nombre>Furgoneta</nombre>
+                        <habilidadMinima>40</habilidadMinima>
+                        <rangoAccion>5</rangoAccion>
+                        <capacidad>7</capacidad>
+                    </RecursoMaterialVehiculo>
+                    <uso>Transporte</uso>
+                </RecursoMision>
+            </recursosmision>
+        </MisionDeCombate>
+    </misiones>
+
+</cuerpodeelite>

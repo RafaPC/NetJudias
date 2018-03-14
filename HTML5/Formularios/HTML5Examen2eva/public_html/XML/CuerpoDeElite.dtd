@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+    TODO define vocabulary identification
+    PUBLIC ID: -//vendor//vocabulary//EN
+    SYSTEM ID: http://server/path/CuerpoDeElite.dtd
+
+-->
+
+<!--
+    An example how to use this DTD from your XML document:
+
+    <?xml version="1.0"?>
+
+    <!DOCTYPE cuerpodeelite SYSTEM "CuerpoDeElite.dtd">
+
+    <cuerpodeelite>
+    ...
+    </cuerpodeelite>
+-->
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT cuerpodeelite (recursos|misiones)*>
+<!ATTLIST cuerpodeelite
+    xsi:noNamespaceSchemaLocation CDATA #IMPLIED
+    xmlns:xsi CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT recursos (RecursoHumano|RecursoMaterial|RecursoMaterialVehiculo)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT RecursoHumano (potenciaDeMuerte|nombre|stress|numBajasCuchillo|habilidadMaquinas|exp|misiones)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT potenciaDeMuerte (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT nombre (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT stress (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT numBajasCuchillo (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT habilidadMaquinas (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT exp (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT misiones (Mision|MisionDeCombate)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT Mision (nombre|fecha|lugar|expGanada|exito|recursosmision)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT fecha (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT lugar (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT expGanada (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT exito (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT MisionDeCombate (nombre|fecha|lugar|expGanada|exito|potenciaMinima|recursosmision)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT potenciaMinima (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT RecursoMaterial (potenciaDeMuerte|nombre|habilidadMinima|rangoAccion|misiones)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT habilidadMinima (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT rangoAccion (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT RecursoMaterialVehiculo (potenciaDeMuerte|nombre|habilidadMinima|rangoAccion|capacidad|misiones)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT capacidad (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT recursosmision (RecursoMision)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT RecursoMision (RecursoHumano|uso|RecursoMaterialVehiculo)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT uso (#PCDATA)>

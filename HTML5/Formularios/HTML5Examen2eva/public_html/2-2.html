@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/primer.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <h1>Zoo Keeper Application Form</h1>
+        <h5><i>Please complete the form. Mandatory fields are marked with a *</i></h5>
+        <form action="https://www.w3schools.com/action_page.php">
+            <fieldset>
+                <legend>CONTACT DETAILS</legend>
+                <div class="fila"><div class="txt">Name *</div>
+                    <input type="text" name="name">
+                </div>
+                <div class="fila"><div class="txt">Telephone</div>
+                    <input type="text" name="telephone">
+                </div>
+                <div class="fila"><div class="txt">Email *</div>
+                    <input type="email" name="email">
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>PERSONAL INFORMATION</legend>
+                <div class="fila"><div class="txt">*Age</div>
+                    <input type="text" name="surname">
+                </div>
+                <div class="fila">
+                    <div class="txt">
+                        Gender
+                    </div>
+                    <select>
+                        <option value="none"></option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="shemale">Shemale</option>
+                    </select>
+                </div>
+                <div class="fila"><div class="txt2">When did you first know you wanted to be a zoo-keeper?</div>
+                    <textarea name="textaco" rows="5" cols="37"></textarea>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>PICK YOUR FAVORITE ANIMALS</legend>
+                <div class="fila">
+                    <div class="boton"><input type="radio" name="zebra" value="zebra" class="inline">Zebra</div>
+                    <div class="boton"><input type="radio" name="cat" value="cat" class="inline">Cat</div>
+                    <div class="boton"><input type="radio" name="anaconda" value="anaconda" class="inline">Anaconda</div>
+                    <div class="boton"><input type="radio" name="human" value="human" class="inline">Human</div>
+                </div>
+                <div class="fila">
+                    <div class="boton"><input type="radio" name="elephant" value="elephant" class="inline">Elephant</div>
+                    <div class="boton"><input type="radio" name="wildebeest" value="wildebeest" class="inline">Wildebeest</div>
+                    <div class="boton"><input type="radio" name="pigeon" value="pigeon" class="inline">Pigeon</div>
+                    <div class="boton"><input type="radio" name="crab" value="crab" class="inline">Crab</div>
+                </div>
+            </fieldset>
+            <div id="submit"><input type="submit"></div>
+        </form>
+    </body>
+</html>
