@@ -25,14 +25,9 @@ public class FXMLController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    private int indice;
-    private Integer number = 0;
-    private int anterior = 0;
+    private Integer number;
+    private int anterior;
     
-    @FXML
-    private TextField fxUser;
-    @FXML
-    private Button fxBotonNormal;
     @FXML
     private Button fxBotonHola;
     
@@ -42,13 +37,11 @@ public class FXMLController implements Initializable {
         anterior = number - anterior;
         fxBotonHola.setText(number.toString());
     }
-
-    @FXML
-    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        number = 1;
+        anterior = 0;
     }    
     
 }

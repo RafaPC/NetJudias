@@ -15,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import modelo.Cliente;
 
 /**
@@ -37,6 +36,12 @@ public class FXMLController implements Initializable {
     @FXML
     private Label fxEdad;
 
+    @FXML 
+    private Button fxSiguiente;
+    
+    @FXML 
+    private Button fxAnterior;
+    
     @FXML
     private void mostrarCliente() throws IOException {
         fxUser.setText(clientes.get(indice).getNombre());
@@ -46,21 +51,27 @@ public class FXMLController implements Initializable {
     @FXML
     private void derecha(ActionEvent event) throws IOException {
         if (indice == clientes.size()) {
-            indice = 0;
+            fxSiguiente.setDisable(true);
         } else {
             indice++;
+            if(fxAnterior.isDisable()){
+                fxAnterior.setDisable(false);
+            }
         }
-        this.mostrarCliente();
+        mostrarCliente();
     }
 
     @FXML
     private void izquierda(ActionEvent event) throws IOException {
         if (indice == 0) {
-            indice = clientes.size();
+            fxAnterior.setDisable(true);
         } else {
             indice--;
+            if(fxSiguiente.isDisable()){
+                fxSiguiente.setDisable(false);
+            }
         }
-        this.mostrarCliente();
+        mostrarCliente();
     }
 
     @Override
@@ -71,6 +82,7 @@ public class FXMLController implements Initializable {
         clientes.add(new Cliente("Andrea", 20));
         clientes.add(new Cliente("Yáñez", 18));
         fxUser.setText(clientes.get(indice).getNombre());
+        fxEdad.setText(clientes.get(indice).getEdad() + "");
     }
 
 }

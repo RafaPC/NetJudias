@@ -14,8 +14,8 @@
    <children>
       <Label layoutX="29.0" layoutY="47.0" prefHeight="45.0" prefWidth="97.0" style="-fx-font-size: 23;" text="Usuario:" />
       <Label layoutX="29.0" layoutY="106.0" prefHeight="45.0" prefWidth="67.0" style="-fx-font-size: 23;" text="Edad:" />
-      <TextField fx:id="usuario" layoutX="138.0" layoutY="59.0" />
-      <TextField fx:id="edad" layoutX="100.0" layoutY="115.0" prefHeight="26.0" prefWidth="50.0" />
+      <TextField fx:id="User" layoutX="138.0" layoutY="59.0" />
+      <TextField fx:id="Edad" layoutX="100.0" layoutY="115.0" prefHeight="26.0" prefWidth="50.0" />
       <Button fx:id="botonSiguiente" layoutX="370.0" layoutY="258.0" mnemonicParsing="false" onAction="#derecha" prefHeight="38.0" prefWidth="97.0" text="Siguiente" />
       <Button fx:id="botonAnterior" layoutX="88.0" layoutY="258.0" mnemonicParsing="false" onAction="#izquierda" prefHeight="38.0" prefWidth="97.0" text="Anterior" />
       <Button fx:id="crearCliente" layoutX="238.0" layoutY="196.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="86.0" text="NEW" />
