@@ -38,9 +38,6 @@ public class FXMLController implements Initializable {
 
     @FXML
     private TextField fxEdad;
-    
-    //@FXML
-    //private Button fxNew;
 
     @FXML
     private Button fxbotonSiguiente;
