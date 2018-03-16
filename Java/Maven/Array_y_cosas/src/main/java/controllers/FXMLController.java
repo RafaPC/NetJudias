@@ -67,6 +67,9 @@ public class FXMLController implements Initializable {
     private void crearCliente() throws IOException{
         Integer edad = Integer.parseInt(fxEdad.getText());
         clientes.add(new Cliente(fxUser.getText(),edad));
+        indice = clientes.size()-1;
+        mostrarCliente();
+        mirarIndice();
     }
     @FXML
     private void derecha(ActionEvent event) throws IOException {

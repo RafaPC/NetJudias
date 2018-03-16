@@ -11,6 +11,6 @@
     </stylesheets>
    <children>
       <Button id="prueba" fx:id="fxBotonHola" layoutX="95.0" layoutY="246.0" mnemonicParsing="false" styleClass="mainFxmlClass" stylesheets="@../styles/fxml.css" text="HOLA MUNDO" />
-      <Button fx:id="fxBotonNormal" layoutX="360.0" layoutY="185.0" mnemonicParsing="false" onAction="#sumarFibonacci" prefHeight="87.0" prefWidth="159.0" style="-fx-background-color: black;" text="FIBONNACCI" textFill="#751c1c" />
+      <Button fx:id="fxBotonNormal" layoutX="360.0" layoutY="185.0" mnemonicParsing="false" onAction="" prefHeight="87.0" prefWidth="159.0" style="-fx-background-color: black;" text="FIBONNACCI" textFill="#751c1c" />
    </children>
 </AnchorPane>
