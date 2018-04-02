@@ -9,6 +9,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import merchadona.constantes.Constantes;
@@ -61,7 +62,12 @@ public class Merchadona {
         System.out.println("------------------------------------------------");
     }
 
-    public int login(int id) {
+    public Empleado login(int id) {
+
+        return empleados.get(id);
+    }
+
+    public int tipoEmpleado(int id) {
         int tipo = 0;
 
         if (id == Constantes.ADMIN_ID) {
@@ -92,40 +98,12 @@ public class Merchadona {
         return altaOK;
     }
 
-    public void darAltaProducto() {
+    public void darAltaProducto(String nombre, double precio) {
         int opcion;
         boolean comprobar = false;
-        double precio;
-        String nombre;
-        System.out.println("Seleccione el tipo de Producto:");
-        System.out.println("-1. Perecedero");
-        System.out.println("-2. No Perecedero");
-        opcion = sc.nextInt();
-        sc.nextLine();
-        System.out.println("Introduce el Nombre del Producto:");
-        nombre = sc.nextLine();
-        for (int i = 0; i < productos.size(); i++) {
-            if (productos.get(i).getNombre().equalsIgnoreCase(nombre)) {
-                comprobar = true;
-                System.out.println("ya esta creado");
-            }
-        }
-        if (!comprobar) {
-            System.out.println("Introduce el Precio base del Producto:");
-            precio = sc.nextDouble();
-            sc.nextLine();
-            switch (opcion) {
-                case 1:
-                    productos.add(new Perecedero(LocalDateTime.now(), nombre, precio));
-                    break;
-                case 2:
-                    productos.add(new Producto(nombre, precio));
-                    break;
-                default:
-                    System.out.print("OPCION NO VALIDA\n");
-                    break;
-            }
-        }
+
+        productos.add(new Producto(nombre, precio));
+
     }
 
     public void darBajaEmpleado() {
@@ -147,12 +125,14 @@ public class Merchadona {
         }
     }
 
-    public void listaCajeras() {
+    public List<Cajera> listaCajeras() {
+        ArrayList<Cajera> cajeras = new ArrayList<>();
         for (Empleado empleado1 : empleados.values()) {
             if (empleado1 instanceof Cajera) {
-                System.out.println(empleado1);
+                cajeras.add((Cajera) empleado1);
             }
         }
+        return cajeras;
     }
 
     public void reponerProducto(int id) {
@@ -172,58 +152,58 @@ public class Merchadona {
         }
     }
 
-    private double caducacion(int producto) {
-        LocalDateTime reposicion = ((Perecedero) productos.get(producto)).getFecha_reposicion();
+    private double caducacion(Producto producto) {
+        LocalDateTime reposicion = ((Perecedero) producto).getFecha_reposicion();
         LocalDateTime actual = LocalDateTime.now();
         Duration d = Duration.between(reposicion, actual);
         long segundos = d.getSeconds();
-        double precioBase = productos.get(producto).getPrecio_base();
-        System.out.println("Han pasado " + segundos + " segundos");
+        double precioBase = producto.getPrecio_base();
+        //System.out.println("Han pasado " + segundos + " segundos");
         double descuento = segundos / Constantes.NUM_SEGUNDOS_BAJA_PRECIO * Constantes.FACTOR_BAJA_PRECIO * precioBase;
         double precioFinal;
         if (segundos > Constantes.NUM_SEGUNDOS_CADUCA) {
-            System.out.println("El producto esta caducado no es posible su venta");
-            precioFinal = 0;
+            //System.out.println("El producto esta caducado no es posible su venta");
+            precioFinal = -1;
         } else {
             precioFinal = precioBase - descuento;
-            System.out.println("El precio a pagar por unidad es : " + precioFinal);
+            // System.out.println("El precio a pagar por unidad es : " + precioFinal);
         }
         return precioFinal;
     }
 
-    public void venderProducto(int id) {
-        int producto, cantidad, siNo;
+    public int venderProducto(int id, int cantidad, Producto producto) {
+        int error = 0;
         boolean salir = false;
         double total = 0;
-        do {
-            System.out.println("Selecione el producto:");
-            imprimirProductos();
-            producto = sc.nextInt();
-            sc.nextLine();
-            double precioProducto = productos.get(producto).getPrecio_base();
-            if (productos.get(producto) instanceof Perecedero) {
-                precioProducto = caducacion(producto);
+
+        double precioProducto = producto.getPrecio_base();
+        if (producto instanceof Perecedero) {
+            precioProducto = caducacion(producto);
+        }
+        if (precioProducto != 0) {
+
+            if (producto.getStock() > cantidad) {
+                producto.setStock(producto.getStock() - cantidad);
+                total = total + precioProducto * cantidad;
+            } else {
+                error = 1;
             }
-            if (precioProducto != 0) {
-                System.out.println("Introduce la cantidad:");
-                cantidad = sc.nextInt();
-                sc.nextLine();
-                if (productos.get(producto).getStock() > cantidad) {
-                    productos.get(producto).setStock(productos.get(producto).getStock() - cantidad);
-                    total = total + precioProducto * cantidad;
-                } else {
-                    System.out.println("No hay esa cantidad en stock");
-                }
-            }
-            System.out.println("Seguir vendiendo SI(1), NO(2)");
-            siNo = sc.nextInt();
-            sc.nextLine();
-            if (siNo == 2) {
-                System.out.println("El precio total de la venta son:" + total);
-                ((Cajera) empleados.get(id)).setPrecio_total_vendidos(total);
-                salir = true;
-            }
-        } while (!salir);
+        } else {
+
+            error = 2;
+        }
+        ((Cajera) empleados.get(id)).setPrecio_total_vendidos(total);
+
+        return error;
 
     }
+
+    public Map<Integer, Empleado> getEmpleados() {
+        return empleados;
+    }
+
+    public ArrayList<Producto> getProductos() {
+        return productos;
+    }
+
 }

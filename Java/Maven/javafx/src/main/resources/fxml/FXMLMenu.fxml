@@ -13,6 +13,7 @@
             <items>
               <MenuItem mnemonicParsing="false" onAction="#handleScene1" text="Scene 1" />
                   <MenuItem mnemonicParsing="false" onAction="#handleScene2" text="Scene 2" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleSceneTablas" text="Tablas" />
             </items>
           </Menu>
             <Menu fx:id="fxProbar" mnemonicParsing="false" text="probar">

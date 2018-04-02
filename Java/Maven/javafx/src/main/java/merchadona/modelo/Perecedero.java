@@ -29,8 +29,5 @@ public class Perecedero extends Producto{
         this.fecha_reposicion = fecha_reposicion;
     }
 
-    @Override
-    public String toString() {
-        return "Perecedero{"+ super.toString() + "fecha_reposicion=" + fecha_reposicion + '}';
-    }    
+  
 }

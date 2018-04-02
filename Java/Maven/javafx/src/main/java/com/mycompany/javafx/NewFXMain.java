@@ -7,6 +7,7 @@ package com.mycompany.javafx;
 
 import fx.FXMLMenuController;
 import fx.FXMLSceneController;
+import fx.constantes.Constantes;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -30,7 +31,7 @@ public class NewFXMain extends Application {
     public void start(Stage stage) throws IOException {
         //BorderPane root = FXMLLoader.load(getClass().getResource("/fxml/FXMLMenu.fxml"));
         FXMLLoader loaderMenu = new FXMLLoader(
-          getClass().getResource("/fxml/FXMLMenu.fxml"));
+          getClass().getResource(Constantes.PANTALLA_MENU));
         BorderPane root = loaderMenu.load();
         FXMLMenuController menuController = loaderMenu.getController();   
                
@@ -38,7 +39,7 @@ public class NewFXMain extends Application {
         AnchorPane anchor;
                     //load up OTHER FXML document
         FXMLLoader loader = new FXMLLoader(
-          getClass().getResource("/fxml/FXMLScene.fxml"));
+          getClass().getResource(Constantes.PANTALLA_SCENE));
         anchor = loader.load();
         FXMLSceneController controller = loader.getController();
         controller.setController(menuController);

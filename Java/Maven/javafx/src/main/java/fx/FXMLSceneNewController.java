@@ -7,12 +7,17 @@ package fx;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 
 /**
  * FXML Controller class
@@ -22,10 +27,29 @@ import javafx.scene.control.ButtonType;
 public class FXMLSceneNewController implements Initializable {
 
     private FXMLMenuController controller;
+    
+    
+    @FXML
+    private ToggleGroup fxTipoEmpleado;
+    
+    @FXML
+    private DatePicker fxFecha;
+    
+    @FXML 
+    private CheckBox fxCheckPerecedero;
+    
 
+    @FXML
+    private void clickPerecedero(ActionEvent event)  {
+        fxFecha.setDisable(!fxCheckPerecedero.isSelected());
+    }
+    
+    
     @FXML
     private void clickAltaEmpleado(ActionEvent event) throws IOException {
 
+        String radio  = ((RadioButton)fxTipoEmpleado.getSelectedToggle()).getText();
+        LocalDate fecha = fxFecha.getValue();
         boolean altaOk = this.controller.getMerchadona().darAltaEmpleado("pepe", 23, 1);
 
         if (altaOk) {

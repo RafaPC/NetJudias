@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.FXMLTablasController">
+    <stylesheets>
+        <URL value="@/css/fxmltablas.css" />
+    </stylesheets>
+   <children>
+      <ListView fx:id="fxList" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" />
+      <TableView fx:id="fxTabla" layoutX="386.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <Button layoutX="162.0" layoutY="253.0" mnemonicParsing="false" onAction="#clickAddProducto" text="Button" />
+      <VBox fx:id="fxVbox" layoutX="353.0" layoutY="14.0" prefHeight="200.0" prefWidth="234.0" />
+      <Button layoutX="248.0" layoutY="40.0" mnemonicParsing="false" onAction="#clickAddCesta" text="add producto a cesta" />
+      <ListView fx:id="fxListCajero" layoutX="277.0" layoutY="166.0" prefHeight="200.0" prefWidth="298.0" />
+   </children>
+</AnchorPane>
