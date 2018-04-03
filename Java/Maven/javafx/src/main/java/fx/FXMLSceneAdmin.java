@@ -33,38 +33,6 @@ public class FXMLSceneAdmin implements Initializable {
     @FXML
     private void handleLoginAction(ActionEvent event) throws IOException {
 
-        // mirar variable de login
-        int empleadoID = Integer.parseInt(fxUser.getText());
-        this.controller.getMerchadona().login(empleadoID);
-
-        this.controller.setEmpleadoID(empleadoID);
-
-        switch (this.controller.getMerchadona().tipoEmpleado(empleadoID)) {
-            case 1:
-                Alert a = new Alert(Alert.AlertType.INFORMATION, "Te has logeado como Admin", ButtonType.CLOSE);
-                //final Stage stage = (Stage) fxUser.getScene().getWindow();
-                //a.initOwner(stage);
-                a.showAndWait();
-                this.controller.habilitaMenuAdmin();
-                break;
-            case 2:
-
-                break;
-            case 3:
-                break;
-
-        }
-
-        this.controller.setEmpleadoActual(
-                this.controller.getMerchadona().login(empleadoID));
-
-        this.controller.getFxMenu().setVisible(true);
-        this.controller.getFxProbar().setVisible(false);
-
-//         FadeTransition ft = new FadeTransition(Duration.millis(5000), fxUser);
-//    ft.setFromValue(1.0);
-//    ft.setToValue(0.0);
-//    ft.play();
     }
 
     /**
