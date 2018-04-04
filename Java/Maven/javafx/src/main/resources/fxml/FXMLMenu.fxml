@@ -5,18 +5,12 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="fxRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.FXMLMenuController">
+<BorderPane fx:id="fxRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.FXMLMenuController">
    <top>
       <MenuBar fx:id="fxMenu" BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="Cambia escena">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#handleScene1" text="Scene 1" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleScene2" text="Scene 2" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleSceneTablas" text="Tablas" />
-            </items>
-          </Menu>
-            <Menu fx:id="fxProbar" mnemonicParsing="false" text="probar">
+          <Menu mnemonicParsing="false" text="Log out" />
+            <Menu mnemonicParsing="false" text="Atras">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
               </items>
