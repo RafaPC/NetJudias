@@ -33,7 +33,7 @@ public class FXMLMenuController implements Initializable {
     private AnchorPane scene2;
     private AnchorPane tabla;
     private FXMLTablasController controllerT;
-
+    
     private Merchadona merchadona;
     private Empleado empleadoActual;
     private int empleadoID;
@@ -43,6 +43,15 @@ public class FXMLMenuController implements Initializable {
 
     @FXML
     private Menu fxProbar;
+
+    @FXML
+    private AnchorPane fxAdmin;
+    
+    @FXML
+    private Menu fxLogout;
+
+    @FXML
+    private Menu fxAtras;
 
     @FXML
     private BorderPane fxRoot;
@@ -75,22 +84,22 @@ public class FXMLMenuController implements Initializable {
             fxMenu.setVisible(false);
             merchadona = new Merchadona();
             FXMLLoader loader = new FXMLLoader(
-              getClass().getResource(Constantes.PANTALLA_SCENE));
+                    getClass().getResource(Constantes.PANTALLA_SCENE));
             scene = loader.load();
             FXMLSceneController controller = loader.getController();
             controller.setController(this);
 
             loader = new FXMLLoader(
-              getClass().getResource(Constantes.PANTALLA_SCENE_NEW));
+                    getClass().getResource(Constantes.PANTALLA_SCENE_NEW));
             scene2 = loader.load();
             FXMLSceneNewController controllerNew = loader.getController();
             controllerNew.setController(this);
 
-            loader = new FXMLLoader(
-              getClass().getResource(Constantes.PANTALLA_TABLAS));
+            /*loader = new FXMLLoader(
+                    getClass().getResource(Constantes.PANTALLA_TABLAS));
             tabla = loader.load();
             controllerT = loader.getController();
-            controllerT.setController(this);
+            controllerT.setController(this);*/
 
         } catch (IOException ex) {
             Logger.getLogger(FXMLMenuController.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,9 +135,19 @@ public class FXMLMenuController implements Initializable {
         this.empleadoID = empleadoID;
     }
 
-    
-    public void habilitaMenuAdmin()
-    {
-        
+    @FXML
+    public void habilitaPantallaAdmin() {
+        fxMenu.setVisible(true);
+        fxAdmin.setVisible(true);
+    }
+
+    @FXML
+    public void habilitaPantallaReponedor() {
+        fxRoot.setCenter(tabla);
+    }
+
+    @FXML
+    public void habilitaPantallaCajero() {
+        fxRoot.setCenter(tabla);
     }
 }

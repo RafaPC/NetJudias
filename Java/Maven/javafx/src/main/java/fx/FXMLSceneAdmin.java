@@ -8,15 +8,15 @@ package fx;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.animation.FadeTransition;
+//import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+//import javafx.scene.control.Alert;
+//import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import javafx.util.Duration;
+//import javafx.stage.Stage;
+//import javafx.util.Duration;
 
 /**
  * FXML Controller class

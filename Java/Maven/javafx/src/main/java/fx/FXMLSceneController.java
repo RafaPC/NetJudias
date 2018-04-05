@@ -45,12 +45,21 @@ public class FXMLSceneController implements Initializable {
                 //final Stage stage = (Stage) fxUser.getScene().getWindow();
                 //a.initOwner(stage);
                 a.showAndWait();
-                this.controller.habilitaMenuAdmin();
+                this.controller.habilitaPantallaAdmin();
                 break;
             case 2:
-
+                Alert b = new Alert(Alert.AlertType.INFORMATION, "Te has logeado como Admin", ButtonType.CLOSE);
+                //final Stage stage = (Stage) fxUser.getScene().getWindow();
+                //a.initOwner(stage);
+                b.showAndWait();
+                this.controller.habilitaPantallaReponedor();
                 break;
             case 3:
+                Alert c = new Alert(Alert.AlertType.INFORMATION, "Te has logeado como Admin", ButtonType.CLOSE);
+                //final Stage stage = (Stage) fxUser.getScene().getWindow();
+                //a.initOwner(stage);
+                c.showAndWait();
+                this.controller.habilitaPantallaCajero();
                 break;
 
         }
