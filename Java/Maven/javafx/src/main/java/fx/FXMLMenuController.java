@@ -139,6 +139,7 @@ public class FXMLMenuController implements Initializable {
     public void habilitaPantallaAdmin() {
         fxMenu.setVisible(true);
         fxAdmin.setVisible(true);
+        
     }
 
     @FXML

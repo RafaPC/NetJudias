@@ -23,7 +23,7 @@ import javafx.util.Duration;
  *
  * @author user
  */
-public class FXMLSceneController implements Initializable {
+public class FXMLSceneReponer implements Initializable {
 
     private FXMLMenuController controller;
 
@@ -68,7 +68,7 @@ public class FXMLSceneController implements Initializable {
                 this.controller.getMerchadona().login(empleadoID));
 
         this.controller.getFxMenu().setVisible(true);
-        //this.controller.getFxProbar().setVisible(false);
+        this.controller.getFxProbar().setVisible(false);
 
 //         FadeTransition ft = new FadeTransition(Duration.millis(5000), fxUser);
 //    ft.setFromValue(1.0);
