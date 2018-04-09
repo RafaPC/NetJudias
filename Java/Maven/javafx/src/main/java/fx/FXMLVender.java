@@ -116,6 +116,7 @@ public class FXMLVender implements Initializable {
     private void handleVaciarCesta(ActionEvent event) throws IOException {
         temp.clear();
         fxCantidad.setText("");
+        cargarLista();
     }
 
     /**
