@@ -5,11 +5,9 @@
  */
 package fx;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,11 +16,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.stage.Stage;
-import javafx.util.Duration;
-import merchadona.modelo.Empleado;
 
 /**
  * FXML Controller class
@@ -46,7 +39,7 @@ public class FXMLSceneController implements Initializable {
         //final Stage stage = (Stage) fxUser.getScene().getWindow();
         //a.initOwner(stage);
         //a.showAndWait();
-        try {
+        /*try {
             // mirar varaib le de login
             if (fxUser.getText() == null || fxUser.getText().trim().isEmpty()) {
             Alert b = new Alert(Alert.AlertType.ERROR, "Tienes que introducir una ID", ButtonType.CLOSE);
@@ -75,11 +68,31 @@ public class FXMLSceneController implements Initializable {
         } catch (Exception e) {
             a.setContentText("El id no es un número");
             a.showAndWait();
-        }
+        }*/
 //         FadeTransition ft = new FadeTransition(Duration.millis(5000), fxUser);
 //    ft.setFromValue(1.0);
 //    ft.setToValue(0.0);
 //    ft.play();
+        if (fxUser.getText() == null || fxUser.getText().trim().isEmpty()) {
+            Alert b = new Alert(Alert.AlertType.ERROR, "Tienes que introducir una ID", ButtonType.CLOSE);
+            b.showAndWait();
+        }
+        int empleadoID = Integer.parseInt(fxUser.getText());
+        switch (this.controller.getMerchadona().tipoEmpleado(empleadoID)) {
+            case 1:
+                this.controller.habilitaMenuAdmin(empleadoID);
+                break;
+            case 2:
+                this.controller.habilitaMenuReponedor(empleadoID);
+                break;
+            case 3:
+                this.controller.habilitaMenuCajero(empleadoID);
+                break;
+            case 0:
+                a.setContentText("Id de usuario no valido");
+                a.showAndWait();
+                break;
+        }
     }
 
     /**
@@ -90,7 +103,7 @@ public class FXMLSceneController implements Initializable {
         // TODO
 
         Image image
-          = new Image(getClass().getResourceAsStream("/images/image.jpeg"));
+                = new Image(getClass().getResourceAsStream("/images/image.jpeg"));
 
         fxImage.setImage(image);
     }

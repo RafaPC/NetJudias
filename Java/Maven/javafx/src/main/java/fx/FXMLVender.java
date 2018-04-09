@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -39,6 +40,9 @@ public class FXMLVender implements Initializable {
 
     @FXML
     private TableView<Producto> fxTabla;
+
+    @FXML
+    private ListView<Producto> fxCesta;
 
     ArrayList<Producto> temp = new ArrayList<>();
 
@@ -66,13 +70,21 @@ public class FXMLVender implements Initializable {
 
     @FXML
     private void handleAñadir(ActionEvent event) throws IOException {
+        int stockCesta = 0;
+        for (int i = 0; i < temp.size(); i++) {
+            if (temp.get(i).getNombre().equals(fxTabla.getSelectionModel().getSelectedItem())) {
+                stockCesta += temp.get(i).getStock();
+            }
+        }
         if (fxTabla.getSelectionModel().getSelectedItem() == null) {
             Alert a = new Alert(Alert.AlertType.ERROR, "Tienes que seleccionar un producto", ButtonType.CLOSE);
             a.showAndWait();
         } else if (fxCantidad.getText() == null || fxCantidad.getText().trim().isEmpty()) {
             Alert a = new Alert(Alert.AlertType.ERROR, "Tienes que introducir un número", ButtonType.CLOSE);
             a.showAndWait();
-        } else if (fxTabla.getSelectionModel().getSelectedItem().getStock() < Integer.parseInt(fxCantidad.getText())) {
+        } //else if (fxTabla.getSelectionModel().getSelectedItem().getStock() < Integer.parseInt(fxCantidad.getText())) {
+        else if (fxTabla.getSelectionModel().getSelectedItem().getStock() < stockCesta+Integer.parseInt(fxCantidad.getText())) {
+
             Alert a = new Alert(Alert.AlertType.ERROR, "No hay tanta cantidad disponible", ButtonType.CLOSE);
             a.showAndWait();
         } else {
@@ -80,6 +92,7 @@ public class FXMLVender implements Initializable {
 
         }
         fxCantidad.setText("");
+        cargarLista();
     }
 
     @FXML
@@ -120,6 +133,9 @@ public class FXMLVender implements Initializable {
     public void cargarLista() {
         fxTabla.getItems().clear();
         fxTabla.getItems().addAll(this.controller.getMerchadona().getProductos());
+
+        fxCesta.getItems().clear();
+        fxCesta.getItems().addAll(temp);
     }
 
     private void configTabla() {
