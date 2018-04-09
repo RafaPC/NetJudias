@@ -71,8 +71,10 @@ public class FXMLVender implements Initializable {
     @FXML
     private void handleAñadir(ActionEvent event) throws IOException {
         int stockCesta = 0;
+        Producto p = new Producto(fxTabla.getSelectionModel().getSelectedItem().getNombre(),fxTabla.getSelectionModel().getSelectedItem().getPrecio_base(),Integer.parseInt(fxCantidad.getText()));
+        System.out.println("COPÓN");
         for (int i = 0; i < temp.size(); i++) {
-            if (temp.get(i).getNombre().equals(fxTabla.getSelectionModel().getSelectedItem())) {
+            if (temp.get(i).getNombre().equals(p.getNombre())) {
                 stockCesta += temp.get(i).getStock();
             }
         }
@@ -82,13 +84,12 @@ public class FXMLVender implements Initializable {
         } else if (fxCantidad.getText() == null || fxCantidad.getText().trim().isEmpty()) {
             Alert a = new Alert(Alert.AlertType.ERROR, "Tienes que introducir un número", ButtonType.CLOSE);
             a.showAndWait();
-        } //else if (fxTabla.getSelectionModel().getSelectedItem().getStock() < Integer.parseInt(fxCantidad.getText())) {
-        else if (fxTabla.getSelectionModel().getSelectedItem().getStock() < stockCesta+Integer.parseInt(fxCantidad.getText())) {
+        }else if (fxTabla.getSelectionModel().getSelectedItem().getStock() < stockCesta+Integer.parseInt(fxCantidad.getText())) {
 
             Alert a = new Alert(Alert.AlertType.ERROR, "No hay tanta cantidad disponible", ButtonType.CLOSE);
             a.showAndWait();
         } else {
-            temp.add(new Producto(fxTabla.getSelectionModel().getSelectedItem().getNombre(), fxTabla.getSelectionModel().getSelectedItem().getPrecio_base(), Integer.parseInt(fxCantidad.getText())));
+            temp.add(new Producto(p.getNombre(), p.getPrecio_base(), Integer.parseInt(fxCantidad.getText())));
 
         }
         fxCantidad.setText("");
