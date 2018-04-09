@@ -17,10 +17,10 @@ public class Producto {
     private double precio_base;
     private int stock;
 
-    public Producto(String nombre, double precio_base) {
+    public Producto(String nombre, double precio_base, int stock) {
         this.nombre = nombre;
         this.precio_base = precio_base;
-        this.stock = 0;
+        this.stock = stock;
     }
     
     public String getNombre() {
@@ -46,7 +46,14 @@ public class Producto {
     public void setStock(int stock) {
         this.stock = stock;
     }
+    
+    public void sumStock(int stock) {
+        this.stock += stock;
+    }
 
+    public void resStock(int stock) {
+        this.stock -= stock;
+    }
     @Override
     public int hashCode() {
         int hash = 5;

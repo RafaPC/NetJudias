@@ -3,15 +3,28 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.FXMLSceneAdmin">
     <stylesheets>
         <URL value="@fxmlscene.css" />
     </stylesheets>
    <children>
-      <Button fx:id="fxAltaEmpleado" layoutX="45.0" layoutY="89.0" mnemonicParsing="false" text="Dar alta empleado" />
-      <Button fx:id="fxAltaProducto" layoutX="285.0" layoutY="89.0" mnemonicParsing="false" text="Dar alta producto" />
-      <Button fx:id="fxBajaEmpleado" layoutX="76.0" layoutY="167.0" mnemonicParsing="false" text="Dar baja empleado" />
-      <Button fx:id="fxListaCajeras" layoutX="340.0" layoutY="167.0" mnemonicParsing="false" text="Lista de cajeras" />
+      <Button layoutX="92.0" layoutY="102.0" mnemonicParsing="false" onAction="#handleAltaEmpleado" text="Dar alta empleado">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button layoutX="370.0" layoutY="102.0" mnemonicParsing="false" onAction="#handleAltaProducto" text="Dar alta producto">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button layoutX="90.0" layoutY="258.0" mnemonicParsing="false" onAction="#handleBajaEmpleado" text="Dar baja empleado">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button layoutX="379.0" layoutY="258.0" mnemonicParsing="false" onAction="#handleListaCajeras" text="Lista de cajeras">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
    </children>
 </AnchorPane>

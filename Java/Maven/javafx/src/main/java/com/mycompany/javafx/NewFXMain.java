@@ -8,6 +8,7 @@ package com.mycompany.javafx;
 import fx.FXMLMenuController;
 import fx.FXMLSceneController;
 import fx.constantes.Constantes;
+import java.io.File;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -19,6 +20,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 /**
@@ -26,31 +29,23 @@ import javafx.stage.Stage;
  * @author user
  */
 public class NewFXMain extends Application {
-    
+
     @Override
     public void start(Stage stage) throws IOException {
         //BorderPane root = FXMLLoader.load(getClass().getResource("/fxml/FXMLMenu.fxml"));
         FXMLLoader loaderMenu = new FXMLLoader(
-          getClass().getResource(Constantes.PANTALLA_MENU));
+                getClass().getResource(Constantes.PANTALLA_MENU));
         BorderPane root = loaderMenu.load();
-        FXMLMenuController menuController = loaderMenu.getController();   
-               
-        
-        AnchorPane anchor;
-                    //load up OTHER FXML document
-        FXMLLoader loader = new FXMLLoader(
-          getClass().getResource(Constantes.PANTALLA_SCENE));
-        anchor = loader.load();
-        FXMLSceneController controller = loader.getController();
-        controller.setController(menuController);
-        
-        root.setCenter(anchor);
+        FXMLMenuController menuController = loaderMenu.getController();
+
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/css/fxmlscene.css");
-        
+
         stage.setTitle("JavaFX and Maven");
         stage.setScene(scene);
+        stage.getProperties().put("hostServices", this.getHostServices());
         stage.show();
+
     }
 
     /**
@@ -59,5 +54,5 @@ public class NewFXMain extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

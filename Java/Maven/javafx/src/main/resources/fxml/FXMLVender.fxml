@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.FXMLVender">
+    <stylesheets>
+        <URL value="@/css/fxmltablas.css" />
+    </stylesheets>
+   <children>
+      <TableView fx:id="fxTabla" layoutX="14.0" layoutY="13.0" prefHeight="375.0" prefWidth="317.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Producto" />
+          <TableColumn prefWidth="75.0" text="Stock" />
+            <TableColumn prefWidth="75.0" text="Precio" />
+        </columns>
+      </TableView>
+      <Button layoutX="383.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleConfirmar" prefHeight="59.0" prefWidth="166.0" text="Confirmar">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Button>
+      <Button layoutX="350.0" layoutY="92.0" mnemonicParsing="false" onAction="#handleAñadir" prefHeight="34.0" prefWidth="78.0" text="Añadir">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <TextField fx:id="fxCantidad" layoutX="466.0" layoutY="36.0" prefHeight="23.0" prefWidth="51.0" />
+      <Label layoutX="374.0" layoutY="33.0" prefHeight="31.0" prefWidth="92.0" text="Cantidad:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="350.0" layoutY="168.0" mnemonicParsing="false" onAction="#handleVaciarCesta" prefHeight="39.0" prefWidth="123.0" text="Vaciar Cesta">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

@@ -12,13 +12,13 @@ import java.time.LocalDateTime;
  *
  * @author daw
  */
-public class Perecedero extends Producto{
-    
+public class Perecedero extends Producto {
+
     private LocalDateTime fecha_reposicion;
 
-    public Perecedero(LocalDateTime fecha_reposicion, String nombre, double precio_base) {
-        super(nombre, precio_base);
-        this.fecha_reposicion = fecha_reposicion;
+    public Perecedero(String nombre, double precio_base, int stock) {
+        super(nombre, precio_base, stock);
+        this.fecha_reposicion = LocalDateTime.now();
     }
 
     public LocalDateTime getFecha_reposicion() {
@@ -29,5 +29,4 @@ public class Perecedero extends Producto{
         this.fecha_reposicion = fecha_reposicion;
     }
 
-  
 }

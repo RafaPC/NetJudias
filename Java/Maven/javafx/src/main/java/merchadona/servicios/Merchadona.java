@@ -34,15 +34,18 @@ public class Merchadona {
         Empleado victor = new Reponedor("Victor", 1234);
         Empleado alvaro = new Cajera("Alvaro", 1235);
         Empleado andrea = new Reponedor("Andrea", 1236);
-        Producto chocolate = new Producto("Chocolate", 2.34);
-        Producto leche = new Perecedero(LocalDateTime.now(), "Leche", 5.2);
-        Producto latas = new Producto("Latas", 3.4);
+        Producto chocolate = new Producto("Chocolate", 2.34, 20);
+        Producto leche = new Perecedero("Leche", 5.2, 7);
+        Producto latas = new Producto("Latas", 3.4, 5);
 
         empleados.put(victor.getId_empleado(), victor);
         empleados.put(alvaro.getId_empleado(), alvaro);
         empleados.put(andrea.getId_empleado(), andrea);
-        productos.add(chocolate);
+        empleados.put(2, new Reponedor("YO", 2));
+        empleados.put(3, new Cajera("TÚ", 3));
         productos.add(leche);
+        productos.add(chocolate);
+
         productos.add(latas);
 
     }
@@ -81,8 +84,9 @@ public class Merchadona {
     }
 
     public boolean darAltaEmpleado(String nombre, int id,
-      int opcion) {
+            int opcion) {
         boolean altaOK = false;
+
         if (empleados.get(id) == null) {
             switch (opcion) {
                 case 1:
@@ -98,20 +102,30 @@ public class Merchadona {
         return altaOK;
     }
 
-    public void darAltaProducto(String nombre, double precio) {
-        int opcion;
-        boolean comprobar = false;
+    public boolean darAltaProducto(String nombre, double precio, int stock, int opcion) {
+        boolean altaOK = true;
 
-        productos.add(new Producto(nombre, precio));
+        for (Producto producto1 : productos) {
+            if (producto1.getNombre().equalsIgnoreCase(nombre)) {
+                altaOK = false;
+            }
+        }
+        if (opcion == 1) {
+            productos.add(new Producto(nombre, precio, stock));
+        } else {
+            productos.add(new Perecedero(nombre, precio, stock));
+        }
+        return altaOK;
 
     }
 
-    public void darBajaEmpleado() {
-        int id;
-        System.out.println("Introduce el ID del Empleado:");
-        id = sc.nextInt();
-        sc.nextLine();
-        empleados.remove(id);
+    public boolean darBajaEmpleado(int id) {
+        boolean bajaOK = false;
+        if (empleados.get(id) != null) {
+            bajaOK = true;
+            empleados.remove(id);
+        }
+        return bajaOK;
     }
 
     public void darBajaProducto() {
@@ -135,20 +149,17 @@ public class Merchadona {
         return cajeras;
     }
 
-    public void reponerProducto(int id) {
-        int producto, cantidad;
-        int totalRepos = ((Reponedor) empleados.get(id)).getNum_reposiciones();
-        imprimirProductos();
-        producto = sc.nextInt();
-        sc.nextLine();
+    public void reponerProducto(int id, Producto producto, int cantidad) {
+        for (int i = 0; i < productos.size(); i++) {
+            if (productos.get(i).equals(producto)) {
+                productos.get(i).sumStock(cantidad);
+                if (productos.get(i) instanceof Perecedero) {
+                    ((Perecedero) productos.get(i)).setFecha_reposicion(LocalDateTime.now());
+                }
+                ((Reponedor) empleados.get(id)).sumRepuestos(cantidad);
+                i = productos.size();
+            }
 
-        System.out.println("Introduce la cantidad a reponer:");
-        cantidad = sc.nextInt();
-        productos.get(producto).setStock(productos.get(producto).getStock() + cantidad);
-        totalRepos = totalRepos + cantidad;
-        ((Reponedor) empleados.get(id)).setNum_reposiciones(totalRepos);
-        if (productos.get(producto) instanceof Perecedero) {
-            ((Perecedero) productos.get(producto)).setFecha_reposicion(LocalDateTime.now());
         }
     }
 
@@ -175,24 +186,21 @@ public class Merchadona {
         int error = 0;
         boolean salir = false;
         double total = 0;
-
         double precioProducto = producto.getPrecio_base();
         if (producto instanceof Perecedero) {
             precioProducto = caducacion(producto);
         }
         if (precioProducto != 0) {
 
-            if (producto.getStock() > cantidad) {
+            /*if (producto.getStock() > cantidad) {
                 producto.setStock(producto.getStock() - cantidad);
                 total = total + precioProducto * cantidad;
-            } else {
-                error = 1;
-            }
+            } */
         } else {
 
             error = 2;
         }
-        ((Cajera) empleados.get(id)).setPrecio_total_vendidos(total);
+        ((Cajera) empleados.get(id)).sumPrecio_total_vendidos(precioProducto);
 
         return error;
 

@@ -5,18 +5,20 @@
  */
 package fx;
 
+import fx.constantes.Constantes;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-//import javafx.animation.FadeTransition;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-//import javafx.scene.control.Alert;
-//import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
-//import javafx.stage.Stage;
-//import javafx.util.Duration;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -27,12 +29,29 @@ public class FXMLSceneAdmin implements Initializable {
 
     private FXMLMenuController controller;
 
-    @FXML
-    private TextField fxUser;
+    private AnchorPane scene2;
 
     @FXML
-    private void handleLoginAction(ActionEvent event) throws IOException {
+    private Button fxListaProductos;
 
+    @FXML
+    private void handleAltaEmpleado(ActionEvent event) throws IOException {
+        controller.handleAltaEmp(event);
+    }
+
+    @FXML
+    private void handleBajaEmpleado(ActionEvent event) throws IOException {
+        controller.handleBajaEmp(event);
+    }
+
+    @FXML
+    private void handleAltaProducto(ActionEvent event) throws IOException {
+        controller.handleAltaProd(event);
+    }
+
+    @FXML
+    private void handleListaCajeras(ActionEvent event) throws IOException {
+        controller.handleSceneTablas(event);
     }
 
     /**
@@ -47,5 +66,4 @@ public class FXMLSceneAdmin implements Initializable {
     public void setController(FXMLMenuController controller) {
         this.controller = controller;
     }
-
 }

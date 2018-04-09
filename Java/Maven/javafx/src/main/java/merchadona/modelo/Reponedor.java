@@ -9,16 +9,14 @@ package merchadona.modelo;
  *
  * @author daw
  */
-public class Reponedor extends Empleado{
-    
+public class Reponedor extends Empleado {
+
     private int num_reposiciones;
 
     public Reponedor(String nombre, int id_empleado) {
         super(nombre, id_empleado);
         this.num_reposiciones = num_reposiciones;
     }
-
-    
 
     public int getNum_reposiciones() {
         return num_reposiciones;
@@ -28,12 +26,14 @@ public class Reponedor extends Empleado{
         this.num_reposiciones = num_reposiciones;
     }
 
+    public void sumRepuestos(int cantidad) {
+        this.num_reposiciones += cantidad;
+    }
+    
     @Override
+
     public String toString() {
         return "Reponedor{" + super.toString() + "num_reposiciones=" + num_reposiciones + '}';
     }
 
-    
-    
-    
 }

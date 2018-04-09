@@ -26,9 +26,10 @@ public class Cajera extends Empleado{
         return precio_total_vendidos;
     }
 
-    public void setPrecio_total_vendidos(double precio_total_vendidos) {
-        this.precio_total_vendidos = precio_total_vendidos;
+    public void sumPrecio_total_vendidos(double precio_total_vendidos) {
+        this.precio_total_vendidos += precio_total_vendidos;
     }
+    
 
     @Override
     public String toString() {
