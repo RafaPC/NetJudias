@@ -29,6 +29,9 @@ public class FXMLNautilusController implements Initializable {
 
     @FXML
     private Button fxBotonSubir;
+    
+    @FXML
+    private Button fxBotonEntrar;
 
     private String rutaActual;
 
@@ -44,6 +47,15 @@ public class FXMLNautilusController implements Initializable {
             
         }
 
+    }
+    
+    @FXML
+    public void checkDirectory(ActionEvent event){
+        if(fxFiles.getSelectionModel().getSelectedItem().isFile()){
+            fxBotonEntrar.setDisable(true);
+        }else if(fxFiles.getSelectionModel().getSelectedItem().isDirectory()){
+            fxBotonEntrar.setDisable(false);
+        }
     }
 
     @FXML
