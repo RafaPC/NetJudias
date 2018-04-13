@@ -5,6 +5,7 @@
  */
 package nautilus.main.controllers;
 
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,50 +25,59 @@ public class FXMLNautilusController implements Initializable {
 
     @FXML
     private ListView<File> fxFiles;
+    
     @FXML
     private Label fxRutaActual;
 
     @FXML
     private Button fxBotonSubir;
-    
+
     @FXML
     private Button fxBotonEntrar;
 
+    
     private String rutaActual;
 
     private File seleccionado;
 
+    
+    
     @FXML
-    public void handleSubir(ActionEvent event) {
+    public void handleEntrar(MouseEvent event) {
+        if (event.getClickCount() > 1) {
+            seleccionado = fxFiles.getSelectionModel().getSelectedItem();
 
-        if (fxRutaActual.getText().equalsIgnoreCase("/")) {
-            fxBotonSubir.setDisable(true);
-        } else {
-            fxRutaActual.setText(seleccionado.getParent());
-            
+            fxRutaActual.setText(seleccionado.getAbsolutePath());
+            cargarFiles();
+            checkBotones();
         }
-
     }
     
     @FXML
-    public void checkDirectory(ActionEvent event){
-        if(fxFiles.getSelectionModel().getSelectedItem().isFile()){
+    public void handleSubir(ActionEvent event) {
+
+        fxRutaActual.setText(seleccionado.getParent());
+        seleccionado = seleccionado.getParentFile();
+        cargarFiles();
+        fxRutaActual.setText(seleccionado.getAbsolutePath());
+    }
+
+    public void checkDirectory(ActionEvent event) {
+        if (fxFiles.getSelectionModel().getSelectedItem().isFile()) {
             fxBotonEntrar.setDisable(true);
-        }else if(fxFiles.getSelectionModel().getSelectedItem().isDirectory()){
+        } else if (fxFiles.getSelectionModel().getSelectedItem().isDirectory()) {
             fxBotonEntrar.setDisable(false);
         }
     }
 
-    @FXML
-    public void handleEntrar(ActionEvent event) {
+    
 
-        File seleccionado
-                = fxFiles.getSelectionModel().getSelectedItem();
-
-        fxRutaActual.setText(seleccionado.getAbsolutePath());
-        fxBotonSubir.setDisable(false);
-        cargarFiles();
-
+    public void checkBotones() {
+        if (fxRutaActual.getText() == "/") {
+            fxBotonSubir.setDisable(true);
+        } else {
+            fxBotonSubir.setDisable(false);
+        }
     }
 
     /**
@@ -78,11 +88,10 @@ public class FXMLNautilusController implements Initializable {
         rutaActual = "/";
         fxRutaActual.setText(rutaActual);
         cargarFiles();
-
-        // TODO
     }
 
     private void cargarFiles() {
+        checkBotones();
         File f = new File(fxRutaActual.getText());
         fxFiles.getItems().clear();
         fxFiles.getItems().addAll(f.listFiles());
