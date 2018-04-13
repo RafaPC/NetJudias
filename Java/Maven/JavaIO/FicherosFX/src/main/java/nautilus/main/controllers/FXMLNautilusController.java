@@ -61,6 +61,7 @@ public class FXMLNautilusController implements Initializable {
         seleccionado = seleccionado.getParentFile();
         cargarFiles();
         fxRutaActual.setText(seleccionado.getAbsolutePath());
+        checkBotones();
     }
 
     public void checkDirectory(ActionEvent event) {
@@ -74,7 +75,7 @@ public class FXMLNautilusController implements Initializable {
     
 
     public void checkBotones() {
-        if (fxRutaActual.getText() == "/") {
+        if (fxRutaActual.getParent() == null) {
             fxBotonSubir.setDisable(true);
         } else {
             fxBotonSubir.setDisable(false);
