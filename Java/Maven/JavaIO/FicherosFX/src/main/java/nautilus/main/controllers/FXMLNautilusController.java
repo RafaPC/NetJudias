@@ -5,7 +5,7 @@
  */
 package nautilus.main.controllers;
 
-import java.awt.event.MouseEvent;
+
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -43,7 +44,7 @@ public class FXMLNautilusController implements Initializable {
     
     
     @FXML
-    public void handleEntrar(MouseEvent event) {
+    public void handleMouseEntrar(MouseEvent event) {
         if (event.getClickCount() > 1) {
             seleccionado = fxFiles.getSelectionModel().getSelectedItem();
 
@@ -91,7 +92,7 @@ public class FXMLNautilusController implements Initializable {
     }
 
     private void cargarFiles() {
-        checkBotones();
+        fxBotonSubir.setDisable(true);
         File f = new File(fxRutaActual.getText());
         fxFiles.getItems().clear();
         fxFiles.getItems().addAll(f.listFiles());

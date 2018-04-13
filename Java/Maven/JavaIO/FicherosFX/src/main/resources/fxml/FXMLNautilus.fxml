@@ -10,6 +10,6 @@
       <Button fx:id="fxBotonSubir" layoutX="23.0" layoutY="41.0" mnemonicParsing="false" onAction="#handleSubir" prefHeight="26.0" prefWidth="58.0" text="subir" />
       <!--Button layoutX="23.0" layoutY="73.0" mnemonicParsing="false" text="entrar" /-->
       <Label fx:id="fxRutaActual" layoutX="101.0" layoutY="14.0" prefHeight="17.0" prefWidth="278.0" />
-      <ListView fx:id="fxListView" layoutX="203.0" layoutY="44.0" onMouseClicked="#handleEntrar" prefHeight="337.0" prefWidth="383.0" />
+      <ListView fx:id="fxFiles" layoutX="203.0" layoutY="44.0" onMouseClicked="#handleMouseEntrar" prefHeight="337.0" prefWidth="383.0" />
    </children>
 </AnchorPane>
