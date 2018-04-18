@@ -6,6 +6,7 @@
 package cuerpodeelite;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -37,6 +38,11 @@ public class CuerpoDeElite {
         @XmlElement(name="Vehículo",type=RecursoMaterialVehiculo.class)
     })
     private ArrayList<Recurso> recursos = new ArrayList<>();
+    @XmlElementWrapper(name="recursos")
+    @XmlElements({
+        @XmlElement(name="MisionDeReconocimiento",type=Mision.class),
+        @XmlElement(name="MisionDeCombate",type=MisionDeCombate.class),
+    })
     private Map<String, Mision> misiones = new LinkedHashMap<>();
 
     public CuerpoDeElite() {
@@ -53,6 +59,10 @@ public class CuerpoDeElite {
         recursos.add(new RecursoHumano(0, 0, 97, 0, 53, "RoboPrimo"));
         recursos.add(new RecursoHumano(0, 25, 50, 7, 47, "Kiko"));
         recursos.add(new RecursoHumano(15, 0, 65, 700, 93, "Sgt. Ripley"));
+        misiones.put("Operacion_Anacardo", new Mision(LocalDate.of(1999, 3, 27), "Ciudad", 80, "Operacion_Anacardo"));
+        misiones.get(LocalDate.of(1999, 3, 27)).addRecurso(recursos.get(2), "Desplazamiento");
+    
+    
     }
 
     public void crearMision() {

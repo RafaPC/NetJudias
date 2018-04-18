@@ -14,22 +14,22 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
  *
  * @author oscar
  */
-public class HashMapAdapter extends XmlAdapter<LinkedList<Persona>, HashMap<LocalDate,Persona>>  {
+public class HashMapAdapter extends XmlAdapter<LinkedList<Mision>, HashMap<String,Mision>>  {
 
     @Override
     public HashMap unmarshal(LinkedList v) throws Exception {
-        HashMap<LocalDate,Persona> personas = new HashMap<>();
+        HashMap<String,Mision> misiones = new HashMap<>();
         for (Object o : v)
         {
-            Persona p = (Persona)o;
-            personas.put(p.getBirth(), p);
+            Mision p = (Mision)o;
+            misiones.put(p.getNombre(), p);
         }
-        return personas;
+        return misiones;
     }
 
     @Override
     public LinkedList marshal(HashMap v) throws Exception {
-        LinkedList<Persona> lista = new LinkedList(v.values());
+        LinkedList<Mision> lista = new LinkedList(v.values());
         return lista;
     }
 

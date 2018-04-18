@@ -8,6 +8,9 @@ package modelo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlIDREF;
 
 /**
  *
@@ -20,6 +23,9 @@ public class Mision {
     private String lugar;
     private int expGanada;
     protected boolean exito;
+    @XmlIDREF
+    @XmlElementWrapper(name="recursos")
+    @XmlElement(name="recurso")
     private ArrayList<RecursoMision> recursosMision = new ArrayList<>();
 
     public Mision(){
