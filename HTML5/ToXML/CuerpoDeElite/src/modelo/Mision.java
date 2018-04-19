@@ -28,6 +28,10 @@ public class Mision {
         return Integer.toString(System.identityHashCode(this));
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -40,13 +44,10 @@ public class Mision {
         this.exito = exito;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public Mision() {
+
     }
-    
-    public Mision(){
-        
-    }
+
     public Mision(LocalDate fecha, String lugar, int expGanada, String nombre) {
         this.fecha = fecha;
         this.lugar = lugar;
@@ -74,44 +75,6 @@ public class Mision {
         this.expGanada = expGanada;
     }
 
-    /*public void crearMision(ArrayList<Recurso> recursos, Scanner sc) {
-        String uso;
-        boolean estresado;
-        int fuerzaLetal = 0;
-        int numRecurso = 0;
-        do {
-
-            for (int i = 0; i < recursos.size(); i++) {
-                estresado = false;
-                if (i > 0 && recursosMision.contains(recursos.get(i))) {
-                } else {
-                    if (recursos.get(i) instanceof RecursoHumano) {
-                        if (((RecursoHumano) recursos.get(i)).getStress() > 20) {
-                            estresado = true;
-                        }
-                    }
-                    if (!estresado) {
-                        if (recursos.get(i) instanceof RecursoMaterialVehiculo) {
-                            System.out.println(i + ".- " + ((RecursoMaterialVehiculo) recursos.get(i)).toString());
-                        } else if (recursos.get(i) instanceof RecursoMaterial) {
-                            System.out.println(i + ".- " + ((RecursoMaterial) recursos.get(i)).toString());
-                        } else if (recursos.get(i) instanceof RecursoHumano) {
-                            System.out.println(i + ".- " + ((RecursoHumano) recursos.get(i)).toString());
-                        }
-                    }
-                }
-            }
-            System.out.println("Elige el recurso");
-            numRecurso = sc.nextInt();
-            sc.nextLine();
-            addRecurso(recursos.get(numRecurso));
-            System.out.println("¿Y cuál va a ser su uso?");
-            uso = sc.next();
-            
-            fuerzaLetal += recursos.get(numRecurso).getPotenciaDeMuerte();
-            recursos.get(numRecurso).addMision(this);
-        } while (numRecurso != -1);
-    }*/
     public ArrayList<RecursoMision> getRecursosMision() {
         return recursosMision;
     }
@@ -185,8 +148,9 @@ public class Mision {
     public String toString() {
         return "Mision - " + "Nombre: " + nombre + ", Fecha: " + fecha + ", Lugar: " + lugar + ", ExpGanada: " + expGanada + ", Exito: " + exito;
     }
-    public void toStringRecursos(){
-        for(RecursoMision resource : recursosMision){
+
+    public void toStringRecursos() {
+        for (RecursoMision resource : recursosMision) {
             System.out.println("-----");
             System.out.println(resource.toString());
         }
