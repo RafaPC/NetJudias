@@ -14,44 +14,16 @@ public class RecursoMaterial extends Recurso {
     protected int habilidadMinima;
     protected int rangoAccion;
 
+    public RecursoMaterial() {
+    }
+
     public RecursoMaterial(int habilidadMinima, int rangoAccion, int potenciaDeMuerte, String nombre) {
         super(potenciaDeMuerte, nombre);
         this.habilidadMinima = habilidadMinima;
         this.rangoAccion = rangoAccion;
     }
-
-    public int getHabilidadMinima() {
-        return habilidadMinima;
-    }
-
-    public void setHabilidadMinima(int habilidadMinima) {
-        this.habilidadMinima = habilidadMinima;
-    }
-
-    public int getRangoAccion() {
-        return rangoAccion;
-    }
-
-    public void setRangoAccion(int rangoAccion) {
-        this.rangoAccion = rangoAccion;
-    }
-
-    public int getPotenciaDeMuerte() {
-        return potenciaDeMuerte;
-    }
-
-    public void setPotenciaDeMuerte(int potenciaDeMuerte) {
-        this.potenciaDeMuerte = potenciaDeMuerte;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
+    
+    
     @Override
     public String toString() {
         return "Vehículo: " + nombre + "\nHabilidad mínima: " + habilidadMinima + "\nRango de acción: " + rangoAccion + "\nPotencia de muerte: " + potenciaDeMuerte ;
@@ -82,6 +54,38 @@ public class RecursoMaterial extends Recurso {
             return false;
         }
         return true;
+    }
+
+    public void setHabilidadMinima(int habilidadMinima) {
+        this.habilidadMinima = habilidadMinima;
+    }
+
+    public void setRangoAccion(int rangoAccion) {
+        this.rangoAccion = rangoAccion;
+    }
+
+    public void setPotenciaDeMuerte(int potenciaDeMuerte) {
+        this.potenciaDeMuerte = potenciaDeMuerte;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getHabilidadMinima() {
+        return habilidadMinima;
+    }
+
+    public int getRangoAccion() {
+        return rangoAccion;
+    }
+
+    public int getPotenciaDeMuerte() {
+        return potenciaDeMuerte;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
 }

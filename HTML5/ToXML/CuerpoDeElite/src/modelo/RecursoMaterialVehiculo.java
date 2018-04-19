@@ -9,22 +9,23 @@ package modelo;
  *
  * @author daw
  */
-public class RecursoMaterialVehiculo extends RecursoMaterial{
-   private int capacidad; 
+public class RecursoMaterialVehiculo extends RecursoMaterial {
+
+    private int capacidad;
 
     public RecursoMaterialVehiculo(int capacidad, int habilidadMinima, int rangoAccion, int potenciaDeMuerte, String nombre) {
         super(habilidadMinima, rangoAccion, potenciaDeMuerte, nombre);
         this.capacidad = capacidad;
     }
 
-    @Override
-    public String toString() {
-        return "Vehículo: " + nombre + "\nCapacidad: " + capacidad + "\nHabilidad mínima: " + habilidadMinima + "\nRango de acción: " + rangoAccion + "\nPotencia de muerte: " + potenciaDeMuerte ;
+    public RecursoMaterialVehiculo() {
     }
 
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
+    @Override
+    public String toString() {
+        return "Vehículo: " + nombre + "\nCapacidad: " + capacidad + "\nHabilidad mínima: " + habilidadMinima + "\nRango de acción: " + rangoAccion + "\nPotencia de muerte: " + potenciaDeMuerte;
     }
+    
 
     @Override
     public int hashCode() {
@@ -48,6 +49,10 @@ public class RecursoMaterialVehiculo extends RecursoMaterial{
             return false;
         }
         return true;
+    }
+
+    public int getCapacidad() {
+        return capacidad;
     }
 
     public int getHabilidadMinima() {
@@ -82,8 +87,8 @@ public class RecursoMaterialVehiculo extends RecursoMaterial{
         this.nombre = nombre;
     }
 
-    public int getCapacidad() {
-        return capacidad;
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
     }
-   
+
 }

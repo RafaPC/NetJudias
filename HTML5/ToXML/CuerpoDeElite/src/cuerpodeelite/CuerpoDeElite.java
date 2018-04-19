@@ -5,21 +5,19 @@
  */
 package cuerpodeelite;
 
+import hashDate.modelo.MyMapAdapter;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Scanner;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import modelo.Mision;
 import modelo.MisionDeCombate;
-import modelo.MyMapAdapter;
 import modelo.Recurso;
 import modelo.RecursoHumano;
 import modelo.RecursoMaterial;
@@ -29,20 +27,26 @@ import modelo.RecursoMaterialVehiculo;
  *
  * @author daw
  */
+@XmlRootElement(name = "CuerpoDeElite")
 public class CuerpoDeElite {
 
-    @XmlTransient
-    public Scanner sc = new Scanner(System.in);
-    @XmlElementWrapper(name="Recursos")
+    private Scanner sc = new Scanner(System.in);
+
+    @XmlElementWrapper(name = "Recursos")
     @XmlElements({
-        @XmlElement(name="Persona",type=RecursoHumano.class),
-        @XmlElement(name="Material",type=RecursoMaterial.class),
-        @XmlElement(name="Vehículo",type=RecursoMaterialVehiculo.class)
+        @XmlElement(name = "Humano", type = RecursoHumano.class)
+
+        ,
+            @XmlElement(name = "Vehiculo", type = RecursoMaterialVehiculo.class)
+
+        ,
+            @XmlElement(name = "Equipo", type = RecursoMaterial.class)
+
     })
-    private ArrayList<Recurso> recursos = new ArrayList<>();
-    
+    protected ArrayList<Recurso> recursos = new ArrayList<>();
+
     @XmlJavaTypeAdapter(MyMapAdapter.class)
-    private Map<String, Mision> misiones = new LinkedHashMap<>();
+    protected HashMap<String, Mision> misiones = new LinkedHashMap<>();
 
     public CuerpoDeElite() {
         recursos.add(new RecursoMaterialVehiculo(8, 35, 300, 20, "Furgón"));
@@ -58,10 +62,12 @@ public class CuerpoDeElite {
         recursos.add(new RecursoHumano(0, 0, 97, 0, 53, "RoboPrimo"));
         recursos.add(new RecursoHumano(0, 25, 50, 7, 47, "Kiko"));
         recursos.add(new RecursoHumano(15, 0, 65, 700, 93, "Sgt. Ripley"));
-        misiones.put("Operacion_Anacardo", new Mision(LocalDate.of(1999, 3, 27), "Ciudad", 80, "Operacion_Anacardo"));
-        misiones.get("Operacion_Anacardo").addRecurso(recursos.get(2), "Desplazamiento");
-        misiones.get("Operacion_Anacardo").addRecurso(recursos.get(7), "MatarGente");
-    
+
+        misiones.put("OperacionAnacardo", new Mision(LocalDate.of(1999, 12, 17), "Fuenlabrada", 56, "OperacionAnacardo"));
+        misiones.get("OperacionAnacardo").addRecurso(recursos.get(12), "Matar cosas");
+        
+        misiones.put("NombreDeMision", new MisionDeCombate(6, LocalDate.of(1936, 01, 16), "Vallecas", 83, "NombreDeMision"));
+
     }
 
     public void crearMision() {

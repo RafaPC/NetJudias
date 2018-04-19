@@ -13,6 +13,73 @@ public class RecursoHumano extends Recurso {
 
     private int stress;
     private int numBajasCuchillo;
+    private int habilidadMaquinas;
+    private int exp;
+
+    public RecursoHumano(int stress, int numBajasCuchillo, int habilidadMaquinas, int exp, int potenciaDeMuerte, String nombre) {
+        super(potenciaDeMuerte, nombre);
+        this.stress = stress;
+        this.numBajasCuchillo = numBajasCuchillo;
+        this.habilidadMaquinas = habilidadMaquinas;
+        this.exp = exp;
+    }
+
+    public RecursoHumano() {
+    }
+
+    public void setStress(int stress) {
+        this.stress = stress;
+    }
+
+    public void sumarStress(int stress) {
+        this.stress += stress;
+    }
+
+    public int getStress() {
+        return stress;
+    }
+
+    public void sumarExp(int exp) {
+        this.exp += exp;
+    }
+
+    @Override
+    public String toString() {
+        return "Soldado: " + nombre + "\nEstrés: " + stress + "\nNúmero de bajas a cuchillo: " + numBajasCuchillo + "\nHabilidad con máquinas: " + habilidadMaquinas + "\nExperiencia: " + exp + "\nPotencia de muerte: " + potenciaDeMuerte;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final RecursoHumano other = (RecursoHumano) obj;
+        if (this.stress != other.stress) {
+            return false;
+        }
+        if (this.numBajasCuchillo != other.numBajasCuchillo) {
+            return false;
+        }
+        if (this.habilidadMaquinas != other.habilidadMaquinas) {
+            return false;
+        }
+        if (this.exp != other.exp) {
+            return false;
+        }
+        return true;
+    }
 
     public int getNumBajasCuchillo() {
         return numBajasCuchillo;
@@ -53,73 +120,6 @@ public class RecursoHumano extends Recurso {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    private int habilidadMaquinas;
-    private int exp;
-
-    public RecursoHumano(int stress, int numBajasCuchillo, int habilidadMaquinas, int exp, int potenciaDeMuerte, String nombre) {
-        super(potenciaDeMuerte, nombre);
-        this.stress = stress;
-        this.numBajasCuchillo = numBajasCuchillo;
-        this.habilidadMaquinas = habilidadMaquinas;
-        this.exp = exp;
-    }
-
-    public void setStress(int stress) {
-        this.stress = stress;
-    }
-
-    public void sumarStress(int stress) {
-        this.stress += stress;
-    }
-
-    public int getStress() {
-        return stress;
-    }
-
-    public void sumarExp(int exp) {
-        this.exp += exp;
-    }
-   
-    
-    
-    @Override
-    public String toString() {
-        return "Soldado: " + nombre + "\nEstrés: " + stress + "\nNúmero de bajas a cuchillo: " + numBajasCuchillo + "\nHabilidad con máquinas: " + habilidadMaquinas + "\nExperiencia: " + exp + "\nPotencia de muerte: " + potenciaDeMuerte;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final RecursoHumano other = (RecursoHumano) obj;
-        if (this.stress != other.stress) {
-            return false;
-        }
-        if (this.numBajasCuchillo != other.numBajasCuchillo) {
-            return false;
-        }
-        if (this.habilidadMaquinas != other.habilidadMaquinas) {
-            return false;
-        }
-        if (this.exp != other.exp) {
-            return false;
-        }
-        return true;
-    }
 
     
-
 }

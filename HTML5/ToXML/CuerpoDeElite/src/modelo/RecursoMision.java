@@ -23,8 +23,7 @@ public class RecursoMision {
         this.uso = uso;
     }
 
-    public void setRecurso(Recurso recurso) {
-        this.recurso = recurso;
+    public RecursoMision() {
     }
 
     private void addUso(String uso) {
@@ -58,6 +57,15 @@ public class RecursoMision {
         return true;
     }
 
+    public Recurso getRecurso() {
+        return recurso;
+    }
+
+    @Override
+    public String toString() {
+        return  "Recurso=" + recurso + ", Uso: " + uso + '}';
+    }
+
     public String getUso() {
         return uso;
     }
@@ -66,13 +74,8 @@ public class RecursoMision {
         this.uso = uso;
     }
 
-    public Recurso getRecurso() {
-        return recurso;
-    }
-
-    @Override
-    public String toString() {
-        return  "Recurso=" + recurso + ", Uso: " + uso + '}';
+    public void setRecurso(Recurso recurso) {
+        this.recurso = recurso;
     }
 
 }

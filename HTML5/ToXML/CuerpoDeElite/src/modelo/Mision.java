@@ -20,43 +20,14 @@ public class Mision {
     private String lugar;
     private int expGanada;
     protected boolean exito;
-    private ArrayList<RecursoMision> recursosMision = new ArrayList<>();
     private String id;
-
-    @XmlID
-    public String getId() {
-        return Integer.toString(System.identityHashCode(this));
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
-
-    public void setExito(boolean exito) {
-        this.exito = exito;
-    }
-
-    public Mision() {
-
-    }
+    private ArrayList<RecursoMision> recursosMision = new ArrayList<>();
 
     public Mision(LocalDate fecha, String lugar, int expGanada, String nombre) {
         this.fecha = fecha;
         this.lugar = lugar;
         this.expGanada = expGanada;
         this.nombre = nombre;
-    }
-
-    public void addRecurso(Recurso recurso, String uso) {
-        recursosMision.add(new RecursoMision(recurso, uso));
     }
 
     public String getLugar() {
@@ -73,6 +44,14 @@ public class Mision {
 
     public void setExpGanada(int expGanada) {
         this.expGanada = expGanada;
+    }
+
+    public void addRecurso(Recurso recurso, String uso) {
+        recursosMision.add(new RecursoMision(recurso, uso));
+    }
+
+    public Mision() {
+
     }
 
     public ArrayList<RecursoMision> getRecursosMision() {
@@ -155,4 +134,14 @@ public class Mision {
             System.out.println(resource.toString());
         }
     }
+
+    @XmlID
+    public String getId() {
+        return Integer.toString(System.identityHashCode(this));
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }

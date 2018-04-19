@@ -17,24 +17,13 @@ public class MisionDeCombate extends Mision {
 
     private int potenciaMinima;
 
-    public MisionDeCombate(){
-        
-    }
     public MisionDeCombate(int potenciaMinima, LocalDate fecha, String lugar, int expGanada, String nombre) {
         super(fecha, lugar, expGanada, nombre);
         this.potenciaMinima = potenciaMinima;
     }
-
-    public void setPotenciaMinima(int potenciaMinima) {
-        this.potenciaMinima = potenciaMinima;
-    }
-
-    public boolean isExito() {
-        return exito;
-    }
-
-    public void setExito(boolean exito) {
-        this.exito = exito;
+    
+    public MisionDeCombate(){
+        
     }
 
     public void crearMisionDeCombate(ArrayList<Recurso> recursos, Scanner sc) {
@@ -77,6 +66,14 @@ public class MisionDeCombate extends Mision {
 
     public int getPotenciaMinima() {
         return potenciaMinima;
+    }
+
+    public boolean isExito() {
+        return exito;
+    }
+
+    public void setExito(boolean exito) {
+        this.exito = exito;
     }
     
 }

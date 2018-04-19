@@ -6,10 +6,13 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
+import java.util.Map;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
 import modelo.Mision;
+
 /**
  *
  * @author daw
@@ -18,7 +21,9 @@ public abstract class Recurso {
 
     protected int potenciaDeMuerte;
     protected String nombre;
+
     private ArrayList<Mision> misiones = new ArrayList<>();
+
     private String id;
 
     @XmlID
@@ -29,29 +34,23 @@ public abstract class Recurso {
     public void setId(String id) {
         this.id = id;
     }
-    
+
     public Recurso(int potenciaDeMuerte, String nombre) {
         this.potenciaDeMuerte = potenciaDeMuerte;
         this.nombre = nombre;
+    }
+
+    public Recurso() {
     }
 
     public int getPotenciaDeMuerte() {
         return potenciaDeMuerte;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void addMision(Mision mision){
+    public void addMision(Mision mision) {
         misiones.add(mision);
     }
-    
-    
+
     @Override
     public String toString() {
         return "PotenciaDeMuerte: " + potenciaDeMuerte + ", Nombre: " + nombre;
@@ -87,24 +86,32 @@ public abstract class Recurso {
         return true;
     }
 
+    @XmlIDREF
+    public ArrayList<Mision> getMisiones() {
+        return misiones;
+    }
+
+    public void toStringMisiones() {
+        for (Mision mission : misiones) {
+            System.out.println("-----");
+            System.out.println(mission.toString());
+        }
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public void setPotenciaDeMuerte(int potenciaDeMuerte) {
         this.potenciaDeMuerte = potenciaDeMuerte;
     }
 
     public void setMisiones(ArrayList<Mision> misiones) {
         this.misiones = misiones;
-    }
-
-    @XmlIDREF
-    public ArrayList<Mision> getMisiones() {
-        return misiones;
-    }
-    
-    public void toStringMisiones(){
-        for(Mision mission : misiones){
-            System.out.println("-----");
-            System.out.println(mission.toString());
-        }
     }
 
 }
