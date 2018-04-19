@@ -6,6 +6,7 @@
 package modelo;
 
 import java.util.Objects;
+import javax.xml.bind.annotation.XmlIDREF;
 
 /**
  *
@@ -13,12 +14,17 @@ import java.util.Objects;
  */
 public class RecursoMision {
 
+    @XmlIDREF
     private Recurso recurso;
     private String uso;
 
     public RecursoMision(Recurso recurso, String uso) {
         this.recurso = recurso;
         this.uso = uso;
+    }
+
+    public void setRecurso(Recurso recurso) {
+        this.recurso = recurso;
     }
 
     private void addUso(String uso) {

@@ -5,7 +5,6 @@
  */
 package modelo;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.LinkedList;
 import javax.xml.bind.annotation.adapters.XmlAdapter;

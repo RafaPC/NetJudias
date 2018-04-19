@@ -22,6 +22,10 @@ public class RecursoMaterialVehiculo extends RecursoMaterial{
         return "Vehículo: " + nombre + "\nCapacidad: " + capacidad + "\nHabilidad mínima: " + habilidadMinima + "\nRango de acción: " + rangoAccion + "\nPotencia de muerte: " + potenciaDeMuerte ;
     }
 
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;

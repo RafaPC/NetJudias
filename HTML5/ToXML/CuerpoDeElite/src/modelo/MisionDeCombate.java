@@ -25,6 +25,10 @@ public class MisionDeCombate extends Mision {
         this.potenciaMinima = potenciaMinima;
     }
 
+    public void setPotenciaMinima(int potenciaMinima) {
+        this.potenciaMinima = potenciaMinima;
+    }
+
     public boolean isExito() {
         return exito;
     }

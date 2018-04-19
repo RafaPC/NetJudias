@@ -16,8 +16,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import modelo.Mision;
 import modelo.MisionDeCombate;
+import modelo.MyMapAdapter;
 import modelo.Recurso;
 import modelo.RecursoHumano;
 import modelo.RecursoMaterial;
@@ -31,18 +33,15 @@ public class CuerpoDeElite {
 
     @XmlTransient
     public Scanner sc = new Scanner(System.in);
-    @XmlElementWrapper(name="recursos")
+    @XmlElementWrapper(name="Recursos")
     @XmlElements({
         @XmlElement(name="Persona",type=RecursoHumano.class),
         @XmlElement(name="Material",type=RecursoMaterial.class),
         @XmlElement(name="Vehículo",type=RecursoMaterialVehiculo.class)
     })
     private ArrayList<Recurso> recursos = new ArrayList<>();
-    @XmlElementWrapper(name="recursos")
-    @XmlElements({
-        @XmlElement(name="MisionDeReconocimiento",type=Mision.class),
-        @XmlElement(name="MisionDeCombate",type=MisionDeCombate.class),
-    })
+    
+    @XmlJavaTypeAdapter(MyMapAdapter.class)
     private Map<String, Mision> misiones = new LinkedHashMap<>();
 
     public CuerpoDeElite() {
@@ -60,8 +59,8 @@ public class CuerpoDeElite {
         recursos.add(new RecursoHumano(0, 25, 50, 7, 47, "Kiko"));
         recursos.add(new RecursoHumano(15, 0, 65, 700, 93, "Sgt. Ripley"));
         misiones.put("Operacion_Anacardo", new Mision(LocalDate.of(1999, 3, 27), "Ciudad", 80, "Operacion_Anacardo"));
-        misiones.get(LocalDate.of(1999, 3, 27)).addRecurso(recursos.get(2), "Desplazamiento");
-    
+        misiones.get("Operacion_Anacardo").addRecurso(recursos.get(2), "Desplazamiento");
+        misiones.get("Operacion_Anacardo").addRecurso(recursos.get(7), "MatarGente");
     
     }
 

@@ -6,11 +6,8 @@
 package modelo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
-import java.util.Map;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
 import modelo.Mision;
 /**
@@ -21,11 +18,18 @@ public abstract class Recurso {
 
     protected int potenciaDeMuerte;
     protected String nombre;
-    @XmlIDREF
-    @XmlElementWrapper(name="misiones")
-    @XmlElement(name="mision")
     private ArrayList<Mision> misiones = new ArrayList<>();
+    private String id;
 
+    @XmlID
+    public String getId() {
+        return Integer.toString(System.identityHashCode(this));
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     public Recurso(int potenciaDeMuerte, String nombre) {
         this.potenciaDeMuerte = potenciaDeMuerte;
         this.nombre = nombre;
@@ -83,6 +87,15 @@ public abstract class Recurso {
         return true;
     }
 
+    public void setPotenciaDeMuerte(int potenciaDeMuerte) {
+        this.potenciaDeMuerte = potenciaDeMuerte;
+    }
+
+    public void setMisiones(ArrayList<Mision> misiones) {
+        this.misiones = misiones;
+    }
+
+    @XmlIDREF
     public ArrayList<Mision> getMisiones() {
         return misiones;
     }
