@@ -29,11 +29,11 @@
             <artifactId>OpenViewerFX</artifactId>
             <version>7.12.28</version>
         </dependency>
-     <!--   <dependency>
+        <dependency>
             <groupId>com.pdfviewer</groupId>
             <artifactId>example-app</artifactId>
             <version>1.0</version>
-        </dependency>-->
+        </dependency>
     </dependencies>
     <build>
         <plugins>
