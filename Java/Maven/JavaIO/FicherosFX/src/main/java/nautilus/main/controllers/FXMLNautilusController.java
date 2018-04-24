@@ -5,7 +5,7 @@
  */
 package nautilus.main.controllers;
 
-import com.qoppa.pdfViewerFX.PDFViewer;
+//import com.qoppa.pdfViewerFX.PDFViewer;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -32,6 +32,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Optional;
+import javafx.scene.control.TextInputDialog;
 
 /**
  * FXML Controller class
@@ -47,7 +49,7 @@ public class FXMLNautilusController implements Initializable {
     private Label fxRutaActual;
 
     @FXML
-    private PDFViewer fxPdfViewer;
+    //private PDFViewer fxPdfViewer;
 
     private String rutaActual;
 
@@ -67,7 +69,6 @@ public class FXMLNautilusController implements Initializable {
                 a.showAndWait();
             }
         }
-
     }
 
     @FXML
@@ -113,7 +114,7 @@ public class FXMLNautilusController implements Initializable {
 
                 int length;
                 //copy the file content in bytes 
-                while ((length = inStream.read(buffer)) >0) {
+                while ((length = inStream.read(buffer)) > 0) {
 
                     outStream.write(buffer, 0, length);
 
@@ -124,20 +125,37 @@ public class FXMLNautilusController implements Initializable {
 
                 System.out.println("File is copied successful!");
 
+                Alert a = new Alert(Alert.AlertType.INFORMATION, "Fichero copiado ", ButtonType.CLOSE);
+                a.showAndWait();
+
             } catch (IOException e) {
                 e.printStackTrace();
                 Alert a = new Alert(Alert.AlertType.ERROR, "Problemo", ButtonType.CLOSE);
                 a.showAndWait();
             }
-        }else{
+        } else {
             Alert a = new Alert(Alert.AlertType.ERROR, "No puedes copiar un directorio", ButtonType.CLOSE);
-                a.showAndWait();
+            a.showAndWait();
         }
+        cargarFiles();
     }
 
     @FXML
     public void handlePegar(ActionEvent event) {
-    
+        File file = new File(fxRutaActual.getText() + "\\" + fileCopiado.getName());
+        cargarFiles();
+    }
+
+    @FXML
+    public void handleCambiarNombre(ActionEvent event) {
+        TextInputDialog dialog = new TextInputDialog("");
+        dialog.setTitle("Nombre nuevo:");
+        Optional<String> result= dialog.showAndWait();
+        String newNombre = "";
+        //String extension = fxFiles.getSelectionModel().getSelectedItem().getFileName().get        
+                if(result.isPresent()){
+            newNombre = result.get();
+        }
     }
 
     /**
