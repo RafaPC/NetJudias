@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args) {
         ConexionSimpleBD c = new ConexionSimpleBD();
 
-        List<Asignatura> asignaturas = c.getAllAsignaturasJDBC();
+         List<Asignatura> asignaturas = c.getAllAsignaturasJDBC();
         for (Asignatura a : asignaturas) {
             System.out.println("ID: " + a.getId());
             System.out.println("Nombre: " + a.getNombre());
