@@ -15,19 +15,18 @@ import java.util.Date;
 public class Alumno {
     
 
-    private long id;
+    private int id;
 
     private String nombre;
 
     private Date fecha_nacimiento;
-    
     private Boolean mayor_edad;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

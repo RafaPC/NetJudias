@@ -8,7 +8,6 @@ package main;
 import dao.ConexionSimpleBD;
 import java.util.List;
 import model.Alumno;
-import model.Asignatura;
 
 /**
  *
@@ -19,13 +18,17 @@ public class Main {
     public static void main(String[] args) {
         ConexionSimpleBD c = new ConexionSimpleBD();
 
-         List<Asignatura> asignaturas = c.getAllAsignaturasJDBC();
-        for (Asignatura a : asignaturas) {
-            System.out.println("ID: " + a.getId());
-            System.out.println("Nombre: " + a.getNombre());
-            System.out.println("Curso: " + a.getCurso());
-            System.out.println("Ciclo: " + a.getCiclo());
-            System.out.println("-------------------------");
+        List<Alumno> alumnos = c.getAllAlumnosJDBC();
+        for (Alumno a : alumnos) {
+            System.out.println(a.getNombre());
+            System.out.println(a.getId());
         }
+        Alumno a = c.getAlumnoJDBC(403);
+        a.setNombre("Salah");
+        c.updateAlumnoJDBC(a);
+        System.out.println(a.getNombre());
+        a = c.getAlumnoJDBC(403);
+        System.out.println("despues "+a.getNombre());
     }
+
 }

@@ -41,6 +41,7 @@ public class Configuration {
         }
         return config;
     }
+    
     private String urlDB;
     private String driverDB;
     private String userDB;

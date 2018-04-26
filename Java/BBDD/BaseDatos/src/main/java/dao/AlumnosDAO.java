@@ -208,7 +208,7 @@ public class AlumnosDAO {
             parameters.put("NOMBRE", a.getNombre());
             parameters.put("FECHA_NACIMIENTO", a.getFecha_nacimiento());
             parameters.put("MAYOR_EDAD", a.getMayor_edad());
-            a.setId(jdbcInsert.executeAndReturnKey(parameters).longValue());
+         //   a.setId(jdbcInsert.executeAndReturnKey(parameters).longValue());
             transactionManager.commit(txStatus);
 
         } catch (Exception e) {
@@ -233,7 +233,7 @@ public class AlumnosDAO {
         parameters.put("NOMBRE", a.getNombre());
         parameters.put("FECHA_NACIMIENTO", a.getFecha_nacimiento());
         parameters.put("MAYOR_EDAD", a.getMayor_edad());
-        a.setId(jdbcInsert.executeAndReturnKey(parameters).longValue());
+       // a.setId(jdbcInsert.executeAndReturnKey(parameters).longValue());
         return a;
     }
 
@@ -253,7 +253,7 @@ public class AlumnosDAO {
               new ScalarHandler<BigInteger>(),
               "", "", "", activacion, 0);
 
-            alumno.setId(id.longValue());
+            alumno.setId(id.intValue());
             con.commit();
 
         } catch (Exception ex) {
