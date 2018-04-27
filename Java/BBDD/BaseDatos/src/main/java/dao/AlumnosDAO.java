@@ -23,7 +23,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import org.apache.commons.dbutils.DbUtils;
-
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -268,7 +267,6 @@ public class AlumnosDAO {
             DBConnection.getInstance().cerrarConexion(con);
         }
         return alumno;
-
     }
 
     public Alumno updateUserDBUtils(Alumno alumno, String activacion) {
