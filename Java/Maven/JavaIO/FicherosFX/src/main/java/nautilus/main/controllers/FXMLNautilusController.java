@@ -55,6 +55,8 @@ public class FXMLNautilusController implements Initializable {
 
     private File fileCopiado;
 
+    private String rutaCopiado;
+
     @FXML
     public void handleMouseClick(MouseEvent event) {
         if (event.getClickCount() > 1) {
@@ -94,68 +96,86 @@ public class FXMLNautilusController implements Initializable {
 
     @FXML
     public void handleCopiar(ActionEvent event) throws FileNotFoundException, IOException {
-
-        File seleccionado
-                = fxFiles.getSelectionModel().getSelectedItem().toFile();
-
+        File seleccionado = new File(rutaCopiado);
         if (seleccionado.isFile()) {
+            rutaCopiado = fxFiles.getSelectionModel().getSelectedItem().toFile().getAbsolutePath();
 
-            InputStream inStream = null;
-            OutputStream outStream = null;
+            Alert a = new Alert(Alert.AlertType.INFORMATION, "Fichero copiado ", ButtonType.CLOSE);
+            a.showAndWait();
 
-            try {
-                String rutaArchivo = seleccionado.getAbsolutePath();
-
-                inStream = new FileInputStream(seleccionado);
-                fileCopiado = new File(seleccionado.getName());
-                outStream = new FileOutputStream(fileCopiado);
-
-                byte[] buffer = new byte[1024];
-
-                int length;
-                //copy the file content in bytes 
-                while ((length = inStream.read(buffer)) > 0) {
-
-                    outStream.write(buffer, 0, length);
-
-                }
-
-                inStream.close();
-                outStream.close();
-
-                System.out.println("File is copied successful!");
-
-                Alert a = new Alert(Alert.AlertType.INFORMATION, "Fichero copiado ", ButtonType.CLOSE);
-                a.showAndWait();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                Alert a = new Alert(Alert.AlertType.ERROR, "Problemo", ButtonType.CLOSE);
-                a.showAndWait();
-            }
         } else {
-            Alert a = new Alert(Alert.AlertType.ERROR, "No puedes copiar un directorio", ButtonType.CLOSE);
+            Alert a = new Alert(Alert.AlertType.ERROR, "Error al copiar", ButtonType.CLOSE);
+            a.showAndWait();
+        }
+    }
+
+    @FXML
+    public void handlePegar(ActionEvent event) {
+
+        InputStream inStream = null;
+        OutputStream outStream = null;
+
+        try {
+            File seleccionado = new File(rutaCopiado);
+            String nombreFichero = seleccionado.getName();
+
+            inStream = new FileInputStream(seleccionado);
+            outStream = new FileOutputStream(new File(fxRutaActual.getText() + "\\" + nombreFichero));
+            byte[] buffer = new byte[1024];
+
+            int length;
+            //copy the file content in bytes 
+            while ((length = inStream.read(buffer)) > 0) {
+
+                outStream.write(buffer, 0, length);
+
+            }
+
+            inStream.close();
+            outStream.close();
+
+            Alert a = new Alert(Alert.AlertType.INFORMATION, "Fichero pegado ", ButtonType.CLOSE);
+            a.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR, "Problemo", ButtonType.CLOSE);
             a.showAndWait();
         }
         cargarFiles();
     }
 
     @FXML
-    public void handlePegar(ActionEvent event) {
-        File file = new File(fxRutaActual.getText() + "\\" + fileCopiado.getName());
-        cargarFiles();
-    }
-
-    @FXML
     public void handleCambiarNombre(ActionEvent event) {
         TextInputDialog dialog = new TextInputDialog("");
-        dialog.setTitle("Nombre nuevo:");
-        Optional<String> result= dialog.showAndWait();
+        dialog.setTitle("Renombrar");
+        dialog.setContentText("");
+        dialog.setHeaderText("Nombre nuevo");
+        Optional<String> result = dialog.showAndWait();
         String newNombre = "";
         //String extension = fxFiles.getSelectionModel().getSelectedItem().getFileName().get        
-                if(result.isPresent()){
+        if (result.isPresent()) {
             newNombre = result.get();
         }
+        File x = new File(fxRutaActual.getText() + "\\" + newNombre);
+        fxFiles.getSelectionModel().getSelectedItem().toFile().renameTo(x);
+        cargarFiles();
+    }
+    
+    @FXML
+    public void handleCrearFichero(ActionEvent event) {
+        TextInputDialog dialog = new TextInputDialog("");
+        dialog.setTitle("Crear fichero");
+        dialog.setContentText("");
+        dialog.setHeaderText("Nombre");
+        Optional<String> result = dialog.showAndWait();
+        String newNombre = "";
+        //String extension = fxFiles.getSelectionModel().getSelectedItem().getFileName().get        
+        if (result.isPresent()) {
+            newNombre = result.get();
+        }
+        File xm = new File(fxRutaActual.getText() + "\\" + newNombre);
+        cargarFiles();
     }
 
     /**
