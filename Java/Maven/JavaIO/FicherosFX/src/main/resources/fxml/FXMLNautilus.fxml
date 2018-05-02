@@ -19,12 +19,11 @@
               </items>
             </ContextMenu>
          </contextMenu></ListView>
-      <Button layoutX="23.0" layoutY="41.0" mnemonicParsing="false" onAction="#handleSubir" prefHeight="26.0" prefWidth="58.0" text="subir" />
-      <Button layoutX="23.0" layoutY="73.0" mnemonicParsing="false" onAction="#handleEntrar" text="entrar" />
+      <Button layoutX="20.0" layoutY="42.0" mnemonicParsing="false" onAction="#handleSubir" prefHeight="26.0" prefWidth="58.0" text="subir" />
       <Label fx:id="fxRutaActual" layoutX="101.0" layoutY="14.0" prefHeight="17.0" prefWidth="278.0" />
-      <Button layoutX="23.0" layoutY="104.0" mnemonicParsing="false" onAction="#handleCopiar" prefHeight="26.0" prefWidth="64.0" text="copiar" />
-      <Button layoutX="24.0" layoutY="136.0" mnemonicParsing="false" onAction="#handlePegar" prefHeight="26.0" prefWidth="58.0" text="pegar" />
-      <Button layoutX="18.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleCambiarNombre" prefHeight="42.0" prefWidth="64.0" text="cambiarnombre" />
+      <Button layoutX="21.0" layoutY="79.0" mnemonicParsing="false" onAction="#handleCopiar" prefHeight="26.0" prefWidth="58.0" text="copiar" />
+      <Button layoutX="21.0" layoutY="115.0" mnemonicParsing="false" onAction="#handlePegar" prefHeight="26.0" prefWidth="58.0" text="pegar" />
+      <Button layoutX="18.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleCambiarNombre" prefHeight="42.0" prefWidth="64.0" text="cambiar&#10;nombre" />
       <Button layoutX="23.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleCrearFichero" prefHeight="42.0" prefWidth="48.0" text="crear" />
       <TextArea fx:id="fxReader" accessibleRole="TEXT" layoutX="88.0" layoutY="42.0" prefHeight="344.0" prefWidth="490.0" visible="false" />
       <Button fx:id="fxBotonSalirFichero" layoutX="539.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleSalirFichero" text="Salir" visible="false" />

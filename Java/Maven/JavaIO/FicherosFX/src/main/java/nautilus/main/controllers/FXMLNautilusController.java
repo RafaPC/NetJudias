@@ -113,17 +113,6 @@ public class FXMLNautilusController implements Initializable {
     }
 
     @FXML
-    public void handleEntrar(ActionEvent event) {
-
-        File seleccionado
-                = fxFiles.getSelectionModel().getSelectedItem().toFile();
-
-        fxRutaActual.setText(seleccionado.getAbsolutePath());
-        cargarFiles();
-
-    }
-
-    @FXML
     public void handleCopiar(ActionEvent event) throws FileNotFoundException, IOException {
         File seleccionado = new File(rutaCopiado);
         if (seleccionado.isFile()) {
