@@ -6,10 +6,13 @@
 package nautilus.main.controllers;
 
 //import com.qoppa.pdfViewerFX.PDFViewer;
+import com.qoppa.pdfViewerFX.PDFViewer;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -33,7 +36,13 @@ import javafx.scene.input.MouseEvent;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Optional;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.AnchorPane;
+import javax.activation.MimetypesFileTypeMap;
+import javax.imageio.ImageIO;
 
 /**
  * FXML Controller class
@@ -42,6 +51,8 @@ import javafx.scene.control.TextInputDialog;
  */
 public class FXMLNautilusController implements Initializable {
 
+    private AnchorPane sceneLeerFichero;
+
     @FXML
     private ListView<Path> fxFiles;
 
@@ -49,7 +60,15 @@ public class FXMLNautilusController implements Initializable {
     private Label fxRutaActual;
 
     @FXML
-    //private PDFViewer fxPdfViewer;
+    private PDFViewer fxPdfViewer;
+    @FXML
+    private TextArea fxReader;
+
+    @FXML
+    private Button fxBotonSalirFichero;
+
+    @FXML
+    private ImageView fxImagen;
 
     private String rutaActual;
 
@@ -64,8 +83,18 @@ public class FXMLNautilusController implements Initializable {
                     = fxFiles.getSelectionModel().getSelectedItem().toFile();
             boolean b = Files.isReadable(Paths.get(seleccionado.getAbsolutePath()));
             if (b) {
-                fxRutaActual.setText(seleccionado.getAbsolutePath());
-                cargarFiles();
+                if (seleccionado.isFile()) {
+                    String mimetype = new MimetypesFileTypeMap().getContentType(seleccionado);
+                    String type = mimetype.split("/")[0];
+                    if (type.equals("image")) {
+                        verImagen(seleccionado);
+                    } else {
+                        leerFichero(seleccionado);
+                    }
+                } else {
+                    fxRutaActual.setText(seleccionado.getAbsolutePath());
+                    cargarFiles();
+                }
             } else {
                 Alert a = new Alert(Alert.AlertType.ERROR, "No puedes leer este directorio", ButtonType.CLOSE);
                 a.showAndWait();
@@ -161,7 +190,7 @@ public class FXMLNautilusController implements Initializable {
         fxFiles.getSelectionModel().getSelectedItem().toFile().renameTo(x);
         cargarFiles();
     }
-    
+
     @FXML
     public void handleCrearFichero(ActionEvent event) {
         TextInputDialog dialog = new TextInputDialog("");
@@ -174,15 +203,75 @@ public class FXMLNautilusController implements Initializable {
         if (result.isPresent()) {
             newNombre = result.get();
         }
-        File xm = new File(fxRutaActual.getText() + "\\" + newNombre);
+        File file = new File(fxRutaActual.getText() + "\\" + newNombre + ".txt");
         cargarFiles();
+    }
+
+    public void leerFichero(File fichero) {
+        BufferedReader br = null;
+        FileReader fr = null;
+        String textoCompleto = "";
+        try {
+
+            //br = new BufferedReader(new FileReader(FILENAME));
+            fr = new FileReader(fichero.getAbsolutePath());
+            br = new BufferedReader(fr);
+
+            String sCurrentLine;
+            while ((sCurrentLine = br.readLine()) != null) {
+                textoCompleto += sCurrentLine + "\n";
+            }
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+
+                if (br != null) {
+                    br.close();
+                }
+
+                if (fr != null) {
+                    fr.close();
+                }
+
+            } catch (IOException ex) {
+
+                ex.printStackTrace();
+
+            }
+            fxFiles.setVisible(false);
+            fxReader.setVisible(true);
+            fxReader.setText(textoCompleto);
+            fxBotonSalirFichero.setVisible(true);
+        }
+    }
+
+    public void verImagen(File imagen) {
+        Image image = new Image(imagen.toURI().toString());
+        fxImagen.setImage(image);
+        fxImagen.setVisible(true);
+        fxFiles.setVisible(false);
+        fxBotonSalirFichero.setVisible(true);
+    }
+
+    @FXML
+    public void handleSalirFichero(ActionEvent event) {
+        fxReader.setVisible(false);
+        fxImagen.setVisible(false);
+        fxBotonSalirFichero.setVisible(false);
+        fxFiles.setVisible(true);
     }
 
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb
+    ) {
         rutaActual = "/";
         fxRutaActual.setText(rutaActual);
         fxFiles.setCellFactory(list -> new ListCell<Path>() {
@@ -207,6 +296,17 @@ public class FXMLNautilusController implements Initializable {
                             case "pdf":
                                 setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/pdf.png"))));
                                 break;
+                            case "jpg":
+                                ImageView x = new ImageView(item.toUri().toString());
+                                x.setFitWidth(24);
+                                x.setFitHeight(24);
+                                setGraphic(x);
+                                break;
+                            case "png":
+                                ImageView j = new ImageView(item.toUri().toString());
+                                j.setFitWidth(24);
+                                j.setFitHeight(24);
+                                setGraphic(j);
                             default:
                                 setGraphic(null);
 
@@ -222,8 +322,6 @@ public class FXMLNautilusController implements Initializable {
             }
         });
         cargarFiles();
-
-        // TODO
     }
 
     private void cargarFiles() {
