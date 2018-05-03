@@ -63,7 +63,7 @@ public class FXMLNautilusController implements Initializable {
 
     @FXML
     private PDFViewer fxPdfViewer;
-    
+
     @FXML
     private TextArea fxReader;
 
@@ -72,14 +72,13 @@ public class FXMLNautilusController implements Initializable {
 
     @FXML
     private ImageView fxImagen;
-    
-    
+
     private String rutaActual;
 
     private File fileCopiado;
 
     private String rutaCopiado;
-   
+
     @FXML
     public void handleMouseClick(MouseEvent event) {
         if (event.getClickCount() > 1) {
@@ -88,15 +87,23 @@ public class FXMLNautilusController implements Initializable {
             boolean b = Files.isReadable(Paths.get(seleccionado.getAbsolutePath()));
             if (b) {
                 if (seleccionado.isFile()) {
-                    
-                    //MIRAR SI ES UN PDF O NO
-                    
-                    String mimetype = new MimetypesFileTypeMap().getContentType(seleccionado);
-                    String type = mimetype.split("/")[0];
-                    if (type.equals("image")) {
-                        verImagen(seleccionado);
+
+                    String nombre = seleccionado.getName();
+
+                    int primerpunto = nombre.indexOf('.');
+                    int ultmopunto = nombre.lastIndexOf('.');
+
+                    String extension = nombre.substring(ultmopunto + 1);
+                    if (extension.equalsIgnoreCase("pdf")) {
+                        verPDF(seleccionado);
                     } else {
-                        leerFichero(seleccionado);
+                        String mimetype = new MimetypesFileTypeMap().getContentType(seleccionado);
+                        String type = mimetype.split("/")[0];
+                        if (type.equals("image")) {
+                            verImagen(seleccionado);
+                        } else {
+                            leerFichero(seleccionado);
+                        }
                     }
                 } else {
                     fxRutaActual.setText(seleccionado.getAbsolutePath());
@@ -254,11 +261,24 @@ public class FXMLNautilusController implements Initializable {
         fxBotonSalirFichero.setVisible(true);
     }
 
-    public void verPDF(){
+    public void verPDF(File fichero) {
+        try {
+
+            fxPdfViewer.setVisible(true);
+            fxPdfViewer.loadPDF(new FileInputStream(fichero.getName()));
+          
+            fxPdfViewer.getToolBar().getOpenDoc().setVisible(false);
+        } catch (PDFException ex) {
+            Logger.getLogger(FXMLViewPdfController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FXMLViewPdfController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
         fxFiles.setVisible(false);
         fxBotonSalirFichero.setVisible(true);
     }
-    
+
     @FXML
     public void handleSalirFichero(ActionEvent event) {
         fxReader.setVisible(false);
