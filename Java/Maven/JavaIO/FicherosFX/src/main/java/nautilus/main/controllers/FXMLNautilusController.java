@@ -45,6 +45,7 @@ import javax.activation.MimetypesFileTypeMap;
 import javax.imageio.ImageIO;
 import com.qoppa.pdf.PDFException;
 import com.qoppa.pdfViewerFX.PDFViewer;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -72,6 +73,7 @@ public class FXMLNautilusController implements Initializable {
 
     @FXML
     private ImageView fxImagen;
+
 
     private String rutaActual;
 
@@ -128,15 +130,14 @@ public class FXMLNautilusController implements Initializable {
 
     @FXML
     public void handleCopiar(ActionEvent event) throws FileNotFoundException, IOException {
-        File seleccionado = new File(rutaCopiado);
-        if (seleccionado.isFile()) {
-            rutaCopiado = fxFiles.getSelectionModel().getSelectedItem().toFile().getAbsolutePath();
+        rutaCopiado = fxFiles.getSelectionModel().getSelectedItem().toFile().getAbsolutePath();
 
+        if (fxFiles.getSelectionModel().getSelectedItem().toFile().isFile()) {
             Alert a = new Alert(Alert.AlertType.INFORMATION, "Fichero copiado ", ButtonType.CLOSE);
             a.showAndWait();
 
         } else {
-            Alert a = new Alert(Alert.AlertType.ERROR, "Error al copiar", ButtonType.CLOSE);
+            Alert a = new Alert(Alert.AlertType.ERROR, "No puedes copiar directorios", ButtonType.CLOSE);
             a.showAndWait();
         }
     }
@@ -209,7 +210,23 @@ public class FXMLNautilusController implements Initializable {
         File file = new File(fxRutaActual.getText() + "\\" + newNombre + ".txt");
         cargarFiles();
     }
-
+    @FXML
+    public void handleBorrarFichero(ActionEvent event){
+        if(fxFiles.getSelectionModel().getSelectedItem().toFile().isFile()){
+            boolean borrado = new File(fxFiles.getSelectionModel().getSelectedItem().toFile().getAbsolutePath()).delete();
+            if (borrado) {
+                Alert a = new Alert(Alert.AlertType.INFORMATION, "Fichero borrado", ButtonType.CLOSE);
+            a.showAndWait();
+            }else{
+               Alert a = new Alert(Alert.AlertType.ERROR, "Error al borrar", ButtonType.CLOSE);
+            a.showAndWait(); 
+            }
+            cargarFiles();
+        }else{
+            Alert a = new Alert(Alert.AlertType.ERROR, "No puedes borrar directorios", ButtonType.CLOSE);
+            a.showAndWait(); 
+        }
+    }
     public void leerFichero(File fichero) {
         BufferedReader br = null;
         FileReader fr = null;
@@ -265,22 +282,22 @@ public class FXMLNautilusController implements Initializable {
         try {
 
             fxPdfViewer.setVisible(true);
-            fxPdfViewer.loadPDF(new FileInputStream(fichero.getName()));
-          
-            fxPdfViewer.getToolBar().getOpenDoc().setVisible(false);
+            fxPdfViewer.loadPDF(new FileInputStream(fichero.getAbsolutePath()));
+            fxPdfViewer.getToolBar().getOpenDoc().setVisible(true);
+
         } catch (PDFException ex) {
             Logger.getLogger(FXMLViewPdfController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(FXMLViewPdfController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         fxFiles.setVisible(false);
         fxBotonSalirFichero.setVisible(true);
     }
 
     @FXML
     public void handleSalirFichero(ActionEvent event) {
+        fxPdfViewer.setVisible(false);
         fxReader.setVisible(false);
         fxImagen.setVisible(false);
         fxBotonSalirFichero.setVisible(false);

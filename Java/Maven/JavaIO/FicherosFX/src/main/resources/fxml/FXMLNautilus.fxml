@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<!--?import javafx.scene.layout.Pane?-->
 <?import com.qoppa.pdfViewerFX.PDFViewer?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nautilus.main.controllers.FXMLNautilusController">
@@ -26,10 +27,11 @@
         <Button layoutX="21.0" layoutY="79.0" mnemonicParsing="false" onAction="#handleCopiar" prefHeight="26.0" prefWidth="58.0" text="copiar" />
         <Button layoutX="21.0" layoutY="115.0" mnemonicParsing="false" onAction="#handlePegar" prefHeight="26.0" prefWidth="58.0" text="pegar" />
         <Button layoutX="18.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleCambiarNombre" prefHeight="42.0" prefWidth="64.0" text="cambiar&#10;nombre" />
-        <Button layoutX="23.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleCrearFichero" prefHeight="42.0" prefWidth="48.0" text="crear" />
+        <Button layoutX="20.0" layoutY="228.0" mnemonicParsing="false" onAction="#handleCrearFichero" prefHeight="42.0" prefWidth="58.0" text="crear" />
         <TextArea fx:id="fxReader" accessibleRole="TEXT" editable="false" layoutX="88.0" layoutY="42.0" prefHeight="344.0" prefWidth="490.0" visible="false" />
         <Button fx:id="fxBotonSalirFichero" layoutX="539.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleSalirFichero" text="Salir" visible="false" />
         <ImageView fx:id="fxImagen" fitHeight="344.0" fitWidth="490.0" layoutX="88.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" visible="false" />
-        <PDFViewer fx:id="fxPdfViewer" layoutX="-3.0" prefHeight="407.0" prefWidth="600.0" visible="false"/>
+        <Button layoutX="20.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleBorrarFichero" prefHeight="42.0" prefWidth="58.0" text="borrar" />
+        <PDFViewer fx:id="fxPdfViewer" layoutX="88.0" layoutY="42.0" prefHeight="407.0" prefWidth="480.0" visible="false"/>
     </children>
 </AnchorPane>
