@@ -43,6 +43,8 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 import javax.activation.MimetypesFileTypeMap;
 import javax.imageio.ImageIO;
+import com.qoppa.pdf.PDFException;
+import com.qoppa.pdfViewerFX.PDFViewer;
 
 /**
  * FXML Controller class
@@ -61,6 +63,7 @@ public class FXMLNautilusController implements Initializable {
 
     @FXML
     private PDFViewer fxPdfViewer;
+    
     @FXML
     private TextArea fxReader;
 
@@ -69,13 +72,14 @@ public class FXMLNautilusController implements Initializable {
 
     @FXML
     private ImageView fxImagen;
-
+    
+    
     private String rutaActual;
 
     private File fileCopiado;
 
     private String rutaCopiado;
-
+   
     @FXML
     public void handleMouseClick(MouseEvent event) {
         if (event.getClickCount() > 1) {
@@ -84,6 +88,9 @@ public class FXMLNautilusController implements Initializable {
             boolean b = Files.isReadable(Paths.get(seleccionado.getAbsolutePath()));
             if (b) {
                 if (seleccionado.isFile()) {
+                    
+                    //MIRAR SI ES UN PDF O NO
+                    
                     String mimetype = new MimetypesFileTypeMap().getContentType(seleccionado);
                     String type = mimetype.split("/")[0];
                     if (type.equals("image")) {
@@ -247,6 +254,11 @@ public class FXMLNautilusController implements Initializable {
         fxBotonSalirFichero.setVisible(true);
     }
 
+    public void verPDF(){
+        fxFiles.setVisible(false);
+        fxBotonSalirFichero.setVisible(true);
+    }
+    
     @FXML
     public void handleSalirFichero(ActionEvent event) {
         fxReader.setVisible(false);

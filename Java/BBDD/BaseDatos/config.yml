@@ -9,3 +9,5 @@ smtpServer: smtp.gmail.com
 smtpPort: 587
 mailPass: alumnodam2
 ##passDB: clasesdaw
+##userDB: oscarnovillo
+##passDB: c557ef
