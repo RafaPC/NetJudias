@@ -25,7 +25,7 @@
       <Button layoutX="21.0" layoutY="115.0" mnemonicParsing="false" onAction="#handlePegar" prefHeight="26.0" prefWidth="58.0" text="pegar" />
       <Button layoutX="18.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleCambiarNombre" prefHeight="42.0" prefWidth="64.0" text="cambiar&#10;nombre" />
       <Button layoutX="23.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleCrearFichero" prefHeight="42.0" prefWidth="48.0" text="crear" />
-      <TextArea fx:id="fxReader" accessibleRole="TEXT" layoutX="88.0" layoutY="42.0" prefHeight="344.0" prefWidth="490.0" visible="false" />
+      <TextArea fx:id="fxReader" accessibleRole="TEXT" editable="false" layoutX="88.0" layoutY="42.0" prefHeight="344.0" prefWidth="490.0" visible="false" />
       <Button fx:id="fxBotonSalirFichero" layoutX="539.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleSalirFichero" text="Salir" visible="false" />
       <ImageView fx:id="fxImagen" fitHeight="344.0" fitWidth="490.0" layoutX="88.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" visible="false" />
    </children>
