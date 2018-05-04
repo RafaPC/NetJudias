@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.controllers.InicioFXMLController">
-    
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.controllers.InicioFXMLController">
+   <children>
+      <Button layoutX="69.0" layoutY="333.0" mnemonicParsing="false" text="Crear">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Button>
+      <Button layoutX="198.0" layoutY="333.0" mnemonicParsing="false" text="Actualizar">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Button>
+      <Button layoutX="388.0" layoutY="332.0" mnemonicParsing="false" text="Borrar">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Button>
+      <ListView layoutX="95.0" layoutY="-2.0" prefHeight="246.0" prefWidth="400.0" />
+      <TextField layoutX="196.0" layoutY="273.0" prefHeight="26.0" prefWidth="77.0" />
+   </children>
 </AnchorPane>
