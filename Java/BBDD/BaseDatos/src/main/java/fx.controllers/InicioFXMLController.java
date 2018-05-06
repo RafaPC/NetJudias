@@ -19,6 +19,37 @@ public class InicioFXMLController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+    @FXML
+    private TextField fxNombre;
+    
+    @FXML
+    private TextField fxEdad;
+    
+    @FXML
+    private ListView fxListAlumnos;
+    
+    
+    @FXML
+    public void handleInsert(ActionEvent event){
+        
+    }
+    
+    @FXML
+    public void handleUpdate(ActionEvent event){
+        
+    }
+    
+    @FXML
+    public void handleDelete(ActionEvent event){
+        
+    }
+    
+    
+    
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

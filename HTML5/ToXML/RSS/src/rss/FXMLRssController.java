@@ -72,9 +72,8 @@ public class FXMLRssController implements Initializable {
                 
                 String textoTotal = "";
 
-                textoTotal = p.channel.getItem().get(numNoticia).getTitle() + "\n";
-                textoTotal += p.channel.getItem().get(numNoticia).mediaTitle + "\n";
-                textoTotal += "------------------\n";
+                textoTotal = p.channel.getItem().get(numNoticia).getTitle() + ".\n";
+                textoTotal += p.channel.getItem().get(numNoticia).mediaTitle + ".";
 
                 
 
