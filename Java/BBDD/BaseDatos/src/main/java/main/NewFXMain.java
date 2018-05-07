@@ -5,7 +5,6 @@
  */
 package main;
 
-import fx.InicioFXMLController;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +21,7 @@ public class NewFXMain extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
        FXMLLoader loaderMenu = new FXMLLoader(
-                getClass().getResource("/resources/fxml/InicioFXML.fxml"));
+                getClass().getResource(constantes.constantes.PANTALLA_ALUMNO));
         AnchorPane root = loaderMenu.load();
 
         Scene scene = new Scene(root);
