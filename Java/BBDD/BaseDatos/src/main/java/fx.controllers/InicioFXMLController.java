@@ -7,7 +7,12 @@ package fx;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -19,6 +24,10 @@ public class InicioFXMLController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+    
+    @FXML
+    private AnchorPane fxRoot;
     
     @FXML
     private TextField fxNombre;
