@@ -63,7 +63,7 @@ public class ConexionSimpleBD {
             }
 
         } catch (Exception ex) {
-            Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Alumno.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (rs != null) {
@@ -76,7 +76,7 @@ public class ConexionSimpleBD {
                     con.close();
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Alumno.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -120,7 +120,7 @@ public class ConexionSimpleBD {
             nuevo.setNombre(nombre);
 
         } catch (Exception ex) {
-            Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Alumno.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (rs != null) {
@@ -133,7 +133,7 @@ public class ConexionSimpleBD {
                     con.close();
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Alumno.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -172,7 +172,7 @@ public class ConexionSimpleBD {
             
 
         } catch (Exception ex) {
-            Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Alumno.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
 
@@ -183,7 +183,7 @@ public class ConexionSimpleBD {
                     con.close();
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Alumno.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
