@@ -50,5 +50,10 @@ public class Asignatura {
     }
     
     private String ciclo;
+
+    @Override
+    public String toString() {
+        return "Asignatura{" + "id=" + id + ", nombre=" + nombre + ", curso=" + curso + ", ciclo=" + ciclo + '}';
+    }
     
 }

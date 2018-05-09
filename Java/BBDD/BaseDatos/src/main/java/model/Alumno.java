@@ -58,6 +58,17 @@ public class Alumno {
     public Alumno() {
     }
 
+    public Alumno(String nombre, Date fecha_nacimiento, Boolean mayor_edad) {
+        this.nombre = nombre;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.mayor_edad = mayor_edad;
+    }
+
+    @Override
+    public String toString() {
+        return "Alumno{" + "id=" + id + ", nombre=" + nombre + ", fecha_nacimiento=" + fecha_nacimiento + ", mayor_edad=" + mayor_edad + '}';
+    }
+
    
     
 }
