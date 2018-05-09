@@ -11,7 +11,7 @@
         <menus>
           <Menu fx:id="fxMenuAlumnos" mnemonicParsing="false" text="Alumnos">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#handleCambiarAlumnos" text="Dale duro" />
+              <MenuItem mnemonicParsing="false" onAction="#handleCambiarAlumnos" text="Allé voy" />
             </items>
           </Menu>
           <Menu fx:id="fxMenuAsignaturas" mnemonicParsing="false" text="Asignaturas">
