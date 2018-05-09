@@ -7,13 +7,10 @@ package main;
 
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -26,8 +23,8 @@ public class NewFXMain extends Application {
     public void start(Stage primaryStage) throws IOException {
         
         FXMLLoader loaderMenu = new FXMLLoader(
-              getClass().getResource("/fxml/InicioFXML.fxml"));
-            AnchorPane root = loaderMenu.load();
+              getClass().getResource("/fxml/MenuFXML.fxml"));
+            BorderPane root = loaderMenu.load();
            
             
             Scene scene = new Scene(root);

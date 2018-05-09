@@ -25,10 +25,10 @@
             <Font size="26.0" />
          </font>
       </Button>
-      <ListView fx:id="fxListAlumnos" layoutX="95.0" layoutY="-2.0" prefHeight="246.0" prefWidth="400.0" />
-      <TextField fx:id="fxNombre" layoutX="59.0" layoutY="270.0" prefHeight="26.0" prefWidth="134.0" promptText="Nombre" />
-      <DatePicker fx:id="fxEdad" layoutX="210.0" layoutY="271.0" prefHeight="26.0" prefWidth="166.0" />
-      <CheckBox fx:id="fxMayor" layoutX="406.0" layoutY="275.0" mnemonicParsing="false" text="Mayor de edad">
+      <ListView fx:id="fxListAlumnos" layoutX="93.0" layoutY="37.0" onMouseClicked="#handleMouseClick" prefHeight="246.0" prefWidth="400.0" />
+      <TextField fx:id="fxNombre" layoutX="69.0" layoutY="292.0" prefHeight="26.0" prefWidth="134.0" promptText="Nombre" />
+      <DatePicker fx:id="fxEdad" layoutX="210.0" layoutY="292.0" prefHeight="26.0" prefWidth="166.0" />
+      <CheckBox fx:id="fxMayor" layoutX="406.0" layoutY="295.0" mnemonicParsing="false" text="Mayor de edad">
          <font>
             <Font size="14.0" />
          </font>

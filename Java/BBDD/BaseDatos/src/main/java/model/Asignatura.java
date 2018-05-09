@@ -16,6 +16,8 @@ public class Asignatura {
     private String nombre;
     
     private String curso;
+    
+    private String ciclo;
 
     public long getId() {
         return id;
@@ -48,8 +50,17 @@ public class Asignatura {
     public void setCiclo(String ciclo) {
         this.ciclo = ciclo;
     }
+
+    public Asignatura(String nombre, String curso, String ciclo) {
+        this.nombre = nombre;
+        this.curso = curso;
+        this.ciclo = ciclo;
+    }
+
+    public Asignatura() {
+    }
     
-    private String ciclo;
+
 
     @Override
     public String toString() {

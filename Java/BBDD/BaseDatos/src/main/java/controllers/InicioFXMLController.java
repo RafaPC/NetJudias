@@ -7,9 +7,7 @@ package controllers;
 
 import dao.ConexionSimpleBD;
 import java.net.URL;
-import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +18,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Alumno;
 
@@ -33,11 +32,14 @@ public class InicioFXMLController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    private MenuFXMLController controller;
+
     private ConexionSimpleBD conex;
 
-    @FXML
-    private AnchorPane fxRoot;
+    private AnchorPane sceneAsignaturas;
 
+//    @FXML
+//    private AnchorPane fxRoot;
     @FXML
     private TextField fxNombre;
 
@@ -51,11 +53,24 @@ public class InicioFXMLController implements Initializable {
     private ListView<Alumno> fxListAlumnos;
 
     @FXML
+    public void handleMouseClick(MouseEvent event) {
+        Alumno seleccionado = fxListAlumnos.getSelectionModel().getSelectedItem();
+
+        fxNombre.setText(seleccionado.getNombre());
+        fxEdad.setValue(new java.sql.Date(seleccionado.getFecha_nacimiento().getTime()).toLocalDate());
+        if (seleccionado.getMayor_edad()) {
+            fxMayor.setSelected(true);
+        } else {
+            fxMayor.setSelected(false);
+        }
+    }
+
+    @FXML
     public void handleInsert(ActionEvent event) {
 
         boolean ok = true;
 
-        if (fxNombre.getText() == null && fxEdad.getValue() == null) {
+        if (fxNombre.getText().trim().length() == 0 && fxEdad.getValue() == null) {
             Alert a = new Alert(Alert.AlertType.ERROR, "Tienes que rellenar el nombre y fecha de nacimiento", ButtonType.CLOSE);
             a.showAndWait();
             ok = false;
@@ -74,39 +89,90 @@ public class InicioFXMLController implements Initializable {
         if (ok) {
 
             java.util.Date date = java.sql.Date.valueOf(fxEdad.getValue());
-            conex.insertAlumnoJDBC(new Alumno(fxNombre.getText(), date, fxMayor.isSelected()));
-            fxListAlumnos.refresh();
-            cargarDatosLista();
+            Alumno a = new Alumno(fxNombre.getText(), date, fxMayor.isSelected());
+            if (conex.insertAlumnoJDBC(a)) {
+                fxListAlumnos.getItems().add(a);
+                Alert b = new Alert(Alert.AlertType.INFORMATION, "Alumno creado correctamente", ButtonType.CLOSE);
+                b.showAndWait();
+                fxListAlumnos.refresh();
+            } else {
+                Alert b = new Alert(Alert.AlertType.ERROR, "Ha ocurrido un problema al crear el alumno", ButtonType.CLOSE);
+                b.showAndWait();
+            }
         }
-
+        clearCampos();
     }
 
     @FXML
     public void handleUpdate(ActionEvent event) {
-        String nombre = fxListAlumnos.getSelectionModel().getSelectedItem().getNombre();
-        Date fecha = fxListAlumnos.getSelectionModel().getSelectedItem().getFecha_nacimiento();
-        boolean mayor = fxListAlumnos.getSelectionModel().getSelectedItem().getMayor_edad();
 
-        if (fxNombre.getText().trim().length() > 0) {
-            nombre = fxNombre.getText();
-        }
-        if (fxEdad.getValue() != null) {
-            fecha = java.sql.Date.valueOf(fxEdad.getValue());
-        }
+        boolean ok = true;
 
-        if (fxMayor.isSelected()) {
-            mayor = true;
+        if (fxListAlumnos.getSelectionModel().getSelectedItem() == null) {
+            Alert a = new Alert(Alert.AlertType.ERROR, "Tienes que seleccionar un alumno", ButtonType.CLOSE);
+            a.showAndWait();
+        } else {
+
+            if (fxNombre.getText() == null && fxEdad.getValue() == null) {
+                Alert a = new Alert(Alert.AlertType.ERROR, "Tienes que rellenar el nombre y fecha de nacimiento", ButtonType.CLOSE);
+                a.showAndWait();
+                ok = false;
+            } else {
+                if (fxNombre.getText().trim().length() == 0) {
+                    Alert a = new Alert(Alert.AlertType.ERROR, "Tienes que rellenar el nombre", ButtonType.CLOSE);
+                    a.showAndWait();
+                    ok = false;
+                }
+                if (fxEdad.getValue() == null) {
+                    Alert a = new Alert(Alert.AlertType.ERROR, "Tienes que rellenar la fecha de nacimiento", ButtonType.CLOSE);
+                    a.showAndWait();
+                    ok = false;
+                }
+            }
+            if (ok) {
+                String nombre = fxNombre.getText();
+                Date fecha = java.sql.Date.valueOf(fxEdad.getValue());
+                boolean mayor = fxMayor.isSelected();
+
+                Alumno original = fxListAlumnos.getSelectionModel().getSelectedItem();
+
+                Alumno a = new Alumno(nombre, fecha, mayor);
+                a.setId(fxListAlumnos.getSelectionModel().getSelectedItem().getId());
+
+                if (conex.updateAlumnoJDBC(a)) {
+
+                    fxListAlumnos.getItems().set(fxListAlumnos.getItems().indexOf(original), a);
+                    Alert b = new Alert(Alert.AlertType.INFORMATION, "Alumno actualizado correctamente", ButtonType.CLOSE);
+                    b.showAndWait();
+                    fxListAlumnos.refresh();
+                } else {
+                    Alert b = new Alert(Alert.AlertType.ERROR, "Ha ocurrido un problema al actualizar el alumno", ButtonType.CLOSE);
+                    b.showAndWait();
+                }
+            }
         }
-        Alumno a = new Alumno(nombre, fecha, mayor);
-        a.setId(fxListAlumnos.getSelectionModel().getSelectedItem().getId());
-        conex.updateAlumnoJDBC(a);
+        clearCampos();
     }
 
     @FXML
     public void handleDelete(ActionEvent event) {
-        Integer id = fxListAlumnos.getSelectionModel().getSelectedItem().getId();
-        conex.deleteAlumno(id.longValue());
-        cargarDatosLista();
+        if (fxListAlumnos.getSelectionModel().getSelectedItem() == null) {
+            Alert a = new Alert(Alert.AlertType.ERROR, "Tienes que seleccionar un alumno", ButtonType.CLOSE);
+            a.showAndWait();
+        } else {
+            Alumno a = fxListAlumnos.getSelectionModel().getSelectedItem();
+            Integer id = a.getId();
+            if (conex.deleteAlumno(id.longValue())) {
+                fxListAlumnos.getItems().remove(a);
+                Alert b = new Alert(Alert.AlertType.INFORMATION, "Alumno borrado correctamente", ButtonType.CLOSE);
+                b.showAndWait();
+                fxListAlumnos.refresh();
+            } else {
+                Alert b = new Alert(Alert.AlertType.ERROR, "Ha ocurrido un problema al borrar el alumno", ButtonType.CLOSE);
+                b.showAndWait();
+            }
+        }
+        clearCampos();
     }
 
     @Override
@@ -114,18 +180,6 @@ public class InicioFXMLController implements Initializable {
         // TODO
         ConexionSimpleBD c = new ConexionSimpleBD();
         conex = new ConexionSimpleBD();
-
-        List<Alumno> alumnos = c.getAllAlumnosJDBC();
-        for (Alumno a : alumnos) {
-            System.out.println(a.getNombre());
-            System.out.println(a.getId());
-        }
-        Alumno a = c.getAlumnoJDBC(403);
-        a.setNombre("Salah");
-        c.updateAlumnoJDBC(a);
-        System.out.println(a.getNombre());
-        a = c.getAlumnoJDBC(403);
-        System.out.println("despues " + a.getNombre());
         cargarDatosLista();
     }
 
@@ -135,6 +189,16 @@ public class InicioFXMLController implements Initializable {
         fxListAlumnos.getItems().addAll(
                 conex.getAllAlumnosJDBC());
 
+    }
+
+    private void clearCampos() {
+        fxNombre.setText("");
+        fxEdad.setValue(null);
+        fxMayor.setSelected(false);
+    }
+
+    public void setController(MenuFXMLController controller) {
+        this.controller = controller;
     }
 
 }
