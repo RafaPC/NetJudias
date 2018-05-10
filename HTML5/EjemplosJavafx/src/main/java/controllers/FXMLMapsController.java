@@ -159,7 +159,7 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         //Set the initial properties of the map.
         MapOptions mapOptions = new MapOptions();
 
-        mapOptions.center(new LatLong(47.6097, -122.3331))
+        mapOptions.center(new LatLong(40.369991,-3.694543))
           .mapType(MapTypeIdEnum.ROADMAP)
           .overviewMapControl(false)
           .panControl(false)
@@ -207,8 +207,8 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
           + "Current Location: Safeway<br>"
           + "ETA: 45 minutes");
 
-        InfoWindow fredWilkeInfoWindow = new InfoWindow(infoWindowOptions);
-        fredWilkeInfoWindow.open(map, fredWilkieMarker);
+//        InfoWindow fredWilkeInfoWindow = new InfoWindow(infoWindowOptions);
+//        fredWilkeInfoWindow.open(map, fredWilkieMarker);
         mapView.getMap().addUIEventHandler(joeSmithMarker, UIEventType.click, (JSObject obj) -> {
             LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
 
