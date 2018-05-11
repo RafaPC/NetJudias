@@ -27,79 +27,80 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
  */
 public class DBConnection {
 
-    private static DBConnection dbconection = null;
-    
-    private final DataSource hirakiDatasource = null;
-    
-    private DBConnection() {
-        //hirakiDatasource = getDataSourceHikari();
-    }
-
-    public static DBConnection getInstance(){
-        if (dbconection == null)
-            dbconection = new DBConnection();
-       
-        return dbconection;
-    }
+//    private static DBConnection dbconection = null;
+//    
+//    private final DataSource hirakiDatasource = null;
+//    
+//    private DBConnection() {
+//        //hirakiDatasource = getDataSourceHikari();
+//    }
+//
+//    public static DBConnection getInstance(){
+//        if (dbconection == null)
+//            dbconection = new DBConnection();
+//       
+//        return dbconection;
+//    }
     
     public Connection getConnection() throws Exception {
+        
         Class.forName(Configuration.getInstance().getDriverDB());
-        Connection connection;
+        Connection connection = null;
 
-//        connection = DriverManager.getConnection(
-//                Configuration.getInstance().getUrlDB(),
-//                Configuration.getInstance().getUserDB(),
-//                Configuration.getInstance().getPassDB());
-        connection = hirakiDatasource.getConnection();
+        connection = DriverManager.getConnection(
+                Configuration.getInstance().getUrlDB(),
+                Configuration.getInstance().getUserDB(),
+                Configuration.getInstance().getPassDB());
+        //connection = hirakiDatasource.getConnection();
 
         return connection;
     }
 
-    public DataSource getDataSourceFromServer() throws NamingException {
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("jdbc/db4free");
-        return ds;
+//    public DataSource getDataSourceFromServer() throws NamingException {
+//        Context ctx = new InitialContext();
+//        DataSource ds = (DataSource) ctx.lookup("jdbc/db4free");
+//        return ds;
+//
+//    }
 
-    }
+//    private DataSource getDataSourceHikari() {
+//        HikariConfig config = new HikariConfig();
+//
+//        config.setJdbcUrl( Configuration.getInstance().getUrlDB());
+//        config.setUsername(Configuration.getInstance().getUserDB());
+//        config.setPassword( Configuration.getInstance().getPassDB());
+//        config.setDriverClassName(Configuration.getInstance().getDriverDB());
+//        config.setMaximumPoolSize(10);
+//        
+//        config.addDataSourceProperty("cachePrepStmts", "true");
+//        config.addDataSourceProperty("prepStmtCacheSize", "250");
+//        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+//
+//        HikariDataSource datasource = new HikariDataSource(config);
+//       
+//        return datasource;
+//    }
 
-    private DataSource getDataSourceHikari() {
-        HikariConfig config = new HikariConfig();
-
-        config.setJdbcUrl( Configuration.getInstance().getUrlDB());
-        config.setUsername(Configuration.getInstance().getUserDB());
-        config.setPassword( Configuration.getInstance().getPassDB());
-        config.setDriverClassName(Configuration.getInstance().getDriverDB());
-        config.setMaximumPoolSize(10);
-        
-        config.addDataSourceProperty("cachePrepStmts", "true");
-        config.addDataSourceProperty("prepStmtCacheSize", "250");
-        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-
-        HikariDataSource datasource = new HikariDataSource(config);
-       
-        return datasource;
-    }
-
-    public DataSource getDataSource() {
-        // Creates a new instance of DriverManagerDataSource and sets
-        // the required parameters such as the Jdbc Driver class,
-        MysqlDataSource mysql = new MysqlConnectionPoolDataSource();
-        mysql.setUrl(Configuration.getInstance().getUrlDB());
-        mysql.setUser(Configuration.getInstance().getUserDB());
-        mysql.setPassword(Configuration.getInstance().getPassDB());
-
-        // Jdbc URL, database user name and password.
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
-        dataSource.setDriverClassName(Configuration.getInstance().getDriverDB());
-        dataSource.setUrl(Configuration.getInstance().getUrlDB());
-        dataSource.setUsername(Configuration.getInstance().getUserDB());
-        dataSource.setPassword(Configuration.getInstance().getPassDB());
-
-        
-        //return mysql;
-       return hirakiDatasource;
-    }
+//    public DataSource getDataSource() {
+//        // Creates a new instance of DriverManagerDataSource and sets
+//        // the required parameters such as the Jdbc Driver class,
+//        MysqlDataSource mysql = new MysqlConnectionPoolDataSource();
+//        mysql.setUrl(Configuration.getInstance().getUrlDB());
+//        mysql.setUser(Configuration.getInstance().getUserDB());
+//        mysql.setPassword(Configuration.getInstance().getPassDB());
+//
+//        // Jdbc URL, database user name and password.
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//
+//        dataSource.setDriverClassName(Configuration.getInstance().getDriverDB());
+//        dataSource.setUrl(Configuration.getInstance().getUrlDB());
+//        dataSource.setUsername(Configuration.getInstance().getUserDB());
+//        dataSource.setPassword(Configuration.getInstance().getPassDB());
+//
+//        
+//        //return mysql;
+//       return hirakiDatasource;
+//    }
 
     public void cerrarConexion(Connection connection) {
         try {

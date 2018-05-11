@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import dao.AsignaturaDAO;
 import dao.ConexionSimpleBD;
 import java.net.URL;
 import java.util.Date;
@@ -33,7 +34,7 @@ public class AsignaturasFXMLController implements Initializable {
      */
     private MenuFXMLController controller;
 
-    private ConexionSimpleBD conex;
+    private AsignaturaDAO conex;
 
     @FXML
     private AnchorPane fxRoot;
@@ -166,7 +167,7 @@ public class AsignaturasFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         ConexionSimpleBD c = new ConexionSimpleBD();
-        conex = new ConexionSimpleBD();
+        conex = new AsignaturaDAO();
         cargarDatosLista();
     }
 

@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import dao.AlumnoDAO;
 import dao.ConexionSimpleBD;
 import java.net.URL;
 import java.util.Date;
@@ -21,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Alumno;
+import servicios.AlumnoService;
 
 /**
  * FXML Controller class
@@ -34,7 +36,7 @@ public class InicioFXMLController implements Initializable {
      */
     private MenuFXMLController controller;
 
-    private ConexionSimpleBD conex;
+    private AlumnoService conex;
 
     private AnchorPane sceneAsignaturas;
 
@@ -87,10 +89,10 @@ public class InicioFXMLController implements Initializable {
             }
         }
         if (ok) {
-
+            
             java.util.Date date = java.sql.Date.valueOf(fxEdad.getValue());
             Alumno a = new Alumno(fxNombre.getText(), date, fxMayor.isSelected());
-            if (conex.insertAlumnoJDBC(a)) {
+            if (conex.insertAlumno(a)) {
                 fxListAlumnos.getItems().add(a);
                 Alert b = new Alert(Alert.AlertType.INFORMATION, "Alumno creado correctamente", ButtonType.CLOSE);
                 b.showAndWait();
@@ -139,7 +141,7 @@ public class InicioFXMLController implements Initializable {
                 Alumno a = new Alumno(nombre, fecha, mayor);
                 a.setId(fxListAlumnos.getSelectionModel().getSelectedItem().getId());
 
-                if (conex.updateAlumnoJDBC(a)) {
+                if (conex.updateAlumno(a)) {
 
                     fxListAlumnos.getItems().set(fxListAlumnos.getItems().indexOf(original), a);
                     Alert b = new Alert(Alert.AlertType.INFORMATION, "Alumno actualizado correctamente", ButtonType.CLOSE);
@@ -179,7 +181,7 @@ public class InicioFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         ConexionSimpleBD c = new ConexionSimpleBD();
-        conex = new ConexionSimpleBD();
+        conex = new AlumnoService();
         cargarDatosLista();
     }
 
@@ -187,7 +189,7 @@ public class InicioFXMLController implements Initializable {
 
         fxListAlumnos.getItems().clear();
         fxListAlumnos.getItems().addAll(
-                conex.getAllAlumnosJDBC());
+                conex.getAllAlumnos());
 
     }
 
