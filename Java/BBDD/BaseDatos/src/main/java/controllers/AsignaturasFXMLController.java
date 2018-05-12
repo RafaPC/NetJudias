@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Asignatura;
+import servicios.AsignaturaService;
 
 /**
  * FXML Controller class
@@ -34,7 +35,7 @@ public class AsignaturasFXMLController implements Initializable {
      */
     private MenuFXMLController controller;
 
-    private AsignaturaDAO conex;
+    private AsignaturaService conex;
 
     @FXML
     private AnchorPane fxRoot;
@@ -82,7 +83,7 @@ public class AsignaturasFXMLController implements Initializable {
 
         if (ok) {
             Asignatura a = new Asignatura(fxNombre.getText(), fxCurso.getText(), fxCiclo.getText());
-            if (conex.insertAsignaturaJDBC(a)) {
+            if (conex.insertAsignatura(a)) {
                 fxListAsignaturas.getItems().add(a);
                 Alert b = new Alert(Alert.AlertType.INFORMATION, "Asignatura creada correctamente", ButtonType.CLOSE);
                 b.showAndWait();
@@ -127,7 +128,7 @@ public class AsignaturasFXMLController implements Initializable {
                 Asignatura a = new Asignatura(nombre, curso, ciclo);
                 a.setId(fxListAsignaturas.getSelectionModel().getSelectedItem().getId());
 
-                if (conex.updateAsignaturaJDBC(a)) {
+                if (conex.updateAsignatura(a)) {
 
                     fxListAsignaturas.getItems().set(fxListAsignaturas.getItems().indexOf(original), a);
                     Alert b = new Alert(Alert.AlertType.INFORMATION, "Asignatura actualizada correctamente", ButtonType.CLOSE);
@@ -167,7 +168,7 @@ public class AsignaturasFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         ConexionSimpleBD c = new ConexionSimpleBD();
-        conex = new AsignaturaDAO();
+        conex = new AsignaturaService();
         cargarDatosLista();
     }
 
@@ -175,7 +176,7 @@ public class AsignaturasFXMLController implements Initializable {
 
         fxListAsignaturas.getItems().clear();
         fxListAsignaturas.getItems().addAll(
-                conex.getAllAsignaturasJDBC());
+                conex.getAllAsignaturas());
     }
 
     private void clearCampos() {

@@ -176,7 +176,7 @@ public class AsignaturaDAO {
 
     }
     
-    public boolean deleteAsignatura(long idWhere) {
+    public boolean deleteAsignaturaJDBC(long idWhere) {
 DBConnection db = new DBConnection();
         Connection con = null;
         PreparedStatement stmt = null;

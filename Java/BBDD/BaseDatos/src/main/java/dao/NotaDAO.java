@@ -10,7 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Alumno;
@@ -72,6 +74,61 @@ public class NotaDAO {
         }
         return nuevo;
 
+    }
+    
+    
+    public List<Alumno> getAllAlumnosFromAsignatura(long idWhere){
+        List<Alumno> lista = new ArrayList<>();
+        Alumno nuevo = null;
+        
+        DBConnection db = new DBConnection();
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            Class.forName(Configuration.getInstance().getDriverDB());
+
+            con = db.getConnection();
+
+            stmt = con.prepareStatement("SELECT * FROM alumnos al JOIN notas n ON (al.id = n.id_alumno) JOIN asignaturas as ON(as.id = n.id_asignatura) where as.id=?");
+
+            stmt.setLong(1, idWhere);
+            rs = stmt.executeQuery();
+
+            //STEP 5: Extract data from result set
+            while (rs.next()) {
+                //Retrieve by column name
+                int id = rs.getInt("id");
+                String nombre = rs.getString("nombre");
+                Date fn = rs.getDate("fecha_nacimiento");
+                Boolean mayor = rs.getBoolean("mayor_edad");
+                nuevo = new Alumno();
+                nuevo.setFecha_nacimiento(fn);
+                nuevo.setId(id);
+                nuevo.setMayor_edad(mayor);
+                nuevo.setNombre(nombre);
+                lista.add(nuevo);
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return lista;
     }
     
 }

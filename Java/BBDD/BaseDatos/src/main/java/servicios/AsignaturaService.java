@@ -14,7 +14,7 @@ import model.Asignatura;
  * @author daw
  */
 public class AsignaturaService {
-    public List getAllAlumnos() {
+    public List getAllAsignaturas() {
         AsignaturaDAO x = new AsignaturaDAO();
         return x.getAllAsignaturasJDBC();
     }
@@ -26,11 +26,11 @@ public class AsignaturaService {
 
     public boolean updateAsignatura(Asignatura a) {
         AsignaturaDAO x = new AsignaturaDAO();
-        return x.insertAsignaturaJDBC(a);
+        return x.updateAsignaturaJDBC(a);
     }
 
-    public boolean deleteAsignatura(Asignatura a) {
+    public boolean deleteAsignatura(long idWhere) {
         AsignaturaDAO x = new AsignaturaDAO();
-        return x.insertAsignaturaJDBC(a);
+        return x.deleteAsignaturaJDBC(idWhere);
     }
 }
