@@ -8,7 +8,17 @@ package controllers;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpRequestFactory;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.UrlEncodedContent;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.JsonObjectParser;
+import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.ArrayMap;
+import com.google.api.client.util.GenericData;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.event.UIEventType;
@@ -29,6 +39,8 @@ import dao.BusDao;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -122,7 +134,7 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
     @FXML
     public void handleButton(ActionEvent event) throws IOException {
         Timeline timeline = new Timeline(
-          new KeyFrame(Duration.seconds(5), e -> {
+          new KeyFrame(Duration.seconds(4), e -> {
               try {
                   loadBud();
               } catch (IOException ex) {
@@ -168,48 +180,34 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
           .streetViewControl(false)
           .zoomControl(false)
           .zoom(12);
-
         map = mapView.createMap(mapOptions);
 
         //Add markers to the map
         MarkerOptions markerOptions1 = new MarkerOptions();
-        markerOptions1.position(joeSmithLocation);
+        markerOptions1.position(new LatLong(40.410757, -3.690594));
         markerOptions1.label("LABEL");
         markerOptions1.title("TITLE");
-        markerOptions1.icon("https://png.clipart.me/istock/previews/5059/50591994-bus-icon-glossy-green-round-button.jpg");
+        //markerOptions1.icon("https://png.clipart.me/istock/previews/5059/50591994-bus-icon-glossy-green-round-button.jpg")
+        ;
 
         MarkerOptions markerOptions2 = new MarkerOptions();
         markerOptions2.position(joshAndersonLocation);
 
-        MarkerOptions markerOptions3 = new MarkerOptions();
-        markerOptions3.position(bobUnderwoodLocation);
-
-        MarkerOptions markerOptions4 = new MarkerOptions();
-        markerOptions4.position(tomChoiceLocation);
-
-        MarkerOptions markerOptions5 = new MarkerOptions();
-        markerOptions5.position(fredWilkieLocation);
-
-        Marker joeSmithMarker = new Marker(markerOptions1);
+        Marker jbotanico = new Marker(markerOptions1);
         Marker joshAndersonMarker = new Marker(markerOptions2);
-        Marker bobUnderwoodMarker = new Marker(markerOptions3);
-        Marker tomChoiceMarker = new Marker(markerOptions4);
-        Marker fredWilkieMarker = new Marker(markerOptions5);
 
-        map.addMarker(joeSmithMarker);
+        map.addMarker(jbotanico);
         map.addMarker(joshAndersonMarker);
-        map.addMarker(bobUnderwoodMarker);
-        map.addMarker(tomChoiceMarker);
-        map.addMarker(fredWilkieMarker);
 
         InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
         infoWindowOptions.content("<h2>Fred Wilkie</h2>"
-          + "Current Location: Safeway<br>"
-          + "ETA: 45 minutes");
+          + "Current Location: Real Jardín Botánico<br>"
+          + "ETA: 45 minutes")
+                .position(new LatLong(40.429980, -3.704352));
 
-//        InfoWindow fredWilkeInfoWindow = new InfoWindow(infoWindowOptions);
-//        fredWilkeInfoWindow.open(map, fredWilkieMarker);
-        mapView.getMap().addUIEventHandler(joeSmithMarker, UIEventType.click, (JSObject obj) -> {
+       InfoWindow fredWilkeInfoWindow = new InfoWindow(infoWindowOptions);
+        fredWilkeInfoWindow.open(map, jbotanico);
+        mapView.getMap().addUIEventHandler(jbotanico, UIEventType.click, (JSObject obj) -> {
             LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
 
             combo.getItems().add(ll.toString());
@@ -219,9 +217,33 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
               + "ETA: 45 minutes");
 
             InfoWindow fredWilkeInfoWindow1 = new InfoWindow(infoWindowOptions1);
-            fredWilkeInfoWindow1.open(map, joeSmithMarker);
+            fredWilkeInfoWindow1.open(map, jbotanico);
 
         });
+        
     }
+    
+//    public String GetListLines() throws IOException {
+//        HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
+//        JsonFactory JSON_FACTORY = new JacksonFactory();
+//        HttpRequestFactory requestFactory
+//                = HTTP_TRANSPORT.createRequestFactory((HttpRequest request) -> {
+//                    request.setParser(new JsonObjectParser(JSON_FACTORY));
+//                });
+//
+//        GenericUrl url = new GenericUrl("https://openbus.emtmadrid.es:9443/emt-proxy-server/last/bus/GetListLines.php");
+//
+//        GenericData data = new GenericData();
+//        data.put("idClient", Constantes.ID_Client);
+//        data.put("passKey", Constantes.CONTRASEÑA);
+//
+//        //pasamos de LocalDate a String
+//        LocalDate localDate = LocalDate.now();//For reference
+//        String sDate = localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+//        data.put("SelectDate", sDate);
+//
+//        HttpRequest requestGoogle = requestFactory.buildPostRequest(url, new UrlEncodedContent(data));
+//        return requestGoogle.execute().parseAsString();
+//    }
 
 }
