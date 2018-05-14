@@ -7,7 +7,9 @@ package servicios;
 
 import dao.AlumnoDAO;
 import dao.AsignaturaDAO;
+import dao.NotaDAO;
 import java.util.List;
+import model.Nota;
 
 /**
  *
@@ -19,8 +21,14 @@ public class NotaService {
         return x.getAllAsignaturasJDBC();
     }
     
-    public List getAllAlumnos() {
-        AlumnoDAO x = new AlumnoDAO();
-        return x.getAllAlumnosJDBC();
+    public List getAllAlumnosFromAsignatura(long idWhere) {
+        NotaDAO x = new NotaDAO();
+        return x.getAllAlumnosFromAsignatura(idWhere);
     }
+    
+    public void updateNota(Nota a) {
+        NotaDAO x = new NotaDAO();
+         x.updateNotas(a);
+    }
+    
 }

@@ -53,9 +53,15 @@ public class NotasFXMLController implements Initializable {
     private ListView<Alumno> fxListAlumnos;
 
     @FXML
-    public void handleMouseClick(MouseEvent event) {
-        
-        fxComboAsignaturas.getSelectionModel().getSelectedItem().getId();
+    public void handleMouseClick(ActionEvent event) {
+        cargarDatosLista(fxComboAsignaturas.getSelectionModel().getSelectedItem().getId());
+    }
+    
+    @FXML
+    public void handleCambiarNota(ActionEvent event) {
+        Integer nota = Integer.parseInt(fxNota.getText());
+        Nota a = new Nota(nota,fxListAlumnos.getSelectionModel().getSelectedItem().getId(), (int) fxComboAsignaturas.getSelectionModel().getSelectedItem().getId());
+        conex.updateNota(a);
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -70,11 +76,11 @@ public class NotasFXMLController implements Initializable {
                 conex.getAllAsignaturas());
     }
 
-    public void cargarDatosLista() {
+    public void cargarDatosLista(long idWhere) {
 
         fxListAlumnos.getItems().clear();
         fxListAlumnos.getItems().addAll(
-                conex.getAllAlumnos());
+                conex.getAllAlumnosFromAsignatura(idWhere));
 
     }
 

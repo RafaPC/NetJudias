@@ -17,6 +17,16 @@ public class Nota {
     
     private int id_asignatura;
 
+    public Nota(int nota, int id_alumno, int id_asignatura) {
+        this.nota = nota;
+        this.id_alumno = id_alumno;
+        this.id_asignatura = id_asignatura;
+    }
+
+    public Nota() {
+    }    
+    
+    
     public int getNota() {
         return nota;
     }

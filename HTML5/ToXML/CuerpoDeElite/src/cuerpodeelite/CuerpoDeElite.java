@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Scanner;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -46,7 +47,7 @@ public class CuerpoDeElite {
     protected ArrayList<Recurso> recursos = new ArrayList<>();
 
     @XmlJavaTypeAdapter(MyMapAdapter.class)
-    protected HashMap<String, Mision> misiones = new LinkedHashMap<>();
+    protected Map<String, Mision> misiones = new LinkedHashMap<>();
 
     public CuerpoDeElite() {
         recursos.add(new RecursoMaterialVehiculo(8, 35, 300, 20, "Furgón"));

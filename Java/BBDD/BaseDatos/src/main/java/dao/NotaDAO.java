@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Alumno;
+import model.Nota;
 
 /**
  *
@@ -90,7 +91,7 @@ public class NotaDAO {
 
             con = db.getConnection();
 
-            stmt = con.prepareStatement("SELECT * FROM alumnos al JOIN notas n ON (al.id = n.id_alumno) JOIN asignaturas as ON(as.id = n.id_asignatura) where as.id=?");
+            stmt = con.prepareStatement("SELECT * FROM alumnos WHERE id IN (SELECT id_alumno FROM notas where id_asignatura = ?)");
 
             stmt.setLong(1, idWhere);
             rs = stmt.executeQuery();
@@ -129,6 +130,49 @@ public class NotaDAO {
 
         }
         return lista;
+    }
+    
+    public void updateNotas(Nota a) {
+
+        DBConnection db = new DBConnection();
+        Connection con = null;
+        PreparedStatement stmt = null;
+        int filas = -1;
+        boolean updateado = true;
+        try {
+            Class.forName(Configuration.getInstance().getDriverDB());
+
+            con = db.getConnection();
+
+            stmt = con.prepareStatement("UPDATE notas SET NOTA = ?  WHERE id_alumno = ? AND id_asignatura = ?");
+
+            stmt.setInt(1, a.getNota());
+            stmt.setInt(2, a.getId_alumno());
+            stmt.setInt(3, a.getId_asignatura());
+
+            filas = stmt.executeUpdate();
+
+        } catch (Exception ex) {
+            Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (filas == -1) {
+                updateado = false;
+            }
+            try {
+
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        //return updateado;
+
     }
     
 }
