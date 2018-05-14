@@ -19,6 +19,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -45,6 +46,9 @@ public class NotasFXMLController implements Initializable {
 
     @FXML
     private TextField fxNota;
+    
+    @FXML
+    private Label fxLabelNota;
 
     @FXML
     private ComboBox<Asignatura> fxComboAsignaturas;
@@ -55,6 +59,7 @@ public class NotasFXMLController implements Initializable {
     @FXML
     public void handleMouseClick(ActionEvent event) {
         cargarDatosLista(fxComboAsignaturas.getSelectionModel().getSelectedItem().getId());
+        
     }
     
     @FXML
