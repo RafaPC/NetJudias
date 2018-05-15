@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,59 +24,59 @@ import model.Nota;
  * @author daw
  */
 public class NotaDAO {
-    public Alumno getNotaAlumnoJDBC(int idWhere) {
-
-        Alumno nuevo = null;
-        DBConnection db = new DBConnection();
-        Connection con = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        try {
-            Class.forName(Configuration.getInstance().getDriverDB());
-
-            con = db.getConnection();
-
-            stmt = con.prepareStatement("SELECT * FROM notas where id_alumno=? AND id_asignatura=?");
-
-            stmt.setInt(1, idWhere);
-            stmt.setString(2, "%a%");
-
-            rs = stmt.executeQuery();
-
-            //STEP 5: Extract data from result set
-            rs.next();
-            //Retrieve by column name
-            int id = rs.getInt("id");
-            String nombre = rs.getString("nombre");
-            Date fn = rs.getDate("fecha_nacimiento");
-            Boolean mayor = rs.getBoolean("mayor_edad");
-            nuevo = new Alumno();
-            nuevo.setFecha_nacimiento(fn);
-            nuevo.setId(id);
-            nuevo.setMayor_edad(mayor);
-            nuevo.setNombre(nombre);
-
-        } catch (Exception ex) {
-            Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-        return nuevo;
-
-    }
+//    public Alumno getNotaAlumnoJDBC(int idWhere) {
+//
+//        Alumno nuevo = null;
+//        DBConnection db = new DBConnection();
+//        Connection con = null;
+//        PreparedStatement stmt = null;
+//        ResultSet rs = null;
+//        try {
+//            Class.forName(Configuration.getInstance().getDriverDB());
+//
+//            con = db.getConnection();
+//
+//            stmt = con.prepareStatement("SELECT * FROM notas where id_alumno=? AND id_asignatura=?");
+//
+//            stmt.setInt(1, idWhere);
+//            stmt.setString(2, "%a%");
+//
+//            rs = stmt.executeQuery();
+//
+//            //STEP 5: Extract data from result set
+//            rs.next();
+//            //Retrieve by column name
+//            int id = rs.getInt("id");
+//            String nombre = rs.getString("nombre");
+//            Date fn = rs.getDate("fecha_nacimiento");
+//            Boolean mayor = rs.getBoolean("mayor_edad");
+//            nuevo = new Alumno();
+//            nuevo.setFecha_nacimiento(fn);
+//            nuevo.setId(id);
+//            nuevo.setMayor_edad(mayor);
+//            nuevo.setNombre(nombre);
+//
+//        } catch (Exception ex) {
+//            Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
+//        } finally {
+//            try {
+//                if (rs != null) {
+//                    rs.close();
+//                }
+//                if (stmt != null) {
+//                    stmt.close();
+//                }
+//                if (con != null) {
+//                    con.close();
+//                }
+//            } catch (SQLException ex) {
+//                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//
+//        }
+//        return nuevo;
+//
+//    }
     
     
     public List<Alumno> getAllAlumnosFromAsignatura(long idWhere){
@@ -132,13 +133,13 @@ public class NotaDAO {
         return lista;
     }
     
-    public void updateNotas(Nota a) {
+    public boolean updateNotas(Nota a) {
 
         DBConnection db = new DBConnection();
         Connection con = null;
         PreparedStatement stmt = null;
         int filas = -1;
-        boolean updateado = true;
+        boolean updateado = false;
         try {
             Class.forName(Configuration.getInstance().getDriverDB());
 
@@ -155,8 +156,8 @@ public class NotaDAO {
         } catch (Exception ex) {
             Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            if (filas == -1) {
-                updateado = false;
+            if (filas == 1) {
+                updateado = true;
             }
             try {
 
@@ -171,7 +172,95 @@ public class NotaDAO {
             }
 
         }
-        //return updateado;
+        return updateado;
+
+    }
+    
+    public int getNotaFromAlumno(int idAlum, int idAsig) {
+        int nota = 0;
+        DBConnection db = new DBConnection();
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            Class.forName(Configuration.getInstance().getDriverDB());
+
+            con = db.getConnection();
+
+            stmt = con.prepareStatement("SELECT nota FROM notas where id_alumno=? AND id_asignatura=?");
+
+            stmt.setInt(1, idAlum);
+            stmt.setInt(2, idAsig);
+
+            rs = stmt.executeQuery();
+
+            //STEP 5: Extract data from result set
+            rs.next();
+            //Retrieve by column name
+             nota = rs.getInt("nota");
+
+        } catch (Exception ex) {
+            Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return nota;
+
+    }
+    
+    
+    public boolean insertNota(int idAlum, int idAsig) {
+        DBConnection db = new DBConnection();
+        Connection con = null;
+        PreparedStatement stmt = null;
+        int filas = -1;
+        boolean insertado = false;
+        try {
+            Class.forName(Configuration.getInstance().getDriverDB());
+
+            con = db.getConnection();
+
+            stmt = con.prepareStatement("INSERT INTO notas "
+                    + "(id_alumno,id_asignatura)  "
+                    + "VALUES (?,?)");
+
+            stmt.setInt(1, idAlum);
+            stmt.setInt(2, idAsig);
+
+            filas = stmt.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (filas == 1) {
+                insertado = true;
+            }
+            try {
+
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return insertado;
 
     }
     

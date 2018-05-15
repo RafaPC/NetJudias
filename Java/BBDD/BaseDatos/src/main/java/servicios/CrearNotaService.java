@@ -15,25 +15,31 @@ import model.Nota;
  *
  * @author Los Prieto
  */
-public class NotaService {
+public class CrearNotaService {
     public List getAllAsignaturas() {
         AsignaturaDAO x = new AsignaturaDAO();
         return x.getAllAsignaturasJDBC();
     }
     
-    public List getAllAlumnosFromAsignatura(long idWhere) {
-        NotaDAO x = new NotaDAO();
-        return x.getAllAlumnosFromAsignatura(idWhere);
+    public List getAllAlumnos() {
+        AlumnoDAO x = new AlumnoDAO();
+        return x.getAllAlumnosJDBC();
     }
     
-    public boolean updateNota(Nota a) {
+    public boolean insertNota(int idAlum, int idAsig) {
         NotaDAO x = new NotaDAO();
-         return x.updateNotas(a);
+        return x.insertNota(idAlum,idAsig);
+    }
+    
+    public void updateNota(Nota a) {
+        NotaDAO x = new NotaDAO();
+         x.updateNotas(a);
     }
     
     public int getNotaFromAlumno(int idAlum, int idAsig){
         NotaDAO x = new NotaDAO();
         return x.getNotaFromAlumno(idAlum, idAsig);
     }
+   
     
 }

@@ -262,5 +262,40 @@ public class AlumnoDAO {
         return borrado;
 
     }
+    
+    public int delUser2(int idWhere){
+        DBConnection db = new DBConnection();
+        Connection con = null;
+        int filas = 0;
+        try {
+            
+            con = db.getConnection();
+            con.setAutoCommit(false);
+            String sql = "DELETE FROM NOTAS WHERE ID_ALUMNO = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setLong(1, idWhere);
+            
+            filas += stmt.executeUpdate();
+            
+            sql = "DELETE FROM ALUMNOS WHERE ID = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setLong(1, idWhere);
+
+            filas += stmt.executeUpdate();
+            con.commit();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                if (con!=null)
+                    con.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } finally {
+            db.cerrarConexion(con);
+        }
+        return filas;
+    }
 
 }

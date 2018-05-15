@@ -21,7 +21,8 @@
           </Menu>
             <Menu fx:id="fxMenuNotas" mnemonicParsing="false" text="Notas">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleCambiarNotas" text="." />
+                  <MenuItem fx:id="fxAsignarAlum" mnemonicParsing="false" onAction="#handleAsignarAlum" text="Asignar alumnos" />
+                  <MenuItem fx:id="fxInsertNota" mnemonicParsing="false" onAction="#handleCambiarNotas" text="Poner notas" />
                </items>
             </Menu>
         </menus>
