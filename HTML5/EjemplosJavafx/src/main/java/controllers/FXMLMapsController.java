@@ -23,8 +23,10 @@ import com.lynden.gmapsfx.javascript.object.MarkerOptions;
 import com.lynden.gmapsfx.shapes.Polyline;
 import com.lynden.gmapsfx.shapes.PolylineOptions;
 import dao.BusDao;
+import java.awt.Color;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,6 +39,7 @@ import javafx.scene.control.ComboBox;
 import javafx.util.Duration;
 import model.Arrive;
 import model.Arrives;
+import model.ListsLinesInfo;
 import model.StopsLine;
 import netscape.javascript.JSObject;
 
@@ -62,29 +65,64 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
 
     private void loadBud() throws IOException {
         BusDao bus = new BusDao();
-        StopsLine stops = bus.GetStopsLine("76", "PLAZA BEATA");
-
-        LatLong[] latlongs = new LatLong[stops.getStop().size()];
-        for (int i = 0; i < stops.getStop().size(); i++) {
-            LatLong x = new LatLong(stops.getStop().get(i).getLatitude(), stops.getStop().get(i).getLongitude());
-            latlongs[i] = x;
-        }
+//        StopsLine stops = bus.GetStopsLine("76", "PLAZA BEATA");
+        ListsLinesInfo lines = bus.GetListLines();
+        Random rand = new Random();
+        boolean primero;
         map.clearMarkers();
+        for (int i = 0; i < 10; i++) {
+            primero = true;
 
-//        LatLong centreP = new LatLong(40.4893538421231, -3.6827461557);
-//        LatLong start = new LatLong(40.4893538421231, -3.6827461557 + 0.02);
-//        LatLong[] latlongs = new LatLong[2];
-//        latlongs[0] = centreP;
-//        latlongs[1] = start;
-        MVCArray array = new MVCArray(latlongs);
+            //Crear color hexadecimal aleatorio
+            float r = rand.nextFloat();
+            float g = rand.nextFloat();
+            float b = rand.nextFloat();
+            Color randomColor = new Color(r, g, b);
+            String colorHex = "#" + Integer.toHexString(randomColor.getRGB()).substring(2);
 
-        PolylineOptions polyOpts = new PolylineOptions()
-                .path(array)
-                .strokeColor("#00FF00")
-                .strokeWeight(2);
-        Polyline pp = new Polyline(polyOpts);
+            //Sacar las paradas de la linea actual
+            StopsLine stops = bus.GetStopsLine(lines.getResultValues().get(i).getLine(), lines.getResultValues().get(i).getNameA());
 
-        map.addMapShape(pp);
+            //Crear array para guardar las posiciones de las paradas
+            LatLong[] latlongs = new LatLong[stops.getStop().size()];
+
+            for (int j = 0; j < stops.getStop().size(); j++) {
+                LatLong x = new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude());
+                latlongs[j] = x;
+            }
+
+            //Pintar la línea actual con todas sus paradas
+            MVCArray array = new MVCArray(latlongs);
+
+            PolylineOptions polyOpts = new PolylineOptions()
+                    .path(array)
+                    .strokeColor(colorHex)
+                    .strokeWeight(2);
+            Polyline pp = new Polyline(polyOpts);
+
+            map.addMapShape(pp);
+
+            //Poner un marcador en la primera parada de cada línea
+            //Opciones Marcador
+            MarkerOptions opcionesMarcador = new MarkerOptions();
+            opcionesMarcador.position(new LatLong(latlongs[0].getLatitude(), latlongs[0].getLongitude()));
+            opcionesMarcador.label(lines.getResultValues().get(i).getLabel());
+            opcionesMarcador.title(lines.getResultValues().get(i).getLine());
+
+            //Marcador
+            Marker marcador = new Marker(opcionesMarcador);
+            map.addMarker(marcador);
+
+            //Opciones InfoWindow
+            InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
+            infoWindowOptions.content("<h2>" + marcador.getTitle() + "<h2>"
+                    + "")
+                    .position(new LatLong(latlongs[0].getLatitude(), latlongs[0].getLongitude()));
+            infoWindowOptions.maxWidth(10);
+            //InfoWindow
+            InfoWindow infoWindow = new InfoWindow(infoWindowOptions);
+            infoWindow.open(map, marcador);
+        }
 
         map.setZoom(16);
 
@@ -124,7 +162,7 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
                     }
                 })
         );
-        timeline.setCycleCount(10);
+        timeline.setCycleCount(0);
         timeline.play();
 
     }
@@ -169,9 +207,7 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         markerOptions1.position(new LatLong(40.410757, -3.690594));
         markerOptions1.label("LABEL");
         markerOptions1.title("TITLE");
-        //markerOptions1.icon("https://png.clipart.me/istock/previews/5059/50591994-bus-icon-glossy-green-round-button.jpg")
-        ;
-
+        //markerOptions1.icon("https://png.clipart.me/istock/previews/5059/50591994-bus-icon-glossy-green-round-button.jpg");
         MarkerOptions markerOptions2 = new MarkerOptions();
         markerOptions2.position(joshAndersonLocation);
 

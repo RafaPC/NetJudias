@@ -24,8 +24,13 @@ import com.google.api.client.json.JsonObjectParser;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.ArrayMap;
 import com.google.api.client.util.GenericData;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import model.Arrive;
 import model.Arrives;
+import model.ListLineInfo;
+import model.ListsLinesInfo;
 import model.Stop;
 import model.StopsLine;
 
@@ -77,7 +82,7 @@ public class BusDao {
         GenericUrl url = new GenericUrl("https://openbus.emtmadrid.es:9443/emt-proxy-server/last/geo/GetStopsLine.php");
 
         GenericData data = new GenericData();
-        data.put("idClient", "WEB.SERV.rafitap.c@hotmail.com ");
+        data.put("idClient", "WEB.SERV.rafitap.c@hotmail.com");
         data.put("passKey", "84802663-D65C-4C6B-8372-0E8206AB6808");
         data.put("line", idLine);
         data.put("direction", Direccion);
@@ -91,6 +96,36 @@ public class BusDao {
         });  
         
         return stops;
+    }
+    
+    
+    public ListsLinesInfo GetListLines() throws IOException {
+        HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
+        JsonFactory JSON_FACTORY = new JacksonFactory();
+        HttpRequestFactory requestFactory
+                = HTTP_TRANSPORT.createRequestFactory((HttpRequest request) -> {
+                    request.setParser(new JsonObjectParser(JSON_FACTORY));
+                });
+
+        GenericUrl url = new GenericUrl("https://openbus.emtmadrid.es:9443/emt-proxy-server/last/bus/GetListLines.php");
+
+        GenericData data = new GenericData();
+        data.put("idClient", "WEB.SERV.rafitap.c@hotmail.com");
+        data.put("passKey", "84802663-D65C-4C6B-8372-0E8206AB6808");
+
+        //pasamos de LocalDate a String
+        LocalDate localDate = LocalDate.now();//For reference
+        String sDate = localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        data.put("SelectDate", sDate);
+
+        HttpRequest requestGoogle = requestFactory.buildPostRequest(url, new UrlEncodedContent(data));
+        
+        ObjectMapper m = new ObjectMapper();
+        m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        ListsLinesInfo lines = m.readValue(requestGoogle.execute().parseAsString(), new TypeReference<ListsLinesInfo>() {
+        });  
+        
+        return lines;
     }
 
     public String GetArrivesStop(String idStop) throws IOException {
