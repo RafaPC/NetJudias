@@ -30,8 +30,8 @@ public class AlumnoService {
         return x.updateAlumnoJDBC(a);
     }
 
-    public boolean deleteAlumno(long idWhere) {
+    public int deleteAlumno(long idWhere) {
         AlumnoDAO x = new AlumnoDAO();
-        return x.deleteAlumno(idWhere);
+        return x.delUser2((int) idWhere);
     }
 }

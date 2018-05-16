@@ -8,21 +8,9 @@ package controllers;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpRequest;
-import com.google.api.client.http.HttpRequestFactory;
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.http.UrlEncodedContent;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.JsonObjectParser;
-import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.client.util.ArrayMap;
-import com.google.api.client.util.GenericData;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.event.UIEventType;
-import com.lynden.gmapsfx.javascript.object.Animation;
 import com.lynden.gmapsfx.javascript.object.GoogleMap;
 import com.lynden.gmapsfx.javascript.object.InfoWindow;
 import com.lynden.gmapsfx.javascript.object.InfoWindowOptions;
@@ -30,30 +18,21 @@ import com.lynden.gmapsfx.javascript.object.LatLong;
 import com.lynden.gmapsfx.javascript.object.MVCArray;
 import com.lynden.gmapsfx.javascript.object.MapOptions;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
-
 import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
 import com.lynden.gmapsfx.shapes.Polyline;
 import com.lynden.gmapsfx.shapes.PolylineOptions;
 import dao.BusDao;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.util.Duration;
 import model.Arrive;
@@ -84,27 +63,25 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
     private void loadBud() throws IOException {
         BusDao bus = new BusDao();
         StopsLine stops = bus.GetStopsLine("76", "PLAZA BEATA");
-        
+
         LatLong[] latlongs = new LatLong[stops.getStop().size()];
-        for(int i = 0; i<stops.getStop().size();i++){
-           LatLong x = new LatLong(stops.getStop().get(i).getLatitude(),stops.getStop().get(i).getLongitude());
-           latlongs [i] = x;
+        for (int i = 0; i < stops.getStop().size(); i++) {
+            LatLong x = new LatLong(stops.getStop().get(i).getLatitude(), stops.getStop().get(i).getLongitude());
+            latlongs[i] = x;
         }
         map.clearMarkers();
-        
+
 //        LatLong centreP = new LatLong(40.4893538421231, -3.6827461557);
 //        LatLong start = new LatLong(40.4893538421231, -3.6827461557 + 0.02);
-        
 //        LatLong[] latlongs = new LatLong[2];
 //        latlongs[0] = centreP;
 //        latlongs[1] = start;
-
         MVCArray array = new MVCArray(latlongs);
 
         PolylineOptions polyOpts = new PolylineOptions()
-          .path(array)
-          .strokeColor("#00FF00")
-          .strokeWeight(2);
+                .path(array)
+                .strokeColor("#00FF00")
+                .strokeWeight(2);
         Polyline pp = new Polyline(polyOpts);
 
         map.addMapShape(pp);
@@ -124,7 +101,7 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
             System.out.println(stop.getLongitude());
             System.out.println(stop.getBusPositionType());
             LatLong punto = new LatLong(Double.parseDouble(stop.getLatitude()),
-              Double.parseDouble(stop.getLongitude()));
+                    Double.parseDouble(stop.getLongitude()));
             map.setCenter(punto);
             MarkerOptions markerOptions5 = new MarkerOptions();
             markerOptions5.position(punto);
@@ -139,13 +116,13 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
     @FXML
     public void handleButton(ActionEvent event) throws IOException {
         Timeline timeline = new Timeline(
-          new KeyFrame(Duration.seconds(4), e -> {
-              try {
-                  loadBud();
-              } catch (IOException ex) {
-                  Logger.getLogger(FXMLMapsController.class.getName()).log(Level.SEVERE, null, ex);
-              }
-          })
+                new KeyFrame(Duration.seconds(4), e -> {
+                    try {
+                        loadBud();
+                    } catch (IOException ex) {
+                        Logger.getLogger(FXMLMapsController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                })
         );
         timeline.setCycleCount(10);
         timeline.play();
@@ -176,15 +153,15 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         //Set the initial properties of the map.
         MapOptions mapOptions = new MapOptions();
 
-        mapOptions.center(new LatLong(40.369991,-3.694543))
-          .mapType(MapTypeIdEnum.ROADMAP)
-          .overviewMapControl(false)
-          .panControl(false)
-          .rotateControl(false)
-          .scaleControl(false)
-          .streetViewControl(false)
-          .zoomControl(false)
-          .zoom(12);
+        mapOptions.center(new LatLong(40.369991, -3.694543))
+                .mapType(MapTypeIdEnum.ROADMAP)
+                .overviewMapControl(false)
+                .panControl(false)
+                .rotateControl(false)
+                .scaleControl(false)
+                .streetViewControl(false)
+                .zoomControl(false)
+                .zoom(12);
         map = mapView.createMap(mapOptions);
 
         //Add markers to the map
@@ -206,11 +183,11 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
 
         InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
         infoWindowOptions.content("<h2>Fred Wilkie</h2>"
-          + "Current Location: Real Jardín Botánico<br>"
-          + "ETA: 45 minutes")
+                + "Current Location: Real Jardín Botánico<br>"
+                + "ETA: 45 minutes")
                 .position(new LatLong(40.429980, -3.704352));
 
-       InfoWindow fredWilkeInfoWindow = new InfoWindow(infoWindowOptions);
+        InfoWindow fredWilkeInfoWindow = new InfoWindow(infoWindowOptions);
         fredWilkeInfoWindow.open(map, jbotanico);
         mapView.getMap().addUIEventHandler(jbotanico, UIEventType.click, (JSObject obj) -> {
             LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
@@ -218,16 +195,16 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
             combo.getItems().add(ll.toString());
             InfoWindowOptions infoWindowOptions1 = new InfoWindowOptions();
             infoWindowOptions1.content("<h2>Fred Wilkie</h2>"
-              + "Current Location: Safeway<br>"
-              + "ETA: 45 minutes");
+                    + "Current Location: Safeway<br>"
+                    + "ETA: 45 minutes");
 
             InfoWindow fredWilkeInfoWindow1 = new InfoWindow(infoWindowOptions1);
             fredWilkeInfoWindow1.open(map, jbotanico);
 
         });
-        
+
     }
-    
+
 //    public String GetListLines() throws IOException {
 //        HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 //        JsonFactory JSON_FACTORY = new JacksonFactory();
@@ -250,5 +227,4 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
 //        HttpRequest requestGoogle = requestFactory.buildPostRequest(url, new UrlEncodedContent(data));
 //        return requestGoogle.execute().parseAsString();
 //    }
-
 }

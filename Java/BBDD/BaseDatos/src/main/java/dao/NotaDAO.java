@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Alumno;
+import model.Asignatura;
 import model.Nota;
 
 /**
@@ -133,6 +134,62 @@ public class NotaDAO {
         return lista;
     }
     
+    public List<Asignatura> getAllAsignaturasJDBC() {
+        DBConnection db = new DBConnection();
+        List<Asignatura> lista = new ArrayList<>();
+        Asignatura nuevo = null;
+
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            Class.forName(Configuration.getInstance().getDriverDB());
+
+            con = db.getConnection();
+
+            stmt = con.createStatement();
+            String sql;
+
+            sql = "SELECT * FROM asignaturas WHERE id IN (SELECT DISTINCT(id_asignatura) FROM notas)";
+            rs = stmt.executeQuery(sql);
+
+            //STEP 5: Extract data from result set
+            while (rs.next()) {
+                //Retrieve by column name
+                int id = rs.getInt("id");
+                String nombre = rs.getString("nombre");
+                String curso = rs.getString("curso");
+                String ciclo = rs.getString("ciclo");
+
+                nuevo = new Asignatura();
+                nuevo.setId(id);
+                nuevo.setNombre(nombre);
+                nuevo.setCurso(curso);
+                nuevo.setCiclo(ciclo);
+                lista.add(nuevo);
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return lista;
+
+    }
     public boolean updateNotas(Nota a) {
 
         DBConnection db = new DBConnection();

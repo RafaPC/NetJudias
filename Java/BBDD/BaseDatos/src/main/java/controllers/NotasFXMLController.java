@@ -50,7 +50,6 @@ public class NotasFXMLController implements Initializable {
     @FXML
     public void handleMouseClick(ActionEvent event) {
         cargarDatosLista(fxComboAsignaturas.getSelectionModel().getSelectedItem().getId());
-
     }
 
     @FXML

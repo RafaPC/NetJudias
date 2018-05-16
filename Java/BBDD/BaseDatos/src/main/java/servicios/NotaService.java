@@ -5,8 +5,6 @@
  */
 package servicios;
 
-import dao.AlumnoDAO;
-import dao.AsignaturaDAO;
 import dao.NotaDAO;
 import java.util.List;
 import model.Nota;
@@ -17,7 +15,7 @@ import model.Nota;
  */
 public class NotaService {
     public List getAllAsignaturas() {
-        AsignaturaDAO x = new AsignaturaDAO();
+        NotaDAO x = new NotaDAO();
         return x.getAllAsignaturasJDBC();
     }
     
