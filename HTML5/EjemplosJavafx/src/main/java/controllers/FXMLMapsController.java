@@ -115,10 +115,10 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
 
             //Opciones InfoWindow
             InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-            infoWindowOptions.content("<h2>" + marcador.getTitle() + "<h2>"
-                    + "")
+            infoWindowOptions.content("Línea " + lines.getResultValues().get(i).getLabel()
+            + "</br>" + lines.getResultValues().get(i).getNameA() + " - " + lines.getResultValues().get(i).getNameB())
                     .position(new LatLong(latlongs[0].getLatitude(), latlongs[0].getLongitude()));
-            infoWindowOptions.maxWidth(10);
+            //infoWindowOptions.maxWidth(10);
             //InfoWindow
             InfoWindow infoWindow = new InfoWindow(infoWindowOptions);
             infoWindow.open(map, marcador);
