@@ -58,6 +58,7 @@ import javafx.scene.control.ComboBox;
 import javafx.util.Duration;
 import model.Arrive;
 import model.Arrives;
+import model.StopsLine;
 import netscape.javascript.JSObject;
 
 /**
@@ -78,18 +79,25 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
     @FXML
     public void handleCombo(ActionEvent event) {
         System.out.println(combo.getSelectionModel().getSelectedItem().toString());
-
     }
 
     private void loadBud() throws IOException {
+        BusDao bus = new BusDao();
+        StopsLine stops = bus.GetStopsLine("76", "PLAZA BEATA");
+        
+        LatLong[] latlongs = new LatLong[stops.getStop().size()];
+        for(int i = 0; i<stops.getStop().size();i++){
+           LatLong x = new LatLong(stops.getStop().get(i).getLatitude(),stops.getStop().get(i).getLongitude());
+           latlongs [i] = x;
+        }
         map.clearMarkers();
-
-        LatLong centreP = new LatLong(40.4893538421231, -3.6827461557);
-        LatLong start = new LatLong(40.4893538421231, -3.6827461557 + 0.02);
-
-        LatLong[] latlongs = new LatLong[2];
-        latlongs[0] = centreP;
-        latlongs[1] = start;
+        
+//        LatLong centreP = new LatLong(40.4893538421231, -3.6827461557);
+//        LatLong start = new LatLong(40.4893538421231, -3.6827461557 + 0.02);
+        
+//        LatLong[] latlongs = new LatLong[2];
+//        latlongs[0] = centreP;
+//        latlongs[1] = start;
 
         MVCArray array = new MVCArray(latlongs);
 
@@ -102,9 +110,6 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         map.addMapShape(pp);
 
         map.setZoom(16);
-
-        BusDao bus = new BusDao();
-        String json = bus.GetStopsLine("76", "PLAZA BEATA");
 
         BusDao b = new BusDao();
 

@@ -11,15 +11,15 @@ import java.util.List;
  *
  * @author daw
  */
-public class StopsLines {
-    private List<Stop> stoplines;
+public class StopsLine { 
+    private List<Stop> stop;
 
     public List<Stop> getStop() {
-        return stoplines;
+        return stop;
     }
 
-    public void setStoplines(List<Stop> stoplines) {
-        this.stoplines = stoplines;
+    public void setStop(List<Stop> stop) {
+        this.stop = stop;
     }
-    
+
 }

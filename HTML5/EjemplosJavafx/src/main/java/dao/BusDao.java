@@ -27,7 +27,7 @@ import com.google.api.client.util.GenericData;
 import model.Arrive;
 import model.Arrives;
 import model.Stop;
-import model.StopsLines;
+import model.StopsLine;
 
 /**
  *
@@ -42,9 +42,12 @@ public class BusDao {
         ObjectMapper m = new ObjectMapper();
         m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-        StopsLines stops = m.readValue(b.GetStopsLine("76", "PLAZA BEATA"), 
-          new TypeReference<StopsLines>() {
-        });
+//        StopsLines stops = m.readValue(b.GetStopsLine("76", "PLAZA BEATA"), 
+//          new TypeReference<StopsLines>() {
+//        });
+        
+        StopsLine stops = (b.GetStopsLine("76", "PLAZA BEATA"));
+        
         for (Stop stop : stops.getStop()) {
             System.out.println(stop.getStopId());
         }
@@ -63,7 +66,7 @@ public class BusDao {
 
     }
 
-    public String GetStopsLine(String idLine, String Direccion) throws IOException {
+    public StopsLine GetStopsLine(String idLine, String Direccion) throws IOException {
         HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
         JsonFactory JSON_FACTORY = new JacksonFactory();
         HttpRequestFactory requestFactory
@@ -80,7 +83,14 @@ public class BusDao {
         data.put("direction", Direccion);
 
         HttpRequest requestGoogle = requestFactory.buildPostRequest(url, new UrlEncodedContent(data));
-        return requestGoogle.execute().parseAsString();
+        
+        //Pasarlo de string a stopslines
+        ObjectMapper m = new ObjectMapper();
+        m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        StopsLine stops = m.readValue(requestGoogle.execute().parseAsString(), new TypeReference<StopsLine>() {
+        });  
+        
+        return stops;
     }
 
     public String GetArrivesStop(String idStop) throws IOException {
