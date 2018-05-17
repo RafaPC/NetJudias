@@ -194,29 +194,28 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         //Crear array para guardar las posiciones de las paradas
         LatLong[] latlongs = new LatLong[stops.getStop().size()];
 
-        for (int j = 0; j < stops.getStop().size(); j++) {
-            LatLong x = new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude());
-            latlongs[j] = x;
-            MarkerOptions opcionesMarcadorParada = new MarkerOptions();
-            if (j != 0 && j != stops.getStop().size()) {
+        putMarkers(latlongs, stops);
 
-                opcionesMarcadorParada.position(new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude()));
-                opcionesMarcadorParada.label(stops.getStop().get(j).getStopId());
-//        .title(linea.getLine());
-                Marker parada = new Marker(opcionesMarcadorParada);
-                map.addMarker(parada);
-
-                Arrives arrives = bus.GetArrivesStop(stops.getStop().get(j).getStopId());
-                map.addUIEventHandler(parada, UIEventType.click, (JSObject obj) -> {
-
-//                    LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
-                    arrivesParada(arrives);
-
-                });
-
-            }
-
-        }
+//        for (int j = 0; j < stops.getStop().size(); j++) {
+//            LatLong x = new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude());
+//            latlongs[j] = x;
+//            if (j != 0 && j != stops.getStop().size()) {
+//
+//                MarkerOptions opcionesMarcadorParada = new MarkerOptions()
+//                        .position(new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude()))
+//                        .label(stops.getStop().get(j).getStopId());
+//                Marker parada = new Marker(opcionesMarcadorParada);
+//                map.addMarker(parada);
+//
+//                Arrives arrives = bus.GetArrivesStop(stops.getStop().get(j).getStopId());
+//                map.addUIEventHandler(parada, UIEventType.click, (JSObject obj) -> {
+//
+//                    arrivesParada(arrives);
+//                });
+//
+//            }
+//
+//        }
 
         //Pintar la línea actual con todas sus paradas
         MVCArray array = new MVCArray(latlongs);
@@ -266,9 +265,32 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         infoWindowFinalLinea.open(map);
     }
 
+    private void putMarkers(LatLong[] latlongs, StopsLine stops) throws IOException {
+        for (int j = 0; j < stops.getStop().size(); j++) {
+            LatLong x = new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude());
+            latlongs[j] = x;
+//            if (j != 0 && j != stops.getStop().size()) {
+
+                MarkerOptions opcionesMarcadorParada = new MarkerOptions()
+                        .position(new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude()))
+                        .label(stops.getStop().get(j).getStopId());
+                Marker parada = new Marker(opcionesMarcadorParada);
+                map.addMarker(parada);
+
+                Arrives arrives = bus.GetArrivesStop(stops.getStop().get(j).getStopId());
+                map.addUIEventHandler(parada, UIEventType.click, (JSObject obj) -> {
+
+                    arrivesParada(arrives);
+                });
+
+            
+
+        }
+    }
+
     private void arrivesParada(Arrives arrives) {
         for (int i = 0; i < arrives.getArrives().size(); i++) {
-            System.out.println(arrives.getArrives().get(i).getBusTimeLeft()/60);
+            System.out.println(arrives.getArrives().get(i).getBusTimeLeft() / 60);
         }
     }
 
