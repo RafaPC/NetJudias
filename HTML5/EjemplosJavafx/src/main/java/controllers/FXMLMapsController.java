@@ -26,6 +26,8 @@ import dao.BusDao;
 import java.awt.Color;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -54,24 +56,26 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
     private GoogleMapView mapView;
 
     @FXML
-    private ComboBox combo;
+    private ComboBox fxCombo;
 
     private GoogleMap map;
 
     @FXML
     public void handleCombo(ActionEvent event) {
-        System.out.println(combo.getSelectionModel().getSelectedItem().toString());
+        System.out.println(fxCombo.getSelectionModel().getSelectedItem().toString());
     }
 
     private void loadBud() throws IOException {
         BusDao bus = new BusDao();
 //        StopsLine stops = bus.GetStopsLine("76", "PLAZA BEATA");
-        ListsLinesInfo lines = bus.GetListLines();
+        List<String> z = new ArrayList<String>();
+        z.add("76");
+        z.add("85");
+        ListsLinesInfo lines = bus.GetListLines(z);
         Random rand = new Random();
         boolean primero;
         map.clearMarkers();
-        for (int i = 0; i < 10; i++) {
-            primero = true;
+        for (int i = 0; i < lines.getResultValues().size(); i++) {
 
             //Crear color hexadecimal aleatorio
             float r = rand.nextFloat();
@@ -116,7 +120,7 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
             //Opciones InfoWindow
             InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
             infoWindowOptions.content("Línea " + lines.getResultValues().get(i).getLabel()
-            + "</br>" + lines.getResultValues().get(i).getNameA() + " - " + lines.getResultValues().get(i).getNameB())
+                    + "</br>" + lines.getResultValues().get(i).getNameA() + " - " + lines.getResultValues().get(i).getNameB())
                     .position(new LatLong(latlongs[0].getLatitude(), latlongs[0].getLongitude()));
             //infoWindowOptions.maxWidth(10);
             //InfoWindow
@@ -175,9 +179,9 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         // TODO
         mapView.addMapInializedListener(this);
 
-        combo.getItems().add("hola");
-        combo.getItems().add("hola1");
-        combo.getItems().add("hola2");
+        fxCombo.getItems().add("hola");
+        fxCombo.getItems().add("hola1");
+        fxCombo.getItems().add("hola2");
     }
 
     @Override
@@ -228,7 +232,7 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         mapView.getMap().addUIEventHandler(jbotanico, UIEventType.click, (JSObject obj) -> {
             LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
 
-            combo.getItems().add(ll.toString());
+            fxCombo.getItems().add(ll.toString());
             InfoWindowOptions infoWindowOptions1 = new InfoWindowOptions();
             infoWindowOptions1.content("<h2>Fred Wilkie</h2>"
                     + "Current Location: Safeway<br>"
