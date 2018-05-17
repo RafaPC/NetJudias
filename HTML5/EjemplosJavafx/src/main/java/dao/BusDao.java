@@ -61,8 +61,7 @@ public class BusDao {
 
         System.out.println(b.GetArrivesStop("2794"));
 
-        Arrives arrives = m.readValue(b.GetArrivesStop("2794"), new TypeReference<Arrives>() {
-        });
+        Arrives arrives = (b.GetArrivesStop("2794"));
         for (Arrive stop : arrives.getArrives()) {
             System.out.println(stop.getStopId());
             System.out.println(stop.getBusTimeLeft());
@@ -147,7 +146,7 @@ public class BusDao {
         return lines;
     }
 
-    public String GetArrivesStop(String idStop) throws IOException {
+    public Arrives GetArrivesStop(String idStop) throws IOException {
         HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
         JsonFactory JSON_FACTORY = new JacksonFactory();
         HttpRequestFactory requestFactory
@@ -163,7 +162,22 @@ public class BusDao {
         data.put("idStop", idStop);
 
         HttpRequest requestGoogle = requestFactory.buildPostRequest(url, new UrlEncodedContent(data));
-        return requestGoogle.execute().parseAsString();
+        
+        ObjectMapper m = new ObjectMapper();
+        m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        int intentos = 0;
+        Arrives arrives = null;
+        while (intentos == 0) {
+            try {
+                arrives = m.readValue(requestGoogle.execute().parseAsString(), new TypeReference<Arrives>() {
+                });
+                intentos++;
+            } catch (Exception ex) {
+                Logger.getLogger(BusDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+          
+        return arrives;
     }
 
 }

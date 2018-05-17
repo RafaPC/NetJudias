@@ -41,6 +41,7 @@ import javafx.scene.control.ComboBox;
 import javafx.util.Duration;
 import model.Arrive;
 import model.Arrives;
+import model.ListLineInfo;
 import model.ListsLinesInfo;
 import model.StopsLine;
 import netscape.javascript.JSObject;
@@ -56,13 +57,32 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
     private GoogleMapView mapView;
 
     @FXML
-    private ComboBox fxCombo;
+    private ComboBox<ListLineInfo> fxCombo;
 
     private GoogleMap map;
 
+    private BusDao bus;
+
+    private Polyline pp;
+
+    private Marker comienzoLinea;
+
+    private Marker finalLinea;
+
+    private InfoWindow infoWindowComienzoLinea;
+
+    private InfoWindow infoWindowFinalLinea;
+
     @FXML
-    public void handleCombo(ActionEvent event) {
-        System.out.println(fxCombo.getSelectionModel().getSelectedItem().toString());
+    public void handleCombo(ActionEvent event) throws IOException {
+        if (pp != null) {
+            map.removeMarker(comienzoLinea);
+            map.removeMarker(finalLinea);
+            map.removeMapShape(pp);
+            infoWindowComienzoLinea.close();
+            infoWindowFinalLinea.close();
+        }
+        pintarLinea(fxCombo.getSelectionModel().getSelectedItem());
     }
 
     private void loadBud() throws IOException {
@@ -107,25 +127,28 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
             map.addMapShape(pp);
 
             //Poner un marcador en la primera parada de cada línea
-            //Opciones Marcador
-            MarkerOptions opcionesMarcador = new MarkerOptions();
-            opcionesMarcador.position(new LatLong(latlongs[0].getLatitude(), latlongs[0].getLongitude()));
-            opcionesMarcador.label(lines.getResultValues().get(i).getLabel());
-            opcionesMarcador.title(lines.getResultValues().get(i).getLine());
+            //Opciones Marcador principio de línea
+            MarkerOptions opcionesMarcadorStart = new MarkerOptions();
+            opcionesMarcadorStart.position(new LatLong(latlongs[0].getLatitude(), latlongs[0].getLongitude()));
+            opcionesMarcadorStart.label(lines.getResultValues().get(i).getLabel());
+            opcionesMarcadorStart.title(lines.getResultValues().get(i).getLine());
 
+            //Opciones Marcador final de línea
+            MarkerOptions opcionesMarcadorEnd = new MarkerOptions();
+            opcionesMarcadorEnd.position(new LatLong(latlongs[latlongs.length].getLatitude(), latlongs[latlongs.length].getLongitude()));
             //Marcador
-            Marker marcador = new Marker(opcionesMarcador);
-            map.addMarker(marcador);
+            Marker marcadorStart = new Marker(opcionesMarcadorStart);
+            map.addMarker(marcadorStart);
 
             //Opciones InfoWindow
-            InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-            infoWindowOptions.content("Línea " + lines.getResultValues().get(i).getLabel()
+            InfoWindowOptions infoWindowOptionsStart = new InfoWindowOptions();
+            infoWindowOptionsStart.content("Línea " + lines.getResultValues().get(i).getLabel()
                     + "</br>" + lines.getResultValues().get(i).getNameA() + " - " + lines.getResultValues().get(i).getNameB())
                     .position(new LatLong(latlongs[0].getLatitude(), latlongs[0].getLongitude()));
             //infoWindowOptions.maxWidth(10);
             //InfoWindow
-            InfoWindow infoWindow = new InfoWindow(infoWindowOptions);
-            infoWindow.open(map, marcador);
+            InfoWindow infoWindow = new InfoWindow(infoWindowOptionsStart);
+            infoWindow.open(map, marcadorStart);
         }
 
         map.setZoom(16);
@@ -134,8 +157,7 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
 
         ObjectMapper m = new ObjectMapper();
         m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        Arrives arrives = m.readValue(b.GetArrivesStop("2794"), new TypeReference<Arrives>() {
-        });
+        Arrives arrives = b.GetArrivesStop("2794");
         for (Arrive stop : arrives.getArrives()) {
             System.out.println(stop.getStopId());
             System.out.println(stop.getBusTimeLeft());
@@ -152,6 +174,101 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
             Marker joeSmithMarker = new Marker(markerOptions5);
             map.addMarker(joeSmithMarker);
 
+        }
+    }
+
+    private void pintarLinea(ListLineInfo linea) throws IOException {
+        Random rand = new Random();
+        map.clearMarkers();
+
+        //Crear color hexadecimal aleatorio
+        float r = rand.nextFloat();
+        float g = rand.nextFloat();
+        float b = rand.nextFloat();
+        Color randomColor = new Color(r, g, b);
+        String colorHex = "#" + Integer.toHexString(randomColor.getRGB()).substring(2);
+
+        //Sacar las paradas de la linea actual
+        StopsLine stops = bus.GetStopsLine(linea.getLine(), linea.getNameA());
+
+        //Crear array para guardar las posiciones de las paradas
+        LatLong[] latlongs = new LatLong[stops.getStop().size()];
+
+        for (int j = 0; j < stops.getStop().size(); j++) {
+            LatLong x = new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude());
+            latlongs[j] = x;
+            MarkerOptions opcionesMarcadorParada = new MarkerOptions();
+            if (j != 0 && j != stops.getStop().size()) {
+
+                opcionesMarcadorParada.position(new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude()));
+                opcionesMarcadorParada.label(stops.getStop().get(j).getStopId());
+//        .title(linea.getLine());
+                Marker parada = new Marker(opcionesMarcadorParada);
+                map.addMarker(parada);
+
+                Arrives arrives = bus.GetArrivesStop(stops.getStop().get(j).getStopId());
+                map.addUIEventHandler(parada, UIEventType.click, (JSObject obj) -> {
+
+//                    LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
+                    arrivesParada(arrives);
+
+                });
+
+            }
+
+        }
+
+        //Pintar la línea actual con todas sus paradas
+        MVCArray array = new MVCArray(latlongs);
+
+        PolylineOptions polyOpts = new PolylineOptions()
+                .path(array)
+                .strokeColor(colorHex)
+                .strokeWeight(2);
+        pp = new Polyline(polyOpts);
+
+        map.addMapShape(pp);
+
+        //Poner un marcador en la primera parada de cada línea
+        //Opciones Marcador
+        MarkerOptions opcionesMarcadorStart = new MarkerOptions()
+                .position(new LatLong(latlongs[0].getLatitude(), latlongs[0].getLongitude()))
+                .label(linea.getLabel())
+                .title(linea.getLine());
+
+        //Opciones Marcador final de línea
+        MarkerOptions opcionesMarcadorEnd = new MarkerOptions()
+                .position(new LatLong(latlongs[latlongs.length - 1].getLatitude(), latlongs[latlongs.length - 1].getLongitude()))
+                .label(linea.getLabel())
+                .title(linea.getLine());
+
+        //Marcador
+        comienzoLinea = new Marker(opcionesMarcadorStart);
+        finalLinea = new Marker(opcionesMarcadorEnd);
+//        map.addMarker(marcadorStart);
+//        map.addMarker(marcadorEnd);
+
+        //Opciones InfoWindowStart
+        InfoWindowOptions infoWindowOptionsStart = new InfoWindowOptions();
+        infoWindowOptionsStart.content("Línea " + linea.getLabel()
+                + "</br>" + linea.getNameA())
+                .position(new LatLong(latlongs[0].getLatitude(), latlongs[0].getLongitude()));
+
+        //Opciones InfoWindowEnd
+        InfoWindowOptions infoWindowOptionsEnd = new InfoWindowOptions();
+        infoWindowOptionsEnd.content("Línea " + linea.getLabel()
+                + "</br>" + linea.getNameB())
+                .position(new LatLong(latlongs[latlongs.length - 1].getLatitude(), latlongs[latlongs.length - 1].getLongitude()));
+        //InfoWindow
+        infoWindowComienzoLinea = new InfoWindow(infoWindowOptionsStart);
+        infoWindowFinalLinea = new InfoWindow(infoWindowOptionsEnd);
+        infoWindowComienzoLinea.open(map);
+        infoWindowFinalLinea.open(map);
+    }
+
+    private void arrivesParada(Arrives arrives) {
+        for (int i = 0; i < arrives.getArrives().size(); i++) {
+            System.out.println(arrives.getArrives().get(i).getBusTimeLeft()/60);
         }
     }
 
@@ -178,10 +295,19 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         mapView.addMapInializedListener(this);
+        bus = new BusDao();
+//        fxCombo.getItems().add("hola");
+//        fxCombo.getItems().add("hola1");
+//        fxCombo.getItems().add("hola2");
 
-        fxCombo.getItems().add("hola");
-        fxCombo.getItems().add("hola1");
-        fxCombo.getItems().add("hola2");
+        List<String> line = new ArrayList();
+        try {
+            fxCombo.getItems().addAll(
+                    bus.GetListLines(line).getResultValues());
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLMapsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @Override
@@ -232,7 +358,7 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         mapView.getMap().addUIEventHandler(jbotanico, UIEventType.click, (JSObject obj) -> {
             LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
 
-            fxCombo.getItems().add(ll.toString());
+//            fxCombo.getItems().add(ll.toString());
             InfoWindowOptions infoWindowOptions1 = new InfoWindowOptions();
             infoWindowOptions1.content("<h2>Fred Wilkie</h2>"
                     + "Current Location: Safeway<br>"
@@ -240,31 +366,7 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
 
             InfoWindow fredWilkeInfoWindow1 = new InfoWindow(infoWindowOptions1);
             fredWilkeInfoWindow1.open(map, jbotanico);
-
         });
-
     }
 
-//    public String GetListLines() throws IOException {
-//        HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
-//        JsonFactory JSON_FACTORY = new JacksonFactory();
-//        HttpRequestFactory requestFactory
-//                = HTTP_TRANSPORT.createRequestFactory((HttpRequest request) -> {
-//                    request.setParser(new JsonObjectParser(JSON_FACTORY));
-//                });
-//
-//        GenericUrl url = new GenericUrl("https://openbus.emtmadrid.es:9443/emt-proxy-server/last/bus/GetListLines.php");
-//
-//        GenericData data = new GenericData();
-//        data.put("idClient", Constantes.ID_Client);
-//        data.put("passKey", Constantes.CONTRASEÑA);
-//
-//        //pasamos de LocalDate a String
-//        LocalDate localDate = LocalDate.now();//For reference
-//        String sDate = localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-//        data.put("SelectDate", sDate);
-//
-//        HttpRequest requestGoogle = requestFactory.buildPostRequest(url, new UrlEncodedContent(data));
-//        return requestGoogle.execute().parseAsString();
-//    }
 }

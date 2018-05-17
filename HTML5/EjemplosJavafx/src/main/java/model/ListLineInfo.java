@@ -55,5 +55,10 @@ public class ListLineInfo {
     public void setNameB(String nameB) {
         this.nameB = nameB;
     }
+
+    @Override
+    public String toString() {
+        return "Línea " + label + "      " + nameA + "- " + nameB;
+    }
     
 }
