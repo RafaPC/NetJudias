@@ -37,7 +37,13 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import model.Arrive;
 import model.Arrives;
@@ -58,6 +64,9 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
 
     @FXML
     private ComboBox<ListLineInfo> fxCombo;
+
+    @FXML
+    private VBox fxVBox;
 
     private GoogleMap map;
 
@@ -190,79 +199,62 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
 
         //Sacar las paradas de la linea actual
         StopsLine stops = bus.GetStopsLine(linea.getLine(), linea.getNameA());
+        if (stops == null) {
+            Alert a = new Alert(Alert.AlertType.ERROR, "Error al cargar", ButtonType.CLOSE);
+            a.showAndWait();
+        } else {
+            //Crear array para guardar las posiciones de las paradas
+            LatLong[] latlongs = new LatLong[stops.getStop().size()];
 
-        //Crear array para guardar las posiciones de las paradas
-        LatLong[] latlongs = new LatLong[stops.getStop().size()];
+            putMarkers(latlongs, stops);
 
-        putMarkers(latlongs, stops);
+            //Pintar la línea actual con todas sus paradas
+            MVCArray array = new MVCArray(latlongs);
 
-//        for (int j = 0; j < stops.getStop().size(); j++) {
-//            LatLong x = new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude());
-//            latlongs[j] = x;
-//            if (j != 0 && j != stops.getStop().size()) {
-//
-//                MarkerOptions opcionesMarcadorParada = new MarkerOptions()
-//                        .position(new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude()))
-//                        .label(stops.getStop().get(j).getStopId());
-//                Marker parada = new Marker(opcionesMarcadorParada);
-//                map.addMarker(parada);
-//
-//                Arrives arrives = bus.GetArrivesStop(stops.getStop().get(j).getStopId());
-//                map.addUIEventHandler(parada, UIEventType.click, (JSObject obj) -> {
-//
-//                    arrivesParada(arrives);
-//                });
-//
-//            }
-//
-//        }
+            PolylineOptions polyOpts = new PolylineOptions()
+                    .path(array)
+                    .strokeColor(colorHex)
+                    .strokeWeight(2);
+            pp = new Polyline(polyOpts);
 
-        //Pintar la línea actual con todas sus paradas
-        MVCArray array = new MVCArray(latlongs);
+            map.addMapShape(pp);
 
-        PolylineOptions polyOpts = new PolylineOptions()
-                .path(array)
-                .strokeColor(colorHex)
-                .strokeWeight(2);
-        pp = new Polyline(polyOpts);
+            //Poner un marcador en la primera parada de cada línea
+            //Opciones Marcador
+            MarkerOptions opcionesMarcadorStart = new MarkerOptions()
+                    .position(new LatLong(latlongs[0].getLatitude(), latlongs[0].getLongitude()))
+                    .label(linea.getLabel())
+                    .title(linea.getLine());
 
-        map.addMapShape(pp);
+            //Opciones Marcador final de línea
+            MarkerOptions opcionesMarcadorEnd = new MarkerOptions()
+                    .position(new LatLong(latlongs[latlongs.length - 1].getLatitude(), latlongs[latlongs.length - 1].getLongitude()))
+                    .label(linea.getLabel())
+                    .title(linea.getLine());
 
-        //Poner un marcador en la primera parada de cada línea
-        //Opciones Marcador
-        MarkerOptions opcionesMarcadorStart = new MarkerOptions()
-                .position(new LatLong(latlongs[0].getLatitude(), latlongs[0].getLongitude()))
-                .label(linea.getLabel())
-                .title(linea.getLine());
-
-        //Opciones Marcador final de línea
-        MarkerOptions opcionesMarcadorEnd = new MarkerOptions()
-                .position(new LatLong(latlongs[latlongs.length - 1].getLatitude(), latlongs[latlongs.length - 1].getLongitude()))
-                .label(linea.getLabel())
-                .title(linea.getLine());
-
-        //Marcador
-        comienzoLinea = new Marker(opcionesMarcadorStart);
-        finalLinea = new Marker(opcionesMarcadorEnd);
+            //Marcador
+            comienzoLinea = new Marker(opcionesMarcadorStart);
+            finalLinea = new Marker(opcionesMarcadorEnd);
 //        map.addMarker(marcadorStart);
 //        map.addMarker(marcadorEnd);
 
-        //Opciones InfoWindowStart
-        InfoWindowOptions infoWindowOptionsStart = new InfoWindowOptions();
-        infoWindowOptionsStart.content("Línea " + linea.getLabel()
-                + "</br>" + linea.getNameA())
-                .position(new LatLong(latlongs[0].getLatitude(), latlongs[0].getLongitude()));
+            //Opciones InfoWindowStart
+            InfoWindowOptions infoWindowOptionsStart = new InfoWindowOptions();
+            infoWindowOptionsStart.content("Línea " + linea.getLabel()
+                    + "</br>" + linea.getNameA())
+                    .position(new LatLong(latlongs[0].getLatitude(), latlongs[0].getLongitude()));
 
-        //Opciones InfoWindowEnd
-        InfoWindowOptions infoWindowOptionsEnd = new InfoWindowOptions();
-        infoWindowOptionsEnd.content("Línea " + linea.getLabel()
-                + "</br>" + linea.getNameB())
-                .position(new LatLong(latlongs[latlongs.length - 1].getLatitude(), latlongs[latlongs.length - 1].getLongitude()));
-        //InfoWindow
-        infoWindowComienzoLinea = new InfoWindow(infoWindowOptionsStart);
-        infoWindowFinalLinea = new InfoWindow(infoWindowOptionsEnd);
-        infoWindowComienzoLinea.open(map);
-        infoWindowFinalLinea.open(map);
+            //Opciones InfoWindowEnd
+            InfoWindowOptions infoWindowOptionsEnd = new InfoWindowOptions();
+            infoWindowOptionsEnd.content("Línea " + linea.getLabel()
+                    + "</br>" + linea.getNameB())
+                    .position(new LatLong(latlongs[latlongs.length - 1].getLatitude(), latlongs[latlongs.length - 1].getLongitude()));
+            //InfoWindow
+            infoWindowComienzoLinea = new InfoWindow(infoWindowOptionsStart);
+            infoWindowFinalLinea = new InfoWindow(infoWindowOptionsEnd);
+            infoWindowComienzoLinea.open(map);
+            infoWindowFinalLinea.open(map);
+        }
     }
 
     private void putMarkers(LatLong[] latlongs, StopsLine stops) throws IOException {
@@ -271,28 +263,80 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
             latlongs[j] = x;
 //            if (j != 0 && j != stops.getStop().size()) {
 
-                MarkerOptions opcionesMarcadorParada = new MarkerOptions()
-                        .position(new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude()))
-                        .label(stops.getStop().get(j).getStopId());
-                Marker parada = new Marker(opcionesMarcadorParada);
-                map.addMarker(parada);
+            MarkerOptions opcionesMarcadorParada = new MarkerOptions()
+                    .position(new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude()))
+                    .label(stops.getStop().get(j).getStopId());
+            Marker parada = new Marker(opcionesMarcadorParada);
+            map.addMarker(parada);
 
-                Arrives arrives = bus.GetArrivesStop(stops.getStop().get(j).getStopId());
-                map.addUIEventHandler(parada, UIEventType.click, (JSObject obj) -> {
+            Arrives arrives = bus.GetArrivesStop(stops.getStop().get(j).getStopId());
+            map.addUIEventHandler(parada, UIEventType.click, (JSObject obj) -> {
 
+                try {
                     arrivesParada(arrives);
-                });
+                } catch (IOException ex) {
+                    Logger.getLogger(FXMLMapsController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
         }
     }
 
-    private void arrivesParada(Arrives arrives) {
-        System.out.println("Próximos buses");             
+    private void arrivesParada(Arrives arrives) throws IOException {
+        System.out.println("Próximos buses");
+        fxVBox.getChildren().clear();
+        fxVBox.setSpacing(7);
+        Label titulo1 = new Label("Líneas");
+        titulo1.setMaxWidth(Double.MAX_VALUE);
+        titulo1.setAlignment(Pos.CENTER_LEFT);
+        titulo1.setStyle("-fx-font-size: 20px;-fx-text-alignment: left;-fx-font-weight: bold;");
+//        titulo1.setStyle("-fx-text-alignment: left;");
+        Label titulo2 = new Label("Tiempo");
+        titulo2.setMaxWidth(Double.MAX_VALUE);
+        titulo2.setAlignment(Pos.CENTER_RIGHT);
+        titulo2.setStyle("-fx-font-size: 20px;-fx-text-alignment: right;-fx-font-weight: bold;-fx-alignment:center-right;");
+        titulo2.setAlignment(Pos.CENTER_RIGHT);
+//        titulo2.setStyle("-fx-text-alignment: right;");
+        HBox lineaTitulo = new HBox(titulo1, titulo2);
+        lineaTitulo.setMaxWidth(Double.MAX_VALUE);
+        fxVBox.getChildren().add(lineaTitulo);
+        VBox vBox1 = new VBox();
+        VBox vBox2 = new VBox();
         for (int i = 0; i < arrives.getArrives().size(); i++) {
+//            List<String> x = new ArrayList();
+//            x.add(arrives.getArrives().get(i).getLineId());
+//            x.add("1135");
+//            ListsLinesInfo linea = bus.GetListLines(x);
+//            System.out.println("Línea: " + linea.getResultValues().get(0).getNameA() + linea.getResultValues().get(0).getNameB());
+            List<String> x = new ArrayList<>();
+            x.add(arrives.getArrives().get(i).getLineId());
+            x.add("008");
+//            ListLineInfo linea = bus.GetLine(arrives.getArrives().get(i).getLineId());
+            ListsLinesInfo listaLinea = bus.GetListLines(x);
+            ListLineInfo linea = listaLinea.getResultValues().get(0);
+            System.out.println("Línea: " + linea.getNameA() + linea.getNameB());
             System.out.println("Línea bus: " + arrives.getArrives().get(i).getLineId());
+
             System.out.println("Número bus: " + arrives.getArrives().get(i).getBusId());
-            System.out.println("Tiempo id: " + arrives.getArrives().get(i).getBusTimeLeft()/60);
+            System.out.println("Tiempo id: " + arrives.getArrives().get(i).getBusTimeLeft() / 60);
             System.out.println("Dirección: " + arrives.getArrives().get(i).getDestination());
+
+            vBox1.getChildren().add(new Label(linea.getLabel()));
+            //Coger el tiempo que va a tardar el bus
+            Integer segundos = new Integer(arrives.getArrives().get(i).getBusTimeLeft());
+            String tiempo;
+            if (segundos == 0) {
+                tiempo = "En parada";
+            } else if (segundos >= 1200) {
+                tiempo = ">20";
+            } else {
+                tiempo = segundos / 60 + "";
+            }
+            HBox fila = new HBox(new VBox(new Label(arrives.getArrives().get(i).getLineId() + "    "), new Label("Destino: " + arrives.getArrives().get(i).getDestination())), new Label(tiempo));
+            fila.setSpacing(15);
+            fxVBox.getChildren().add(fila);
+
         }
+        fxVBox.setVisible(true);
     }
 
     @FXML
