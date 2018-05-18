@@ -282,15 +282,15 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
 
                     arrivesParada(arrives);
                 });
-
-            
-
         }
     }
 
     private void arrivesParada(Arrives arrives) {
+        System.out.println("Próximos buses");             
         for (int i = 0; i < arrives.getArrives().size(); i++) {
-            System.out.println(arrives.getArrives().get(i).getBusTimeLeft() / 60);
+            System.out.println("Número bus: " + arrives.getArrives().get(i).getBusId());
+            System.out.println("Tiempo id: " + arrives.getArrives().get(i).getBusTimeLeft()/60);
+            System.out.println("Destino: " + arrives.getArrives().get(i).getDestination());
         }
     }
 

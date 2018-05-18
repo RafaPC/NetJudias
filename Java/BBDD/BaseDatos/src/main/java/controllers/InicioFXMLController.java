@@ -7,6 +7,7 @@ package controllers;
 
 import dao.ConexionSimpleBD;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -156,7 +157,7 @@ public class InicioFXMLController implements Initializable {
     }
 
     @FXML
-    public void handleDelete(ActionEvent event) {
+    public void handleDelete(ActionEvent event) throws SQLException {
         if (fxListAlumnos.getSelectionModel().getSelectedItem() == null) {
             Alert a = new Alert(Alert.AlertType.ERROR, "Tienes que seleccionar un alumno", ButtonType.CLOSE);
             a.showAndWait();
@@ -164,7 +165,7 @@ public class InicioFXMLController implements Initializable {
             Alumno a = fxListAlumnos.getSelectionModel().getSelectedItem();
             Integer id = a.getId();
             int x  = conex.deleteAlumno(id.longValue());
-            if (conex.deleteAlumno(id.longValue()) > 2) {
+            if (x == 1) {
                 fxListAlumnos.getItems().remove(a);
                 Alert b = new Alert(Alert.AlertType.INFORMATION, "Alumno borrado correctamente", ButtonType.CLOSE);
                 b.showAndWait();

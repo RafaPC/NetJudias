@@ -51,7 +51,7 @@ public class NotasFXMLController implements Initializable {
     public void handleMouseClick(ActionEvent event) {
         cargarDatosLista(fxComboAsignaturas.getSelectionModel().getSelectedItem().getId());
     }
-
+    
     @FXML
     public void handleCambiarNota(ActionEvent event) {
         Integer nota = Integer.parseInt(fxNota.getText());
