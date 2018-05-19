@@ -8,6 +8,7 @@ package controllers;
 import dao.AsignaturaDAO;
 import dao.ConexionSimpleBD;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -144,14 +145,15 @@ public class AsignaturasFXMLController implements Initializable {
     }
 
     @FXML
-    public void handleDelete(ActionEvent event) {
+    public void handleDelete(ActionEvent event) throws SQLException {
         if (fxListAsignaturas.getSelectionModel().getSelectedItem() == null) {
             Alert a = new Alert(Alert.AlertType.ERROR, "Tienes que seleccionar una asignatura", ButtonType.CLOSE);
             a.showAndWait();
         } else {
             Asignatura a = fxListAsignaturas.getSelectionModel().getSelectedItem();
             long id = a.getId();
-            if (conex.deleteAsignatura(id)) {
+            int x = conex.deleteAsignatura(id);
+            if (x==1) {
                 fxListAsignaturas.getItems().remove(a);
                 Alert b = new Alert(Alert.AlertType.INFORMATION, "Asignatura borrada correctamente", ButtonType.CLOSE);
                 b.showAndWait();

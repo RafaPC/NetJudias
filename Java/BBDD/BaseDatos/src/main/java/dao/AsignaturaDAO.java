@@ -22,6 +22,7 @@ import model.Asignatura;
  * @author daw
  */
 public class AsignaturaDAO {
+
     public List<Asignatura> getAllAsignaturasJDBC() {
         DBConnection db = new DBConnection();
         List<Asignatura> lista = new ArrayList<>();
@@ -78,7 +79,7 @@ public class AsignaturaDAO {
         return lista;
 
     }
-    
+
     public boolean insertAsignaturaJDBC(Asignatura a) {
         DBConnection db = new DBConnection();
         Connection con = null;
@@ -109,10 +110,10 @@ public class AsignaturaDAO {
         } catch (Exception ex) {
             Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            if(filas == 1){
+            if (filas == 1) {
                 insertado = true;
             }
-            
+
             try {
 
                 if (stmt != null) {
@@ -129,7 +130,7 @@ public class AsignaturaDAO {
         return insertado;
 
     }
-    
+
     public boolean updateAsignaturaJDBC(Asignatura a) {
         DBConnection db = new DBConnection();
         Connection con = null;
@@ -155,10 +156,10 @@ public class AsignaturaDAO {
         } catch (Exception ex) {
             Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            if(filas == 1){
+            if (filas == 1) {
                 updateado = true;
             }
-            
+
             try {
 
                 if (stmt != null) {
@@ -175,9 +176,9 @@ public class AsignaturaDAO {
         return updateado;
 
     }
-    
+
     public boolean deleteAsignaturaJDBC(long idWhere) {
-DBConnection db = new DBConnection();
+        DBConnection db = new DBConnection();
         Connection con = null;
         PreparedStatement stmt = null;
         int numFilas = -1;
@@ -202,5 +203,82 @@ DBConnection db = new DBConnection();
 
         }
         return borrado;
+    }
+
+    public int delNotaAndAsig(long idWhere) {
+        DBConnection db = new DBConnection();
+        Connection con = null;
+        int respuesta = 0;
+        try {
+
+            con = db.getConnection();
+            con.setAutoCommit(false);
+            String sql = "DELETE FROM notas WHERE id_asignatura = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setLong(1, idWhere);
+
+            stmt.executeUpdate();
+
+            sql = "DELETE FROM asignaturas WHERE id = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setLong(1, idWhere);
+
+            stmt.executeUpdate();
+
+            con.commit();
+            respuesta = 1;
+        } catch (Exception ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                if (con != null) {
+                    con.rollback();
+                }
+            } catch (SQLException ex1) {
+                Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } finally {
+            db.cerrarConexion(con);
+        }
+        return respuesta;
+    }
+    
+    public boolean existNotaFromAsignatura(long idWhere){
+        DBConnection db = new DBConnection();
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        boolean existeNota = false;
+        try {
+
+            con = db.getConnection();
+
+            stmt = con.prepareStatement("SELECT nota FROM notas where id_asignatura=?");
+
+            stmt.setLong(1, idWhere);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                existeNota = true;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return existeNota;
     }
 }

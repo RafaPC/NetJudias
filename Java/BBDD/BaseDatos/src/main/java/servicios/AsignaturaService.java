@@ -6,6 +6,7 @@
 package servicios;
 
 import dao.AsignaturaDAO;
+import java.sql.SQLException;
 import java.util.List;
 import model.Asignatura;
 
@@ -29,8 +30,20 @@ public class AsignaturaService {
         return x.updateAsignaturaJDBC(a);
     }
 
-    public boolean deleteAsignatura(long idWhere) {
+    public int deleteAsignatura(long idWhere) throws SQLException {
         AsignaturaDAO x = new AsignaturaDAO();
-        return x.deleteAsignaturaJDBC(idWhere);
+        int respuesta;
+        if(x.existNotaFromAsignatura(idWhere)){
+            respuesta = x.delNotaAndAsig(idWhere);
+            return respuesta;
+        }else{
+           boolean cosa = x.deleteAsignaturaJDBC(idWhere);
+           if(cosa){
+               respuesta = 1;
+           } else{
+               respuesta = 0;
+           }
+        }
+        return respuesta;
     }
 }

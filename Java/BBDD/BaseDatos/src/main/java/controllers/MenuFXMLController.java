@@ -36,6 +36,8 @@ public class MenuFXMLController implements Initializable {
     private AnchorPane sceneNotas;
 
     private AnchorPane sceneAsignarAlum;
+    
+    private NotasFXMLController notasController;
 
     @FXML
     private BorderPane fxRoot;
@@ -72,11 +74,17 @@ public class MenuFXMLController implements Initializable {
 
     @FXML
     public void handleCambiarNotas(ActionEvent event) {
+        
+        
         fxMenuAlumnos.setVisible(true);
         fxMenuAsignaturas.setVisible(true);
         fxAsignarAlum.setVisible(true);
         fxInsertNota.setVisible(false);
+        
+        notasController.cargarDatosCombo();
         fxRoot.setCenter(sceneNotas);
+        
+        
     }
 
     @FXML
@@ -112,18 +120,7 @@ public class MenuFXMLController implements Initializable {
         AsignaturasFXMLController controllerAsignaturas = loader.getController();
         controllerAsignaturas.setController(this);
 
-        //Escena de notas
-        loader = new FXMLLoader(
-                getClass().getResource("/fxml/NotasFXML.fxml"));
-        try {
-            sceneNotas = loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(MenuFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        NotasFXMLController controllerNotas = loader.getController();
-        controllerNotas.setController(this);
-
-        //Escena de notas
+        //Escena de asignar alumnos a asignaturas
         loader = new FXMLLoader(
                 getClass().getResource("/fxml/CrearNotasFXML.fxml"));
         try {
@@ -133,6 +130,17 @@ public class MenuFXMLController implements Initializable {
         }
         CrearNotasFXMLController controllerAsignarAlum = loader.getController();
         controllerAsignarAlum.setController(this);
+        
+        //Escena de updatear 
+        loader = new FXMLLoader(
+                getClass().getResource("/fxml/NotasFXML.fxml"));
+        try {
+            sceneNotas = loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MenuFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        notasController = loader.getController();
+        notasController.setController(this);
 
         fxMenuAlumnos.setVisible(false);
         fxRoot.setCenter(sceneAlumnos);

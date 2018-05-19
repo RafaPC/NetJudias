@@ -80,18 +80,12 @@ public class NotasFXMLController implements Initializable {
     }
 
     public void cargarDatosLista(long idWhere) {
-
         fxListAlumnos.getItems().clear();
         fxListAlumnos.getItems().addAll(
                 conex.getAllAlumnosFromAsignatura(idWhere));
 
     }
 
-//    private void clearCampos() {
-//        fxNombre.setText("");
-//        fxEdad.setValue(null);
-//        fxMayor.setSelected(false);
-//    }
     public void setController(MenuFXMLController controller) {
         this.controller = controller;
     }
