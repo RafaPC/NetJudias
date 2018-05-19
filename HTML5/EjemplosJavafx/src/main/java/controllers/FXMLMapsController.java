@@ -35,6 +35,7 @@ import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -42,6 +43,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -68,7 +70,14 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
     @FXML
     private VBox fxVBox;
 
+    @FXML
+    private Label fxParada;
+
+    private ListLineInfo lineaActual;
+
     private GoogleMap map;
+
+    private String busActual = "08";
 
     private BusDao bus;
 
@@ -82,6 +91,8 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
 
     private InfoWindow infoWindowFinalLinea;
 
+    private String colorLinea;
+
     @FXML
     public void handleCombo(ActionEvent event) throws IOException {
         if (pp != null) {
@@ -90,13 +101,14 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
             map.removeMapShape(pp);
             infoWindowComienzoLinea.close();
             infoWindowFinalLinea.close();
+            fxParada.setVisible(false);
+            fxVBox.setVisible(false);
         }
         pintarLinea(fxCombo.getSelectionModel().getSelectedItem());
     }
 
     private void loadBud() throws IOException {
         BusDao bus = new BusDao();
-//        StopsLine stops = bus.GetStopsLine("76", "PLAZA BEATA");
         List<String> z = new ArrayList<String>();
         z.add("76");
         z.add("85");
@@ -187,15 +199,22 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
     }
 
     private void pintarLinea(ListLineInfo linea) throws IOException {
-        Random rand = new Random();
-        map.clearMarkers();
+        if (lineaActual != null) {
+            map.clearMarkers();
+            map.removeMapShape(pp);
+        }
+        if (fxCombo.getSelectionModel().getSelectedItem() != lineaActual) {
+            Random rand = new Random();
+            float r = rand.nextFloat();
+            float g = rand.nextFloat();
+            float b = rand.nextFloat();
+            Color randomColor = new Color(r, g, b);
+            colorLinea = "#" + Integer.toHexString(randomColor.getRGB()).substring(2);
+        }
+        lineaActual = linea;
 
+        map.clearMarkers();
         //Crear color hexadecimal aleatorio
-        float r = rand.nextFloat();
-        float g = rand.nextFloat();
-        float b = rand.nextFloat();
-        Color randomColor = new Color(r, g, b);
-        String colorHex = "#" + Integer.toHexString(randomColor.getRGB()).substring(2);
 
         //Sacar las paradas de la linea actual
         StopsLine stops = bus.GetStopsLine(linea.getLine(), linea.getNameA());
@@ -213,8 +232,8 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
 
             PolylineOptions polyOpts = new PolylineOptions()
                     .path(array)
-                    .strokeColor(colorHex)
-                    .strokeWeight(2);
+                    .strokeColor(colorLinea)
+                    .strokeWeight(5);
             pp = new Polyline(polyOpts);
 
             map.addMapShape(pp);
@@ -261,7 +280,6 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         for (int j = 0; j < stops.getStop().size(); j++) {
             LatLong x = new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude());
             latlongs[j] = x;
-//            if (j != 0 && j != stops.getStop().size()) {
 
             MarkerOptions opcionesMarcadorParada = new MarkerOptions()
                     .position(new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude()))
@@ -270,10 +288,13 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
             map.addMarker(parada);
 
             Arrives arrives = bus.GetArrivesStop(stops.getStop().get(j).getStopId());
+            String paradaNombre = stops.getStop().get(j).getName();
             map.addUIEventHandler(parada, UIEventType.click, (JSObject obj) -> {
 
                 try {
                     arrivesParada(arrives);
+                    fxParada.setText(paradaNombre);
+                    fxParada.setVisible(true);
                 } catch (IOException ex) {
                     Logger.getLogger(FXMLMapsController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -282,61 +303,111 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
     }
 
     private void arrivesParada(Arrives arrives) throws IOException {
-        System.out.println("Próximos buses");
         fxVBox.getChildren().clear();
-        fxVBox.setSpacing(7);
+
+        //LINEA
         Label titulo1 = new Label("Líneas");
-        titulo1.setMaxWidth(Double.MAX_VALUE);
+        titulo1.setMinWidth(120);
         titulo1.setAlignment(Pos.CENTER_LEFT);
-        titulo1.setStyle("-fx-font-size: 20px;-fx-text-alignment: left;-fx-font-weight: bold;");
-//        titulo1.setStyle("-fx-text-alignment: left;");
+        titulo1.setStyle("-fx-font-size: 20px;-fx-font-weight: bold;-fx-text-fill:#000000");
+
+        //TIEMPO        
         Label titulo2 = new Label("Tiempo");
         titulo2.setMaxWidth(Double.MAX_VALUE);
         titulo2.setAlignment(Pos.CENTER_RIGHT);
-        titulo2.setStyle("-fx-font-size: 20px;-fx-text-alignment: right;-fx-font-weight: bold;-fx-alignment:center-right;");
+        titulo2.setStyle("-fx-font-size: 20px;-fx-font-weight: bold;-fx-text-fill:#000000");
         titulo2.setAlignment(Pos.CENTER_RIGHT);
-//        titulo2.setStyle("-fx-text-alignment: right;");
+
         HBox lineaTitulo = new HBox(titulo1, titulo2);
         lineaTitulo.setMaxWidth(Double.MAX_VALUE);
+        lineaTitulo.setStyle("-fx-border-style:solid;-fx-border-width:2px;-fx-border-color:black;");
         fxVBox.getChildren().add(lineaTitulo);
-        VBox vBox1 = new VBox();
-        VBox vBox2 = new VBox();
-        for (int i = 0; i < arrives.getArrives().size(); i++) {
-//            List<String> x = new ArrayList();
-//            x.add(arrives.getArrives().get(i).getLineId());
-//            x.add("1135");
-//            ListsLinesInfo linea = bus.GetListLines(x);
-//            System.out.println("Línea: " + linea.getResultValues().get(0).getNameA() + linea.getResultValues().get(0).getNameB());
+        int i;
+        for (i = 0; i < arrives.getArrives().size(); i++) {
             List<String> x = new ArrayList<>();
             x.add(arrives.getArrives().get(i).getLineId());
+            //Añado otro porque si no hay problemas en como devuelve el json
             x.add("008");
-//            ListLineInfo linea = bus.GetLine(arrives.getArrives().get(i).getLineId());
             ListsLinesInfo listaLinea = bus.GetListLines(x);
             ListLineInfo linea = listaLinea.getResultValues().get(0);
-            System.out.println("Línea: " + linea.getNameA() + linea.getNameB());
-            System.out.println("Línea bus: " + arrives.getArrives().get(i).getLineId());
 
-            System.out.println("Número bus: " + arrives.getArrives().get(i).getBusId());
-            System.out.println("Tiempo id: " + arrives.getArrives().get(i).getBusTimeLeft() / 60);
-            System.out.println("Dirección: " + arrives.getArrives().get(i).getDestination());
-
-            vBox1.getChildren().add(new Label(linea.getLabel()));
             //Coger el tiempo que va a tardar el bus
             Integer segundos = new Integer(arrives.getArrives().get(i).getBusTimeLeft());
             String tiempo;
+            int ancho;
             if (segundos == 0) {
                 tiempo = "En parada";
+                ancho = 140;
             } else if (segundos >= 1200) {
                 tiempo = ">20";
+                ancho = 170;
             } else {
-                tiempo = segundos / 60 + "";
+                tiempo = segundos / 60 + " min";
+                ancho = 160;
             }
-            HBox fila = new HBox(new VBox(new Label(arrives.getArrives().get(i).getLineId() + "    "), new Label("Destino: " + arrives.getArrives().get(i).getDestination())), new Label(tiempo));
-            fila.setSpacing(15);
+            Label destino = new Label("Destino: " + arrives.getArrives().get(i).getDestination());
+            VBox lineaCosa = new VBox(new Label(arrives.getArrives().get(i).getLineId() + "    "), destino);
+            
+            //Para hacer el vbox mas alto cuando mas buses haya
+            lineaCosa.setMaxWidth(ancho);
+            lineaCosa.setMinWidth(ancho);
+            VBox tiempoCosa = new VBox(new Label(tiempo));
+            HBox fila = new HBox(new VBox(lineaCosa), tiempoCosa);
+            fila.setStyle("-fx-border-style:solid;-fx-border-width:1px;-fx-border-color: #000000;-fx-background-color: #00B4FF;");
+
+            busActual = arrives.getArrives().get(i).getBusId();
+            String stopSelected = arrives.getArrives().get(i).getStopId() + "";
+            //Añadir evento
+            fila.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent event) {
+                    try {
+                        loadBus(busActual, stopSelected);
+                    } catch (IOException ex) {
+                        Logger.getLogger(FXMLMapsController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
             fxVBox.getChildren().add(fila);
 
         }
+        fxVBox.setPrefHeight(i * 50);
+        fxVBox.setMinHeight(i * 50);
+
         fxVBox.setVisible(true);
+    }
+
+    public void loadBus(String idBus, String idStop) throws IOException {
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(10), e -> {
+                    try {
+                        System.out.println("EMPIEZA");
+                        Arrives arrives = bus.GetArrivesStop(idStop);
+                        for (Arrive auto : arrives.getArrives()) {
+                            if (auto.getBusId().equals(idBus)) {
+
+                                pintarLinea(lineaActual);
+                                LatLong punto = new LatLong(Double.parseDouble(auto.getLatitude()),
+                                        Double.parseDouble(auto.getLongitude()));
+                                map.setCenter(punto);
+                                MarkerOptions markerOptions = new MarkerOptions();
+                                markerOptions.position(punto);
+                                markerOptions.title(auto.getBusId());
+                                markerOptions.label(auto.getBusId());
+
+                                Marker autobus = new Marker(markerOptions);
+                                map.addMarker(autobus);
+                            }
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(FXMLMapsController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                })
+        );
+        timeline.setCycleCount(20);
+        timeline.play();
+
     }
 
     @FXML
@@ -362,10 +433,8 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         mapView.addMapInializedListener(this);
+        fxVBox.setSpacing(7);
         bus = new BusDao();
-//        fxCombo.getItems().add("hola");
-//        fxCombo.getItems().add("hola1");
-//        fxCombo.getItems().add("hola2");
 
         List<String> line = new ArrayList();
         try {

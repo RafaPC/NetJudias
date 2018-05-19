@@ -6,12 +6,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLMapsController">
    <center>
       <GoogleMapView fx:id="mapView" BorderPane.alignment="CENTER">
          <children>
-            <VBox fx:id="fxVBox" layoutX="440.0" prefHeight="195.0" prefWidth="160.0" style="-fx-background-color: white;" visible="false" />
+            <VBox fx:id="fxVBox" layoutX="400.0" prefHeight="195.0" prefWidth="200.0" minHeight="100" maxHeight="250" style="-fx-background-color: #1554ab" visible="false" />
          </children></GoogleMapView>
    </center>
    <top>
@@ -19,6 +20,7 @@
          <children>
             <Button mnemonicParsing="false" onAction="#handleButton" text="Button" />
             <ComboBox fx:id="fxCombo" onAction="#handleCombo" prefWidth="150.0" />
+            <Label fx:id="fxParada" visible="false" style="-fx-font-size:18px;-fx-font-weight: bold;-fx-background-color:white;"/>
          </children>
       </HBox>
    </top>

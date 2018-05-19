@@ -108,7 +108,7 @@ public class BusDao {
         StopsLine stops = null;
         while (intentos < 3) {
             try{
-            m.readValue(requestGoogle.execute().parseAsString(), new TypeReference<StopsLine>() {
+            stops = m.readValue(requestGoogle.execute().parseAsString(), new TypeReference<StopsLine>() {
             });
             intentos = 3;
             }catch(Exception ex){

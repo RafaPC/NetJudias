@@ -19,6 +19,8 @@ public class Arrive {
     private int busTimeLeft;
     private String busId;
 
+    
+    
     public int getStopId() {
         return stopId;
     }
@@ -58,8 +60,6 @@ public class Arrive {
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
-
-   
 
     public int getBusPositionType() {
         return busPositionType;
