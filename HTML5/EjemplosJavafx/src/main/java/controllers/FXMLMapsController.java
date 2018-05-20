@@ -75,6 +75,8 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
 
     private ListLineInfo lineaActual;
 
+    private StopsLine stopsActual;
+
     private GoogleMap map;
 
     private String busActual = "08";
@@ -217,15 +219,15 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         //Crear color hexadecimal aleatorio
 
         //Sacar las paradas de la linea actual
-        StopsLine stops = bus.GetStopsLine(linea.getLine(), linea.getNameA());
-        if (stops == null) {
+        stopsActual = bus.GetStopsLine(linea.getLine(), linea.getNameA());
+        if (stopsActual == null) {
             Alert a = new Alert(Alert.AlertType.ERROR, "Error al cargar", ButtonType.CLOSE);
             a.showAndWait();
         } else {
             //Crear array para guardar las posiciones de las paradas
-            LatLong[] latlongs = new LatLong[stops.getStop().size()];
+            LatLong[] latlongs = new LatLong[stopsActual.getStop().size()];
 
-            putMarkers(latlongs, stops);
+            putMarkers(latlongs, stopsActual, 0);
 
             //Pintar la línea actual con todas sus paradas
             MVCArray array = new MVCArray(latlongs);
@@ -276,7 +278,10 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         }
     }
 
-    private void putMarkers(LatLong[] latlongs, StopsLine stops) throws IOException {
+    private void putMarkers(LatLong[] latlongs, StopsLine stops, int opcion) throws IOException {
+        if(opcion == 1){
+            map.clearMarkers();
+        }
         for (int j = 0; j < stops.getStop().size(); j++) {
             LatLong x = new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude());
             latlongs[j] = x;
@@ -347,7 +352,7 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
             }
             Label destino = new Label("Destino: " + arrives.getArrives().get(i).getDestination());
             VBox lineaCosa = new VBox(new Label(arrives.getArrives().get(i).getLineId() + "    "), destino);
-            
+
             //Para hacer el vbox mas alto cuando mas buses haya
             lineaCosa.setMaxWidth(ancho);
             lineaCosa.setMinWidth(ancho);
@@ -380,24 +385,28 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
 
     public void loadBus(String idBus, String idStop) throws IOException {
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(10), e -> {
+                new KeyFrame(Duration.seconds(20), e -> {
                     try {
-                        System.out.println("EMPIEZA");
+                        System.out.println("BUS");
                         Arrives arrives = bus.GetArrivesStop(idStop);
+
                         for (Arrive auto : arrives.getArrives()) {
                             if (auto.getBusId().equals(idBus)) {
-
-                                pintarLinea(lineaActual);
+                                LatLong[] latlongs = new LatLong[stopsActual.getStop().size()];
+                                putMarkers(latlongs, stopsActual, 1);
+//                                pintarLinea(lineaActual);
                                 LatLong punto = new LatLong(Double.parseDouble(auto.getLatitude()),
                                         Double.parseDouble(auto.getLongitude()));
-                                map.setCenter(punto);
+
                                 MarkerOptions markerOptions = new MarkerOptions();
                                 markerOptions.position(punto);
                                 markerOptions.title(auto.getBusId());
-                                markerOptions.label(auto.getBusId());
+//                                markerOptions.label(auto.getBusId());
+                                markerOptions.label("BUS");
 
                                 Marker autobus = new Marker(markerOptions);
                                 map.addMarker(autobus);
+                                map.setCenter(punto);
                             }
                         }
                     } catch (IOException ex) {
