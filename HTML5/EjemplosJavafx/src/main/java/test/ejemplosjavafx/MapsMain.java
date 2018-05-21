@@ -5,14 +5,14 @@
  */
 package test.ejemplosjavafx;
 
+import controllers.FXMLMapsController;
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -20,20 +20,25 @@ import javafx.stage.Stage;
  * @author user
  */
 public class MapsMain extends Application {
-    
+
+    private FXMLMapsController controller;
+
     @Override
     public void start(Stage primaryStage) throws IOException {
         //BorderPane root = FXMLLoader.load(getClass().getResource("/fxml/FXMLMenu.fxml"));
-            FXMLLoader loaderMenu = new FXMLLoader(
-              getClass().getResource("/fxml/FXMLMaps.fxml"));
-            Parent root = loaderMenu.load();
-           
-            
-            Scene scene = new Scene(root);
-            
-            primaryStage.setTitle("BUS");
-            primaryStage.setScene(scene);
-            primaryStage.show();
+        FXMLLoader loaderMenu = new FXMLLoader(
+                getClass().getResource("/fxml/FXMLMaps.fxml"));
+        Parent root = loaderMenu.load();
+        controller = loaderMenu.getController();
+        controller.setStage(primaryStage);
+        controller.setWindowListener();
+
+        Scene scene = new Scene(root);
+
+        primaryStage.setTitle("BUS");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
     }
 
     /**
@@ -42,5 +47,5 @@ public class MapsMain extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
