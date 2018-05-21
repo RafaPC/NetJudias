@@ -104,6 +104,9 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
 
     @FXML
     public void handleCombo(ActionEvent event) throws IOException {
+        System.out.println(stage.getWidth());
+        
+        
         if (pp != null) {
             map.removeMarker(comienzoLinea);
             map.removeMarker(finalLinea);
@@ -472,8 +475,9 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
             @Override
             public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
 //                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                System.out.println("HOLA");
-                fxVBox.setLayoutX(stage.getWidth()*0.7);
+                System.out.println(stage.getWidth());
+                //double anchura = stage.getMaxWidth() * 0.6;
+                //fxVBox.setLayoutX(anchura);
                 fxVBox.setMinWidth(stage.getWidth()*0.2);
                 fxVBox.setVisible(true);
             }
