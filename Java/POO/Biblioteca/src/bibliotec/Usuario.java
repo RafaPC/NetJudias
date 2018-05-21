@@ -35,11 +35,6 @@ public class Usuario {
     public String toString() {
         String mensaje;
         mensaje = nombre + "\nLibros prestados: " + numlibrosprestados;
-        
-        
-        /*for (int i = 0; i < numlibrosprestados; i++) {
-            mensaje += "\n" + librosprestados[i].toString();
-        }*/
         mensaje += "\n";
         return mensaje;
     }
@@ -62,6 +57,12 @@ public class Usuario {
         return true;
     }
 
+    /**
+     * Se le pregunta al usuario como buscar libro, por isbn, titulo o autor, y tras introducir los parametros necesarios se le muestran los resultados.
+     * Tras elegir libro, ese liro se pondrá como "prestado" y se añadirá al array de libros del usuario.
+     * @param libros
+     * @param numLibros 
+     */
     public void prestarLibro(Libro[] libros, int numLibros) {
 
         System.out.println("Elige:"
@@ -162,7 +163,12 @@ public class Usuario {
 
     }
 
-    public void devolverLibro(Libro[] libros, int numUsuarios, int numLibros) {
+    /**
+     * Muestra al usuario los libros prestados y el usuario elige que libro devolver.
+     * @param libros
+     * @param numLibros 
+     */
+    public void devolverLibro(Libro[] libros, int numLibros) {
         int posicionLibro = -1;
         //Muestra todos los libros prestados al usuario seleccionado
         for (int i = 0; i < numlibrosprestados; i++) {
@@ -192,6 +198,10 @@ public class Usuario {
         }
     }
 
+    /**
+     * Se le pasa un array con todos los libros. Este se compara con el array de libros prestados del usuario y donde .equals sea true, cambiará el libro del array de todos los libros a "no prestado".
+     * @param libros 
+     */
     public void devolverTodosLosLibros(Libro[] libros) {
         boolean cambiado;
         //Coge cada libro y lo compara con los libros prestados
@@ -208,6 +218,9 @@ public class Usuario {
 
     }
 
+    /**
+     * Recorre el array de libros prestados del usuario imprimiendo el toString de cada uno.
+     */
     public void librosPrestadosUsuario() {
         for (int i = 0; i < numlibrosprestados; i++) {
             System.out.println(librosprestados[i].toString() + "\n");

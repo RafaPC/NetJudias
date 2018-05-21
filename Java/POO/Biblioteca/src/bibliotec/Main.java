@@ -20,8 +20,6 @@ public class Main {
         // TODO code application logic here
         Biblioteca biblioteca = new Biblioteca();
         Scanner sc = new Scanner(System.in);
-        int numUsuarios = 4;
-        int numLibros = 13;
         boolean salir = false;
         do {
 
@@ -77,6 +75,8 @@ public class Main {
                     System.out.println("Te has inventado el número, anda, prueba otra vez");
             }
         } while (salir == false);
+        
+        sc.close();
 
     }
 

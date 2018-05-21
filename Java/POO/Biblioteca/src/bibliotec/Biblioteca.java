@@ -21,8 +21,16 @@ public class Biblioteca {
 
     public int numLibros = 13;
 
+    /**
+     * Variable que indica en que posición se encuentra el usuario requerido
+     * despues de llamar a encontrarUsuario().
+     */
     public int posicionUsuario;
 
+    /**
+     * Variable que cambia cada vez que se llama a encontrarUsuario() y que
+     * indica si el método ha tenido éxito o no.
+     */
     public boolean encontrado;
 
     Scanner sc = new Scanner(System.in);
@@ -58,7 +66,9 @@ public class Biblioteca {
 
     }
 
-    //Pregunta por los campos que necesita el constructor y crea un objeto de la clase Libro
+    /**
+     * Pregunta por los campos que necesita el constructor de Libro y crea uno.
+     */
     public void darAltaLibro() {
         System.out.println("Procede a rellenar los datos para dar de alta el libro");
         System.out.println("ISBN: ");
@@ -67,32 +77,52 @@ public class Biblioteca {
         String titulo = sc.next();
         System.out.println("Autor de la obra: ");
         String autor = sc.next();
-        System.out.println("Número de páginas: ");
-        int numPaginas = sc.nextInt();
-
-        libros[numLibros] = new Libro(isbn, titulo, autor, numPaginas);
-        numLibros++;
+        System.out.println("N�mero de p�ginas: ");
+        
+        boolean numeroCorrecto = true;
+        int numPaginas = 0;
+        
+        try {
+            numPaginas = sc.nextInt();
+        } catch (Exception ex) {
+            numeroCorrecto = false;
+        }
+        
+        if (numeroCorrecto) {
+            libros[numLibros] = new Libro(isbn, titulo, autor, numPaginas);
+            numLibros++;
+        }
     }
 
-    //Pregunta por los campos que necesita el constructor y crea un objeto de la clase Usuario
+    /**
+     * Pregunta por el nombre de usuario, despu�s checkea si existe alg�n
+     * usuario con ese nombre, y finalmente crea un Usuario con ese nombre.
+     */
     public void darAltaUsuario() {
 
         System.out.println("Nombre del usuario: ");
+        boolean nombreCorrecto = true;
+
         String nombre = sc.next();
 
-        Usuario temp = new Usuario(nombre);
-        for (int i = 0; i < numUsuarios; i++) {
-            if (temp.equals(usuarios[i])) {
-                System.out.println("Ya hay un usuario con ese nombre");
-                System.out.println("En esta biblioteca no admitimos personas con el mismo nombre");
-            }
-        }
-        usuarios[numUsuarios] = new Usuario(nombre);
-        numUsuarios++;
+        if (nombreCorrecto) {
 
+            Usuario temp = new Usuario(nombre);
+            for (int i = 0; i < numUsuarios; i++) {
+                if (temp.equals(usuarios[i])) {
+                    System.out.println("Ya hay un usuario con ese nombre");
+                    System.out.println("En esta biblioteca no admitimos personas con el mismo nombre");
+                }
+            }
+            usuarios[numUsuarios] = new Usuario(nombre);
+            numUsuarios++;
+        }
     }
 
-    //Pregunta el usuario y si tiene algún libro prestado llama a la función "devolverTodosLosLibros" de Usuario
+    /**
+     * Llama a encontrarUsuario y, si existe el usuario introducido, devuelve
+     * sus libros prestados y despu�s borra al usuario.
+     */
     public void darBajaUsuario() {
         encontrarUsuario();
         if (encontrado) {
@@ -107,7 +137,10 @@ public class Biblioteca {
         }
     }
 
-    //Pregunta el usuario y si se ha encontrado y tiene menos de 3 libros, llama a la función "prestarLibro" de Usuario
+    /**
+     * Llama a encontrarUsuario y, si existe el usuario introducido, llama a la
+     * funci�n prestarLibro del usuario.
+     */
     public void prestarLibro() {
         encontrarUsuario();
         if (encontrado) {
@@ -121,26 +154,32 @@ public class Biblioteca {
 
     }
 
-    //Pregunta el usuario y llama a la función "devolverLibro" de Usuario
+    /**
+     * Llama a encontrarUsuario y, si existe el usuario introducido, llama a la
+     * funci�n devolverLibro del usuario.
+     */
     public void devolverLibro() {
         encontrarUsuario();
         if (encontrado) {
             if (usuarios[posicionUsuario].getNumlibrosprestados() == 0) {
                 System.out.println("Ese usuario no tiene ningún libro prestado");
             } else {
-                usuarios[posicionUsuario].devolverLibro(libros, numUsuarios, numLibros);
             }
         }
     }
 
-    //Lista todos los libros, poniendo en cada uno si está disponible o no
+    /**
+     * Lista todos los libros mostrando cuales est�n disponibles y cuales no.
+     */
     public void listadoLibros() {
         for (int i = 0; i < numLibros; i++) {
             System.out.println(libros[i].toString() + "\n");
         }
     }
 
-    //Lista los libros que tiene un usuario
+    /**
+     * Lista todos los libros de un usuario.
+     */
     public void listadoLibrosUsuario() {
         encontrarUsuario();
         if (encontrado) {
@@ -152,7 +191,9 @@ public class Biblioteca {
         }
     }
 
-    //Lista todos los usuarios
+    /**
+     * Muestra una lista de todos los usuarios enumerados.
+     */
     public void listadoUsuarios() {
         for (int i = 0; i < numUsuarios; i++) {
 
@@ -161,7 +202,10 @@ public class Biblioteca {
         }
     }
 
-    //Busca a un usuario con un nombre introducido por teclado y devuelve si lo ha encontrado o no con el booleano (encontrado)
+    /**
+     * Busca a un usuario con un nombre introducido por teclado y cambia la
+     * variable global "encontrado" a true o false si lo ha encontrado o no
+     */
     public void encontrarUsuario() {
         encontrado = true;
         System.out.print("Nombre del usuario: ");
