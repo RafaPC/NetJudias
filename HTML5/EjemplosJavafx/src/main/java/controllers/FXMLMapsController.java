@@ -34,6 +34,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -46,6 +48,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Arrive;
 import model.Arrives;
@@ -73,7 +76,11 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
     @FXML
     private Label fxParada;
 
+    private Stage stage;
+    
     private ListLineInfo lineaActual;
+    
+    private Marker autobus;
 
     private StopsLine stopsActual;
 
@@ -97,6 +104,9 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
 
     @FXML
     public void handleCombo(ActionEvent event) throws IOException {
+        System.out.println(stage.getWidth());
+        
+        
         if (pp != null) {
             map.removeMarker(comienzoLinea);
             map.removeMarker(finalLinea);
@@ -385,26 +395,26 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
 
     public void loadBus(String idBus, String idStop) throws IOException {
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(20), e -> {
+                new KeyFrame(Duration.seconds(10), e -> {
                     try {
                         System.out.println("BUS");
                         Arrives arrives = bus.GetArrivesStop(idStop);
 
                         for (Arrive auto : arrives.getArrives()) {
                             if (auto.getBusId().equals(idBus)) {
+                                if(autobus != null){
+                                    map.removeMarker(autobus);
+                                }
                                 LatLong[] latlongs = new LatLong[stopsActual.getStop().size()];
-                                putMarkers(latlongs, stopsActual, 1);
-//                                pintarLinea(lineaActual);
                                 LatLong punto = new LatLong(Double.parseDouble(auto.getLatitude()),
                                         Double.parseDouble(auto.getLongitude()));
 
                                 MarkerOptions markerOptions = new MarkerOptions();
                                 markerOptions.position(punto);
                                 markerOptions.title(auto.getBusId());
-//                                markerOptions.label(auto.getBusId());
                                 markerOptions.label("BUS");
 
-                                Marker autobus = new Marker(markerOptions);
+                                autobus = new Marker(markerOptions);
                                 map.addMarker(autobus);
                                 map.setCenter(punto);
                             }
@@ -434,6 +444,8 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         timeline.play();
 
     }
+    
+    
 
     /**
      * Initializes the controller class.
@@ -454,7 +466,35 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         }
 
     }
+    public void setStage(Stage stage){
+        this.stage = stage;
+    }
+    
+    public void setWindowListener(){
+        stage.maximizedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                System.out.println(stage.getWidth());
+                //double anchura = stage.getMaxWidth() * 0.6;
+                //fxVBox.setLayoutX(anchura);
+                fxVBox.setMinWidth(stage.getWidth()*0.2);
+                fxVBox.setVisible(true);
+            }
 
+        });
+        stage.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                System.out.println("HOLA");
+                fxVBox.setLayoutX(stage.getWidth()*0.7);
+                fxVBox.setMinWidth(stage.getWidth()*0.2);
+                fxVBox.setVisible(true);
+            }
+
+        });
+    }
     @Override
     public void mapInitialized() {
         LatLong joeSmithLocation = new LatLong(47.6197, -122.3231);
