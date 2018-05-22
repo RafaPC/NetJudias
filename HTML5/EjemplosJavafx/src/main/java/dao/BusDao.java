@@ -9,23 +9,16 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.util.ArrayList;
-import com.google.api.client.http.EmptyContent;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
-import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.UrlEncodedContent;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.GenericJson;
 import com.google.api.client.json.JsonObjectParser;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.client.util.ArrayMap;
 import com.google.api.client.util.GenericData;
-
-import controllers.FXMLMapsController;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -33,11 +26,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import model.Arrive;
 import model.Arrives;
 import model.ListLineInfo;
 import model.ListsLinesInfo;
-import model.Stop;
 import model.StopsLine;
 
 /**
@@ -47,38 +38,6 @@ import model.StopsLine;
 public class BusDao {
 
     public static void main(String[] args) throws IOException {
-        BusDao b = new BusDao();
-
-//        ObjectMapper m = new ObjectMapper();
-//        m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-//
-////        StopsLines stops = m.readValue(b.GetStopsLine("76", "PLAZA BEATA"), 
-////          new TypeReference<StopsLines>() {
-////        });
-//        StopsLine stops = (b.GetStopsLine("76", "PLAZA BEATA"));
-//
-//        for (Stop stop : stops.getStop()) {
-//            System.out.println(stop.getStopId());
-//        }
-//
-//        System.out.println(b.GetArrivesStop("2794"));
-//
-//        Arrives arrives = (b.GetArrivesStop("2794"));
-//        for (Arrive stop : arrives.getArrives()) {
-//            System.out.println(stop.getStopId());
-//            System.out.println(stop.getBusTimeLeft());
-//            System.out.println(stop.getLatitude());
-//            System.out.println(stop.getLongitude());
-//            System.out.println(stop.getBusPositionType());
-//        }
-        List<String> x = new ArrayList<>();
-        ListsLinesInfo lineas = b.GetListLines(x);
-        System.out.println(lineas.getResultValues().get(0).getLine());
-
-        List<String> y = new ArrayList<>();
-        y.add("008");
-        ListsLinesInfo lineas2 = b.GetListLines(y);
-        System.out.println(lineas2.getResultValues().get(0).getLine());
 
     }
 
@@ -106,12 +65,14 @@ public class BusDao {
 
         int intentos = 0;
         StopsLine stops = null;
+        //Si da error al mandar la petición porque la pagina del emt no funciona o algo, lo intenta dos veces y más y 
+        //si sigue dando error sale y si el objeto es null salta un aviso
         while (intentos < 3) {
-            try{
-            stops = m.readValue(requestGoogle.execute().parseAsString(), new TypeReference<StopsLine>() {
-            });
-            intentos = 3;
-            }catch(Exception ex){
+            try {
+                stops = m.readValue(requestGoogle.execute().parseAsString(), new TypeReference<StopsLine>() {
+                });
+                intentos = 3;
+            } catch (Exception ex) {
                 Logger.getLogger(BusDao.class.getName()).log(Level.SEVERE, null, ex);
                 intentos++;
             }

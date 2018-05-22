@@ -40,8 +40,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -63,49 +65,47 @@ import netscape.javascript.JSObject;
  * @author user
  */
 public class FXMLMapsController implements Initializable, MapComponentInitializedListener {
-
+    
     @FXML
     private GoogleMapView mapView;
-
+    
     @FXML
     private ComboBox<ListLineInfo> fxCombo;
-
+    
     @FXML
     private VBox fxVBox;
-
+    
     @FXML
     private Label fxParada;
-
+    
     private Stage stage;
     
     private ListLineInfo lineaActual;
     
     private Marker autobus;
-
+    
     private StopsLine stopsActual;
-
+    
     private GoogleMap map;
-
+    
     private String busActual = "08";
-
+    
     private BusDao bus;
-
+    
     private Polyline pp;
-
+    
     private Marker comienzoLinea;
-
+    
     private Marker finalLinea;
-
+    
     private InfoWindow infoWindowComienzoLinea;
-
+    
     private InfoWindow infoWindowFinalLinea;
-
+    
     private String colorLinea;
-
+    
     @FXML
     public void handleCombo(ActionEvent event) throws IOException {
-        System.out.println(stage.getWidth());
-        
         
         if (pp != null) {
             map.removeMarker(comienzoLinea);
@@ -118,104 +118,14 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         }
         pintarLinea(fxCombo.getSelectionModel().getSelectedItem());
     }
-
-    private void loadBud() throws IOException {
-        BusDao bus = new BusDao();
-        List<String> z = new ArrayList<String>();
-        z.add("76");
-        z.add("85");
-        ListsLinesInfo lines = bus.GetListLines(z);
-        Random rand = new Random();
-        boolean primero;
-        map.clearMarkers();
-        for (int i = 0; i < lines.getResultValues().size(); i++) {
-
-            //Crear color hexadecimal aleatorio
-            float r = rand.nextFloat();
-            float g = rand.nextFloat();
-            float b = rand.nextFloat();
-            Color randomColor = new Color(r, g, b);
-            String colorHex = "#" + Integer.toHexString(randomColor.getRGB()).substring(2);
-
-            //Sacar las paradas de la linea actual
-            StopsLine stops = bus.GetStopsLine(lines.getResultValues().get(i).getLine(), lines.getResultValues().get(i).getNameA());
-
-            //Crear array para guardar las posiciones de las paradas
-            LatLong[] latlongs = new LatLong[stops.getStop().size()];
-
-            for (int j = 0; j < stops.getStop().size(); j++) {
-                LatLong x = new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude());
-                latlongs[j] = x;
-            }
-
-            //Pintar la línea actual con todas sus paradas
-            MVCArray array = new MVCArray(latlongs);
-
-            PolylineOptions polyOpts = new PolylineOptions()
-                    .path(array)
-                    .strokeColor(colorHex)
-                    .strokeWeight(2);
-            Polyline pp = new Polyline(polyOpts);
-
-            map.addMapShape(pp);
-
-            //Poner un marcador en la primera parada de cada línea
-            //Opciones Marcador principio de línea
-            MarkerOptions opcionesMarcadorStart = new MarkerOptions();
-            opcionesMarcadorStart.position(new LatLong(latlongs[0].getLatitude(), latlongs[0].getLongitude()));
-            opcionesMarcadorStart.label(lines.getResultValues().get(i).getLabel());
-            opcionesMarcadorStart.title(lines.getResultValues().get(i).getLine());
-
-            //Opciones Marcador final de línea
-            MarkerOptions opcionesMarcadorEnd = new MarkerOptions();
-            opcionesMarcadorEnd.position(new LatLong(latlongs[latlongs.length].getLatitude(), latlongs[latlongs.length].getLongitude()));
-            //Marcador
-            Marker marcadorStart = new Marker(opcionesMarcadorStart);
-            map.addMarker(marcadorStart);
-
-            //Opciones InfoWindow
-            InfoWindowOptions infoWindowOptionsStart = new InfoWindowOptions();
-            infoWindowOptionsStart.content("Línea " + lines.getResultValues().get(i).getLabel()
-                    + "</br>" + lines.getResultValues().get(i).getNameA() + " - " + lines.getResultValues().get(i).getNameB())
-                    .position(new LatLong(latlongs[0].getLatitude(), latlongs[0].getLongitude()));
-            //infoWindowOptions.maxWidth(10);
-            //InfoWindow
-            InfoWindow infoWindow = new InfoWindow(infoWindowOptionsStart);
-            infoWindow.open(map, marcadorStart);
-        }
-
-        map.setZoom(16);
-
-        BusDao b = new BusDao();
-
-        ObjectMapper m = new ObjectMapper();
-        m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        Arrives arrives = b.GetArrivesStop("2794");
-        for (Arrive stop : arrives.getArrives()) {
-            System.out.println(stop.getStopId());
-            System.out.println(stop.getBusTimeLeft());
-            System.out.println(stop.getLatitude());
-            System.out.println(stop.getLongitude());
-            System.out.println(stop.getBusPositionType());
-            LatLong punto = new LatLong(Double.parseDouble(stop.getLatitude()),
-                    Double.parseDouble(stop.getLongitude()));
-            map.setCenter(punto);
-            MarkerOptions markerOptions5 = new MarkerOptions();
-            markerOptions5.position(punto);
-            markerOptions5.title(stop.getBusId());
-
-            Marker joeSmithMarker = new Marker(markerOptions5);
-            map.addMarker(joeSmithMarker);
-
-        }
-    }
-
+    
     private void pintarLinea(ListLineInfo linea) throws IOException {
-        if (lineaActual != null) {
-            map.clearMarkers();
-            map.removeMapShape(pp);
-        }
+
         if (fxCombo.getSelectionModel().getSelectedItem() != lineaActual) {
+            if(pp != null){
+                map.removeMapShape(pp);
+            }
+            map.clearMarkers();
             Random rand = new Random();
             float r = rand.nextFloat();
             float g = rand.nextFloat();
@@ -224,7 +134,7 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
             colorLinea = "#" + Integer.toHexString(randomColor.getRGB()).substring(2);
         }
         lineaActual = linea;
-
+        
         map.clearMarkers();
         //Crear color hexadecimal aleatorio
 
@@ -236,18 +146,18 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         } else {
             //Crear array para guardar las posiciones de las paradas
             LatLong[] latlongs = new LatLong[stopsActual.getStop().size()];
-
+            
             putMarkers(latlongs, stopsActual, 0);
 
             //Pintar la línea actual con todas sus paradas
             MVCArray array = new MVCArray(latlongs);
-
+            
             PolylineOptions polyOpts = new PolylineOptions()
                     .path(array)
                     .strokeColor(colorLinea)
                     .strokeWeight(5);
             pp = new Polyline(polyOpts);
-
+            
             map.addMapShape(pp);
 
             //Poner un marcador en la primera parada de cada línea
@@ -287,25 +197,25 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
             infoWindowFinalLinea.open(map);
         }
     }
-
+    
     private void putMarkers(LatLong[] latlongs, StopsLine stops, int opcion) throws IOException {
-        if(opcion == 1){
+        if (opcion == 1) {
             map.clearMarkers();
         }
         for (int j = 0; j < stops.getStop().size(); j++) {
             LatLong x = new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude());
             latlongs[j] = x;
-
+            
             MarkerOptions opcionesMarcadorParada = new MarkerOptions()
                     .position(new LatLong(stops.getStop().get(j).getLatitude(), stops.getStop().get(j).getLongitude()))
                     .label(stops.getStop().get(j).getStopId());
             Marker parada = new Marker(opcionesMarcadorParada);
             map.addMarker(parada);
-
+            
             Arrives arrives = bus.GetArrivesStop(stops.getStop().get(j).getStopId());
             String paradaNombre = stops.getStop().get(j).getName();
             map.addUIEventHandler(parada, UIEventType.click, (JSObject obj) -> {
-
+                
                 try {
                     arrivesParada(arrives);
                     fxParada.setText(paradaNombre);
@@ -316,9 +226,20 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
             });
         }
     }
-
+    
     private void arrivesParada(Arrives arrives) throws IOException {
         fxVBox.getChildren().clear();
+        
+        Button cerrar = new Button();
+        cerrar.setText("Cerrar ventana");
+        cerrar.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                fxVBox.setVisible(false);
+            }
+        });
+        
+        fxVBox.getChildren().add(cerrar);
 
         //LINEA
         Label titulo1 = new Label("Líneas");
@@ -332,11 +253,12 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         titulo2.setAlignment(Pos.CENTER_RIGHT);
         titulo2.setStyle("-fx-font-size: 20px;-fx-font-weight: bold;-fx-text-fill:#000000");
         titulo2.setAlignment(Pos.CENTER_RIGHT);
-
+        
         HBox lineaTitulo = new HBox(titulo1, titulo2);
         lineaTitulo.setMaxWidth(Double.MAX_VALUE);
         lineaTitulo.setStyle("-fx-border-style:solid;-fx-border-width:2px;-fx-border-color:black;");
         fxVBox.getChildren().add(lineaTitulo);
+        
         int i;
         for (i = 0; i < arrives.getArrives().size(); i++) {
             List<String> x = new ArrayList<>();
@@ -369,12 +291,11 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
             VBox tiempoCosa = new VBox(new Label(tiempo));
             HBox fila = new HBox(new VBox(lineaCosa), tiempoCosa);
             fila.setStyle("-fx-border-style:solid;-fx-border-width:1px;-fx-border-color: #000000;-fx-background-color: #00B4FF;");
-
+            
             busActual = arrives.getArrives().get(i).getBusId();
             String stopSelected = arrives.getArrives().get(i).getStopId() + "";
             //Añadir evento
             fila.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
                 @Override
                 public void handle(MouseEvent event) {
                     try {
@@ -385,35 +306,36 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
                 }
             });
             fxVBox.getChildren().add(fila);
-
+            
         }
+        fxVBox.setMaxHeight(stage.getHeight());
         fxVBox.setPrefHeight(i * 50);
-        fxVBox.setMinHeight(i * 50);
-
+        fxVBox.setMinHeight(i * 60);
+        
         fxVBox.setVisible(true);
     }
-
+    
     public void loadBus(String idBus, String idStop) throws IOException {
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(10), e -> {
                     try {
                         System.out.println("BUS");
                         Arrives arrives = bus.GetArrivesStop(idStop);
-
+                        
                         for (Arrive auto : arrives.getArrives()) {
                             if (auto.getBusId().equals(idBus)) {
-                                if(autobus != null){
+                                if (autobus != null) {
                                     map.removeMarker(autobus);
                                 }
                                 LatLong[] latlongs = new LatLong[stopsActual.getStop().size()];
                                 LatLong punto = new LatLong(Double.parseDouble(auto.getLatitude()),
                                         Double.parseDouble(auto.getLongitude()));
-
+                                
                                 MarkerOptions markerOptions = new MarkerOptions();
                                 markerOptions.position(punto);
                                 markerOptions.title(auto.getBusId());
                                 markerOptions.label("BUS");
-
+                                
                                 autobus = new Marker(markerOptions);
                                 map.addMarker(autobus);
                                 map.setCenter(punto);
@@ -426,26 +348,8 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         );
         timeline.setCycleCount(20);
         timeline.play();
-
+        
     }
-
-    @FXML
-    public void handleButton(ActionEvent event) throws IOException {
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(4), e -> {
-                    try {
-                        loadBud();
-                    } catch (IOException ex) {
-                        Logger.getLogger(FXMLMapsController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                })
-        );
-        timeline.setCycleCount(0);
-        timeline.play();
-
-    }
-    
-    
 
     /**
      * Initializes the controller class.
@@ -456,7 +360,7 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         mapView.addMapInializedListener(this);
         fxVBox.setSpacing(7);
         bus = new BusDao();
-
+        
         List<String> line = new ArrayList();
         try {
             fxCombo.getItems().addAll(
@@ -464,49 +368,45 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
         } catch (IOException ex) {
             Logger.getLogger(FXMLMapsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    }
-    public void setStage(Stage stage){
-        this.stage = stage;
+        
     }
     
-    public void setWindowListener(){
+    public void setWindowListener() {
         stage.maximizedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                System.out.println(stage.getWidth());
-                //double anchura = stage.getMaxWidth() * 0.6;
-                //fxVBox.setLayoutX(anchura);
-                fxVBox.setMinWidth(stage.getWidth()*0.2);
-                fxVBox.setVisible(true);
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.               
+                if (stage.isMaximized()) {
+                    fxVBox.setLayoutX(1718);
+                    fxVBox.setMaxHeight(1080);
+                } else {
+                    fxVBox.setLayoutX(400);                    
+                    fxVBox.setMaxHeight(438);
+                }
             }
-
         });
-        stage.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                System.out.println("HOLA");
-                fxVBox.setLayoutX(stage.getWidth()*0.7);
-                fxVBox.setMinWidth(stage.getWidth()*0.2);
-                fxVBox.setVisible(true);
-            }
-
-        });
+//        stage.resizableProperty().addListener(new ChangeListener<Boolean>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+////                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                System.out.println("cambia de tamaño");
+//            }
+//        });
+//        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+//            
+//        });
+//        ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue)
+//                -> fxVBox.setLayoutX(stage.getWidth()*0.7);
+//        stage.widthProperty().addListener(stageSizeListener);
     }
+    
     @Override
     public void mapInitialized() {
-        LatLong joeSmithLocation = new LatLong(47.6197, -122.3231);
-        LatLong joshAndersonLocation = new LatLong(47.6297, -122.3431);
-        LatLong bobUnderwoodLocation = new LatLong(47.6397, -122.3031);
-        LatLong tomChoiceLocation = new LatLong(47.6497, -122.3325);
-        LatLong fredWilkieLocation = new LatLong(47.6597, -122.3357);
 
         //Set the initial properties of the map.
         MapOptions mapOptions = new MapOptions();
-
-        mapOptions.center(new LatLong(40.369991, -3.694543))
+        
+        mapOptions.center(new LatLong(40.400999, -3.694545))
                 .mapType(MapTypeIdEnum.ROADMAP)
                 .overviewMapControl(false)
                 .panControl(false)
@@ -516,42 +416,9 @@ public class FXMLMapsController implements Initializable, MapComponentInitialize
                 .zoomControl(false)
                 .zoom(12);
         map = mapView.createMap(mapOptions);
-
-        //Add markers to the map
-        MarkerOptions markerOptions1 = new MarkerOptions();
-        markerOptions1.position(new LatLong(40.410757, -3.690594));
-        markerOptions1.label("LABEL");
-        markerOptions1.title("TITLE");
-        //markerOptions1.icon("https://png.clipart.me/istock/previews/5059/50591994-bus-icon-glossy-green-round-button.jpg");
-        MarkerOptions markerOptions2 = new MarkerOptions();
-        markerOptions2.position(joshAndersonLocation);
-
-        Marker jbotanico = new Marker(markerOptions1);
-        Marker joshAndersonMarker = new Marker(markerOptions2);
-
-        map.addMarker(jbotanico);
-        map.addMarker(joshAndersonMarker);
-
-        InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-        infoWindowOptions.content("<h2>Fred Wilkie</h2>"
-                + "Current Location: Real Jardín Botánico<br>"
-                + "ETA: 45 minutes")
-                .position(new LatLong(40.429980, -3.704352));
-
-        InfoWindow fredWilkeInfoWindow = new InfoWindow(infoWindowOptions);
-        fredWilkeInfoWindow.open(map, jbotanico);
-        mapView.getMap().addUIEventHandler(jbotanico, UIEventType.click, (JSObject obj) -> {
-            LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
-
-//            fxCombo.getItems().add(ll.toString());
-            InfoWindowOptions infoWindowOptions1 = new InfoWindowOptions();
-            infoWindowOptions1.content("<h2>Fred Wilkie</h2>"
-                    + "Current Location: Safeway<br>"
-                    + "ETA: 45 minutes");
-
-            InfoWindow fredWilkeInfoWindow1 = new InfoWindow(infoWindowOptions1);
-            fredWilkeInfoWindow1.open(map, jbotanico);
-        });
     }
-
+    
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 }
