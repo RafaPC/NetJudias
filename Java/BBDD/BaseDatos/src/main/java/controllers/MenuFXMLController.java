@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import dao.DBConnectionPool;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,6 +30,7 @@ public class MenuFXMLController implements Initializable {
     /**
      * Initializes the controller class.
      */
+            
     private AnchorPane sceneAlumnos;
 
     private AnchorPane sceneAsignaturas;
@@ -98,6 +100,7 @@ public class MenuFXMLController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         //Escena de alumnos
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/fxml/AlumnosFXML.fxml"));

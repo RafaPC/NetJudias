@@ -40,8 +40,6 @@ public class InicioFXMLController implements Initializable {
 
     private AnchorPane sceneAsignaturas;
 
-//    @FXML
-//    private AnchorPane fxRoot;
     @FXML
     private TextField fxNombre;
 

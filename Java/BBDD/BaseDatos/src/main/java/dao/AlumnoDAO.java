@@ -27,15 +27,13 @@ public class AlumnoDAO {
     public List<Alumno> getAllAlumnosJDBC() {
         List<Alumno> lista = new ArrayList<>();
         Alumno nuevo = null;
-
-        DBConnection db = new DBConnection();
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
         try {
             Class.forName(Configuration.getInstance().getDriverDB());
 
-            con = db.getConnection();
+            con = DBConnectionPool.getInstance().getConnection();
 
             stmt = con.createStatement();
             String sql;
@@ -74,8 +72,9 @@ public class AlumnoDAO {
             } catch (SQLException ex) {
                 Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
+
         return lista;
 
     }
@@ -282,7 +281,7 @@ public class AlumnoDAO {
             stmt.setLong(1, idWhere);
 
             stmt.executeUpdate();
-            
+
             con.commit();
             respuesta = 1;
         } catch (Exception ex) {

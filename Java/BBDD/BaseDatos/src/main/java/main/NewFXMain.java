@@ -5,6 +5,8 @@
  */
 package main;
 
+import dao.CrearModelo;
+import dao.DBConnectionPool;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,40 +19,25 @@ import javafx.stage.Stage;
  * @author Los Prieto
  */
 public class NewFXMain extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) throws IOException {
+
+        
         
         FXMLLoader loaderMenu = new FXMLLoader(
-              getClass().getResource("/fxml/MenuFXML.fxml"));
-            BorderPane root = loaderMenu.load();
-           
-            
-            Scene scene = new Scene(root);
-            
-            primaryStage.setTitle("Hello World!");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        
-        
-        /*Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-        
-        AnchorPane root = new AnchorPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
+                getClass().getResource("/fxml/MenuFXML.fxml"));
+        BorderPane root = loaderMenu.load();
+
+        Scene scene = new Scene(root);
+
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
-        primaryStage.show();*/
+        primaryStage.show();
+        
+        CrearModelo x = new CrearModelo();
+        x.crearModeloJDBC();
+
     }
 
     /**
@@ -59,5 +46,5 @@ public class NewFXMain extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
