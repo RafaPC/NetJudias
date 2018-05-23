@@ -31,7 +31,6 @@ public class AlumnoDAO {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            Class.forName(Configuration.getInstance().getDriverDB());
 
             con = DBConnectionPool.getInstance().getConnection();
 
@@ -65,9 +64,6 @@ public class AlumnoDAO {
                 }
                 if (stmt != null) {
                     stmt.close();
-                }
-                if (con != null) {
-                    con.close();
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);

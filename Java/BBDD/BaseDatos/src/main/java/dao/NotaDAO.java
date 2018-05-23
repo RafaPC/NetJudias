@@ -143,7 +143,6 @@ public class NotaDAO {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            Class.forName(Configuration.getInstance().getDriverDB());
 
             con = db.getConnection();
 
@@ -178,9 +177,6 @@ public class NotaDAO {
                 }
                 if (stmt != null) {
                     stmt.close();
-                }
-                if (con != null) {
-                    con.close();
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
