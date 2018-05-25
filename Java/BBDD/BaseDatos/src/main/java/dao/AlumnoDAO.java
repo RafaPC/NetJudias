@@ -58,16 +58,6 @@ public class AlumnoDAO {
         } catch (Exception ex) {
             Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
-            }
             DBConnectionPool.getInstance().cerrarConexion(con);
         }
 
@@ -78,14 +68,13 @@ public class AlumnoDAO {
     public Alumno getAlumnoJDBC(int idWhere) {
 
         Alumno nuevo = null;
-        DBConnection db = new DBConnection();
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
             Class.forName(Configuration.getInstance().getDriverDB());
 
-            con = db.getConnection();
+            con = DBConnectionPool.getInstance().getConnection();
 
             stmt = con.prepareStatement("SELECT * FROM alumnos where id=? AND nombre LIKE ?");
 
@@ -110,27 +99,13 @@ public class AlumnoDAO {
         } catch (Exception ex) {
             Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return nuevo;
 
     }
 
     public boolean updateAlumnoJDBC(Alumno a) {
-        DBConnection db = new DBConnection();
         Connection con = null;
         PreparedStatement stmt = null;
         int filas = -1;
@@ -138,7 +113,7 @@ public class AlumnoDAO {
         try {
             Class.forName(Configuration.getInstance().getDriverDB());
 
-            con = db.getConnection();
+            con = DBConnectionPool.getInstance().getConnection();
 
             stmt = con.prepareStatement("UPDATE alumnos "
                     + "SET NOMBRE=?,FECHA_NACIMIENTO=?,MAYOR_EDAD=? "
@@ -161,25 +136,13 @@ public class AlumnoDAO {
             if (filas == -1) {
                 updateado = false;
             }
-            try {
-
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return updateado;
 
     }
 
     public boolean insertAlumnoJDBC(Alumno a) {
-        DBConnection db = new DBConnection();
         Connection con = null;
         PreparedStatement stmt = null;
         int filas = -1;
@@ -187,7 +150,7 @@ public class AlumnoDAO {
         try {
             Class.forName(Configuration.getInstance().getDriverDB());
 
-            con = db.getConnection();
+            con = DBConnectionPool.getInstance().getConnection();
 
             stmt = con.prepareStatement("INSERT INTO alumnos "
                     + "(NOMBRE,FECHA_NACIMIENTO,MAYOR_EDAD)  "
@@ -212,25 +175,13 @@ public class AlumnoDAO {
             if (filas == 1) {
                 insertado = true;
             }
-            try {
-
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return insertado;
 
     }
 
     public boolean deleteAlumno(long idWhere) {
-        DBConnection db = new DBConnection();
         Connection con = null;
         PreparedStatement stmt = null;
         int numFilas = -1;
@@ -238,7 +189,7 @@ public class AlumnoDAO {
         try {
             Class.forName(Configuration.getInstance().getDriverDB());
 
-            con = db.getConnection();
+            con = DBConnectionPool.getInstance().getConnection();
 
             stmt = con.prepareStatement("DELETE FROM alumnos where id=? ");
 
@@ -252,19 +203,18 @@ public class AlumnoDAO {
             if (numFilas == 1) {
                 borrado = true;
             }
-
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return borrado;
 
     }
 
     public int delNotaAndUser(int idWhere) {
-        DBConnection db = new DBConnection();
         Connection con = null;
         int respuesta = 0;
         try {
 
-            con = db.getConnection();
+            con = DBConnectionPool.getInstance().getConnection();
             con.setAutoCommit(false);
             String sql = "DELETE FROM notas WHERE id_alumno = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -290,20 +240,19 @@ public class AlumnoDAO {
                 Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex1);
             }
         } finally {
-            db.cerrarConexion(con);
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return respuesta;
     }
 
     public boolean existNotaFromAlumno(int idWhere) throws SQLException {
-        DBConnection db = new DBConnection();
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         boolean existeNota = false;
         try {
 
-            con = db.getConnection();
+            con = DBConnectionPool.getInstance().getConnection();
 
             stmt = con.prepareStatement("SELECT nota FROM notas where id_alumno=?");
 
@@ -317,20 +266,7 @@ public class AlumnoDAO {
         } catch (Exception ex) {
             Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return existeNota;
     }

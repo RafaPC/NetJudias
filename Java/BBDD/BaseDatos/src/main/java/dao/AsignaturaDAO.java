@@ -24,17 +24,15 @@ import model.Asignatura;
 public class AsignaturaDAO {
 
     public List<Asignatura> getAllAsignaturasJDBC() {
-        DBConnection db = new DBConnection();
         List<Asignatura> lista = new ArrayList<>();
         Asignatura nuevo = null;
-
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
         try {
             Class.forName(Configuration.getInstance().getDriverDB());
 
-            con = db.getConnection();
+            con = DBConnectionPool.getInstance().getConnection();
 
             stmt = con.createStatement();
             String sql;
@@ -61,27 +59,13 @@ public class AsignaturaDAO {
         } catch (Exception ex) {
             Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return lista;
 
     }
 
     public boolean insertAsignaturaJDBC(Asignatura a) {
-        DBConnection db = new DBConnection();
         Connection con = null;
         PreparedStatement stmt = null;
         int filas = -1;
@@ -89,7 +73,7 @@ public class AsignaturaDAO {
         try {
             Class.forName(Configuration.getInstance().getDriverDB());
 
-            con = db.getConnection();
+            con = DBConnectionPool.getInstance().getConnection();
 
             stmt = con.prepareStatement("INSERT INTO asignaturas "
                     + "(NOMBRE,CURSO,CICLO)  "
@@ -113,26 +97,13 @@ public class AsignaturaDAO {
             if (filas == 1) {
                 insertado = true;
             }
-
-            try {
-
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return insertado;
 
     }
 
     public boolean updateAsignaturaJDBC(Asignatura a) {
-        DBConnection db = new DBConnection();
         Connection con = null;
         PreparedStatement stmt = null;
         int filas = -1;
@@ -140,7 +111,7 @@ public class AsignaturaDAO {
         try {
             Class.forName(Configuration.getInstance().getDriverDB());
 
-            con = db.getConnection();
+            con = DBConnectionPool.getInstance().getConnection();
 
             stmt = con.prepareStatement("UPDATE asignaturas "
                     + "SET NOMBRE=?,CURSO=?,CICLO=? "
@@ -159,19 +130,7 @@ public class AsignaturaDAO {
             if (filas == 1) {
                 updateado = true;
             }
-
-            try {
-
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return updateado;
 
@@ -200,18 +159,17 @@ public class AsignaturaDAO {
             if (numFilas == 1) {
                 borrado = true;
             }
-
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return borrado;
     }
 
     public int delNotaAndAsig(long idWhere) {
-        DBConnection db = new DBConnection();
         Connection con = null;
         int respuesta = 0;
         try {
-
-            con = db.getConnection();
+            
+            con = DBConnectionPool.getInstance().getConnection();
             con.setAutoCommit(false);
             String sql = "DELETE FROM notas WHERE id_asignatura = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -237,20 +195,19 @@ public class AsignaturaDAO {
                 Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex1);
             }
         } finally {
-            db.cerrarConexion(con);
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return respuesta;
     }
-    
-    public boolean existNotaFromAsignatura(long idWhere){
-        DBConnection db = new DBConnection();
+
+    public boolean existNotaFromAsignatura(long idWhere) {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         boolean existeNota = false;
         try {
 
-            con = db.getConnection();
+            con = DBConnectionPool.getInstance().getConnection();
 
             stmt = con.prepareStatement("SELECT nota FROM notas where id_asignatura=?");
 
@@ -264,20 +221,7 @@ public class AsignaturaDAO {
         } catch (Exception ex) {
             Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return existeNota;
     }
