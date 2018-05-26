@@ -18,34 +18,28 @@ public class AlumnoService {
 
     public List getAllAlumnos() {
         AlumnoDAO x = new AlumnoDAO();
-        return x.getAllAlumnosJDBC();
+        return x.getAllAlumnosDBUtils();
     }
-    
+
     public boolean insertAlumno(Alumno a) {
         AlumnoDAO x = new AlumnoDAO();
-        return x.insertAlumnoJDBC(a);
+        return x.insertAlumnoDBUtils(a);
     }
 
     public boolean updateAlumno(Alumno a) {
         AlumnoDAO x = new AlumnoDAO();
-        return x.updateAlumnoJDBC(a);
+        return x.updateUserDBUtils(a);
     }
 
-    public int deleteAlumno(long idWhere) throws SQLException {
+    public boolean deleteAlumno(Alumno a) throws SQLException {
+        boolean borrado = false;
         AlumnoDAO x = new AlumnoDAO();
-        int respuesta;
-        if(x.existNotaFromAlumno((int) idWhere)){
-            respuesta = x.delNotaAndUser((int) idWhere);
-            return respuesta;
-        }else{
-           boolean cosa = x.deleteAlumno(idWhere);
-           if(cosa){
-               respuesta = 1;
-           } else{
-               respuesta = 0;
-           }
+        if (x.existNotaFromAlumno((int) a.getId())) {
+            borrado = x.deleteNotaAndAlumnoDBUtils(a);
+        } else {
+            borrado = x.deleteAlumnoDBUtils(a);
         }
-        return respuesta;
+        return borrado;
     }
-    
+
 }

@@ -23,7 +23,8 @@ public class NewFXMain extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        
+        CrearModelo x = new CrearModelo();
+        x.crearModeloJDBC();
         
         FXMLLoader loaderMenu = new FXMLLoader(
                 getClass().getResource("/fxml/MenuFXML.fxml"));
@@ -35,8 +36,7 @@ public class NewFXMain extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         
-        CrearModelo x = new CrearModelo();
-        x.crearModeloJDBC();
+        
 
     }
 

@@ -17,6 +17,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Alumno;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 /**
  *
@@ -63,6 +67,27 @@ public class AlumnoDAO {
 
         return lista;
 
+    }
+
+    public List<Alumno> getAllAlumnosDBUtils() {
+        List<Alumno> lista = null;
+
+        Connection con = null;
+        try {
+            con = DBConnectionPool.getInstance().getConnection();
+
+            QueryRunner qr = new QueryRunner();
+            ResultSetHandler<List<Alumno>> handler
+                    = new BeanListHandler<Alumno>(Alumno.class);
+            lista = qr.query(con, "select * FROM ALUMNOS", handler);
+
+        } catch (Exception ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+            DBConnectionPool.getInstance().cerrarConexion(con);
+        }
+        return lista;
     }
 
     public Alumno getAlumnoJDBC(int idWhere) {
@@ -142,6 +167,32 @@ public class AlumnoDAO {
 
     }
 
+    public boolean updateUserDBUtils(Alumno alumno) {
+
+        Connection con = null;
+        boolean updateado = false;
+        int filas = -1;
+        try {
+            con = DBConnectionPool.getInstance().getConnection();
+
+            QueryRunner qr = new QueryRunner();
+
+            filas = qr.update(con,
+                    "UPDATE ALUMNOS SET NOMBRE = ?,FECHA_NACIMIENTO = ?, MAYOR_EDAD = ? WHERE ID = ?",
+                    alumno.getNombre(), alumno.getFecha_nacimiento(), alumno.getMayor_edad(), alumno.getId());
+
+        } catch (Exception ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (filas == 1) {
+                updateado = true;
+            }
+            DBConnectionPool.getInstance().cerrarConexion(con);
+        }
+        return updateado;
+
+    }
+
     public boolean insertAlumnoJDBC(Alumno a) {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -181,6 +232,31 @@ public class AlumnoDAO {
 
     }
 
+// insert DBUTILS
+    public boolean insertAlumnoDBUtils(Alumno alumno) {
+        int id = 0;
+        Connection con = null;
+        boolean insertado = false;
+        try {
+            con = DBConnectionPool.getInstance().getConnection();
+            QueryRunner qr = new QueryRunner();
+            ResultSetHandler<Integer> handler = new BeanHandler<Integer>(Integer.class);
+            id = qr.insert(con,
+                    "INSERT INTO ALUMNOS (NOMBRE,FECHA_NACIMIENTO,MAYOR_EDAD) VALUES(?,?,?)", handler, alumno.getNombre(), alumno.getFecha_nacimiento(), alumno.getMayor_edad());
+            alumno.setId(id);
+
+        } catch (Exception ex) {
+
+        } finally {
+            if (id != 0) {
+                insertado = true;
+            }
+            DBConnectionPool.getInstance().cerrarConexion(con);
+        }
+        return insertado;
+
+    }
+
     public boolean deleteAlumno(long idWhere) {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -205,6 +281,55 @@ public class AlumnoDAO {
             }
             DBConnectionPool.getInstance().cerrarConexion(con);
         }
+        return borrado;
+
+    }
+
+    public boolean deleteAlumnoDBUtils(Alumno alumno) {
+
+        Connection con = null;
+        boolean borrado = false;
+        int filas = -1;
+        try {
+            con = DBConnectionPool.getInstance().getConnection();
+            QueryRunner qr = new QueryRunner();
+            filas = qr.update(con, "DELETE FROM ALUMNOS WHERE ID = ?", alumno.getId());
+        } catch (Exception ex) {
+
+        } finally {
+            DBConnectionPool.getInstance().cerrarConexion(con);
+            if (filas == 1) {
+                borrado = true;
+            }
+        }
+
+        return borrado;
+
+    }
+
+    public boolean deleteNotaAndAlumnoDBUtils(Alumno alumno) throws SQLException {
+
+        Connection con = null;
+        boolean borrado = false;
+        int filas = -1;
+        try {
+            con = DBConnectionPool.getInstance().getConnection();
+            con.setAutoCommit(false);
+            QueryRunner qr = new QueryRunner();
+            qr.update(con, "DELETE FROM NOTAS WHERE ID_ALUMNO = ?", alumno.getId());
+
+            filas = qr.update(con, "DELETE FROM ALUMNOS WHERE ID = ?", alumno.getId());
+
+        } catch (Exception ex) {
+            con.rollback();
+        } finally {
+            if (filas == 1) {
+                borrado = true;
+                con.commit();
+            }
+            DBConnectionPool.getInstance().cerrarConexion(con);
+        }
+
         return borrado;
 
     }

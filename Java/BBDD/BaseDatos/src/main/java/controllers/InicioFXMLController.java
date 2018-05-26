@@ -137,7 +137,7 @@ public class InicioFXMLController implements Initializable {
                 Alumno original = fxListAlumnos.getSelectionModel().getSelectedItem();
 
                 Alumno a = new Alumno(nombre, fecha, mayor);
-                a.setId(fxListAlumnos.getSelectionModel().getSelectedItem().getId());
+                a.setId(original.getId());
 
                 if (conex.updateAlumno(a)) {
 
@@ -162,8 +162,8 @@ public class InicioFXMLController implements Initializable {
         } else {
             Alumno a = fxListAlumnos.getSelectionModel().getSelectedItem();
             Integer id = a.getId();
-            int x  = conex.deleteAlumno(id.longValue());
-            if (x == 1) {
+            boolean borrado  = conex.deleteAlumno(a);
+            if (borrado) {
                 fxListAlumnos.getItems().remove(a);
                 Alert b = new Alert(Alert.AlertType.INFORMATION, "Alumno borrado correctamente", ButtonType.CLOSE);
                 b.showAndWait();
