@@ -6,6 +6,7 @@
 package nautilus.main.controllers;
 
 //import com.qoppa.pdfViewerFX.PDFViewer;
+import com.google.common.io.CharStreams;
 import com.qoppa.pdfViewerFX.PDFViewer;
 import java.io.BufferedReader;
 import java.io.File;
@@ -82,7 +83,7 @@ public class FXMLNautilusController implements Initializable {
     private String rutaCopiado;
 
     @FXML
-    public void handleMouseClick(MouseEvent event) {
+    public void handleMouseClick(MouseEvent event) throws IOException {
         if (event.getClickCount() > 1) {
             File seleccionado
                     = fxFiles.getSelectionModel().getSelectedItem().toFile();
@@ -196,7 +197,7 @@ public class FXMLNautilusController implements Initializable {
     }
 
     @FXML
-    public void handleCrearFichero(ActionEvent event) {
+    public void handleCrearFichero(ActionEvent event) throws IOException {
         TextInputDialog dialog = new TextInputDialog("");
         dialog.setTitle("Crear fichero");
         dialog.setContentText("");
@@ -208,8 +209,10 @@ public class FXMLNautilusController implements Initializable {
             newNombre = result.get();
         }
         File file = new File(fxRutaActual.getText() + "\\" + newNombre + ".txt");
+        file.createNewFile();
         cargarFiles();
     }
+    
     @FXML
     public void handleBorrarFichero(ActionEvent event){
         if(fxFiles.getSelectionModel().getSelectedItem().toFile().isFile()){
@@ -227,7 +230,8 @@ public class FXMLNautilusController implements Initializable {
             a.showAndWait(); 
         }
     }
-    public void leerFichero(File fichero) {
+    
+    public void leerFichero(File fichero) throws FileNotFoundException, IOException {
         BufferedReader br = null;
         FileReader fr = null;
         String textoCompleto = "";
@@ -265,7 +269,8 @@ public class FXMLNautilusController implements Initializable {
             }
             fxFiles.setVisible(false);
             fxReader.setVisible(true);
-            fxReader.setText(textoCompleto);
+            String otraForma = CharStreams.toString(new FileReader(fichero));
+            fxReader.setText(otraForma);
             fxBotonSalirFichero.setVisible(true);
         }
     }
