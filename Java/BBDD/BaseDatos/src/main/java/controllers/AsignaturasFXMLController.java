@@ -153,10 +153,9 @@ public class AsignaturasFXMLController implements Initializable {
             Asignatura a = fxListAsignaturas.getSelectionModel().getSelectedItem();
             long id = a.getId();
             if (conex.deleteAsignatura(a)) {
-                //fxListAsignaturas.getItems().remove(a);
+                fxListAsignaturas.getItems().remove(a);
                 Alert b = new Alert(Alert.AlertType.INFORMATION, "Asignatura borrada correctamente", ButtonType.CLOSE);
                 b.showAndWait();
-                cargarDatosLista();
                 fxListAsignaturas.refresh();
             } else {
                 Alert b = new Alert(Alert.AlertType.ERROR, "Ha ocurrido un problema al borrar la asignatura", ButtonType.CLOSE);
