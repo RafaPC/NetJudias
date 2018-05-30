@@ -8,6 +8,9 @@ package servicios;
 import dao.AsignaturaDAO;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import model.Asignatura;
 
 /**
@@ -15,35 +18,39 @@ import model.Asignatura;
  * @author daw
  */
 public class AsignaturaService {
+
     public List getAllAsignaturas() {
-        AsignaturaDAO x = new AsignaturaDAO();
-        return x.getAllAsignaturasJDBC();
+        AsignaturaDAO dao = new AsignaturaDAO();
+        return dao.getAllAlumnosJDBCTemplate();
     }
-    
+
     public boolean insertAsignatura(Asignatura a) {
-        AsignaturaDAO x = new AsignaturaDAO();
-        return x.insertAsignaturaJDBC(a);
+        AsignaturaDAO dao = new AsignaturaDAO();
+        return dao.addUserJDBCTemplate(a);
     }
 
     public boolean updateAsignatura(Asignatura a) {
-        AsignaturaDAO x = new AsignaturaDAO();
-        return x.updateAsignaturaJDBC(a);
+        AsignaturaDAO dao = new AsignaturaDAO();
+        return dao.updateJDBCTemplate(a);
     }
 
-    public int deleteAsignatura(long idWhere) throws SQLException {
-        AsignaturaDAO x = new AsignaturaDAO();
+    public boolean deleteAsignatura(Asignatura a) throws SQLException {
+        boolean deleteado = false;
+        AsignaturaDAO dao = new AsignaturaDAO();
         int respuesta;
-        if(x.existNotaFromAsignatura(idWhere)){
-            respuesta = x.delNotaAndAsig(idWhere);
-            return respuesta;
-        }else{
-           boolean cosa = x.deleteAsignaturaJDBC(idWhere);
-           if(cosa){
-               respuesta = 1;
-           } else{
-               respuesta = 0;
-           }
+        if (dao.existNotaFromAsignaturaDBUtils(a)) {
+            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+            alerta.setTitle("Aviso de integridad referencial");
+            alerta.setContentText("Si borras esta asignatura se borrarán las notas referenciadas a esta");
+            Optional<ButtonType> resulta = alerta.showAndWait();
+
+            if (resulta.get() == ButtonType.OK) {
+                deleteado = dao.delNotaAndAsigJDBCTemplate(a);
+            }
+
+        } else {
+            deleteado = dao.deleteAsignaturaJDBC(a);
         }
-        return respuesta;
+        return deleteado;
     }
 }

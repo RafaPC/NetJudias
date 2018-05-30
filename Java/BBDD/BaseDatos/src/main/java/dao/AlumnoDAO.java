@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Alumno;
+import model.Nota;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -88,46 +89,6 @@ public class AlumnoDAO {
             DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return lista;
-    }
-
-    public Alumno getAlumnoJDBC(int idWhere) {
-
-        Alumno nuevo = null;
-        Connection con = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        try {
-            Class.forName(Configuration.getInstance().getDriverDB());
-
-            con = DBConnectionPool.getInstance().getConnection();
-
-            stmt = con.prepareStatement("SELECT * FROM alumnos where id=? AND nombre LIKE ?");
-
-            stmt.setInt(1, idWhere);
-            stmt.setString(2, "%a%");
-
-            rs = stmt.executeQuery();
-
-            //STEP 5: Extract data from result set
-            rs.next();
-            //Retrieve by column name
-            int id = rs.getInt("id");
-            String nombre = rs.getString("nombre");
-            Date fn = rs.getDate("fecha_nacimiento");
-            Boolean mayor = rs.getBoolean("mayor_edad");
-            nuevo = new Alumno();
-            nuevo.setFecha_nacimiento(fn);
-            nuevo.setId(id);
-            nuevo.setMayor_edad(mayor);
-            nuevo.setNombre(nombre);
-
-        } catch (Exception ex) {
-            Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            DBConnectionPool.getInstance().cerrarConexion(con);
-        }
-        return nuevo;
-
     }
 
     public boolean updateAlumnoJDBC(Alumno a) {
@@ -232,7 +193,6 @@ public class AlumnoDAO {
 
     }
 
-// insert DBUTILS
     public boolean insertAlumnoDBUtils(Alumno alumno) {
         int id = 0;
         Connection con = null;
@@ -394,5 +354,30 @@ public class AlumnoDAO {
             DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return existeNota;
+    }
+
+    public boolean existNotaFromAlumnoDBUtils(Alumno a) {
+        boolean existe = false;
+        List<Nota> lista = null;
+
+        Connection con = null;
+        try {
+            con = DBConnectionPool.getInstance().getConnection();
+
+            QueryRunner qr = new QueryRunner();
+            ResultSetHandler<List<Nota>> handler
+                    = new BeanListHandler<Nota>(Nota.class);
+            lista = qr.query(con, "select * FROM NOTAS where ID_ALUMNO=?", handler, a.getId());
+
+            if (lista.size() > 0) {
+                existe = true;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+            DBConnectionPool.getInstance().cerrarConexion(con);
+        }
+        return existe;
     }
 }

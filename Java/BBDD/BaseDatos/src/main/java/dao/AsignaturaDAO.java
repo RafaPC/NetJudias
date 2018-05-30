@@ -12,10 +12,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Alumno;
 import model.Asignatura;
+import model.Nota;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 /**
  *
@@ -65,6 +79,16 @@ public class AsignaturaDAO {
 
     }
 
+    public List<Asignatura> getAllAlumnosJDBCTemplate() {
+
+        JdbcTemplate jtm = new JdbcTemplate(
+                DBConnectionPool.getInstance().getDataSource());
+        List<Asignatura> asignaturas = jtm.query("Select * from ASIGNATURAS",
+                new BeanPropertyRowMapper(Asignatura.class));
+
+        return asignaturas;
+    }
+
     public boolean insertAsignaturaJDBC(Asignatura a) {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -103,6 +127,20 @@ public class AsignaturaDAO {
 
     }
 
+    public boolean addUserJDBCTemplate(Asignatura a) {
+        boolean insertado = false;
+        SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(
+                DBConnectionPool.getInstance().getDataSource()).withTableName("ASIGNATURAS").usingGeneratedKeyColumns("ID");
+        Map<String, Object> parameters = new HashMap<String, Object>();
+
+        parameters.put("NOMBRE", a.getNombre());
+        parameters.put("CURSO", a.getCurso());
+        parameters.put("CICLO", a.getCiclo());
+        a.setId(jdbcInsert.executeAndReturnKey(parameters).intValue());
+        insertado = true;
+        return insertado;
+    }
+
     public boolean updateAsignaturaJDBC(Asignatura a) {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -136,7 +174,21 @@ public class AsignaturaDAO {
 
     }
 
-    public boolean deleteAsignaturaJDBC(long idWhere) {
+    public boolean updateJDBCTemplate(Asignatura a) {
+        boolean updateado = false;
+        JdbcTemplate jtm = new JdbcTemplate(
+                DBConnectionPool.getInstance().getDataSource());
+        String updateQuery = "UPDATE ASIGNATURAS set NOMBRE=?,CURSO=?,CICLO=? where ID=?";
+        int filas = jtm.update(updateQuery, a.getNombre(), a.getCurso(), a.getCiclo(), a.getId());
+
+        if (filas == 1) {
+            updateado = true;
+        }
+        return updateado;
+
+    }
+
+    public boolean deleteAsignaturaJDBC(Asignatura a) {
         DBConnection db = new DBConnection();
         Connection con = null;
         PreparedStatement stmt = null;
@@ -147,9 +199,9 @@ public class AsignaturaDAO {
 
             con = db.getConnection();
 
-            stmt = con.prepareStatement("DELETE FROM asignaturas where id=? ");
+            stmt = con.prepareStatement("DELETE FROM asignaturas WHERE ID=? ");
 
-            stmt.setLong(1, idWhere);
+            stmt.setLong(1, a.getId());
 
             numFilas = stmt.executeUpdate();
 
@@ -164,11 +216,26 @@ public class AsignaturaDAO {
         return borrado;
     }
 
-    public int delNotaAndAsig(long idWhere) {
+    public boolean deleteJDBCTemplate(Asignatura a) {
+
+        boolean deleteado = false;
+        JdbcTemplate jtm = new JdbcTemplate(
+                DBConnectionPool.getInstance().getDataSource());
+        String updateQuery = "DELETE FROM asignaturas where ID=?";
+        int filas = jtm.update(updateQuery, a.getId());
+
+        if (filas == 1) {
+            deleteado = true;
+        }
+        return deleteado;
+    }
+
+    public boolean delNotaAndAsig(long idWhere) {
+        boolean deleteado = false;
         Connection con = null;
         int respuesta = 0;
         try {
-            
+
             con = DBConnectionPool.getInstance().getConnection();
             con.setAutoCommit(false);
             String sql = "DELETE FROM notas WHERE id_asignatura = ?";
@@ -184,7 +251,7 @@ public class AsignaturaDAO {
             stmt.executeUpdate();
 
             con.commit();
-            respuesta = 1;
+            deleteado = true;
         } catch (Exception ex) {
             Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
             try {
@@ -197,7 +264,36 @@ public class AsignaturaDAO {
         } finally {
             DBConnectionPool.getInstance().cerrarConexion(con);
         }
-        return respuesta;
+        return deleteado;
+    }
+
+    public boolean delNotaAndAsigJDBCTemplate(Asignatura a) {
+
+        boolean deleteado = false;
+        TransactionDefinition txDef = new DefaultTransactionDefinition();
+        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(DBConnectionPool.getInstance().getDataSource());
+        TransactionStatus txStatus = transactionManager.getTransaction(txDef);
+
+        try {
+            JdbcTemplate jtm = new JdbcTemplate(
+                    DBConnectionPool.getInstance().getDataSource());
+            String updateQuery = "DELETE FROM notas WHERE id_asignatura = ?";
+            int filas = jtm.update(updateQuery, a.getId());
+
+            updateQuery = "DELETE FROM asignaturas where ID=?";
+            filas = jtm.update(updateQuery, a.getId());
+
+            transactionManager.commit(txStatus);
+            deleteado = true;
+        } catch (Exception e) {
+
+            transactionManager.rollback(txStatus);
+
+            throw e;
+
+        }
+
+        return deleteado;
     }
 
     public boolean existNotaFromAsignatura(long idWhere) {
@@ -224,5 +320,17 @@ public class AsignaturaDAO {
             DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return existeNota;
+    }
+
+    public boolean existNotaFromAsignaturaDBUtils(Asignatura a) {
+        boolean existe = false;
+        JdbcTemplate jtm = new JdbcTemplate(
+                DBConnectionPool.getInstance().getDataSource());
+        List<Nota> notas = jtm.query("Select * from NOTAS where ID_ASIGNATURA=?",
+                new BeanPropertyRowMapper(Nota.class), a.getId());
+        if (notas.size() > 0) {
+            existe = true;
+        }
+        return existe;
     }
 }

@@ -67,6 +67,17 @@ public class MenuFXMLController implements Initializable {
 
     @FXML
     public void handleCambiarAsignaturas(ActionEvent event) {
+        //Escena de asignaturas
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/fxml/AsignaturasFXML.fxml"));
+        try {
+            sceneAsignaturas = loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MenuFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        AsignaturasFXMLController controllerAsignaturas = loader.getController();
+        controllerAsignaturas.setController(this);
+        
         fxMenuAlumnos.setVisible(true);
         fxMenuAsignaturas.setVisible(false);
         fxRoot.setCenter(sceneAsignaturas);
@@ -76,7 +87,16 @@ public class MenuFXMLController implements Initializable {
 
     @FXML
     public void handleCambiarNotas(ActionEvent event) {
-        
+        //Escena de updatear 
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/fxml/NotasFXML.fxml"));
+        try {
+            sceneNotas = loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MenuFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        notasController = loader.getController();
+        notasController.setController(this);
         
         fxMenuAlumnos.setVisible(true);
         fxMenuAsignaturas.setVisible(true);
@@ -91,6 +111,17 @@ public class MenuFXMLController implements Initializable {
 
     @FXML
     public void handleAsignarAlum(ActionEvent event) {
+        //Escena de asignar alumnos a asignaturas
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/fxml/CrearNotasFXML.fxml"));
+        try {
+            sceneAsignarAlum = loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MenuFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        CrearNotasFXMLController controllerAsignarAlum = loader.getController();
+        controllerAsignarAlum.setController(this);
+        
         fxMenuAlumnos.setVisible(true);
         fxMenuAsignaturas.setVisible(true);
         fxAsignarAlum.setVisible(false);
@@ -111,39 +142,6 @@ public class MenuFXMLController implements Initializable {
         }
         InicioFXMLController controllerAlum = loader.getController();
         controllerAlum.setController(this);
-
-        //Escena de asignaturas
-        loader = new FXMLLoader(
-                getClass().getResource("/fxml/AsignaturasFXML.fxml"));
-        try {
-            sceneAsignaturas = loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(MenuFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        AsignaturasFXMLController controllerAsignaturas = loader.getController();
-        controllerAsignaturas.setController(this);
-
-        //Escena de asignar alumnos a asignaturas
-        loader = new FXMLLoader(
-                getClass().getResource("/fxml/CrearNotasFXML.fxml"));
-        try {
-            sceneAsignarAlum = loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(MenuFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        CrearNotasFXMLController controllerAsignarAlum = loader.getController();
-        controllerAsignarAlum.setController(this);
-        
-        //Escena de updatear 
-        loader = new FXMLLoader(
-                getClass().getResource("/fxml/NotasFXML.fxml"));
-        try {
-            sceneNotas = loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(MenuFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        notasController = loader.getController();
-        notasController.setController(this);
 
         fxMenuAlumnos.setVisible(false);
         fxRoot.setCenter(sceneAlumnos);

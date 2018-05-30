@@ -152,11 +152,11 @@ public class AsignaturasFXMLController implements Initializable {
         } else {
             Asignatura a = fxListAsignaturas.getSelectionModel().getSelectedItem();
             long id = a.getId();
-            int x = conex.deleteAsignatura(id);
-            if (x==1) {
-                fxListAsignaturas.getItems().remove(a);
+            if (conex.deleteAsignatura(a)) {
+                //fxListAsignaturas.getItems().remove(a);
                 Alert b = new Alert(Alert.AlertType.INFORMATION, "Asignatura borrada correctamente", ButtonType.CLOSE);
                 b.showAndWait();
+                cargarDatosLista();
                 fxListAsignaturas.refresh();
             } else {
                 Alert b = new Alert(Alert.AlertType.ERROR, "Ha ocurrido un problema al borrar la asignatura", ButtonType.CLOSE);
@@ -185,6 +185,7 @@ public class AsignaturasFXMLController implements Initializable {
         fxNombre.setText("");
         fxCurso.setText("");
         fxCiclo.setText("");
+        fxListAsignaturas.getSelectionModel().select(null);
     }
 
     public void setController(MenuFXMLController controller) {

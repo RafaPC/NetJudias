@@ -8,6 +8,9 @@ package servicios;
 import dao.AlumnoDAO;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import model.Alumno;
 
 /**
@@ -17,27 +20,34 @@ import model.Alumno;
 public class AlumnoService {
 
     public List getAllAlumnos() {
-        AlumnoDAO x = new AlumnoDAO();
-        return x.getAllAlumnosDBUtils();
+        AlumnoDAO dao = new AlumnoDAO();
+        return dao.getAllAlumnosDBUtils();
     }
 
     public boolean insertAlumno(Alumno a) {
-        AlumnoDAO x = new AlumnoDAO();
-        return x.insertAlumnoDBUtils(a);
+        AlumnoDAO dao = new AlumnoDAO();
+        return dao.insertAlumnoDBUtils(a);
     }
 
     public boolean updateAlumno(Alumno a) {
-        AlumnoDAO x = new AlumnoDAO();
-        return x.updateUserDBUtils(a);
+        AlumnoDAO dao = new AlumnoDAO();
+        return dao.updateUserDBUtils(a);
     }
 
     public boolean deleteAlumno(Alumno a) throws SQLException {
         boolean borrado = false;
-        AlumnoDAO x = new AlumnoDAO();
-        if (x.existNotaFromAlumno((int) a.getId())) {
-            borrado = x.deleteNotaAndAlumnoDBUtils(a);
+        AlumnoDAO dao = new AlumnoDAO();
+        if (dao.existNotaFromAlumnoDBUtils(a)) {
+            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+            alerta.setTitle("Aviso de integridad referencial");
+            alerta.setContentText("Si borras este alumno se borrarán sus notas también");
+            Optional<ButtonType> resulta = alerta.showAndWait();
+
+            if (resulta.get() == ButtonType.OK) {
+                borrado = dao.deleteNotaAndAlumnoDBUtils(a);
+            }
         } else {
-            borrado = x.deleteAlumnoDBUtils(a);
+            borrado = dao.deleteAlumnoDBUtils(a);
         }
         return borrado;
     }
