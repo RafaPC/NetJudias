@@ -13,7 +13,8 @@
       <GoogleMapView fx:id="mapView" BorderPane.alignment="CENTER">
          <children>
             <VBox fx:id="fxVBox" layoutX="400.0" prefHeight="195.0" prefWidth="200.0" minHeight="100" maxHeight="250" style="-fx-background-color: #1554ab" visible="false" />
-         </children></GoogleMapView>
+         </children>
+      </GoogleMapView>
    </center>
    <top>
       <HBox prefHeight="34.0" prefWidth="600.0" BorderPane.alignment="CENTER">
